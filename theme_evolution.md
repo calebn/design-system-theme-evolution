@@ -43,17 +43,17 @@ flowchart LR
         direction TB
         a1["Primary Color<br/>#0055FF"]
         a2["Secondary Color<br/>#FF6B00"]
-        a3["Body Font<br/>16px · Inter"]
-        a4["Spacing Unit<br/>8px"]
-        a5["Button Radius<br/>4px"]
-        a6["Button Radius<br/>6px"]
+        a3["Body Font<br/>Inter"]
+        a4["Spacing Unit<br/>6px"]
+        a5["Btn Radius Sm<br/>4px"]
+        a6["Btn Radius Lg<br/>6px"]
     end
 
     subgraph v2 ["Version 2"]
         direction TB
         b1["Primary Color<br/>#1A73E8"]
         b2["Secondary Color<br/>#E8710A"]
-        b3["Body Font<br/>18px · Inter"]
+        b3["Body Font<br/>DM Sans"]
         b4["Spacing Unit<br/>8px"]
         b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
@@ -63,7 +63,7 @@ flowchart LR
         direction TB
         c1["Primary Color<br/>#0F5FCC"]
         c2["Secondary Color<br/>#CC5A00"]
-        c3["Body Font<br/>18px · Neue Haas"]
+        c3["Body Font<br/>Neue Haas"]
         c4["Spacing Unit<br/>10px"]
         c5["Button Radius<br/>6px"]
         c6["Accent Color<br/>#2D9142"]
@@ -89,7 +89,7 @@ flowchart LR
 
 **Restyle** keeps the token name constant while its value changes. When `Primary Color` updates from `#0055FF` to `#1A73E8`, every component referencing that token picks up the new value automatically. The reference never breaks; the token's identity is preserved.
 
-**Combine** reconciles two inconsistent values for the same concept into one. `Button Radius` existed as both `4px` and `6px` in different parts of the system — a common result of independent design decisions over time. Combining them into a single `5px` token means every component now references one source of truth, and future updates only need to happen in one place.
+**Combine** reconciles two inconsistent values for the same concept into one. `Btn Radius Sm` and `Btn Radius Lg` — two named variants that accumulated from independent design decisions — are consolidated into a single `Button Radius (5px)` token. Every component now references one source of truth, and future updates only need to happen in one place.
 
 **New elements** are purely additive. `Accent Color` and `Motion Easing` each begin in the version they're introduced, with no effect on anything that came before.
 
@@ -113,17 +113,17 @@ flowchart LR
         direction TB
         a1["Primary Color<br/>#0055FF"]
         a2["Secondary Color<br/>#FF6B00"]
-        a3["Body Font<br/>16px · Inter"]
-        a4["Spacing Unit<br/>8px"]
-        a5["Button Radius<br/>4px"]
-        a6["Button Radius<br/>6px"]
+        a3["Body Font<br/>Inter"]
+        a4["Spacing Unit<br/>6px"]
+        a5["Btn Radius Sm<br/>4px"]
+        a6["Btn Radius Lg<br/>6px"]
     end
 
     subgraph v2 ["Version 2"]
         direction TB
         b1["Primary Color<br/>#1A73E8"]
         b2["Secondary Color<br/>#E8710A"]
-        b3["Body Font<br/>18px · Inter"]
+        b3["Body Font<br/>DM Sans"]
         b4["Spacing Unit<br/>8px"]
         b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
@@ -135,7 +135,7 @@ flowchart LR
         c2["Primary Dark<br/>#4D9FFF"]
         c3["Secondary Light<br/>#E8710A"]
         c4["Secondary Dark<br/>#FFB347"]
-        c5["Body Font<br/>18px · Neue Haas"]
+        c5["Body Font<br/>Neue Haas"]
         c6["Spacing Unit<br/>10px"]
         c7["Button Radius<br/>6px"]
         c8(["Motion Easing<br/>ease-out"])

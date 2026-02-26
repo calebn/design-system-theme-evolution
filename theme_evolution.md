@@ -24,7 +24,7 @@ flowchart LR
         a3["Body Font<br/>16px · Inter"]
         a4["Spacing Unit<br/>8px"]
         a5["Button Radius<br/>4px"]
-        a6["Card Elevation<br/>0 2px 4px"]
+        a6["Button Radius<br/>6px"]
     end
 
     subgraph v2 ["Version 2"]
@@ -33,7 +33,7 @@ flowchart LR
         b2["Secondary Color<br/>#E8710A"]
         b3["Body Font<br/>18px · Inter"]
         b4["Spacing Unit<br/>8px"]
-        b5["Surface Tokens<br/>radius · elevation"]
+        b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
     end
 
@@ -43,7 +43,7 @@ flowchart LR
         c2["Secondary Color<br/>#CC5A00"]
         c3["Body Font<br/>18px · Neue Haas"]
         c4["Spacing Unit<br/>10px"]
-        c5["Surface Tokens<br/>updated values"]
+        c5["Button Radius<br/>6px"]
         c6["Accent Color<br/>#2D9142"]
         c7(["Motion Easing<br/>ease-out"])
     end
@@ -67,7 +67,7 @@ flowchart LR
 
 **Restyle** keeps the token name constant while its value changes. When `Primary Color` updates from `#0055FF` to `#1A73E8`, every component referencing that token picks up the new value automatically. The reference never breaks; the token's identity is preserved.
 
-**Combine** merges two tokens into one. `Button Radius` and `Card Elevation` — previously maintained as separate values — become a single `Surface Tokens` group. There are fewer references to manage going forward, though some granularity is traded away in the process.
+**Combine** reconciles two inconsistent values for the same concept into one. `Button Radius` existed as both `4px` and `6px` in different parts of the system — a common result of independent design decisions over time. Combining them into a single `5px` token means every component now references one source of truth, and future updates only need to happen in one place.
 
 **New elements** are purely additive. `Accent Color` and `Motion Easing` each begin in the version they're introduced, with no effect on anything that came before.
 
@@ -94,7 +94,7 @@ flowchart LR
         a3["Body Font<br/>16px · Inter"]
         a4["Spacing Unit<br/>8px"]
         a5["Button Radius<br/>4px"]
-        a6["Card Elevation<br/>0 2px 4px"]
+        a6["Button Radius<br/>6px"]
     end
 
     subgraph v2 ["Version 2"]
@@ -103,7 +103,7 @@ flowchart LR
         b2["Secondary Color<br/>#E8710A"]
         b3["Body Font<br/>18px · Inter"]
         b4["Spacing Unit<br/>8px"]
-        b5["Surface Tokens<br/>radius · elevation"]
+        b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
     end
 
@@ -115,7 +115,7 @@ flowchart LR
         c4["Secondary Dark<br/>#FFB347"]
         c5["Body Font<br/>18px · Neue Haas"]
         c6["Spacing Unit<br/>10px"]
-        c7["Surface Tokens<br/>updated values"]
+        c7["Button Radius<br/>6px"]
         c8(["Motion Easing<br/>ease-out"])
     end
 

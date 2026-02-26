@@ -7,7 +7,7 @@ Two diagrams showing how a design system's theme elements can evolve across vers
 - Rectangular nodes `[ ]` — a carried-forward element
 - Pill nodes `([ ])` — a newly introduced element
 - Hexagon nodes `{{ }}` — a removed element *(Diagram 2 only)*
-- Arrow labels — the operation applied between versions
+- Arrow labels — the operation applied between versions (`no change` = same name, same value, passes through untouched)
 
 ---
 
@@ -53,7 +53,7 @@ flowchart LR
         direction TB
         b1["Primary Color<br/>#1A73E8"]
         b2["Secondary Color<br/>#E8710A"]
-        b3["Body Font<br/>DM Sans"]
+        b3["Body Font<br/>Inter"]
         b4["Spacing Unit<br/>8px"]
         b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
@@ -64,7 +64,7 @@ flowchart LR
         c1["Primary Color<br/>#0F5FCC"]
         c2["Secondary Color<br/>#CC5A00"]
         c3["Body Font<br/>Neue Haas"]
-        c4["Spacing Unit<br/>10px"]
+        c4["Spacing Unit<br/>8px"]
         c5["Button Radius<br/>6px"]
         c6["Accent Color<br/>#2D9142"]
         c7(["Motion Easing<br/>ease-out"])
@@ -72,7 +72,7 @@ flowchart LR
 
     a1 -->|restyle| b1
     a2 -->|restyle| b2
-    a3 -->|restyle| b3
+    a3 -->|no change| b3
     a4 -->|restyle| b4
     a5 -->|combine| b5
     a6 -->|combine| b5
@@ -80,7 +80,7 @@ flowchart LR
     b1 -->|restyle| c1
     b2 -->|restyle| c2
     b3 -->|restyle| c3
-    b4 -->|restyle| c4
+    b4 -->|no change| c4
     b5 -->|restyle| c5
     b6 -->|restyle| c6
 ```
@@ -90,6 +90,8 @@ flowchart LR
 **Restyle** keeps the token name constant while its value changes. When `Primary Color` updates from `#0055FF` to `#1A73E8`, every component referencing that token picks up the new value automatically. The reference never breaks; the token's identity is preserved.
 
 **Combine** reconciles two inconsistent values for the same concept into one. `Btn Radius Sm` and `Btn Radius Lg` — two named variants that accumulated from independent design decisions — are consolidated into a single `Button Radius (5px)` token. Every component now references one source of truth, and future updates only need to happen in one place.
+
+**No change** means the token passes through a version update untouched — same name, same value. Not every token needs to change in every release. `Body Font` carries forward from V1 to V2 unchanged, then restyles in V3. `Spacing Unit` restyles in V2 and then holds steady into V3. This is the normal steady state for most tokens in most releases.
 
 **New elements** are purely additive. `Accent Color` and `Motion Easing` each begin in the version they're introduced, with no effect on anything that came before.
 
@@ -123,7 +125,7 @@ flowchart LR
         direction TB
         b1["Primary Color<br/>#1A73E8"]
         b2["Secondary Color<br/>#E8710A"]
-        b3["Body Font<br/>DM Sans"]
+        b3["Body Font<br/>Inter"]
         b4["Spacing Unit<br/>8px"]
         b5["Button Radius<br/>5px"]
         b6(["Accent Color<br/>#34A853"])
@@ -136,7 +138,7 @@ flowchart LR
         c3["Secondary Light<br/>#E8710A"]
         c4["Secondary Dark<br/>#FFB347"]
         c5["Body Font<br/>Neue Haas"]
-        c6["Spacing Unit<br/>10px"]
+        c6["Spacing Unit<br/>8px"]
         c7["Button Radius<br/>6px"]
         c8(["Motion Easing<br/>ease-out"])
     end
@@ -145,7 +147,7 @@ flowchart LR
 
     a1 -->|restyle| b1
     a2 -->|restyle| b2
-    a3 -->|restyle| b3
+    a3 -->|no change| b3
     a4 -->|restyle| b4
     a5 -->|combine| b5
     a6 -->|combine| b5
@@ -155,7 +157,7 @@ flowchart LR
     b2 -->|split| c3
     b2 -->|split| c4
     b3 -->|restyle| c5
-    b4 -->|restyle| c6
+    b4 -->|no change| c6
     b5 -->|restyle| c7
     b6 -. deleted .-> del1
 ```

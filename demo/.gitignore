@@ -1,0 +1,5 @@
+node_modules/
+dist/
+generated/
+public/generated/
+src/diff-data.ts

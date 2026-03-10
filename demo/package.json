@@ -1,0 +1,29 @@
+{
+  "name": "design-tokens-demo",
+  "version": "1.0.0",
+  "description": "Design tokens pipeline demo: Figma Variables → DTCG → CSS → UI (Logos + Verbum multi-brand)",
+  "type": "module",
+  "scripts": {
+    "build:tokens": "tsx build/build-tokens.ts",
+    "build:all-versions": "tsx build/build-tokens.ts --all-versions",
+    "diff": "tsx build/diff-tokens.ts",
+    "check": "tsx build/check-breaking.ts",
+    "build:diff-data": "npx tsx build/generate-diff-data.ts",
+    "dev": "npm run build:tokens && npm run build:diff-data && vite",
+    "build": "npm run build:tokens && npm run build:diff-data && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "style-dictionary": "^4.3.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
+  }
+}

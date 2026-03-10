@@ -1,0 +1,30 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1e293b;
+  background: #fff;
+}
+
+code {
+  font-family: 'Courier New', Consolas, monospace;
+  background: #f1f5f9;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: #334155;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}

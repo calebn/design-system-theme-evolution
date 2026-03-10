@@ -64,7 +64,7 @@ export function App() {
     border: active ? '2px solid #1e293b' : '2px solid #e2e8f0',
     backgroundColor: active ? '#1e293b' : '#fff',
     color: active ? '#fff' : '#475569',
-    fontSize: '0.85rem',
+    fontSize: '0.95rem',
     fontWeight: active ? 700 : 500,
     cursor: 'pointer',
     transition: 'all 0.12s',
@@ -85,16 +85,21 @@ export function App() {
           ================================================================ */}
       <section
         style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
           padding: '80px 32px 60px',
           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
           color: '#fff',
           textAlign: 'center',
+          scrollSnapAlign: 'start',
         }}
       >
-        <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
+        <h1 style={{ margin: 0, fontSize: '3rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
           Design Tokens Pipeline
         </h1>
-        <p style={{ margin: '12px auto 0', maxWidth: 540, fontSize: '1.1rem', color: '#94a3b8', lineHeight: 1.6 }}>
+        <p style={{ margin: '16px auto 0', maxWidth: 580, fontSize: '1.25rem', color: '#94a3b8', lineHeight: 1.65 }}>
           Figma Variables &rarr; DTCG tokens.json &rarr; CSS custom properties &rarr; components.
           <br />One source of truth. Every brand. Every platform.
         </p>
@@ -126,8 +131,8 @@ export function App() {
                 border: '1px solid rgba(255,255,255,0.08)',
               }}
             >
-              <div style={{ fontSize: '0.82rem', fontWeight: 600, marginBottom: 3 }}>{title}</div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.4 }}>{desc}</div>
+              <div style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: 4 }}>{title}</div>
+              <div style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.5 }}>{desc}</div>
             </div>
           ))}
         </div>
@@ -235,7 +240,7 @@ export function App() {
                 backgroundColor: 'var(--color-surface, #fff)',
               }}
             >
-              <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8', marginBottom: 12 }}>
+              <div style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8', marginBottom: 12 }}>
                 Live output
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -271,7 +276,7 @@ export function App() {
               {b === 'logos' ? 'Logos' : 'Verbum'}
             </button>
           ))}
-          <span style={{ marginLeft: 12, fontSize: '0.78rem', color: '#94a3b8', alignSelf: 'center' }}>
+          <span style={{ marginLeft: 12, fontSize: '0.88rem', color: '#94a3b8', alignSelf: 'center' }}>
             Active: <strong style={{ color: '#334155' }}>{brand}</strong>
           </span>
         </div>
@@ -310,7 +315,7 @@ export function App() {
       >
         {/* Version toggle */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8' }}>
             Token version
           </span>
           {(['1.0.0', '1.1.0', '2.0.0'] as Version[]).map((v) => (
@@ -326,7 +331,7 @@ export function App() {
           <h3 style={{ margin: '0 0 12px', fontSize: '1rem', fontWeight: 600, color: '#334155' }}>
             1.0.0 &rarr; 1.1.0 (non-breaking)
           </h3>
-          <p style={{ margin: '0 0 12px', fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6 }}>
+          <p style={{ margin: '0 0 12px', fontSize: '1rem', color: '#64748b', lineHeight: 1.65 }}>
             Primary color restyled (new shade). New <code>color.accent</code> token added.
             <code>radius-sm</code> and <code>radius-lg</code> combined into <code>radius-md</code>.
             Result: <strong>MINOR</strong> bump. CI gate passes.
@@ -343,19 +348,19 @@ export function App() {
         title="The breaking change"
         subtitle="Version 2.0.0 splits color.primary into two tokens and deletes color.accent. Components that depend on the old name break — visually and unmistakably."
       >
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 20, alignItems: 'center', flexWrap: 'wrap' }}>
           <button onClick={() => setVersion('2.0.0')} style={inlinePill(version === '2.0.0')}>
             Switch to v2.0.0 to see the breakage
           </button>
           {version === '2.0.0' && (
-            <span style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: 600 }}>
-              Active — look for the hotpink!
-            </span>
-          )}
-          {version !== '2.0.0' && (
-            <button onClick={() => setVersion('1.0.0')} style={{ ...inlinePill(false), fontSize: '0.78rem' }}>
-              Reset to 1.0.0
-            </button>
+            <>
+              <span style={{ fontSize: '0.88rem', color: '#dc2626', fontWeight: 600 }}>
+                Active — look for the hotpink!
+              </span>
+              <button onClick={() => setVersion('1.0.0')} style={inlinePill(false)}>
+                Reset to 1.0.0
+              </button>
+            </>
           )}
         </div>
 
@@ -365,7 +370,7 @@ export function App() {
           <h3 style={{ margin: '0 0 12px', fontSize: '1rem', fontWeight: 600, color: '#dc2626' }}>
             1.1.0 &rarr; 2.0.0 (BREAKING)
           </h3>
-          <p style={{ margin: '0 0 12px', fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6 }}>
+          <p style={{ margin: '0 0 12px', fontSize: '1rem', color: '#64748b', lineHeight: 1.65 }}>
             <code>color.primary</code> was split into <code>primary-light-mode</code> + <code>primary-dark-mode</code>.
             <code>color.accent</code> was deleted. Every component that referenced the old names now resolves
             to <strong style={{ color: 'hotpink' }}>hotpink</strong> — the CSS fallback that makes missing tokens impossible to miss.
@@ -433,16 +438,16 @@ export function App() {
 
         <div style={{ marginTop: 20, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 12 }}>
           <div style={{ padding: '16px 20px', borderRadius: 8, border: '1px solid #bbf7d0', backgroundColor: '#f0fdf4' }}>
-            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#166534', marginBottom: 6 }}>Diagram 1 — Safe operations</div>
-            <ul style={{ margin: 0, paddingLeft: 18, fontSize: '0.82rem', color: '#334155', lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#166534', marginBottom: 6 }}>Diagram 1 — Safe operations</div>
+            <ul style={{ margin: 0, paddingLeft: 18, fontSize: '0.9rem', color: '#334155', lineHeight: 1.7 }}>
               <li><strong>Restyle</strong> — change a token value</li>
               <li><strong>Add</strong> — introduce a new token</li>
               <li><strong>Combine</strong> — merge tokens, keep old names as aliases</li>
             </ul>
           </div>
           <div style={{ padding: '16px 20px', borderRadius: 8, border: '1px solid #fecaca', backgroundColor: '#fef2f2' }}>
-            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#991b1b', marginBottom: 6 }}>Diagram 2 — Breaking operations</div>
-            <ul style={{ margin: 0, paddingLeft: 18, fontSize: '0.82rem', color: '#334155', lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#991b1b', marginBottom: 6 }}>Diagram 2 — Breaking operations</div>
+            <ul style={{ margin: 0, paddingLeft: 18, fontSize: '0.9rem', color: '#334155', lineHeight: 1.7 }}>
               <li><strong>Split</strong> — one token becomes multiple new names</li>
               <li><strong>Delete</strong> — remove a token entirely</li>
             </ul>
@@ -463,7 +468,7 @@ export function App() {
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f5f3ff' }}>
             <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>🎨</div>
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#5b21b6' }}>Designers</h3>
-            <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
+            <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
               Change a color in Figma (or the token file), publish, and every product surface updates.
               No handoff ticket, no waiting for a dev sprint. Restyles ship automatically — you have
               direct control over how the product looks.
@@ -474,7 +479,7 @@ export function App() {
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f0f9ff' }}>
             <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>⌨️</div>
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#0369a1' }}>Developers</h3>
-            <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
+            <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
               Color changes require zero dev work — they're patches that CI auto-approves. New tokens are minor
               bumps you opt into. Breaking changes are explicit major bumps with migration guides. The semver
               contract tells you exactly how much work is coming.
@@ -485,7 +490,7 @@ export function App() {
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#fffbeb' }}>
             <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>📊</div>
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#b45309' }}>Managers</h3>
-            <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
+            <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
               Design changes that used to be cross-team tickets become self-service operations. Developers aren't
               bottlenecks for visual updates. Breaking changes are visible in CI, not discovered in production.
               Multi-brand scales without multiplying effort.
@@ -546,7 +551,7 @@ export function App() {
                   borderRadius: '50%',
                   backgroundColor: '#f1f5f9',
                   color: '#475569',
-                  fontSize: '0.75rem',
+                  fontSize: '0.82rem',
                   fontWeight: 700,
                   flexShrink: 0,
                 }}
@@ -554,8 +559,8 @@ export function App() {
                 {step.num}
               </span>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#1e293b', marginBottom: 2 }}>{step.title}</div>
-                <div style={{ fontSize: '0.82rem', color: '#64748b', lineHeight: 1.5 }}>{step.desc}</div>
+                <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b', marginBottom: 4 }}>{step.title}</div>
+                <div style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.6 }}>{step.desc}</div>
               </div>
             </div>
           ))}
@@ -574,7 +579,7 @@ export function App() {
         style={{
           padding: '32px',
           textAlign: 'center',
-          fontSize: '0.78rem',
+          fontSize: '0.85rem',
           color: '#94a3b8',
           borderTop: '1px solid #e2e8f0',
         }}

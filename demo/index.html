@@ -30,6 +30,45 @@
         background: none !important;
         text-shadow: none !important;
       }
+      /* High-contrast Prism token colors (VSCode Dark+ inspired) */
+      .token.property,
+      .token.tag,
+      .token.boolean,
+      .token.constant,
+      .token.symbol,
+      .token.deleted {
+        color: #9cdcfe !important; /* bright cyan for JSON keys / properties */
+      }
+      .token.string,
+      .token.attr-value,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #ce9178 !important; /* warm orange for string values */
+      }
+      .token.number,
+      .token.unit {
+        color: #b5cea8 !important; /* muted green for numbers */
+      }
+      .token.punctuation,
+      .token.operator {
+        color: #d4d4d4 !important; /* light gray for punctuation */
+      }
+      .token.keyword,
+      .token.selector,
+      .token.important {
+        color: #c586c0 !important; /* magenta for keywords */
+      }
+      .token.function,
+      .token.class-name {
+        color: #dcdcaa !important; /* yellow for function/class names */
+      }
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #6a9955 !important; /* green for comments */
+      }
       /* Highlighted line mark */
       mark.code-highlight {
         display: inline;

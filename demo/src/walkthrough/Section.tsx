@@ -12,12 +12,17 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
     <section
       id={id}
       style={{
-        padding: '56px 0',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '64px 0',
         backgroundColor: tinted ? '#f8f9fb' : '#fff',
         borderBottom: '1px solid #eaedf2',
+        scrollSnapAlign: 'start',
       }}
     >
-      <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 32px' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 32px', width: '100%' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, marginBottom: subtitle ? 4 : 20 }}>
           {step !== undefined && (
             <span
@@ -25,12 +30,12 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 28,
-                height: 28,
+                width: 32,
+                height: 32,
                 borderRadius: '50%',
                 backgroundColor: '#1e293b',
                 color: '#fff',
-                fontSize: '0.75rem',
+                fontSize: '0.85rem',
                 fontWeight: 700,
                 flexShrink: 0,
               }}
@@ -41,7 +46,7 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
           <h2
             style={{
               margin: 0,
-              fontSize: '1.5rem',
+              fontSize: '1.75rem',
               fontWeight: 700,
               color: '#1e293b',
               letterSpacing: '-0.01em',
@@ -54,11 +59,11 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
         {subtitle && (
           <p
             style={{
-              margin: '0 0 24px',
-              paddingLeft: step !== undefined ? 42 : 0,
-              fontSize: '1rem',
+              margin: '0 0 28px',
+              paddingLeft: step !== undefined ? 46 : 0,
+              fontSize: '1.1rem',
               color: '#64748b',
-              lineHeight: 1.6,
+              lineHeight: 1.65,
             }}
           >
             {subtitle}

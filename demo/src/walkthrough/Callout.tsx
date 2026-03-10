@@ -30,7 +30,7 @@ export function Callout({ role = 'info', children }: CalloutProps) {
       <div>
         <div
           style={{
-            fontSize: '0.72rem',
+            fontSize: '0.78rem',
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
@@ -40,7 +40,7 @@ export function Callout({ role = 'info', children }: CalloutProps) {
         >
           {cfg.label}
         </div>
-        <div style={{ fontSize: '0.875rem', color: '#334155', lineHeight: 1.6 }}>
+        <div style={{ fontSize: '0.95rem', color: '#334155', lineHeight: 1.65 }}>
           {children}
         </div>
       </div>

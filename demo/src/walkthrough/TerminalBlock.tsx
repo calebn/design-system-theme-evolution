@@ -12,8 +12,8 @@ export function TerminalBlock({ command, output, title }: TerminalBlockProps) {
         overflow: 'hidden',
         border: '1px solid #334155',
         fontFamily: "'Courier New', Consolas, monospace",
-        fontSize: '0.78rem',
-        lineHeight: 1.6,
+        fontSize: '0.85rem',
+        lineHeight: 1.65,
       }}
     >
       {/* Title bar */}
@@ -22,15 +22,15 @@ export function TerminalBlock({ command, output, title }: TerminalBlockProps) {
           display: 'flex',
           alignItems: 'center',
           gap: 6,
-          padding: '7px 14px',
+          padding: '8px 14px',
           backgroundColor: '#334155',
         }}
       >
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ef4444' }} />
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#eab308' }} />
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#22c55e' }} />
+        <span style={{ width: 11, height: 11, borderRadius: '50%', backgroundColor: '#ef4444' }} />
+        <span style={{ width: 11, height: 11, borderRadius: '50%', backgroundColor: '#eab308' }} />
+        <span style={{ width: 11, height: 11, borderRadius: '50%', backgroundColor: '#22c55e' }} />
         {title && (
-          <span style={{ marginLeft: 8, fontSize: '0.7rem', color: '#94a3b8' }}>{title}</span>
+          <span style={{ marginLeft: 8, fontSize: '0.78rem', color: '#94a3b8' }}>{title}</span>
         )}
       </div>
       {/* Body */}

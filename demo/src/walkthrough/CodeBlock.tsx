@@ -44,17 +44,17 @@ export function CodeBlock({ code, language, title, highlights, maxHeight }: Code
         borderRadius: 8,
         overflow: 'hidden',
         border: '1px solid #e2e8f0',
-        fontSize: '0.8rem',
+        fontSize: '0.85rem',
         lineHeight: 1.65,
       }}
     >
       {title && (
         <div
           style={{
-            padding: '6px 14px',
+            padding: '7px 14px',
             backgroundColor: '#f1f5f9',
             borderBottom: '1px solid #e2e8f0',
-            fontSize: '0.72rem',
+            fontSize: '0.78rem',
             fontWeight: 600,
             color: '#475569',
             fontFamily: 'monospace',

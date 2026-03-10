@@ -28,7 +28,8 @@ export function App() {
   const [showVersionControls, setShowVersionControls] = useState(false);
 
   useEffect(() => {
-    const cssPath = `/generated/versions/${version}/${brand}/variables.css`;
+    const base = import.meta.env.BASE_URL;
+    const cssPath = `${base}generated/versions/${version}/${brand}/variables.css`;
     let link = document.getElementById('theme-css') as HTMLLinkElement | null;
     if (link) {
       link.href = cssPath;

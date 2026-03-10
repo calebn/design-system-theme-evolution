@@ -1,0 +1,17 @@
+{
+  "color": {
+    "$type": "color",
+    "primary-light-mode": { "$value": "#6B1928", "$description": "SPLIT from primary (v2.0.0) -- light mode value" },
+    "primary-dark-mode":  { "$value": "#C47A88", "$description": "SPLIT from primary (v2.0.0) -- dark mode value" },
+    "primary-light":      { "$value": "#F5E6E9", "$description": "Primary tint for backgrounds" },
+    "primary-dark":       { "$value": "#3D0F17", "$description": "Primary shade for emphasis" },
+    "secondary":          { "$value": "#C9A84C", "$description": "Verbum Gold -- supporting brand color" },
+    "surface":            { "$value": "#FFFDF8", "$description": "Warm white content surface" },
+    "surface-muted":      { "$value": "#F5F0E8", "$description": "Warm subdued surface" },
+    "on-surface":         { "$value": "#2C2420", "$description": "Text on surface (warm black)" },
+    "on-primary":         { "$value": "#FFFFFF", "$description": "Text on primary color" },
+    "danger":             { "$value": "#B71C1C", "$description": "Error and destructive actions" },
+    "warning":            { "$value": "#E6A817", "$description": "Caution states" },
+    "success":            { "$value": "#2E7D32", "$description": "Positive outcomes" }
+  }
+}

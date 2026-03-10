@@ -1,0 +1,9 @@
+{
+  "font": {
+    "$type": "fontFamily",
+    "heading": { "$value": "'Playfair Display', serif", "$description": "Traditional display typeface" },
+    "body":    { "$value": "Literata, serif",            "$description": "Body text (restyled in v2.0.0)" },
+    "caption": { "$value": "'Source Sans 3', sans-serif","$description": "Small text / labels" },
+    "mono":    { "$value": "'Courier New', monospace",   "$description": "Code and technical text" }
+  }
+}

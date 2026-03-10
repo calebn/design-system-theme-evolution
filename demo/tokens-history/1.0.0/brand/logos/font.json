@@ -1,0 +1,9 @@
+{
+  "font": {
+    "$type": "fontFamily",
+    "heading": { "$value": "Georgia, serif",           "$description": "Display typeface (Alaska VAR in production)" },
+    "body":    { "$value": "'Source Sans 3', sans-serif", "$description": "Body text" },
+    "caption": { "$value": "'Source Sans 3', sans-serif", "$description": "Small text / labels" },
+    "mono":    { "$value": "'Courier New', monospace",    "$description": "Code and technical text" }
+  }
+}

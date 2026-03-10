@@ -1,0 +1,9 @@
+{
+  "font": {
+    "$type": "fontFamily",
+    "heading": { "$value": "Georgia, serif",       "$description": "Display typeface (Alaska VAR in production)" },
+    "body":    { "$value": "Inter, sans-serif",     "$description": "Body text (restyled in v2.0.0)" },
+    "caption": { "$value": "Inter, sans-serif",     "$description": "Small text / labels" },
+    "mono":    { "$value": "'Courier New', monospace", "$description": "Code and technical text" }
+  }
+}

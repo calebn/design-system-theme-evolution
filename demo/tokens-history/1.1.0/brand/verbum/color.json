@@ -1,0 +1,17 @@
+{
+  "color": {
+    "$type": "color",
+    "primary":       { "$value": "#6B1928", "$description": "Verbum Burgundy (restyled v1.1.0)" },
+    "primary-light": { "$value": "#F5E6E9", "$description": "Primary tint for backgrounds" },
+    "primary-dark":  { "$value": "#3D0F17", "$description": "Primary shade for emphasis" },
+    "secondary":     { "$value": "#C9A84C", "$description": "Verbum Gold -- supporting brand color" },
+    "accent":        { "$value": "#E8C96E", "$description": "NEW in v1.1.0 -- warm gold highlight" },
+    "surface":       { "$value": "#FFFDF8", "$description": "Warm white content surface" },
+    "surface-muted": { "$value": "#F5F0E8", "$description": "Warm subdued surface" },
+    "on-surface":    { "$value": "#2C2420", "$description": "Text on surface (warm black)" },
+    "on-primary":    { "$value": "#FFFFFF", "$description": "Text on primary color" },
+    "danger":        { "$value": "#B71C1C", "$description": "Error and destructive actions" },
+    "warning":       { "$value": "#E6A817", "$description": "Caution states" },
+    "success":       { "$value": "#2E7D32", "$description": "Positive outcomes" }
+  }
+}

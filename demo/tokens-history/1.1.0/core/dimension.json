@@ -1,0 +1,14 @@
+{
+  "dimension": {
+    "$type": "dimension",
+    "spacing-xs": { "$value": "4px",    "$description": "Extra small spacing" },
+    "spacing-sm": { "$value": "8px",    "$description": "Small spacing" },
+    "spacing-md": { "$value": "16px",   "$description": "Medium spacing" },
+    "spacing-lg": { "$value": "24px",   "$description": "Large spacing" },
+    "spacing-xl": { "$value": "40px",   "$description": "Extra large spacing" },
+    "radius-sm":  { "$value": "4px",    "$description": "ALIAS — combined into radius-md (v1.1.0)" },
+    "radius-md":  { "$value": "8px",    "$description": "Button / card radius — combines former sm + lg" },
+    "radius-lg":  { "$value": "8px",    "$description": "ALIAS — combined into radius-md (v1.1.0)" },
+    "radius-full":{ "$value": "9999px", "$description": "Fully rounded (pill)" }
+  }
+}

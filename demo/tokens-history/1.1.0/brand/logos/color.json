@@ -1,0 +1,17 @@
+{
+  "color": {
+    "$type": "color",
+    "primary":       { "$value": "#0F5FCC", "$description": "Logos Blue (restyled v1.1.0)" },
+    "primary-light": { "$value": "#E9F5FF", "$description": "Primary tint for backgrounds" },
+    "primary-dark":  { "$value": "#00042F", "$description": "Primary shade for emphasis" },
+    "secondary":     { "$value": "#3640B8", "$description": "Supporting brand color" },
+    "accent":        { "$value": "#4885FE", "$description": "NEW in v1.1.0 -- bright highlight" },
+    "surface":       { "$value": "#FFFFFF", "$description": "Default content surface" },
+    "surface-muted": { "$value": "#F5F5F5", "$description": "Subdued surface" },
+    "on-surface":    { "$value": "#303030", "$description": "Text on surface" },
+    "on-primary":    { "$value": "#FFFFFF", "$description": "Text on primary color" },
+    "danger":        { "$value": "#CC3333", "$description": "Error and destructive actions" },
+    "warning":       { "$value": "#DBA910", "$description": "Caution states" },
+    "success":       { "$value": "#5BA224", "$description": "Positive outcomes" }
+  }
+}

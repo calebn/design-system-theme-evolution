@@ -14,8 +14,7 @@ import { Button } from './components/Button';
 // Actual source files imported as raw strings — always in sync
 import logosColorRaw from '../tokens/brand/logos/color.json?raw';
 import verbumColorRaw from '../tokens/brand/verbum/color.json?raw';
-import logosVarsCssRaw from '../generated/logos/variables.css?raw';
-import verbumVarsCssRaw from '../generated/verbum/variables.css?raw';
+import { logosVarsCss as logosVarsCssRaw, verbumVarsCss as verbumVarsCssRaw } from './token-css-strings';
 import buttonTsxRaw from './components/Button.tsx?raw';
 
 type Brand = 'logos' | 'verbum';

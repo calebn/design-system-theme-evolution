@@ -11,7 +11,8 @@
       rel="stylesheet"
     />
     <!-- Default brand/version: loaded by App.tsx on mount; this prevents FOUC -->
-    <link id="theme-css" rel="stylesheet" href="./generated/versions/1.0.0/logos/variables.css" />
+    <!-- Use %BASE_URL% so Vite serves this from public/ instead of bundling it as a source CSS file -->
+    <link id="theme-css" rel="stylesheet" href="%BASE_URL%generated/versions/1.0.0/logos/variables.css" />
     <!-- Prism.js — syntax highlighting for code blocks (Tomorrow Night theme) -->
     <link
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"

@@ -248,12 +248,27 @@ async function main() {
     return;
   }
 
-  // generated/{brand}/ — for ?raw imports and direct CLI reference
+  // generated/{brand}/ — for CLI reference and the CSS strings TS file
   // public/generated/versions/{ver}/{brand}/ — for runtime CSS <link> loading
   console.log('\n── Building current tokens ──');
+  const currentCssStrings: Record<string, string> = {};
   for (const brand of brands) {
     await buildBrand(brand, join(ROOT, 'tokens'), join(ROOT, 'generated', brand));
+    const cssPath = join(ROOT, 'generated', brand, 'variables.css');
+    currentCssStrings[brand] = readFileSync(cssPath, 'utf-8');
   }
+
+  // Write a TS file so App.tsx can import CSS content as strings without
+  // Vite treating the .css files as actual stylesheets to inject.
+  const cssStringsSrc = [
+    `// AUTO-GENERATED — do not edit. Run: npm run build:tokens`,
+    ``,
+    ...Object.entries(currentCssStrings).map(
+      ([brand, css]) =>
+        `export const ${brand}VarsCss = ${JSON.stringify(css)};`,
+    ),
+  ].join('\n') + '\n';
+  writeFileSync(join(ROOT, 'src', 'token-css-strings.ts'), cssStringsSrc);
 
   console.log('\n── Building all history versions ──');
   const historyDir = join(ROOT, 'tokens-history');

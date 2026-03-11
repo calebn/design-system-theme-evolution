@@ -3,4 +3,5 @@ dist/
 generated/
 public/generated/
 src/diff-data.ts
+src/token-css-strings.ts
 package-lock.json

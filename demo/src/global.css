@@ -14,11 +14,12 @@ body {
 
 code {
   font-family: 'Courier New', Consolas, monospace;
-  background: #f1f5f9;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
   padding: 1px 5px;
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 0.85em;
-  color: #334155;
+  color: #0550ae;
 }
 
 button {

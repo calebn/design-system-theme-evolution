@@ -25,55 +25,58 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js" defer></script>
     <style>
-      /* Override Prism background to match our dark code blocks */
+      /* Override Prism background — code blocks use our own background color */
       pre[class*="language-"], code[class*="language-"] {
         background: none !important;
         text-shadow: none !important;
+        color: #24292f !important; /* GitHub dark default text */
       }
-      /* High-contrast Prism token colors (VSCode Dark+ inspired) */
+      /* GitHub-style light syntax token colors */
       .token.property,
       .token.tag,
       .token.boolean,
-      .token.constant,
-      .token.symbol,
-      .token.deleted {
-        color: #9cdcfe !important; /* bright cyan for JSON keys / properties */
+      .token.constant {
+        color: #0550ae !important; /* deep blue for JSON keys / properties */
       }
       .token.string,
       .token.attr-value,
       .token.char,
       .token.builtin,
       .token.inserted {
-        color: #ce9178 !important; /* warm orange for string values */
+        color: #0a3069 !important; /* dark blue-green for strings */
       }
       .token.number,
       .token.unit {
-        color: #b5cea8 !important; /* muted green for numbers */
+        color: #116329 !important; /* dark green for numbers */
       }
       .token.punctuation,
       .token.operator {
-        color: #d4d4d4 !important; /* light gray for punctuation */
+        color: #24292f !important; /* near-black for punctuation */
       }
       .token.keyword,
       .token.selector,
       .token.important {
-        color: #c586c0 !important; /* magenta for keywords */
+        color: #cf222e !important; /* GitHub red for keywords */
       }
       .token.function,
       .token.class-name {
-        color: #dcdcaa !important; /* yellow for function/class names */
+        color: #8250df !important; /* purple for function/class names */
       }
       .token.comment,
       .token.prolog,
       .token.doctype,
       .token.cdata {
-        color: #6a9955 !important; /* green for comments */
+        color: #6e7781 !important; /* gray for comments */
       }
-      /* Highlighted line mark */
+      .token.symbol,
+      .token.deleted {
+        color: #cf222e !important;
+      }
+      /* Highlighted line mark (for light background) */
       mark.code-highlight {
         display: inline;
-        background: rgba(250, 204, 21, 0.15);
-        border-left: 3px solid #facc15;
+        background: rgba(255, 200, 0, 0.2);
+        border-left: 3px solid #e6a817;
         margin-left: -16px;
         padding-left: 13px;
         color: inherit;

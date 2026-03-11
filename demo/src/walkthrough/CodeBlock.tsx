@@ -43,7 +43,7 @@ export function CodeBlock({ code, language, title, highlights, maxHeight }: Code
       style={{
         borderRadius: 8,
         overflow: 'hidden',
-        border: '1px solid #e2e8f0',
+        border: '1px solid #d0d7de',
         fontSize: '0.85rem',
         lineHeight: 1.65,
       }}
@@ -52,11 +52,11 @@ export function CodeBlock({ code, language, title, highlights, maxHeight }: Code
         <div
           style={{
             padding: '7px 14px',
-            backgroundColor: '#f1f5f9',
-            borderBottom: '1px solid #e2e8f0',
+            backgroundColor: '#f6f8fa',
+            borderBottom: '1px solid #d0d7de',
             fontSize: '0.78rem',
             fontWeight: 600,
-            color: '#475569',
+            color: '#57606a',
             fontFamily: 'monospace',
             letterSpacing: '0.02em',
           }}
@@ -69,7 +69,8 @@ export function CodeBlock({ code, language, title, highlights, maxHeight }: Code
           margin: 0,
           padding: '14px 16px',
           overflow: 'auto',
-          backgroundColor: '#1e293b',
+          backgroundColor: '#f6f8fa',
+          color: '#24292f',
           maxHeight: maxHeight ?? 420,
         }}
       >

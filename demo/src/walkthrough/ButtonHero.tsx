@@ -11,8 +11,9 @@ interface ButtonHeroProps {
 
 const TOKEN_PROPS = [
   { name: '--color-primary', label: 'color-primary' },
+  { name: '--color-accent', label: 'color-accent' },
   { name: '--color-on-primary', label: 'color-on-primary' },
-  { name: '--dimension-radius-md', label: 'radius-md' },
+  { name: '--dimension-radius-lg', label: 'radius-lg' },
   { name: '--font-body', label: 'font-body' },
 ];
 

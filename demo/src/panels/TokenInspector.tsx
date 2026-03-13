@@ -82,7 +82,7 @@ export function TokenInspector({ brand, version, cssLoadKey }: TokenInspectorPro
     <div>
       <h3
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: 'system-ui, sans-serif',
           fontSize: '0.8rem',
           fontWeight: 700,
           textTransform: 'uppercase',

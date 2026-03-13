@@ -23,8 +23,10 @@ const styles: Record<string, React.CSSProperties> = {
     cursor: 'pointer',
     border: '2px solid transparent',
     transition: 'opacity 0.15s, transform 0.1s',
-    borderRadius: 'var(--dimension-radius-md)',
+    borderRadius: 'var(--dimension-radius-lg)',
     whiteSpace: 'nowrap',
+    // --color-accent transparent fallback makes the ring invisible when the token doesn't exist
+    boxShadow: '0 3px 0 var(--color-accent, transparent)',
   },
   sm: { padding: 'var(--dimension-spacing-xs) var(--dimension-spacing-sm)', fontSize: '0.8rem' },
   md: { padding: 'var(--dimension-spacing-sm) var(--dimension-spacing-md)', fontSize: '0.9rem' },

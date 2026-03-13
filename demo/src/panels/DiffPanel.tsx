@@ -32,6 +32,8 @@ import { DIFF_DATA } from '../diff-data';
 interface DiffPanelProps {
   fromVersion: string;
   toVersion: string;
+  /** When provided, only show the diff for this brand */
+  brand?: string;
 }
 
 const BUMP_COLORS: Record<string, string> = {
@@ -66,7 +68,7 @@ const CHANGE_COLORS: Record<string, string> = {
   removed: '#dc2626',
 };
 
-export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
+export function DiffPanel({ fromVersion, toVersion, brand }: DiffPanelProps) {
   const key = `${fromVersion}->${toVersion}`;
   const data: DiffData | undefined = DIFF_DATA[key];
 
@@ -77,7 +79,7 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
           color: 'var(--color-on-surface)',
           opacity: 0.5,
           fontSize: '0.875rem',
-          fontFamily: 'var(--font-body)',
+          fontFamily: 'system-ui, sans-serif',
         }}
       >
         No diff available for {fromVersion} → {toVersion}
@@ -88,7 +90,7 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
   const bumpColor = BUMP_COLORS[data.overallBump] ?? '#888';
 
   return (
-    <div style={{ fontFamily: 'var(--font-body)' }}>
+    <div style={{ fontFamily: 'system-ui, sans-serif' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
         <span
           style={{
@@ -129,109 +131,115 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
         </span>
       </div>
 
-      {data.brands.map((bd) => {
-        const nonTrivial = bd.changes.filter((c) => c.type !== 'unchanged');
-        return (
-          <div key={bd.brand} style={{ marginBottom: 12 }}>
-            <div
-              style={{
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--color-on-surface)',
-                opacity: 0.45,
-                marginBottom: 4,
-              }}
-            >
-              {bd.brand}
-            </div>
-            {nonTrivial.length === 0 ? (
-              <div style={{ fontSize: '0.8rem', color: 'var(--color-on-surface)', opacity: 0.4 }}>
-                No changes
-              </div>
-            ) : (
+      {data.brands
+        .filter((bd) => !brand || bd.brand === brand)
+        .map((bd) => {
+          const nonTrivial = bd.changes.filter((c) => c.type !== 'unchanged');
+          return (
+            <div key={bd.brand} style={{ marginBottom: 12 }}>
               <div
                 style={{
-                  border: '1px solid var(--color-surface-muted)',
-                  borderRadius: 6,
-                  overflow: 'hidden',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  color: 'var(--color-on-surface)',
+                  opacity: 0.45,
+                  marginBottom: 4,
                 }}
               >
-                {nonTrivial.map((c) => (
-                  <div
-                    key={c.path}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '16px 1fr',
-                      gap: 8,
-                      padding: '5px 10px',
-                      borderBottom: '1px solid var(--color-surface-muted)',
-                      alignItems: 'start',
-                      backgroundColor: 'var(--color-surface)',
-                    }}
-                  >
-                    <span
-                      aria-label={CHANGE_LABELS[c.type]}
-                      style={{ color: CHANGE_COLORS[c.type], fontWeight: 700, fontSize: '0.85rem' }}
+                {bd.brand}
+              </div>
+              {nonTrivial.length === 0 ? (
+                <div style={{ fontSize: '0.8rem', color: 'var(--color-on-surface)', opacity: 0.4 }}>
+                  No changes
+                </div>
+              ) : (
+                <div
+                  style={{
+                    border: '1px solid var(--color-surface-muted)',
+                    borderRadius: 6,
+                    overflow: 'hidden',
+                  }}
+                >
+                  {nonTrivial.map((c) => (
+                    <div
+                      key={c.path}
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: '16px 1fr',
+                        gap: 8,
+                        padding: '5px 10px',
+                        borderBottom: '1px solid var(--color-surface-muted)',
+                        alignItems: 'start',
+                        backgroundColor: 'var(--color-surface)',
+                      }}
                     >
-                      <span aria-hidden="true">{CHANGE_ICONS[c.type]}</span>
-                    </span>
-                    <div>
                       <span
+                        aria-label={CHANGE_LABELS[c.type]}
                         style={{
-                          fontFamily: 'monospace',
-                          fontSize: '0.9rem',
-                          color: 'var(--color-on-surface)',
+                          color: CHANGE_COLORS[c.type],
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
                         }}
                       >
-                        {c.path}
+                        <span aria-hidden="true">{CHANGE_ICONS[c.type]}</span>
                       </span>
-                      {c.type === 'restyle' && (
-                        <div style={{ fontSize: '0.875rem', marginTop: 3 }}>
-                          <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
-                          <span style={{ color: '#94a3b8', margin: '0 6px' }}>→</span>
-                          <span style={{ color: '#16a34a' }}>{JSON.stringify(c.newValue)}</span>
-                        </div>
-                      )}
-                      {c.type === 'added' && (
-                        <div style={{ fontSize: '0.875rem', color: '#16a34a', marginTop: 3 }}>
-                          {JSON.stringify(c.newValue)}
-                        </div>
-                      )}
-                      {c.type === 'removed' && (
-                        <div
+                      <div>
+                        <span
                           style={{
-                            fontSize: '0.875rem',
-                            marginTop: 3,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 8,
+                            fontFamily: 'monospace',
+                            fontSize: '0.9rem',
+                            color: 'var(--color-on-surface)',
                           }}
                         >
-                          <span
+                          {c.path}
+                        </span>
+                        {c.type === 'restyle' && (
+                          <div style={{ fontSize: '0.875rem', marginTop: 3 }}>
+                            <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
+                            <span style={{ color: '#94a3b8', margin: '0 6px' }}>→</span>
+                            <span style={{ color: '#16a34a' }}>{JSON.stringify(c.newValue)}</span>
+                          </div>
+                        )}
+                        {c.type === 'added' && (
+                          <div style={{ fontSize: '0.875rem', color: '#16a34a', marginTop: 3 }}>
+                            {JSON.stringify(c.newValue)}
+                          </div>
+                        )}
+                        {c.type === 'removed' && (
+                          <div
                             style={{
-                              fontSize: '0.7rem',
-                              fontWeight: 700,
-                              background: '#fecaca',
-                              color: '#991b1b',
-                              padding: '1px 6px',
-                              borderRadius: 3,
+                              fontSize: '0.875rem',
+                              marginTop: 3,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 8,
                             }}
                           >
-                            Deleted
-                          </span>
-                          <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
-                        </div>
-                      )}
+                            <span
+                              style={{
+                                fontSize: '0.7rem',
+                                fontWeight: 700,
+                                background: '#fecaca',
+                                color: '#991b1b',
+                                padding: '1px 6px',
+                                borderRadius: 3,
+                              }}
+                            >
+                              Deleted
+                            </span>
+                            <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      })}
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
 
       {data.contractMismatches.length > 0 && (
         <div

@@ -89,6 +89,9 @@ const DARK_CARD: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  minHeight: 280,
+  // Prevents font-swap-induced reflow from propagating outside the card
+  contain: 'layout',
 };
 
 const PILL_ACTIVE: React.CSSProperties = {
@@ -1707,7 +1710,7 @@ export function App() {
               added. Two radius tokens were combined into one. Our automated checks classified this
               as <strong>safe</strong>. It shipped without any developer work.
             </p>
-            <DiffPanel fromVersion="1.0.0" toVersion="1.1.0" />
+            <DiffPanel fromVersion="1.0.0" toVersion="1.1.0" brand={brand} />
           </div>
         </div>
       </Section>
@@ -1826,7 +1829,7 @@ export function App() {
               check detects the removed tokens and requires a migration guide before the version can
               be released.
             </p>
-            <DiffPanel fromVersion="1.1.0" toVersion="2.0.0" />
+            <DiffPanel fromVersion="1.1.0" toVersion="2.0.0" brand={brand} />
           </div>
         </div>
       </Section>

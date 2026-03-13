@@ -39,6 +39,15 @@ export function StickyControls({
       { threshold: 0 },
     );
     observer.observe(sentinel);
+
+    // If the page loaded already scrolled past the sentinel, the observer's
+    // intersection callback never fires. Detect this case and show immediately.
+    const initialRect = sentinel.getBoundingClientRect();
+    if (initialRect.top < 0) {
+      hasBeenOnScreen = true;
+      setVisible(true);
+    }
+
     return () => observer.disconnect();
   }, []);
 

@@ -55,27 +55,12 @@ html {
   100% { background: transparent; }
 }
 
-@keyframes btn-restyle {
-  0%   { filter: none; }
-  20%  { filter: brightness(1.4) saturate(0.4); }
-  50%  { filter: hue-rotate(40deg) brightness(1.1); }
-  80%  { filter: none; }
-  100% { filter: none; }
-}
-
 .search-btn-slot-0 { animation: slot-highlight 1.8s 0.2s ease-in-out forwards; }
 .search-btn-slot-1 { animation: slot-highlight 1.8s 2.0s ease-in-out forwards; }
 .search-btn-slot-2 { animation: slot-highlight 1.8s 3.8s ease-in-out forwards; }
 .search-btn-slot-3 { animation: slot-highlight 1.8s 5.6s ease-in-out forwards; }
 .search-btn-slot-4 { animation: slot-highlight 1.8s 7.4s ease-in-out forwards; }
 .search-btn-slot-5 { animation: slot-highlight 1.8s 9.2s ease-in-out forwards; }
-
-.search-btn-slot-0 button { animation: btn-restyle 1.8s 0.2s ease-in-out forwards; }
-.search-btn-slot-1 button { animation: btn-restyle 1.8s 2.0s ease-in-out forwards; }
-.search-btn-slot-2 button { animation: btn-restyle 1.8s 3.8s ease-in-out forwards; }
-.search-btn-slot-3 button { animation: btn-restyle 1.8s 5.6s ease-in-out forwards; }
-.search-btn-slot-4 button { animation: btn-restyle 1.8s 7.4s ease-in-out forwards; }
-.search-btn-slot-5 button { animation: btn-restyle 1.8s 9.2s ease-in-out forwards; }
 
 
 /* ── Scroll-cue bounce arrow (last slide) ── */

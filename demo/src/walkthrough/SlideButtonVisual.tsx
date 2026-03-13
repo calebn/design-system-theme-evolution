@@ -29,6 +29,7 @@ const BASE_BTN: React.CSSProperties = {
   cursor: 'default',
   border: 'none',
   userSelect: 'none',
+  whiteSpace: 'nowrap',
 };
 
 const BLUE_BTN: React.CSSProperties = {
@@ -91,36 +92,73 @@ function ScatteredButtons() {
 }
 
 /* ---- Search-and-update animation ---- */
-const COUNTER_STEPS = [
-  { at: 200, label: 'Pages migrated: 0' },
-  { at: 2000, label: 'Pages migrated: 1' },
-  { at: 3800, label: 'Pages migrated: 2' },
-  { at: 5600, label: 'Pages migrated: 3' },
-  { at: 7400, label: 'Pages migrated: 4' },
-  { at: 9200, label: 'Pages migrated: 5' },
-  { at: 11000, label: 'Pages migrated: 6 ✓' },
+
+// The uniform "new" style every button settles into after migration
+const MIGRATED_STYLE: React.CSSProperties = {
+  background: '#1E6AFE',
+  borderRadius: 8,
+  fontSize: '1rem',
+  padding: '12px 28px',
+  transition: 'all 0.5s ease',
+};
+
+// Each slot: highlight starts at `highlightAt`, button is "done" at `doneAt`
+const SLOT_TIMING = [
+  { highlightAt: 200,  doneAt: 2000 },
+  { highlightAt: 2000, doneAt: 3800 },
+  { highlightAt: 3800, doneAt: 5600 },
+  { highlightAt: 5600, doneAt: 7400 },
+  { highlightAt: 7400, doneAt: 9200 },
+  { highlightAt: 9200, doneAt: 11000 },
 ];
 
 function SearchingButtons() {
+  const [migrated, setMigrated] = useState<boolean[]>(Array(6).fill(false));
   const [counter, setCounter] = useState('Pages migrated: 0');
 
   useEffect(() => {
-    const timers = COUNTER_STEPS.map(({ at, label }) =>
-      window.setTimeout(() => setCounter(label), at),
-    );
+    const counterLabels = ['Pages migrated: 0', 'Pages migrated: 1', 'Pages migrated: 2',
+      'Pages migrated: 3', 'Pages migrated: 4', 'Pages migrated: 5', 'Pages migrated: 6 ✓'];
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    SLOT_TIMING.forEach(({ doneAt }, i) => {
+      // Flip the button to its uniform "migrated" style
+      timers.push(window.setTimeout(() => {
+        setMigrated(prev => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
+        // Advance counter label
+        setCounter(counterLabels[i + 1]);
+      }, doneAt));
+    });
+
     return () => timers.forEach(clearTimeout);
   }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 20, position: 'relative' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 20 }}>
         {DRIFTED.map((d, i) => (
           <div
             key={i}
-            className={`search-btn-slot search-btn-slot-${i}`}
+            // Keep the CSS highlight class only while still being animated
+            className={migrated[i] ? undefined : `search-btn-slot search-btn-slot-${i}`}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
           >
-            <button style={{ ...BASE_BTN, color: '#fff', ...d.style }}>{d.label}</button>
+            <button
+              style={{
+                ...BASE_BTN,
+                color: '#fff',
+                // Before: each button has its own drifted style
+                // After: all buttons look the same
+                ...(migrated[i] ? MIGRATED_STYLE : d.style),
+              }}
+            >
+              {d.label}
+            </button>
           </div>
         ))}
       </div>

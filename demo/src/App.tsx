@@ -257,7 +257,10 @@ export function App() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 48, maxWidth: 760, width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <p style={{ margin: 0, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>
-                What if...
+                The opportunity
+              </p>
+              <p style={{ margin: 0, fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 700, color: 'rgba(255,255,255,0.9)', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+                Designers should be free to create. Developers should build, not migrate. Redesigns shouldn't cost us years.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 {[
@@ -317,6 +320,9 @@ export function App() {
                   </li>
                 ))}
               </ul>
+              <p style={{ margin: '20px 0 0', fontSize: '0.85rem', color: 'rgba(255,255,255,0.35)', fontStyle: 'italic' }}>
+                We shipped great work despite this — imagine what we could do without it.
+              </p>
             </div>
             <SlideButtonVisual variant="scattered" />
           </div>
@@ -336,7 +342,7 @@ export function App() {
                 {[
                   'L7, L8, L9, L10, Subscription Era — 5 major redesigns since 2018',
                   "I've spent ~2 of my ~6 years here on theme migration work",
-                  'Multiply across the team — hundreds of thousands of dollars in manual labor',
+                  "Multiply that across every team — that's a lot of creative energy spent on busywork",
                 ].map((point, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: '1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
                     <span style={{ color: 'rgba(255,200,100,0.5)', flexShrink: 0, marginTop: 2 }}>—</span>
@@ -369,7 +375,7 @@ export function App() {
                 ))}
               </ul>
               <p style={{ margin: '24px 0 0', fontSize: '0.85rem', color: 'rgba(255,255,255,0.35)', fontStyle: 'italic' }}>
-                Same design intent. Separate implementations. No shared code.
+                Same vision. Different systems. We made it work anyway.
               </p>
             </div>
             <SlideButtonVisual variant="split" />
@@ -1128,8 +1134,9 @@ BLOCKED — breaking changes detected`}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginBottom: 48 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
-                We need a small, dedicated <strong style={{ color: '#fff' }}>Design System team</strong> —
-                2 designers and 2 developers, each contributing ~4 hours a week.
+                Design changes should flow from Figma to production without anyone hand-migrating themes.
+                A small, dedicated <strong style={{ color: '#fff' }}>Design System team</strong> can make
+                that real — 2 designers and 2 developers, each contributing ~4 hours a week.
               </p>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 This team would help Design adopt <strong style={{ color: '#fff' }}>Figma Variables</strong> (which

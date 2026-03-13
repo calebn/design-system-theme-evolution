@@ -66,7 +66,10 @@ export function App() {
   const [brand, setBrand] = useState<Brand>('logos');
   const [version, setVersion] = useState<Version>('1.0.0');
   const [cssLoadKey, setCssLoadKey] = useState(0);
-  const [presentationStarted, setPresentationStarted] = useState(false);
+  // Only offer the fullscreen hint when entering at the very beginning (no vertical-section hash).
+  const [showFullscreenHint, setShowFullscreenHint] = useState(
+    () => !SECTION_IDS.includes(window.location.hash.slice(1)),
+  );
 
   useEffect(() => {
     const css = versionedCss[version]?.[brand] ?? '';
@@ -95,13 +98,18 @@ export function App() {
     setCssLoadKey((k) => k + 1);
   }, [brand, version]);
 
-  // Dismiss fullscreen overlay on any key press too
+  // Dismiss fullscreen hint on keypress or when the user scrolls past the title area.
   useEffect(() => {
-    if (presentationStarted) return;
-    const handler = () => setPresentationStarted(true);
-    window.addEventListener('keydown', handler, { once: true });
-    return () => window.removeEventListener('keydown', handler);
-  }, [presentationStarted]);
+    if (!showFullscreenHint) return;
+    const onKey = () => setShowFullscreenHint(false);
+    const onScroll = () => { if (window.scrollY > 50) setShowFullscreenHint(false); };
+    window.addEventListener('keydown', onKey, { once: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [showFullscreenHint]);
 
   // On initial load: if the hash points to a vertical section, jump to the last
   // horizontal slide (releasing the scroll lock) then scroll to the section.
@@ -153,11 +161,6 @@ export function App() {
     return () => observer.disconnect();
   }, []);
 
-  const enterPresentation = () => {
-    setPresentationStarted(true);
-    document.documentElement.requestFullscreen?.().catch(() => {});
-  };
-
   const inlinePill = (active: boolean): React.CSSProperties => ({
     padding: '6px 18px',
     borderRadius: 6,
@@ -181,52 +184,35 @@ export function App() {
 
   return (
     <div>
-      {/* ── Fullscreen entry overlay ────────────────────────────────── */}
-      {!presentationStarted && (
-        <div
-          onClick={enterPresentation}
+      {/* ── Fullscreen hint pill — only shown when entering at the start ── */}
+      {showFullscreenHint && (
+        <button
+          onClick={() => {
+            setShowFullscreenHint(false);
+            document.documentElement.requestFullscreen?.().catch(() => {});
+          }}
           style={{
             position: 'fixed',
-            inset: 0,
-            background: 'rgba(15,23,42,0.97)',
-            backdropFilter: 'blur(6px)',
+            bottom: 24,
+            right: 24,
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            zIndex: 1000,
+            gap: 8,
+            padding: '10px 18px',
+            borderRadius: 8,
+            border: '1px solid rgba(255,255,255,0.2)',
+            background: 'rgba(15,23,42,0.82)',
+            backdropFilter: 'blur(8px)',
             color: '#fff',
-            textAlign: 'center',
-            padding: '32px',
+            fontSize: '0.85rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            zIndex: 100,
           }}
         >
-          <p style={{ margin: '0 0 12px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>
-            A design system story
-          </p>
-          <h1 style={{ margin: '0 0 40px', fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
-            From Copy-Paste<br />to Source of Truth
-          </h1>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 12,
-              padding: '16px 32px',
-              borderRadius: 10,
-              border: '1px solid rgba(255,255,255,0.25)',
-              background: 'rgba(255,255,255,0.08)',
-              fontSize: '1rem',
-              fontWeight: 600,
-            }}
-          >
-            <span style={{ fontSize: '1.2rem' }}>⛶</span>
-            Enter Fullscreen Presentation
-          </div>
-          <p style={{ margin: '16px 0 0', fontSize: '0.78rem', color: 'rgba(255,255,255,0.25)' }}>
-            Press any key to start without fullscreen
-          </p>
-        </div>
+          <span style={{ fontSize: '1rem' }}>⛶</span>
+          Fullscreen
+        </button>
       )}
 
       <StickyControls

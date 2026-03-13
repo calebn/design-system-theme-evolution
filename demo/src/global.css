@@ -27,7 +27,69 @@ button {
   font-family: inherit;
 }
 
+/* ── Vertical scroll-snap for Phase 2 sections ── */
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+}
+
+/* ── Horizontal deck: hide scrollbar in all browsers ── */
+.horizontal-deck-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.horizontal-deck-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Search-and-update animation (Slides 3 & 6) ──
+   Each .search-btn-slot-N gets highlighted in sequence,
+   then the button inside fades to the "new" style.
+   Total duration: 6 slots × 1.8s each = 10.8s, then holds.
+*/
+@keyframes slot-highlight {
+  0%   { background: transparent; }
+  10%  { background: rgba(255, 220, 60, 0.18); box-shadow: 0 0 0 2px rgba(255,220,60,0.5); border-radius: 6px; }
+  40%  { background: rgba(255, 220, 60, 0.12); }
+  60%  { background: transparent; }
+  100% { background: transparent; }
+}
+
+@keyframes btn-restyle {
+  0%   { filter: none; }
+  20%  { filter: brightness(1.4) saturate(0.4); }
+  50%  { filter: hue-rotate(40deg) brightness(1.1); }
+  80%  { filter: none; }
+  100% { filter: none; }
+}
+
+.search-btn-slot-0 { animation: slot-highlight 1.8s 0.2s ease-in-out forwards; }
+.search-btn-slot-1 { animation: slot-highlight 1.8s 2.0s ease-in-out forwards; }
+.search-btn-slot-2 { animation: slot-highlight 1.8s 3.8s ease-in-out forwards; }
+.search-btn-slot-3 { animation: slot-highlight 1.8s 5.6s ease-in-out forwards; }
+.search-btn-slot-4 { animation: slot-highlight 1.8s 7.4s ease-in-out forwards; }
+.search-btn-slot-5 { animation: slot-highlight 1.8s 9.2s ease-in-out forwards; }
+
+.search-btn-slot-0 button { animation: btn-restyle 1.8s 0.2s ease-in-out forwards; }
+.search-btn-slot-1 button { animation: btn-restyle 1.8s 2.0s ease-in-out forwards; }
+.search-btn-slot-2 button { animation: btn-restyle 1.8s 3.8s ease-in-out forwards; }
+.search-btn-slot-3 button { animation: btn-restyle 1.8s 5.6s ease-in-out forwards; }
+.search-btn-slot-4 button { animation: btn-restyle 1.8s 7.4s ease-in-out forwards; }
+.search-btn-slot-5 button { animation: btn-restyle 1.8s 9.2s ease-in-out forwards; }
+
+
+/* ── Scroll-cue bounce arrow (last slide) ── */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(8px); opacity: 0.9; }
+}
+
+.scroll-cue-arrow {
+  animation: bounce-down 1.6s ease-in-out infinite;
+}
+
+/* ── Sticky controls slide-down animation ── */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }

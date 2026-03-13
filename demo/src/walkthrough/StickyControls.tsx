@@ -8,7 +8,7 @@ interface StickyControlsProps {
   setBrand: (b: Brand) => void;
   version: Version;
   setVersion: (v: Version) => void;
-  showVersion: boolean;
+  showVersion?: boolean;
 }
 
 const VERSIONS: Version[] = ['1.0.0', '1.1.0', '2.0.0'];

@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 interface HorizontalDeckProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ interface HorizontalDeckProps {
 
 export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDeckProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   // Compute initial index from URL hash before first paint to avoid a flash.
   const initialIndex = (() => {
@@ -23,6 +25,9 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
 
   // Throttle gate: prevents advancing more than one slide per wheel gesture
   const wheelCooldown = useRef(false);
+  // Touch tracking refs for mobile swipe navigation
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
   // Returns true when the page has been scrolled past the horizontal deck
   // (user is in the vertical content area). Used to guard all scroll locks.
@@ -97,18 +102,38 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
   // Never lock when the user is already in the vertical content area.
   useEffect(() => {
     const onLastSlideNow = activeIndex === slideCount - 1;
+    const shouldLock = !onLastSlideNow && !isInVerticalContent();
 
-    if (onLastSlideNow || isInVerticalContent()) {
-      document.documentElement.style.overflowY = '';
+    if (isMobile) {
+      // iOS Safari ignores overflow:hidden on <html>. Use position:fixed body trick instead.
+      if (shouldLock) {
+        const scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+      } else {
+        const scrollY = parseInt(document.body.style.top || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        if (scrollY) window.scrollTo(0, -scrollY);
+      }
     } else {
-      document.documentElement.style.overflowY = 'hidden';
+      document.documentElement.style.overflowY = shouldLock ? 'hidden' : '';
     }
 
-    // Restore on unmount
     return () => {
-      document.documentElement.style.overflowY = '';
+      if (isMobile) {
+        const scrollY = parseInt(document.body.style.top || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        if (scrollY) window.scrollTo(0, -scrollY);
+      } else {
+        document.documentElement.style.overflowY = '';
+      }
     };
-  }, [activeIndex, slideCount]);
+  }, [activeIndex, slideCount, isMobile]);
 
   // Intercept wheel/trackpad to drive horizontal navigation while deck is locked.
   // Does nothing when the user is already scrolling the vertical content.
@@ -162,6 +187,36 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
     return () => window.removeEventListener('keydown', handleKey);
   }, [activeIndex, slideCount, goTo]);
 
+  // Mobile touch handlers — track swipe direction to navigate slides.
+  // The track handles horizontal panning natively; we only need to
+  // block vertical scroll-through while the deck is locked.
+  useEffect(() => {
+    if (!isMobile) return;
+    const track = trackRef.current;
+    if (!track) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (isInVerticalContent()) return;
+      if (activeIndex === slideCount - 1) return;
+      const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+      // If gesture is predominantly vertical, prevent it to stop scroll-through.
+      if (dy > dx) e.preventDefault();
+    };
+
+    track.addEventListener('touchstart', onTouchStart, { passive: true });
+    track.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => {
+      track.removeEventListener('touchstart', onTouchStart);
+      track.removeEventListener('touchmove', onTouchMove);
+    };
+  }, [isMobile, activeIndex, slideCount]);
+
   const slides = Array.isArray(children) ? children : [children];
   const slidesWithKeys = slides.map((child, i) => (
     <SlideWrapper key={i} isActive={activeIndex === i} slideIndex={i}>
@@ -206,6 +261,7 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}${activeIndex === i ? ' (current)' : ''}`}
             aria-current={activeIndex === i ? 'true' : undefined}
+            className="deck-dot"
             style={{
               width: activeIndex === i ? 24 : 8,
               height: 8,

@@ -99,6 +99,7 @@ export function TokenInspector({ brand, version, cssLoadKey }: TokenInspectorPro
           border: '1px solid var(--color-surface-muted)',
           borderRadius: 'var(--dimension-radius-md)',
           overflow: 'hidden',
+          overflowX: 'auto',
           backgroundColor: 'var(--color-surface)',
         }}
       >

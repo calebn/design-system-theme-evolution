@@ -255,7 +255,15 @@ function SearchingButtons() {
 /* ---- Split two worlds ---- */
 function SplitButtons() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 40,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
         <div
           style={{
@@ -345,7 +353,15 @@ function VariantButtons() {
         >
           Before
         </span>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'flex-end',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           {oldSizes.map((s, i) => (
             <div
               key={i}
@@ -380,7 +396,15 @@ function VariantButtons() {
         >
           After
         </span>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'flex-end',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           {newSizes.map((s, i) => (
             <div
               key={i}
@@ -462,7 +486,8 @@ function AnnotatedButton({ tokenStyle }: { tokenStyle: boolean }) {
     <div
       style={{
         position: 'relative',
-        width: 480,
+        maxWidth: 480,
+        width: '100%',
         height: 200,
         display: 'flex',
         alignItems: 'center',

@@ -63,7 +63,9 @@ export function ButtonHero({
             border: '1px solid rgba(255,255,255,0.1)',
             borderRadius: 8,
             padding: '16px 24px',
-            minWidth: 320,
+            minWidth: 0,
+            width: '100%',
+            maxWidth: 320,
           }}
         >
           {TOKEN_PROPS.map(({ name, label }) => (

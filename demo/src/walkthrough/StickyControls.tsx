@@ -59,6 +59,7 @@ export function StickyControls({
   return (
     <nav
       aria-label="Theme controls"
+      className="sticky-controls"
       style={{
         position: 'fixed',
         top: 0,

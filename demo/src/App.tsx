@@ -14,6 +14,7 @@ import { DiffPanel } from './panels/DiffPanel';
 
 import { versionedCss } from './token-css-strings';
 import { Brand, Version } from './types';
+import { useIsMobile } from './hooks/useIsMobile';
 
 const LOGOS_COMPACT_CSS = `[data-brand="logos"] {
   --color-primary:       #1E6AFE;
@@ -115,6 +116,7 @@ const PILL_INACTIVE: React.CSSProperties = {
 };
 
 export function App() {
+  const isMobile = useIsMobile();
   const [brand, setBrand] = useState<Brand>('logos');
   const [version, setVersion] = useState<Version>('1.0.0');
   const [cssLoadKey, setCssLoadKey] = useState(0);
@@ -219,8 +221,8 @@ export function App() {
 
   return (
     <main>
-      {/* ── Fullscreen hint pill — only shown when entering at the start ── */}
-      {showFullscreenHint && (
+      {/* ── Fullscreen hint pill — only shown when entering at the start on desktop ── */}
+      {!isMobile && showFullscreenHint && (
         <button
           onClick={() => {
             setShowFullscreenHint(false);
@@ -443,6 +445,7 @@ export function App() {
         {/* SLIDE 3 — CONTENT ADMIN ERA */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -536,6 +539,7 @@ export function App() {
         {/* SLIDE 3 — THE COST */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -618,6 +622,7 @@ export function App() {
         {/* SLIDE 4 — TWO WORLDS */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -699,6 +704,7 @@ export function App() {
         {/* SLIDE 5 — ENTER BUILDER.IO */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -782,6 +788,7 @@ export function App() {
         {/* SLIDE 6 — STORYBOOK (NEW) */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -983,6 +990,7 @@ export function App() {
         {/* SLIDE 7 — THE GAP (was Slide 6) */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -1066,6 +1074,7 @@ export function App() {
         {/* SLIDE 8 — SYSTEM PROBLEM (was Slide 7) */}
         <Slide>
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -1218,6 +1227,7 @@ export function App() {
         tinted
       >
         <div
+          className="responsive-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -1484,6 +1494,7 @@ export function App() {
           </div>
 
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -1629,6 +1640,7 @@ export function App() {
         </div>
 
         <div
+          className="responsive-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -1743,6 +1755,7 @@ export function App() {
         </div>
 
         <div
+          className="responsive-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -1829,6 +1842,7 @@ export function App() {
       >
         {/* Button pair: healthy vs broken */}
         <div
+          className="responsive-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -2224,6 +2238,7 @@ BLOCKED — breaking changes detected`}
           </div>
 
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -2507,6 +2522,7 @@ BLOCKED — breaking changes detected`}
           </h2>
 
           <div
+            className="responsive-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -2570,6 +2586,7 @@ BLOCKED — breaking changes detected`}
 
             {/* Contrast visual — closing the visual loop */}
             <div
+              className="responsive-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',

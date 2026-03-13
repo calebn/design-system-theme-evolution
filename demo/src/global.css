@@ -128,3 +128,23 @@ a:focus-visible {
   from { transform: translateY(-100%); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
+
+/* ── Mobile responsive utilities (max-width: 768px) ── */
+@media (max-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .sticky-controls {
+    padding: 6px 12px !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Enlarge progress dot hit area to 44×44px without affecting visual size */
+  .deck-dot {
+    position: relative;
+    padding: 18px 8px !important;
+  }
+}

@@ -2035,9 +2035,8 @@ BLOCKED — breaking changes detected`}
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 12,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
+              gap: 8,
+              flexWrap: 'nowrap',
               width: '100%',
             }}
           >
@@ -2048,7 +2047,8 @@ BLOCKED — breaking changes detected`}
                 overflow: 'hidden',
                 border: '1px solid rgba(0,0,0,0.12)',
                 boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                width: 148,
+                width: 120,
+                flexShrink: 0,
                 background: '#1e1e1e',
               }}
             >
@@ -2159,70 +2159,83 @@ BLOCKED — breaking changes detected`}
               </div>
             </div>
 
-            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
 
             <div
               style={{
-                padding: '16px 20px',
+                padding: '12px 14px',
                 borderRadius: 10,
                 border: '1px solid #e2e8f0',
                 backgroundColor: '#f8fafc',
                 textAlign: 'center',
-                minWidth: 130,
+                flex: '1 1 0',
+                minWidth: 0,
               }}
             >
               <div
                 style={{
-                  fontSize: '0.9rem',
+                  fontSize: '0.82rem',
                   fontWeight: 700,
                   color: '#1e293b',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 tokens.json
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>
-                Design tokens · DTCG format
+              <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: 3 }}>
+                Design tokens · DTCG
               </div>
             </div>
 
-            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
 
             <div
               style={{
-                padding: '16px 20px',
+                padding: '12px 14px',
                 borderRadius: 10,
                 border: '1px solid #e2e8f0',
                 backgroundColor: '#f8fafc',
                 textAlign: 'center',
-                minWidth: 130,
+                flex: '1 1 0',
+                minWidth: 0,
               }}
             >
               <div
                 style={{
-                  fontSize: '0.9rem',
+                  fontSize: '0.82rem',
                   fontWeight: 700,
                   color: '#1e293b',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 CSS Variables
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>
-                Build tool converts tokens → vars
+              <div
+                style={{
+                  fontSize: '0.68rem',
+                  color: '#94a3b8',
+                  marginTop: 3,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Build tool → vars
               </div>
             </div>
 
-            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
 
             {/* Live button as the final pipeline output */}
             <div
               data-brand={brand}
               style={{
                 ...DARK_CARD,
-                padding: '20px 28px',
+                padding: '16px 20px',
                 border: '2px solid rgba(255,255,255,0.12)',
                 flexDirection: 'column',
                 gap: 8,
-                minWidth: 150,
+                flexShrink: 0,
+                minHeight: 'unset',
+                contain: 'none',
               }}
             >
               <div

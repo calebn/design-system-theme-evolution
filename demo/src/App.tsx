@@ -242,7 +242,13 @@ export function App() {
                 How our design system got here, and where it can go
               </p>
             </div>
-            <SlideButtonVisual variant="single" />
+            <SlideButtonVisual
+              variant="single"
+              onButtonClick={() => {
+                const track = document.querySelector('.horizontal-deck-track') as HTMLElement | null;
+                track?.scrollTo({ left: window.innerWidth, behavior: 'smooth' });
+              }}
+            />
           </div>
         </Slide>
 

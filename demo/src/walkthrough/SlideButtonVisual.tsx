@@ -18,6 +18,8 @@ interface SlideButtonVisualProps {
   variant: SlideButtonVariant;
   /** Pass an ever-incrementing value to force remount and restart animations */
   animationKey?: number;
+  /** If provided, the primary button becomes clickable and calls this handler. */
+  onButtonClick?: () => void;
 }
 
 const BASE_BTN: React.CSSProperties = {
@@ -41,8 +43,8 @@ const BLUE_BTN: React.CSSProperties = {
   fontSize: '1rem',
 };
 
-export function SlideButtonVisual({ variant }: SlideButtonVisualProps) {
-  if (variant === 'single') return <SingleButton />;
+export function SlideButtonVisual({ variant, onButtonClick }: SlideButtonVisualProps) {
+  if (variant === 'single') return <SingleButton onButtonClick={onButtonClick} />;
   if (variant === 'scattered') return <ScatteredButtons />;
   if (variant === 'searching') return <SearchingButtons />;
   if (variant === 'split') return <SplitButtons />;
@@ -53,10 +55,27 @@ export function SlideButtonVisual({ variant }: SlideButtonVisualProps) {
 }
 
 /* ---- Single centered button ---- */
-function SingleButton() {
+function SingleButton({ onButtonClick }: { onButtonClick?: () => void }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-      <button style={{ ...BLUE_BTN, fontSize: '1.25rem', padding: '18px 48px' }}>
+      <button
+        onClick={onButtonClick}
+        style={{
+          ...BLUE_BTN,
+          fontSize: '1.25rem',
+          padding: '18px 48px',
+          cursor: onButtonClick ? 'pointer' : 'default',
+          transition: 'transform 0.1s, box-shadow 0.1s',
+        }}
+        onMouseEnter={onButtonClick ? (e) => {
+          (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+          (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 24px rgba(30,106,254,0.4)';
+        } : undefined}
+        onMouseLeave={onButtonClick ? (e) => {
+          (e.currentTarget as HTMLButtonElement).style.transform = '';
+          (e.currentTarget as HTMLButtonElement).style.boxShadow = '';
+        } : undefined}
+      >
         Get Started
       </button>
     </div>

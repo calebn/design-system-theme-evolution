@@ -430,7 +430,7 @@ export function App() {
                   color: 'rgba(255,255,255,0.35)',
                 }}
               >
-                2018 – 2022
+                The Past
               </p>
               <h2
                 style={{

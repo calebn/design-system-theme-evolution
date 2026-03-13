@@ -60,7 +60,14 @@ export function Alert({ variant, title, children }: AlertProps) {
             {title}
           </p>
         )}
-        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-on-surface)', opacity: 0.85 }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: '0.875rem',
+            color: 'var(--color-on-surface)',
+            opacity: 0.85,
+          }}
+        >
           {children}
         </p>
       </div>

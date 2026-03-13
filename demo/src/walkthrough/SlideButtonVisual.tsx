@@ -67,14 +67,23 @@ function SingleButton({ onButtonClick }: { onButtonClick?: () => void }) {
           cursor: onButtonClick ? 'pointer' : 'default',
           transition: 'transform 0.1s, box-shadow 0.1s',
         }}
-        onMouseEnter={onButtonClick ? (e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 24px rgba(30,106,254,0.4)';
-        } : undefined}
-        onMouseLeave={onButtonClick ? (e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = '';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = '';
-        } : undefined}
+        onMouseEnter={
+          onButtonClick
+            ? (e) => {
+                (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+                (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                  '0 8px 24px rgba(30,106,254,0.4)';
+              }
+            : undefined
+        }
+        onMouseLeave={
+          onButtonClick
+            ? (e) => {
+                (e.currentTarget as HTMLButtonElement).style.transform = '';
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = '';
+              }
+            : undefined
+        }
       >
         Get Started
       </button>
@@ -84,20 +93,54 @@ function SingleButton({ onButtonClick }: { onButtonClick?: () => void }) {
 
 /* ---- Scattered copy-paste drift buttons ---- */
 const DRIFTED: { style: React.CSSProperties; label: string }[] = [
-  { style: { background: '#1E6AFE', borderRadius: 8, fontSize: '0.95rem', padding: '12px 28px' }, label: 'Homepage' },
-  { style: { background: '#1a5fe0', borderRadius: 4, fontSize: '1.05rem', padding: '14px 30px' }, label: 'Pricing' },
-  { style: { background: '#2B7EFF', borderRadius: 12, fontSize: '0.9rem', padding: '10px 24px' }, label: 'Campaign A' },
-  { style: { background: '#1659cc', borderRadius: 6, fontSize: '1rem', padding: '16px 36px', letterSpacing: '0.02em' }, label: 'Promo page' },
-  { style: { background: '#0d4fc8', borderRadius: 3, fontSize: '0.88rem', padding: '11px 22px' }, label: 'Blog CTA' },
-  { style: { background: '#2472f5', borderRadius: 10, fontSize: '1.1rem', padding: '15px 32px' }, label: 'Landing' },
+  {
+    style: { background: '#1E6AFE', borderRadius: 8, fontSize: '0.95rem', padding: '12px 28px' },
+    label: 'Homepage',
+  },
+  {
+    style: { background: '#1a5fe0', borderRadius: 4, fontSize: '1.05rem', padding: '14px 30px' },
+    label: 'Pricing',
+  },
+  {
+    style: { background: '#2B7EFF', borderRadius: 12, fontSize: '0.9rem', padding: '10px 24px' },
+    label: 'Campaign A',
+  },
+  {
+    style: {
+      background: '#1659cc',
+      borderRadius: 6,
+      fontSize: '1rem',
+      padding: '16px 36px',
+      letterSpacing: '0.02em',
+    },
+    label: 'Promo page',
+  },
+  {
+    style: { background: '#0d4fc8', borderRadius: 3, fontSize: '0.88rem', padding: '11px 22px' },
+    label: 'Blog CTA',
+  },
+  {
+    style: { background: '#2472f5', borderRadius: 10, fontSize: '1.1rem', padding: '15px 32px' },
+    label: 'Landing',
+  },
 ];
 
 function ScatteredButtons() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 20, justifyContent: 'center' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, auto)',
+          gap: 20,
+          justifyContent: 'center',
+        }}
+      >
         {DRIFTED.map((d, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div
+            key={i}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+          >
             <button style={{ ...BASE_BTN, color: '#fff', ...d.style }}>{d.label}</button>
             <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>{d.label}</span>
           </div>
@@ -123,7 +166,7 @@ const MIGRATED_STYLE: React.CSSProperties = {
 
 // Each slot: highlight starts at `highlightAt`, button is "done" at `doneAt`
 const SLOT_TIMING = [
-  { highlightAt: 200,  doneAt: 2000 },
+  { highlightAt: 200, doneAt: 2000 },
   { highlightAt: 2000, doneAt: 3800 },
   { highlightAt: 3800, doneAt: 5600 },
   { highlightAt: 5600, doneAt: 7400 },
@@ -136,22 +179,31 @@ function SearchingButtons() {
   const [counter, setCounter] = useState('Pages migrated: 0');
 
   useEffect(() => {
-    const counterLabels = ['Pages migrated: 0', 'Pages migrated: 1', 'Pages migrated: 2',
-      'Pages migrated: 3', 'Pages migrated: 4', 'Pages migrated: 5', 'Pages migrated: 6 ✓'];
+    const counterLabels = [
+      'Pages migrated: 0',
+      'Pages migrated: 1',
+      'Pages migrated: 2',
+      'Pages migrated: 3',
+      'Pages migrated: 4',
+      'Pages migrated: 5',
+      'Pages migrated: 6 ✓',
+    ];
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     SLOT_TIMING.forEach(({ doneAt }, i) => {
       // Flip the button to its uniform "migrated" style
-      timers.push(window.setTimeout(() => {
-        setMigrated(prev => {
-          const next = [...prev];
-          next[i] = true;
-          return next;
-        });
-        // Advance counter label
-        setCounter(counterLabels[i + 1]);
-      }, doneAt));
+      timers.push(
+        window.setTimeout(() => {
+          setMigrated((prev) => {
+            const next = [...prev];
+            next[i] = true;
+            return next;
+          });
+          // Advance counter label
+          setCounter(counterLabels[i + 1]);
+        }, doneAt),
+      );
     });
 
     return () => timers.forEach(clearTimeout);
@@ -205,7 +257,16 @@ function SplitButtons() {
           }}
         >
           <button style={{ ...BLUE_BTN }}>Buy Now</button>
-          <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Skeletor</span>
+          <span
+            style={{
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.45)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            Skeletor
+          </span>
         </div>
       </div>
       <div style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.2)' }}>⟷</div>
@@ -222,7 +283,16 @@ function SplitButtons() {
           }}
         >
           <button style={{ ...BLUE_BTN, borderRadius: 4 }}>Buy Now</button>
-          <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Content Admin</span>
+          <span
+            style={{
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.45)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            Content Admin
+          </span>
         </div>
       </div>
     </div>
@@ -232,41 +302,73 @@ function SplitButtons() {
 /* ---- 4→3 variant mapping (SM/MD/LG/Super → SM/MD/LG) ---- */
 function VariantButtons() {
   const oldSizes = [
-    { label: 'SM',    padding: '9px 20px',   fontSize: '0.875rem' },
-    { label: 'MD',    padding: '12px 28px',  fontSize: '1rem' },
-    { label: 'LG',    padding: '16px 36px',  fontSize: '1.1rem' },
-    { label: 'Super', padding: '22px 56px',  fontSize: '1.3rem' },
+    { label: 'SM', padding: '9px 20px', fontSize: '0.875rem' },
+    { label: 'MD', padding: '12px 28px', fontSize: '1rem' },
+    { label: 'LG', padding: '16px 36px', fontSize: '1.1rem' },
+    { label: 'Super', padding: '22px 56px', fontSize: '1.3rem' },
   ];
   const newSizes = [
-    { label: 'SM', padding: '9px 20px',  fontSize: '0.875rem' },
+    { label: 'SM', padding: '9px 20px', fontSize: '0.875rem' },
     { label: 'MD', padding: '12px 28px', fontSize: '1rem' },
     { label: 'LG', padding: '16px 36px', fontSize: '1.1rem' },
   ];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Before</span>
+        <span
+          style={{
+            fontSize: '0.7rem',
+            color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Before
+        </span>
         <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
           {oldSizes.map((s, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-              <button style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}>
+            <div
+              key={i}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+            >
+              <button
+                style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}
+              >
                 Buy
               </button>
-              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>{s.label}</span>
+              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
+                {s.label}
+              </span>
             </div>
           ))}
         </div>
       </div>
       <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.3)' }}>↓ Redesign</div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>After</span>
+        <span
+          style={{
+            fontSize: '0.7rem',
+            color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+          }}
+        >
+          After
+        </span>
         <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
           {newSizes.map((s, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-              <button style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}>
+            <div
+              key={i}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+            >
+              <button
+                style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}
+              >
                 Buy
               </button>
-              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>{s.label}</span>
+              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
+                {s.label}
+              </span>
             </div>
           ))}
           {/* Super: no longer exists, shown as a prominent ghost */}
@@ -327,7 +429,16 @@ function AnnotatedButton({ tokenStyle }: { tokenStyle: boolean }) {
       ];
 
   return (
-    <div style={{ position: 'relative', width: 480, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      style={{
+        position: 'relative',
+        width: 480,
+        height: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <button
         style={{
           ...BLUE_BTN,

@@ -28,10 +28,7 @@ export function ComponentStrip({ brand }: ComponentStripProps) {
           marginBottom: 16,
         }}
       >
-        <Card
-          title="Buttons"
-          description="Primary, secondary, and ghost variants."
-        >
+        <Card title="Buttons" description="Primary, secondary, and ghost variants.">
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
             <Button variant="primary">Buy now</Button>
             <Button variant="secondary">Details</Button>

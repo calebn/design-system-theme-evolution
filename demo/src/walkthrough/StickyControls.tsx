@@ -13,7 +13,13 @@ interface StickyControlsProps {
 
 const VERSIONS: Version[] = ['1.0.0', '1.1.0', '2.0.0'];
 
-export function StickyControls({ brand, setBrand, version, setVersion, showVersion }: StickyControlsProps) {
+export function StickyControls({
+  brand,
+  setBrand,
+  version,
+  setVersion,
+  showVersion,
+}: StickyControlsProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -71,7 +77,15 @@ export function StickyControls({ brand, setBrand, version, setVersion, showVersi
         animation: 'slideDown 0.2s ease-out',
       }}
     >
-      <span style={{ fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8' }}>
+      <span
+        style={{
+          fontSize: '0.68rem',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          color: '#94a3b8',
+        }}
+      >
         Brand
       </span>
       <div style={{ display: 'flex', gap: 4 }}>
@@ -85,7 +99,15 @@ export function StickyControls({ brand, setBrand, version, setVersion, showVersi
       {showVersion && (
         <>
           <div style={{ width: 1, height: 20, backgroundColor: '#e2e8f0' }} />
-          <span style={{ fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8' }}>
+          <span
+            style={{
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              color: '#94a3b8',
+            }}
+          >
             Version
           </span>
           <div style={{ display: 'flex', gap: 4 }}>

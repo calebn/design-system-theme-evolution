@@ -10,21 +10,21 @@ interface BadgeProps {
 }
 
 const BG: Record<BadgeVariant, string> = {
-  primary:   'var(--color-primary, hotpink)',
+  primary: 'var(--color-primary, hotpink)',
   secondary: 'var(--color-secondary)',
-  success:   'var(--color-success)',
-  warning:   'var(--color-warning)',
-  danger:    'var(--color-danger)',
-  neutral:   'var(--color-surface-muted)',
+  success: 'var(--color-success)',
+  warning: 'var(--color-warning)',
+  danger: 'var(--color-danger)',
+  neutral: 'var(--color-surface-muted)',
 };
 
 const FG: Record<BadgeVariant, string> = {
-  primary:   'var(--color-on-primary, #fff)',
+  primary: 'var(--color-on-primary, #fff)',
   secondary: 'var(--color-on-primary)',
-  success:   'var(--color-on-primary)',
-  warning:   'var(--color-on-surface)',
-  danger:    'var(--color-on-primary)',
-  neutral:   'var(--color-on-surface)',
+  success: 'var(--color-on-primary)',
+  warning: 'var(--color-on-surface)',
+  danger: 'var(--color-on-primary)',
+  neutral: 'var(--color-on-surface)',
 };
 
 export function Badge({ children, variant = 'primary' }: BadgeProps) {

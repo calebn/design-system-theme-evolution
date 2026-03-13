@@ -23,7 +23,15 @@ export function Slide({ children, dark = false, zoom = 1.25 }: SlideProps) {
         overflow: 'hidden',
       }}
     >
-      <div style={{ zoom, width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div
+        style={{
+          zoom,
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         {children}
       </div>
     </div>

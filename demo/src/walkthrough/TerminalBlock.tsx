@@ -34,13 +34,18 @@ export function TerminalBlock({ command, output, title }: TerminalBlockProps) {
         )}
       </div>
       {/* Body */}
-      <div style={{ backgroundColor: '#0f172a', padding: '12px 16px', overflow: 'auto', maxHeight: 340 }}>
+      <div
+        style={{
+          backgroundColor: '#0f172a',
+          padding: '12px 16px',
+          overflow: 'auto',
+          maxHeight: 340,
+        }}
+      >
         <div style={{ color: '#22d3ee', marginBottom: 4 }}>
           <span style={{ color: '#a78bfa' }}>$</span> {command}
         </div>
-        <pre style={{ margin: 0, color: '#e2e8f0', whiteSpace: 'pre-wrap' }}>
-          {output}
-        </pre>
+        <pre style={{ margin: 0, color: '#e2e8f0', whiteSpace: 'pre-wrap' }}>{output}</pre>
       </div>
     </div>
   );

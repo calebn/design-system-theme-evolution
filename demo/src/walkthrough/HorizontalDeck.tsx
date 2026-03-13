@@ -42,12 +42,15 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
     history.replaceState(null, '', `#${id}`);
   }, [activeIndex, slideIds]);
 
-  const goTo = useCallback((index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const clamped = Math.max(0, Math.min(slideCount - 1, index));
-    track.scrollTo({ left: clamped * window.innerWidth, behavior: 'smooth' });
-  }, [slideCount]);
+  const goTo = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(slideCount - 1, index));
+      track.scrollTo({ left: clamped * window.innerWidth, behavior: 'smooth' });
+    },
+    [slideCount],
+  );
 
   // Sync activeIndex from scroll position
   useEffect(() => {
@@ -124,7 +127,9 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
 
       if (wheelCooldown.current) return;
       wheelCooldown.current = true;
-      setTimeout(() => { wheelCooldown.current = false; }, 700);
+      setTimeout(() => {
+        wheelCooldown.current = false;
+      }, 700);
 
       if (e.deltaY > 0) {
         goTo(activeIndex + 1);
@@ -238,9 +243,7 @@ function SlideWrapper({
   }, [isActive]);
 
   return (
-    <div
-      style={{ scrollSnapAlign: 'start', flexShrink: 0, width: '100vw', height: '100vh' }}
-    >
+    <div style={{ scrollSnapAlign: 'start', flexShrink: 0, width: '100vw', height: '100vh' }}>
       <div key={activationCount} style={{ width: '100%', height: '100%' }}>
         {children}
       </div>

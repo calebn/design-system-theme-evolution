@@ -66,7 +66,14 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
 
   if (!data) {
     return (
-      <div style={{ color: 'var(--color-on-surface)', opacity: 0.5, fontSize: '0.875rem', fontFamily: 'var(--font-body)' }}>
+      <div
+        style={{
+          color: 'var(--color-on-surface)',
+          opacity: 0.5,
+          fontSize: '0.875rem',
+          fontFamily: 'var(--font-body)',
+        }}
+      >
         No diff available for {fromVersion} → {toVersion}
       </div>
     );
@@ -77,11 +84,27 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
   return (
     <div style={{ fontFamily: 'var(--font-body)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-        <span style={{ fontSize: '0.78rem', fontFamily: 'monospace', backgroundColor: 'var(--color-surface-muted)', padding: '2px 8px', borderRadius: 4 }}>
+        <span
+          style={{
+            fontSize: '0.78rem',
+            fontFamily: 'monospace',
+            backgroundColor: 'var(--color-surface-muted)',
+            padding: '2px 8px',
+            borderRadius: 4,
+          }}
+        >
           {fromVersion}
         </span>
         <span style={{ color: 'var(--color-on-surface)', opacity: 0.4 }}>→</span>
-        <span style={{ fontSize: '0.78rem', fontFamily: 'monospace', backgroundColor: 'var(--color-surface-muted)', padding: '2px 8px', borderRadius: 4 }}>
+        <span
+          style={{
+            fontSize: '0.78rem',
+            fontFamily: 'monospace',
+            backgroundColor: 'var(--color-surface-muted)',
+            padding: '2px 8px',
+            borderRadius: 4,
+          }}
+        >
           {toVersion}
         </span>
         <span
@@ -104,13 +127,31 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
         const nonTrivial = bd.changes.filter((c) => c.type !== 'unchanged');
         return (
           <div key={bd.brand} style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-on-surface)', opacity: 0.45, marginBottom: 4 }}>
+            <div
+              style={{
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                color: 'var(--color-on-surface)',
+                opacity: 0.45,
+                marginBottom: 4,
+              }}
+            >
               {bd.brand}
             </div>
             {nonTrivial.length === 0 ? (
-              <div style={{ fontSize: '0.8rem', color: 'var(--color-on-surface)', opacity: 0.4 }}>No changes</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--color-on-surface)', opacity: 0.4 }}>
+                No changes
+              </div>
             ) : (
-              <div style={{ border: '1px solid var(--color-surface-muted)', borderRadius: 6, overflow: 'hidden' }}>
+              <div
+                style={{
+                  border: '1px solid var(--color-surface-muted)',
+                  borderRadius: 6,
+                  overflow: 'hidden',
+                }}
+              >
                 {nonTrivial.map((c) => (
                   <div
                     key={c.path}
@@ -124,11 +165,19 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
                       backgroundColor: 'var(--color-surface)',
                     }}
                   >
-                    <span style={{ color: CHANGE_COLORS[c.type], fontWeight: 700, fontSize: '0.85rem' }}>
+                    <span
+                      style={{ color: CHANGE_COLORS[c.type], fontWeight: 700, fontSize: '0.85rem' }}
+                    >
                       {CHANGE_ICONS[c.type]}
                     </span>
                     <div>
-                      <span style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--color-on-surface)' }}>
+                      <span
+                        style={{
+                          fontFamily: 'monospace',
+                          fontSize: '0.9rem',
+                          color: 'var(--color-on-surface)',
+                        }}
+                      >
                         {c.path}
                       </span>
                       {c.type === 'restyle' && (
@@ -144,8 +193,25 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
                         </div>
                       )}
                       {c.type === 'removed' && (
-                        <div style={{ fontSize: '0.875rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: 700, background: '#fecaca', color: '#991b1b', padding: '1px 6px', borderRadius: 3 }}>
+                        <div
+                          style={{
+                            fontSize: '0.875rem',
+                            marginTop: 3,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 8,
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: '0.7rem',
+                              fontWeight: 700,
+                              background: '#fecaca',
+                              color: '#991b1b',
+                              padding: '1px 6px',
+                              borderRadius: 3,
+                            }}
+                          >
                             Deleted
                           </span>
                           <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
@@ -161,10 +227,22 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
       })}
 
       {data.contractMismatches.length > 0 && (
-        <div style={{ marginTop: 8, padding: '8px 12px', backgroundColor: '#fef2f2', borderRadius: 6, border: '1px solid #fca5a5' }}>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>Brand contract violations</div>
+        <div
+          style={{
+            marginTop: 8,
+            padding: '8px 12px',
+            backgroundColor: '#fef2f2',
+            borderRadius: 6,
+            border: '1px solid #fca5a5',
+          }}
+        >
+          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>
+            Brand contract violations
+          </div>
           {data.contractMismatches.map((m, i) => (
-            <div key={i} style={{ fontSize: '0.75rem', color: '#b91c1c' }}>• {m}</div>
+            <div key={i} style={{ fontSize: '0.75rem', color: '#b91c1c' }}>
+              • {m}
+            </div>
           ))}
         </div>
       )}

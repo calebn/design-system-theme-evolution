@@ -65,8 +65,8 @@ export function TokenInspector({ brand, version, cssLoadKey }: TokenInspectorPro
       next[v] = readCssVar(v);
     }
     setValues(next);
-  // cssLoadKey only increments after the <link> load event fires, so the CSS
-  // for the current brand+version is guaranteed to be applied when this runs.
+    // cssLoadKey only increments after the <link> load event fires, so the CSS
+    // for the current brand+version is guaranteed to be applied when this runs.
   }, [cssLoadKey]);
 
   const cellStyle: React.CSSProperties = {

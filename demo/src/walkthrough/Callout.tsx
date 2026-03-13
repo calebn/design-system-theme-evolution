@@ -6,10 +6,10 @@ interface CalloutProps {
 }
 
 const ROLE_CONFIG: Record<Role, { icon: string; label: string; accent: string; bg: string }> = {
-  designer:  { icon: '🎨', label: 'For designers',  accent: '#7c3aed', bg: '#f5f3ff' },
-  developer: { icon: '⌨️',  label: 'For developers', accent: '#0369a1', bg: '#f0f9ff' },
-  manager:   { icon: '📊', label: 'For managers',   accent: '#b45309', bg: '#fffbeb' },
-  info:      { icon: '💡', label: 'Key insight',    accent: '#475569', bg: '#f8fafc' },
+  designer: { icon: '🎨', label: 'For designers', accent: '#7c3aed', bg: '#f5f3ff' },
+  developer: { icon: '⌨️', label: 'For developers', accent: '#0369a1', bg: '#f0f9ff' },
+  manager: { icon: '📊', label: 'For managers', accent: '#b45309', bg: '#fffbeb' },
+  info: { icon: '💡', label: 'Key insight', accent: '#475569', bg: '#f8fafc' },
 };
 
 export function Callout({ role = 'info', children }: CalloutProps) {
@@ -40,9 +40,7 @@ export function Callout({ role = 'info', children }: CalloutProps) {
         >
           {cfg.label}
         </div>
-        <div style={{ fontSize: '0.95rem', color: '#334155', lineHeight: 1.65 }}>
-          {children}
-        </div>
+        <div style={{ fontSize: '0.95rem', color: '#334155', lineHeight: 1.65 }}>{children}</div>
       </div>
     </div>
   );

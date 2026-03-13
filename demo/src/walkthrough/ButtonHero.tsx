@@ -16,7 +16,12 @@ const TOKEN_PROPS = [
   { name: '--font-body', label: 'font-body' },
 ];
 
-export function ButtonHero({ brand, cssLoadKey, showTokens = true, compact = false }: ButtonHeroProps) {
+export function ButtonHero({
+  brand,
+  cssLoadKey,
+  showTokens = true,
+  compact = false,
+}: ButtonHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
 
@@ -43,7 +48,9 @@ export function ButtonHero({ brand, cssLoadKey, showTokens = true, compact = fal
       }}
     >
       <div style={compact ? undefined : { transform: 'scale(1.4)', transformOrigin: 'center' }}>
-        <Button size="lg" variant="primary">Get Started</Button>
+        <Button size="lg" variant="primary">
+          Get Started
+        </Button>
       </div>
 
       {showTokens && (

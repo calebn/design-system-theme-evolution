@@ -50,7 +50,14 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
       }}
     >
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 32px', width: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, marginBottom: subtitle ? 4 : 20 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: 14,
+            marginBottom: subtitle ? 4 : 20,
+          }}
+        >
           {step !== undefined && (
             <span
               style={{

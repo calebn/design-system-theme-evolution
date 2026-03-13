@@ -2031,225 +2031,229 @@ BLOCKED — breaking changes detected`}
           }}
         >
           {/* Pipeline diagram — Figma mockup → tokens.json → CSS vars → live button */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              flexWrap: 'nowrap',
-              width: '100%',
-            }}
-          >
-            {/* Mini Figma variables panel mockup */}
+          {/* Outer wrapper scrolls horizontally on narrow viewports, preserving the left-to-right story */}
+          <div style={{ width: '100%', overflowX: 'auto', paddingBottom: 4 }}>
             <div
               style={{
-                borderRadius: 10,
-                overflow: 'hidden',
-                border: '1px solid rgba(0,0,0,0.12)',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                width: 120,
-                flexShrink: 0,
-                background: '#1e1e1e',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                flexWrap: 'nowrap',
+                width: '100%',
+                minWidth: 560,
               }}
             >
+              {/* Mini Figma variables panel mockup */}
               <div
                 style={{
-                  background: '#2c2c2c',
-                  padding: '7px 10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderRadius: 10,
+                  overflow: 'hidden',
+                  border: '1px solid rgba(0,0,0,0.12)',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                  width: 120,
+                  flexShrink: 0,
+                  background: '#1e1e1e',
                 }}
               >
                 <div
                   style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: '#e74c3c',
-                  }}
-                />
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: '#f39c12',
-                  }}
-                />
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: '#2ecc71',
-                  }}
-                />
-                <span
-                  style={{
-                    marginLeft: 4,
-                    fontSize: '0.58rem',
-                    color: 'rgba(255,255,255,0.65)',
-                    fontFamily: 'monospace',
+                    background: '#2c2c2c',
+                    padding: '7px 10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
                   }}
                 >
-                  Variables
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '8px 10px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 5,
-                }}
-              >
-                {[
-                  { swatch: '#1E6AFE', name: 'color/primary' },
-                  { swatch: '#3640B8', name: 'color/accent' },
-                  { swatch: '#FFFFFF', name: 'color/surface' },
-                ].map(({ swatch, name }) => (
-                  <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <div
-                      style={{
-                        width: 12,
-                        height: 12,
-                        borderRadius: 3,
-                        background: swatch,
-                        border: '1px solid rgba(255,255,255,0.15)',
-                        flexShrink: 0,
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontSize: '0.58rem',
-                        color: 'rgba(255,255,255,0.55)',
-                        fontFamily: 'monospace',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {name}
-                    </span>
-                  </div>
-                ))}
+                  <div
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      background: '#e74c3c',
+                    }}
+                  />
+                  <div
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      background: '#f39c12',
+                    }}
+                  />
+                  <div
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      background: '#2ecc71',
+                    }}
+                  />
+                  <span
+                    style={{
+                      marginLeft: 4,
+                      fontSize: '0.58rem',
+                      color: 'rgba(255,255,255,0.65)',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    Variables
+                  </span>
+                </div>
                 <div
                   style={{
-                    marginTop: 2,
-                    fontSize: '0.5rem',
-                    color: 'rgba(255,255,255,0.2)',
+                    padding: '8px 10px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 5,
+                  }}
+                >
+                  {[
+                    { swatch: '#1E6AFE', name: 'color/primary' },
+                    { swatch: '#3640B8', name: 'color/accent' },
+                    { swatch: '#FFFFFF', name: 'color/surface' },
+                  ].map(({ swatch, name }) => (
+                    <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div
+                        style={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: 3,
+                          background: swatch,
+                          border: '1px solid rgba(255,255,255,0.15)',
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span
+                        style={{
+                          fontSize: '0.58rem',
+                          color: 'rgba(255,255,255,0.55)',
+                          fontFamily: 'monospace',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {name}
+                      </span>
+                    </div>
+                  ))}
+                  <div
+                    style={{
+                      marginTop: 2,
+                      fontSize: '0.5rem',
+                      color: 'rgba(255,255,255,0.2)',
+                      textAlign: 'center',
+                    }}
+                  >
+                    + 14 more
+                  </div>
+                </div>
+                <div
+                  style={{
+                    padding: '5px 10px',
+                    borderTop: '1px solid rgba(255,255,255,0.06)',
+                    fontSize: '0.55rem',
+                    color: 'rgba(255,255,255,0.3)',
                     textAlign: 'center',
                   }}
                 >
-                  + 14 more
+                  Designer updates
                 </div>
               </div>
+
+              <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
+
               <div
                 style={{
-                  padding: '5px 10px',
-                  borderTop: '1px solid rgba(255,255,255,0.06)',
-                  fontSize: '0.55rem',
-                  color: 'rgba(255,255,255,0.3)',
+                  padding: '12px 14px',
+                  borderRadius: 10,
+                  border: '1px solid #e2e8f0',
+                  backgroundColor: '#f8fafc',
                   textAlign: 'center',
+                  flex: '1 1 0',
+                  minWidth: 0,
                 }}
               >
-                Designer updates
+                <div
+                  style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: '#1e293b',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  tokens.json
+                </div>
+                <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: 3 }}>
+                  Design tokens · DTCG
+                </div>
               </div>
-            </div>
 
-            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
+              <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
 
-            <div
-              style={{
-                padding: '12px 14px',
-                borderRadius: 10,
-                border: '1px solid #e2e8f0',
-                backgroundColor: '#f8fafc',
-                textAlign: 'center',
-                flex: '1 1 0',
-                minWidth: 0,
-              }}
-            >
               <div
                 style={{
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  color: '#1e293b',
-                  whiteSpace: 'nowrap',
+                  padding: '12px 14px',
+                  borderRadius: 10,
+                  border: '1px solid #e2e8f0',
+                  backgroundColor: '#f8fafc',
+                  textAlign: 'center',
+                  flex: '1 1 0',
+                  minWidth: 0,
                 }}
               >
-                tokens.json
+                <div
+                  style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: '#1e293b',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  CSS Variables
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.68rem',
+                    color: '#94a3b8',
+                    marginTop: 3,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Build tool → vars
+                </div>
               </div>
-              <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: 3 }}>
-                Design tokens · DTCG
-              </div>
-            </div>
 
-            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
+              <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
 
-            <div
-              style={{
-                padding: '12px 14px',
-                borderRadius: 10,
-                border: '1px solid #e2e8f0',
-                backgroundColor: '#f8fafc',
-                textAlign: 'center',
-                flex: '1 1 0',
-                minWidth: 0,
-              }}
-            >
+              {/* Live button as the final pipeline output */}
               <div
+                data-brand={brand}
                 style={{
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  color: '#1e293b',
-                  whiteSpace: 'nowrap',
+                  ...DARK_CARD,
+                  padding: '16px 20px',
+                  border: '2px solid rgba(255,255,255,0.12)',
+                  flexDirection: 'column',
+                  gap: 8,
+                  flexShrink: 0,
+                  minHeight: 'unset',
+                  contain: 'none',
                 }}
               >
-                CSS Variables
+                <div
+                  style={{
+                    fontSize: '0.65rem',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.3)',
+                    marginBottom: 4,
+                  }}
+                >
+                  Output
+                </div>
+                <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
               </div>
-              <div
-                style={{
-                  fontSize: '0.68rem',
-                  color: '#94a3b8',
-                  marginTop: 3,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Build tool → vars
-              </div>
-            </div>
-
-            <div style={{ fontSize: '1.2rem', color: '#94a3b8', flexShrink: 0 }}>→</div>
-
-            {/* Live button as the final pipeline output */}
-            <div
-              data-brand={brand}
-              style={{
-                ...DARK_CARD,
-                padding: '16px 20px',
-                border: '2px solid rgba(255,255,255,0.12)',
-                flexDirection: 'column',
-                gap: 8,
-                flexShrink: 0,
-                minHeight: 'unset',
-                contain: 'none',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.3)',
-                  marginBottom: 4,
-                }}
-              >
-                Output
-              </div>
-              <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
             </div>
           </div>
 

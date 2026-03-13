@@ -27,6 +27,7 @@ export function Card({ title, description, children, elevated = false }: CardPro
           margin: '0 0 var(--dimension-spacing-xs)',
           fontSize: '1.1rem',
           fontWeight: 700,
+          lineHeight: 1.2,
         }}
       >
         {title}

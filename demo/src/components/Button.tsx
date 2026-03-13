@@ -19,6 +19,7 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     fontFamily: 'var(--font-body)',
     fontWeight: 600,
+    lineHeight: 1,
     cursor: 'pointer',
     border: '2px solid transparent',
     transition: 'opacity 0.15s, transform 0.1s',

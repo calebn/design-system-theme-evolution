@@ -124,6 +124,11 @@ export function App() {
   }, []);
 
   // Update URL hash as vertical sections scroll into the center of the viewport.
+  // Also auto-reset v2.0.0 when the safety-net section comes into view (broken tokens
+  // would confuse the "safe vs breaking" comparison that section is demonstrating).
+  const versionRef = useRef(version);
+  useEffect(() => { versionRef.current = version; }, [version]);
+
   useEffect(() => {
     const targets = SECTION_IDS
       .map((id) => document.getElementById(id))
@@ -134,6 +139,9 @@ export function App() {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             history.replaceState(null, '', `#${entry.target.id}`);
+            if (entry.target.id === 'safety-net' && versionRef.current === '2.0.0') {
+              setVersion('1.0.0');
+            }
           }
         }
       },
@@ -630,16 +638,39 @@ export function App() {
               <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
             </div>
             <div>
-              <Callout role="info">
-                How many lines of JavaScript ran to re-theme? <strong>Zero.</strong> The brand toggle
-                changes a single <code style={{ whiteSpace: 'nowrap' }}>data-brand</code> attribute.
-                The browser's CSS engine does the rest. Components don't re-render — they just repaint.
-              </Callout>
-              <Callout role="info">
-                <strong>Bonus:</strong> The same mechanism makes dark mode trivial — just another set
-                of token values under a <code style={{ whiteSpace: 'nowrap' }}>data-theme="dark"</code> selector.
-                Something design has wanted for years becomes essentially free.
-              </Callout>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 0,
+                  borderRadius: 8,
+                  backgroundColor: '#f8fafc',
+                  borderLeft: '4px solid #475569',
+                  margin: '16px 0',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ display: 'flex', gap: 12, padding: '14px 18px' }}>
+                  <span style={{ fontSize: '1.1rem', flexShrink: 0, lineHeight: 1.5 }}>💡</span>
+                  <div>
+                    <div style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#475569', marginBottom: 4 }}>Key insights</div>
+                    <div style={{ fontSize: '0.95rem', color: '#334155', lineHeight: 1.65 }}>
+                      How many lines of JavaScript ran to re-theme? <strong>Zero.</strong> The brand toggle
+                      changes a single <code style={{ whiteSpace: 'nowrap' }}>data-brand</code> attribute.
+                      The browser's CSS engine does the rest.
+                    </div>
+                  </div>
+                </div>
+                <div style={{ height: 1, background: '#e2e8f0', margin: '0 18px' }} />
+                <div style={{ display: 'flex', gap: 12, padding: '14px 18px' }}>
+                  <span style={{ fontSize: '1.1rem', flexShrink: 0, lineHeight: 1.5 }}>🌙</span>
+                  <div style={{ fontSize: '0.95rem', color: '#334155', lineHeight: 1.65 }}>
+                    <strong>Bonus:</strong> The same mechanism makes dark mode trivial — just another set
+                    of token values under a <code style={{ whiteSpace: 'nowrap' }}>data-theme="dark"</code> selector.
+                    Something design has wanted for years becomes essentially free.
+                  </div>
+                </div>
+              </div>
               <div style={{ marginTop: 16, borderRadius: 12, border: '1px solid #e2e8f0', padding: 20, backgroundColor: 'var(--color-surface, #fff)' }}>
                 <div data-brand={brand}>
                   <TokenInspector brand={brand} version={version} cssLoadKey={cssLoadKey} />

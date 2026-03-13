@@ -139,9 +139,7 @@ function generateTS(
   for (const [path, token] of Object.entries(flatTokens)) {
     const constName = toCamelConst(path);
     const valueStr =
-      typeof token.value === 'object'
-        ? JSON.stringify(token.value)
-        : JSON.stringify(token.value);
+      typeof token.value === 'object' ? JSON.stringify(token.value) : JSON.stringify(token.value);
     const comment = token.description ? ` // ${token.description}` : '';
     lines.push(`  ${constName}: ${valueStr} as const,${comment}`);
   }
@@ -157,9 +155,7 @@ function generateTS(
 // Tailwind config generator (CJS for Tailwind compatibility)
 // ---------------------------------------------------------------------------
 
-function generateTailwind(
-  flatTokens: Record<string, { value: unknown; type?: string }>,
-): string {
+function generateTailwind(flatTokens: Record<string, { value: unknown; type?: string }>): string {
   const colors: Record<string, string> = {};
 
   for (const [path] of Object.entries(flatTokens)) {
@@ -180,11 +176,7 @@ function generateTailwind(
 // Build a single brand from a token source directory
 // ---------------------------------------------------------------------------
 
-async function buildBrand(
-  brand: string,
-  tokenSourceDir: string,
-  outputDir: string,
-): Promise<void> {
+async function buildBrand(brand: string, tokenSourceDir: string, outputDir: string): Promise<void> {
   const coreDir = join(tokenSourceDir, 'core');
   const brandDir = join(tokenSourceDir, 'brand', brand);
 
@@ -220,14 +212,15 @@ async function main() {
 
   if (allVersions) {
     const historyDir = join(ROOT, 'tokens-history');
-    const versions = readdirSync(historyDir).filter((v) =>
-      existsSync(join(historyDir, v, 'core')),
-    );
+    const versions = readdirSync(historyDir).filter((v) => existsSync(join(historyDir, v, 'core')));
     for (const version of versions) {
       console.log(`\n── Building version ${version} ──`);
       for (const brand of brands) {
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'public', 'generated', 'versions', version, brand));
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'generated', 'versions', version, brand));
+        await buildBrand(
+          brand,
+          join(historyDir, version),
+          join(ROOT, 'generated', 'versions', version, brand),
+        );
       }
     }
     return;
@@ -242,34 +235,30 @@ async function main() {
     }
     console.log(`\n── Building version ${version} ──`);
     for (const brand of brands) {
-      await buildBrand(brand, historyDir, join(ROOT, 'public', 'generated', 'versions', version, brand));
       await buildBrand(brand, historyDir, join(ROOT, 'generated', 'versions', version, brand));
     }
     return;
   }
 
   // generated/{brand}/ — for CLI reference and the CSS strings TS file
-  // public/generated/versions/{ver}/{brand}/ — for runtime CSS <link> loading
   console.log('\n── Building current tokens ──');
-  const currentCssStrings: Record<string, string> = {};
   for (const brand of brands) {
     await buildBrand(brand, join(ROOT, 'tokens'), join(ROOT, 'generated', brand));
-    const cssPath = join(ROOT, 'generated', brand, 'variables.css');
-    currentCssStrings[brand] = readFileSync(cssPath, 'utf-8');
   }
 
   console.log('\n── Building all history versions ──');
   const historyDir = join(ROOT, 'tokens-history');
   const versionedCssStrings: Record<string, Record<string, string>> = {};
   if (existsSync(historyDir)) {
-    const versions = readdirSync(historyDir).filter((v) =>
-      existsSync(join(historyDir, v, 'core')),
-    );
+    const versions = readdirSync(historyDir).filter((v) => existsSync(join(historyDir, v, 'core')));
     for (const version of versions) {
       versionedCssStrings[version] = {};
       for (const brand of brands) {
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'public', 'generated', 'versions', version, brand));
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'generated', 'versions', version, brand));
+        await buildBrand(
+          brand,
+          join(historyDir, version),
+          join(ROOT, 'generated', 'versions', version, brand),
+        );
         const cssPath = join(ROOT, 'generated', 'versions', version, brand, 'variables.css');
         versionedCssStrings[version][brand] = readFileSync(cssPath, 'utf-8');
       }
@@ -282,10 +271,10 @@ async function main() {
   const versionedCssBlock = [
     `export const versionedCss: Record<string, Record<string, string>> = {`,
     ...Object.entries(versionedCssStrings).map(([version, brandMap], vi, vArr) => {
-      const brandLines = Object.entries(brandMap)
-        .map(([brand, css], bi, bArr) =>
+      const brandLines = Object.entries(brandMap).map(
+        ([brand, css], bi, bArr) =>
           `    ${JSON.stringify(brand)}: ${JSON.stringify(css)}${bi < bArr.length - 1 ? ',' : ''}`,
-        );
+      );
       return `  ${JSON.stringify(version)}: {\n${brandLines.join('\n')}\n  }${vi < vArr.length - 1 ? ',' : ''}`;
     }),
     `};`,
@@ -293,11 +282,6 @@ async function main() {
 
   const cssStringsSrc = [
     `// AUTO-GENERATED — do not edit. Run: npm run build:tokens`,
-    ``,
-    ...Object.entries(currentCssStrings).map(
-      ([brand, css]) =>
-        `export const ${brand}VarsCss = ${JSON.stringify(css)};`,
-    ),
     ``,
     versionedCssBlock,
     ``,

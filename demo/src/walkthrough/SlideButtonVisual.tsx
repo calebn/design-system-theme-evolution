@@ -141,8 +141,19 @@ function ScatteredButtons() {
             key={i}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
           >
-            <button style={{ ...BASE_BTN, color: '#fff', ...d.style }}>{d.label}</button>
-            <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>{d.label}</span>
+            <div
+              role="img"
+              aria-label={`${d.label} button variant`}
+              style={{ ...BASE_BTN, color: '#fff', ...d.style }}
+            >
+              {d.label}
+            </div>
+            <span
+              aria-hidden="true"
+              style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}
+            >
+              {d.label}
+            </span>
           </div>
         ))}
       </div>
@@ -161,7 +172,8 @@ const MIGRATED_STYLE: React.CSSProperties = {
   borderRadius: 8,
   fontSize: '1rem',
   padding: '12px 28px',
-  transition: 'all 0.5s ease',
+  transition:
+    'background 0.5s ease, color 0.5s ease, border-radius 0.5s ease, padding 0.5s ease, font-size 0.5s ease',
 };
 
 // Each slot: highlight starts at `highlightAt`, button is "done" at `doneAt`
@@ -219,17 +231,17 @@ function SearchingButtons() {
             className={migrated[i] ? undefined : `search-btn-slot search-btn-slot-${i}`}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
           >
-            <button
+            <div
+              role="img"
+              aria-label={`${d.label} button${migrated[i] ? ' (migrated)' : ''}`}
               style={{
                 ...BASE_BTN,
                 color: '#fff',
-                // Before: each button has its own drifted style
-                // After: all buttons look the same
                 ...(migrated[i] ? MIGRATED_STYLE : d.style),
               }}
             >
               {d.label}
-            </button>
+            </div>
           </div>
         ))}
       </div>
@@ -256,7 +268,9 @@ function SplitButtons() {
             gap: 12,
           }}
         >
-          <button style={{ ...BLUE_BTN }}>Buy Now</button>
+          <div role="img" aria-label="Buy Now button (Skeletor)" style={{ ...BLUE_BTN }}>
+            Buy Now
+          </div>
           <span
             style={{
               fontSize: '0.7rem',
@@ -282,7 +296,13 @@ function SplitButtons() {
             gap: 12,
           }}
         >
-          <button style={{ ...BLUE_BTN, borderRadius: 4 }}>Buy Now</button>
+          <div
+            role="img"
+            aria-label="Buy Now button (Content Admin)"
+            style={{ ...BLUE_BTN, borderRadius: 4 }}
+          >
+            Buy Now
+          </div>
           <span
             style={{
               fontSize: '0.7rem',
@@ -331,12 +351,17 @@ function VariantButtons() {
               key={i}
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
             >
-              <button
+              <div
+                role="img"
+                aria-label={`Buy button ${s.label} size`}
                 style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}
               >
                 Buy
-              </button>
-              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
+              </div>
+              <span
+                aria-hidden="true"
+                style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}
+              >
                 {s.label}
               </span>
             </div>
@@ -361,12 +386,17 @@ function VariantButtons() {
               key={i}
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
             >
-              <button
+              <div
+                role="img"
+                aria-label={`Buy button ${s.label} size (new)`}
                 style={{ ...BASE_BTN, ...BLUE_BTN, padding: s.padding, fontSize: s.fontSize }}
               >
                 Buy
-              </button>
-              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
+              </div>
+              <span
+                aria-hidden="true"
+                style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}
+              >
                 {s.label}
               </span>
             </div>
@@ -439,7 +469,9 @@ function AnnotatedButton({ tokenStyle }: { tokenStyle: boolean }) {
         justifyContent: 'center',
       }}
     >
-      <button
+      <div
+        role="img"
+        aria-label="Get Started button illustration"
         style={{
           ...BLUE_BTN,
           fontSize: '1.2rem',
@@ -449,7 +481,7 @@ function AnnotatedButton({ tokenStyle }: { tokenStyle: boolean }) {
         }}
       >
         Get Started
-      </button>
+      </div>
       {annotations.map((ann, i) => (
         <div
           key={i}

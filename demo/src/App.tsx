@@ -932,19 +932,27 @@ BLOCKED — breaking changes detected`}
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, width: '100%' }}>
-            {/* Focused 4-line component snippet */}
+            {/* Focused 4-line component snippet — uses divs intentionally to avoid Prism auto-highlight */}
             <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
-              <div style={{ background: '#1e293b', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ background: '#1e293b', padding: '10px 16px' }}>
                 <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>Button.tsx — what the component references</span>
               </div>
-              <pre style={{ margin: 0, background: '#0f172a', padding: '18px 20px', fontSize: '0.88rem', fontFamily: 'monospace', lineHeight: 1.75, overflowX: 'auto', color: '#e2e8f0' }}>
-                <code>
-                  {'background:   '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--color-primary, '}</span><span style={{ color: 'hotpink' }}>hotpink</span><span style={{ color: '#e2e8f0' }}>{');'}</span>{'\n'}
-                  {'color:        '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--color-on-primary);'}</span>{'\n'}
-                  {'borderRadius: '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--dimension-radius-md);'}</span>{'\n'}
-                  {'fontFamily:   '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--font-body);'}</span>
-                </code>
-              </pre>
+              <div style={{ background: '#0f172a', padding: '18px 20px', fontFamily: 'monospace', fontSize: '0.88rem', lineHeight: 2, display: 'flex', flexDirection: 'column' }}>
+                {([
+                  { prop: 'background:   ', fn: 'var', args: '(--color-primary, ', fallback: 'hotpink', close: ');' },
+                  { prop: 'color:        ', fn: 'var', args: '(--color-on-primary);', fallback: null, close: null },
+                  { prop: 'borderRadius: ', fn: 'var', args: '(--dimension-radius-md);', fallback: null, close: null },
+                  { prop: 'fontFamily:   ', fn: 'var', args: '(--font-body);', fallback: null, close: null },
+                ] as const).map((line, i) => (
+                  <div key={i} style={{ whiteSpace: 'pre' }}>
+                    <span style={{ color: '#93c5fd' }}>{line.prop}</span>
+                    <span style={{ color: '#86efac' }}>{line.fn}</span>
+                    <span style={{ color: '#e2e8f0' }}>{line.args}</span>
+                    {line.fallback && <span style={{ color: 'hotpink' }}>{line.fallback}</span>}
+                    {line.close && <span style={{ color: '#e2e8f0' }}>{line.close}</span>}
+                  </div>
+                ))}
+              </div>
               <div style={{ background: '#1e293b', padding: '8px 16px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)' }}>
                 No hard-coded colors. Every value is a CSS variable — a token in disguise.
               </div>

@@ -771,11 +771,11 @@ export function App() {
           <div>
             <p style={{ margin: '0 0 16px', fontSize: '1.05rem', color: '#475569', lineHeight: 1.65 }}>
               <code>color.primary</code> was split into <code>primary-light-mode</code> + <code>primary-dark-mode</code>.{' '}
-              <code>color.accent</code> was deleted. We deliberately set the CSS fallback to{' '}
-              <strong style={{ color: 'hotpink' }}>hotpink</strong> for this demo so broken
-              references are impossible to miss. In a real system you'd choose your own fallback —
-              the point is that missing tokens become visible immediately rather than silently
-              inheriting the wrong value.
+              <code>color.accent</code> was deleted. We set the CSS fallback to{' '}
+              <strong style={{ color: 'hotpink' }}>hotpink</strong> here purely as a demo technique —
+              it makes broken references impossible to miss on screen. In a real system this change
+              would be <strong>blocked before it shipped</strong>: the automated check detects the
+              removed tokens and requires a migration guide before the version can be released.
             </p>
             <DiffPanel fromVersion="1.1.0" toVersion="2.0.0" />
           </div>

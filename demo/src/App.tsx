@@ -6,16 +6,26 @@ import { SlideButtonVisual } from './walkthrough/SlideButtonVisual';
 import { ButtonHero } from './walkthrough/ButtonHero';
 import { Section } from './walkthrough/Section';
 import { CodeBlock } from './walkthrough/CodeBlock';
-import { SideBySide } from './walkthrough/SideBySide';
 import { Callout } from './walkthrough/Callout';
 import { StickyControls } from './walkthrough/StickyControls';
 import { TerminalBlock } from './walkthrough/TerminalBlock';
 import { TokenInspector } from './panels/TokenInspector';
 import { DiffPanel } from './panels/DiffPanel';
-import { Button } from './components/Button';
 
-import { logosVarsCss as logosVarsCssRaw, verbumVarsCss as verbumVarsCssRaw, versionedCss } from './token-css-strings';
-import buttonTsxRaw from './components/Button.tsx?raw';
+import { versionedCss } from './token-css-strings';
+
+const LOGOS_COMPACT_CSS = `[data-brand="logos"] {
+  --color-primary:       #1E6AFE;
+  --color-on-primary:    #FFFFFF;
+  --color-accent:        #3640B8;
+  --color-surface:       #FFFFFF;
+  --font-heading:        Georgia, serif;
+  --font-body:           'Source Sans 3', sans-serif;
+  --dimension-radius-md: 8px;
+  /* ... 12 more tokens */
+}
+
+/* Verbum uses the same structure — different brand values */`;
 
 type Brand = 'logos' | 'verbum';
 type Version = '1.0.0' | '1.1.0' | '2.0.0';
@@ -584,6 +594,12 @@ export function App() {
               </div>
             </div>
 
+            <Callout role="designer">
+              <strong>Your new workflow:</strong> Update a variable in Figma. Export. Done.
+              Every surface that references that token updates automatically —
+              no ticket, no dev sprint.
+            </Callout>
+
             <p style={{ margin: 0, fontSize: '1rem', color: '#64748b', lineHeight: 1.6 }}>
               Change the value in Figma, re-export, run the build tool, and{' '}
               <em>every surface updates automatically</em> — no component code touched.
@@ -619,6 +635,11 @@ export function App() {
                 changes a single <code style={{ whiteSpace: 'nowrap' }}>data-brand</code> attribute.
                 The browser's CSS engine does the rest. Components don't re-render — they just repaint.
               </Callout>
+              <Callout role="info">
+                <strong>Bonus:</strong> The same mechanism makes dark mode trivial — just another set
+                of token values under a <code style={{ whiteSpace: 'nowrap' }}>data-theme="dark"</code> selector.
+                Something design has wanted for years becomes essentially free.
+              </Callout>
               <div style={{ marginTop: 16, borderRadius: 12, border: '1px solid #e2e8f0', padding: 20, backgroundColor: 'var(--color-surface, #fff)' }}>
                 <div data-brand={brand}>
                   <TokenInspector brand={brand} version={version} cssLoadKey={cssLoadKey} />
@@ -650,8 +671,20 @@ export function App() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div data-brand={brand} style={darkCard}>
+          <div data-brand={brand} style={{ ...darkCard, flexDirection: 'column', gap: 16 }}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8, minHeight: 26, alignItems: 'center' }}>
+              {version === '1.1.0' && (
+                <>
+                  <span style={{ fontSize: '0.68rem', fontFamily: 'monospace', color: 'rgba(120,220,120,0.9)', background: 'rgba(40,80,40,0.55)', padding: '3px 10px', borderRadius: 4, border: '1px solid rgba(120,220,120,0.3)', whiteSpace: 'nowrap' }}>
+                    ~ color-primary shifted
+                  </span>
+                  <span style={{ fontSize: '0.68rem', fontFamily: 'monospace', color: 'rgba(100,200,255,0.9)', background: 'rgba(20,60,90,0.55)', padding: '3px 10px', borderRadius: 4, border: '1px solid rgba(100,200,255,0.3)', whiteSpace: 'nowrap' }}>
+                    + color-accent added
+                  </span>
+                </>
+              )}
+            </div>
           </div>
           <div>
             <p style={{ margin: '0 0 16px', fontSize: '1.05rem', color: '#475569', lineHeight: 1.65 }}>
@@ -689,8 +722,20 @@ export function App() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div data-brand={brand} style={darkCard}>
+          <div data-brand={brand} style={{ ...darkCard, flexDirection: 'column', gap: 16 }}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8, minHeight: 26, alignItems: 'center' }}>
+              {version === '2.0.0' && (
+                <>
+                  <span style={{ fontSize: '0.68rem', fontFamily: 'monospace', color: 'rgba(255,100,100,0.9)', background: 'rgba(80,20,20,0.55)', padding: '3px 10px', borderRadius: 4, border: '1px solid rgba(255,100,100,0.3)', whiteSpace: 'nowrap' }}>
+                    --color-primary: ???
+                  </span>
+                  <span style={{ fontSize: '0.68rem', fontFamily: 'monospace', color: 'rgba(255,100,180,0.9)', background: 'rgba(80,20,50,0.55)', padding: '3px 10px', borderRadius: 4, border: '1px solid rgba(255,100,180,0.3)', whiteSpace: 'nowrap' }}>
+                    ↑ CSS fallback: hotpink
+                  </span>
+                </>
+              )}
+            </div>
           </div>
           <div>
             <p style={{ margin: '0 0 16px', fontSize: '1.05rem', color: '#475569', lineHeight: 1.65 }}>
@@ -749,38 +794,7 @@ export function App() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gap: 16, marginBottom: 24 }}>
-          <TerminalBlock
-            command="npm run check -- 1.0.0 1.1.0"
-            output={`════════════════════════════════════════════════════════════
-  Automated check: 1.0.0  →  1.1.0
-════════════════════════════════════════════════════════════
-
-[logos]  ✅ 2 restyled, 1 added — safe
-[verbum]  ✅ 2 restyled, 1 added — safe
-
-  ✅ PASSED — non-breaking. Suggested bump: MINOR`}
-            title="Safe change — automated check passes"
-          />
-          <TerminalBlock
-            command="npm run check -- 1.1.0 2.0.0"
-            output={`════════════════════════════════════════════════════════════
-  Automated check: 1.1.0  →  2.0.0
-════════════════════════════════════════════════════════════
-
-[logos]  ❌ REMOVED tokens (breaking):
-  ✖  color.accent   ✖  color.primary
-
-[verbum]  ❌ REMOVED tokens (breaking):
-  ✖  color.accent   ✖  color.primary
-
-  ❌ BLOCKED — breaking changes detected.
-  To proceed: bump MAJOR version + provide a migration guide.`}
-            title="Breaking change — automated check blocks"
-          />
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 12, marginBottom: 24 }}>
           <div style={{ padding: '16px 20px', borderRadius: 8, border: '1px solid #bbf7d0', backgroundColor: '#f0fdf4' }}>
             <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#166534', marginBottom: 6 }}>Safe operations</div>
             <ul style={{ margin: 0, paddingLeft: 18, fontSize: '0.9rem', color: '#334155', lineHeight: 1.7 }}>
@@ -797,6 +811,23 @@ export function App() {
             </ul>
           </div>
         </div>
+
+        <div style={{ display: 'grid', gap: 16 }}>
+          <TerminalBlock
+            command="check 1.0.0 → 1.1.0"
+            output={`[logos]  ✅ 2 restyled, 1 added — safe
+[verbum] ✅ 2 restyled, 1 added — safe
+PASSED — non-breaking`}
+            title="Safe change — automated check passes"
+          />
+          <TerminalBlock
+            command="check 1.1.0 → 2.0.0"
+            output={`[logos]  ❌ REMOVED: color.accent, color.primary
+[verbum] ❌ REMOVED: color.accent, color.primary
+BLOCKED — breaking changes detected`}
+            title="Breaking change — automated check blocks"
+          />
+        </div>
       </Section>
 
       {/* ================================================================
@@ -808,35 +839,50 @@ export function App() {
         subtitle="Figma exports variables as JSON. A build tool generates CSS custom properties. Components re-theme automatically. No developer bottleneck for visual changes."
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          {/* Pipeline diagram — button IS the output */}
+          {/* Pipeline diagram — Figma mockup → tokens.json → CSS vars → live button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
-            {[
-              { label: 'Figma Variables', sub: 'Designer updates' },
-              null,
-              { label: 'tokens.json', sub: 'Design tokens · DTCG format' },
-              null,
-              { label: 'CSS Variables', sub: 'Build tool converts tokens → vars' },
-              null,
-            ].map((item, i) =>
-              item === null ? (
-                <div key={i} style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
-              ) : (
-                <div
-                  key={i}
-                  style={{
-                    padding: '16px 20px',
-                    borderRadius: 10,
-                    border: '1px solid #e2e8f0',
-                    backgroundColor: '#f8fafc',
-                    textAlign: 'center',
-                    minWidth: 130,
-                  }}
-                >
-                  <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#1e293b' }}>{item.label}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>{item.sub}</div>
-                </div>
-              )
-            )}
+            {/* Mini Figma variables panel mockup */}
+            <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.12)', boxShadow: '0 2px 12px rgba(0,0,0,0.10)', width: 148, background: '#1e1e1e' }}>
+              <div style={{ background: '#2c2c2c', padding: '7px 10px', display: 'flex', alignItems: 'center', gap: 6, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#e74c3c' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f39c12' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#2ecc71' }} />
+                <span style={{ marginLeft: 4, fontSize: '0.58rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>Variables</span>
+              </div>
+              <div style={{ padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 5 }}>
+                {[
+                  { swatch: '#1E6AFE', name: 'color/primary' },
+                  { swatch: '#3640B8', name: 'color/accent' },
+                  { swatch: '#FFFFFF', name: 'color/surface' },
+                ].map(({ swatch, name }) => (
+                  <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 12, height: 12, borderRadius: 3, background: swatch, border: '1px solid rgba(255,255,255,0.15)', flexShrink: 0 }} />
+                    <span style={{ fontSize: '0.58rem', color: 'rgba(255,255,255,0.55)', fontFamily: 'monospace', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</span>
+                  </div>
+                ))}
+                <div style={{ marginTop: 2, fontSize: '0.5rem', color: 'rgba(255,255,255,0.2)', textAlign: 'center' }}>+ 14 more</div>
+              </div>
+              <div style={{ padding: '5px 10px', borderTop: '1px solid rgba(255,255,255,0.06)', fontSize: '0.55rem', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>
+                Designer updates
+              </div>
+            </div>
+
+            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+
+            <div style={{ padding: '16px 20px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', textAlign: 'center', minWidth: 130 }}>
+              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#1e293b' }}>tokens.json</div>
+              <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>Design tokens · DTCG format</div>
+            </div>
+
+            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+
+            <div style={{ padding: '16px 20px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', textAlign: 'center', minWidth: 130 }}>
+              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#1e293b' }}>CSS Variables</div>
+              <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>Build tool converts tokens → vars</div>
+            </div>
+
+            <div style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
+
             {/* Live button as the final pipeline output */}
             <div
               data-brand={brand}
@@ -855,17 +901,30 @@ export function App() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, width: '100%' }}>
+            {/* Focused 4-line component snippet */}
+            <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+              <div style={{ background: '#1e293b', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>Button.tsx — what the component references</span>
+              </div>
+              <pre style={{ margin: 0, background: '#0f172a', padding: '18px 20px', fontSize: '0.88rem', fontFamily: 'monospace', lineHeight: 1.75, overflowX: 'auto', color: '#e2e8f0' }}>
+                <code>
+                  {'background:   '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--color-primary, '}</span><span style={{ color: 'hotpink' }}>hotpink</span><span style={{ color: '#e2e8f0' }}>{');'}</span>{'\n'}
+                  {'color:        '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--color-on-primary);'}</span>{'\n'}
+                  {'borderRadius: '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--dimension-radius-md);'}</span>{'\n'}
+                  {'fontFamily:   '}<span style={{ color: '#86efac' }}>var</span><span style={{ color: '#e2e8f0' }}>{'(--font-body);'}</span>
+                </code>
+              </pre>
+              <div style={{ background: '#1e293b', padding: '8px 16px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)' }}>
+                No hard-coded colors. Every value is a CSS variable — a token in disguise.
+              </div>
+            </div>
+
+            {/* Compact single-brand CSS excerpt */}
             <CodeBlock
-              code={buttonTsxRaw.trim()}
-              language="tsx"
-              title="src/components/Button.tsx"
-              highlights={[20, 25, 31, 32, 33, 37, 38]}
-              maxHeight={360}
-            />
-            <SideBySide
-              left={{ title: 'generated/logos/variables.css', code: logosVarsCssRaw.trim(), language: 'css' }}
-              right={{ title: 'generated/verbum/variables.css', code: verbumVarsCssRaw.trim(), language: 'css' }}
-              maxHeight={360}
+              code={LOGOS_COMPACT_CSS}
+              language="css"
+              title="generated/logos/variables.css"
+              maxHeight={240}
             />
           </div>
         </div>
@@ -897,6 +956,8 @@ export function App() {
             <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
               Change a color in Figma, export, and every product surface updates.
               No handoff ticket, no waiting for a dev sprint. Safe changes ship automatically.
+              And Figma Variables make building new designs faster and more consistent too —
+              the investment improves your daily workflow, not just the handoff.
             </p>
           </div>
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f0f9ff' }}>
@@ -924,7 +985,7 @@ export function App() {
           {[
             { num: 1, title: 'Extract', desc: 'Convert hand-written colors.ts hex values into DTCG JSON using semantic names.' },
             { num: 2, title: 'Add a build tool', desc: 'colors.ts becomes a generated file. The token JSON is now the source of truth — Style Dictionary or any compatible tool transforms it.' },
-            { num: 3, title: 'Map tokens to CSS variables', desc: 'Every design token gets a corresponding CSS custom property. Tailwind, CSS modules, or any styling approach can reference them — no hard-coded hex values anywhere.' },
+            { num: 3, title: 'Map tokens to CSS variables', desc: 'Every design token gets a corresponding CSS custom property. Tailwind, CSS modules, or any styling approach can reference them — no hard-coded hex values anywhere. This is the most labor-intensive step — but it\'s a one-time cost.' },
             { num: 4, title: 'Add automated checks', desc: 'A check script runs on every proposed change that touches token files. Changes are automatically labeled as safe or breaking.' },
             { num: 5, title: 'Connect to Figma', desc: 'Figma Variables export to JSON via native export or the REST API. An automated workflow picks up the file and opens a pull request.' },
           ].map((step) => (
@@ -994,16 +1055,21 @@ export function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 We need a small, dedicated <strong style={{ color: '#fff' }}>Design System team</strong> —
-                a handful of designers and developers collaborating a few hours a week.
+                2 designers and 2 developers, each contributing ~4 hours a week.
               </p>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 This team would help Design adopt <strong style={{ color: '#fff' }}>Figma Variables</strong> (which
                 they don't currently use), build the Figma-to-token pipeline, and maintain the tooling.
               </p>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
-                The math is simple: a few dedicated people investing a few hours a week can
-                save many teams <strong style={{ color: '#fff' }}>many, many hours</strong> on every future redesign.
-                Theme upgrades that used to consume years become automated, version-controlled operations.
+                Each major redesign has cost us roughly{' '}
+                <strong style={{ color: '#fff' }}>6 developer-months</strong> of migration work.
+                A non-breaking redesign in a token-driven system costs zero.
+              </p>
+              <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
+                ~16 hours a week of focused investment can save many teams{' '}
+                <strong style={{ color: '#fff' }}>many, many hours</strong> on every future redesign.
+                Theme upgrades that used to consume months become automated, version-controlled operations.
               </p>
             </div>
 
@@ -1029,7 +1095,7 @@ export function App() {
                 <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>
                   Each redesign:<br />find every copy, fix it, repeat
                 </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(255,100,100,0.9)' }}>~years of effort</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(255,100,100,0.9)' }}>~6 dev-months per redesign</div>
               </div>
 
               {/* With a design system team — live ButtonHero */}
@@ -1046,7 +1112,7 @@ export function App() {
                   ))}
                   <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', marginTop: 4 }}>Figma → tokens → CSS → done</div>
                 </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(100,220,150,0.9)' }}>~hours, not months</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(100,220,150,0.9)' }}>~days, not months</div>
               </div>
             </div>
           </div>
@@ -1062,10 +1128,10 @@ export function App() {
               lineHeight: 1.7,
             }}
           >
-            A few designers. A few developers. A few hours a week.{' '}
+            2 designers. 2 developers. ~4 hours a week each.{' '}
             <strong style={{ color: '#fff' }}>That's the ask.</strong>{' '}
             The return is a design-to-code pipeline that scales, a team that ships faster,
-            and redesigns that don't cost anyone years of their life.
+            and redesigns that don't cost anyone months of their life.
           </div>
         </div>
       </section>

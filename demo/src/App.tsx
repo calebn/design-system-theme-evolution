@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { HorizontalDeck } from './walkthrough/HorizontalDeck';
 import { Slide } from './walkthrough/Slide';
@@ -19,6 +19,29 @@ import buttonTsxRaw from './components/Button.tsx?raw';
 
 type Brand = 'logos' | 'verbum';
 type Version = '1.0.0' | '1.1.0' | '2.0.0';
+
+const SLIDE_IDS = [
+  'title',
+  'content-admin-era',
+  'theme-cost',
+  'two-worlds',
+  'builder-era',
+  'storybook',
+  'better-not-solved',
+  'system-problem',
+  'the-bridge',
+];
+
+const SECTION_IDS = [
+  'design-token',
+  'two-brands',
+  'design-evolves',
+  'breaking-change',
+  'safety-net',
+  'full-pipeline',
+  'for-you',
+  'the-ask',
+];
 
 // Drifted buttons re-used in the CTA "Today" card
 const DRIFTED_STYLES: React.CSSProperties[] = [
@@ -60,6 +83,48 @@ export function App() {
     window.addEventListener('keydown', handler, { once: true });
     return () => window.removeEventListener('keydown', handler);
   }, [presentationStarted]);
+
+  // On initial load: if the hash points to a vertical section, jump to the last
+  // horizontal slide (releasing the scroll lock) then scroll to the section.
+  const didHandleInitialHash = useRef(false);
+  useEffect(() => {
+    if (didHandleInitialHash.current) return;
+    didHandleInitialHash.current = true;
+    const hash = window.location.hash.slice(1);
+    if (!SECTION_IDS.includes(hash)) return;
+    // Go to last slide instantly so overflowY is released
+    const track = document.querySelector('.horizontal-deck-track') as HTMLElement | null;
+    if (track) {
+      track.scrollLeft = (SLIDE_IDS.length - 1) * window.innerWidth;
+    }
+    // Scroll to section after a brief render tick
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'auto' });
+      });
+    });
+  }, []);
+
+  // Update URL hash as vertical sections scroll into the center of the viewport.
+  useEffect(() => {
+    const targets = SECTION_IDS
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            history.replaceState(null, '', `#${entry.target.id}`);
+          }
+        }
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const enterPresentation = () => {
     setPresentationStarted(true);
@@ -148,7 +213,7 @@ export function App() {
       {/* ================================================================
           PHASE 1 — HORIZONTAL NARRATIVE SLIDES
           ================================================================ */}
-      <HorizontalDeck>
+      <HorizontalDeck slideIds={SLIDE_IDS}>
 
         {/* SLIDE 1 — TITLE */}
         <Slide>
@@ -440,6 +505,7 @@ export function App() {
           SECTION 1 — THIS IS A DESIGN TOKEN
           ================================================================ */}
       <Section
+        id="design-token"
         title="This is a Design Token"
         subtitle="Every visual property of this button comes from a named, versioned value. Change the value — the button changes. No code edits."
         tinted
@@ -496,6 +562,7 @@ export function App() {
           SECTION 2 — ONE BUTTON, TWO BRANDS
           ================================================================ */}
       <Section
+        id="two-brands"
         title="One Button. Two Brands."
         subtitle="Same component. Same code. Completely different brand. Zero JavaScript re-renders — just CSS."
       >
@@ -532,10 +599,10 @@ export function App() {
           SECTION 3 — DESIGN EVOLVES (VERSION HISTORY)
           ================================================================ */}
       <Section
+        id="design-evolves"
         title="Design Evolves"
         subtitle="Each change to a token is automatically classified as safe or breaking. Safe changes ship without developer involvement."
         tinted
-        id="section-evolves"
       >
         <div style={{ display: 'flex', gap: 8, marginBottom: 32, alignItems: 'center' }}>
           <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8' }}>
@@ -567,6 +634,7 @@ export function App() {
           SECTION 4 — THE BREAKING CHANGE
           ================================================================ */}
       <Section
+        id="breaking-change"
         title="The Breaking Change"
         subtitle="Version 2.0.0 split color.primary into two new tokens. The old name disappeared. In this demo, we set the fallback to hotpink so you can see exactly what broke."
       >
@@ -608,6 +676,7 @@ export function App() {
           SECTION 5 — THE SAFETY NET
           ================================================================ */}
       <Section
+        id="safety-net"
         title="The Safety Net"
         subtitle="Every change to a token file runs through an automated check. Safe changes ship. Breaking changes are flagged and blocked until a migration plan exists."
         tinted
@@ -700,6 +769,7 @@ export function App() {
           SECTION 6 — THE FULL PIPELINE
           ================================================================ */}
       <Section
+        id="full-pipeline"
         title="The Full Pipeline"
         subtitle="Figma exports variables as JSON. A build tool generates CSS custom properties. Components re-theme automatically. No developer bottleneck for visual changes."
       >
@@ -771,6 +841,7 @@ export function App() {
           SECTION 7 — WHAT THIS MEANS FOR YOU
           ================================================================ */}
       <Section
+        id="for-you"
         title="What This Means For You"
         subtitle="Different roles, different wins — but the same system serves everyone."
         tinted
@@ -865,6 +936,7 @@ export function App() {
           SECTION 8 — THE ASK (CTA)
           ================================================================ */}
       <section
+        id="the-ask"
         style={{
           minHeight: '100vh',
           display: 'flex',

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface SectionProps {
   step?: number;
   title: string;
@@ -5,6 +7,31 @@ interface SectionProps {
   children: React.ReactNode;
   tinted?: boolean;
   id?: string;
+}
+
+function CopyLink({ id }: { id: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <a
+      href={`#${id}`}
+      onClick={handleClick}
+      className="section-anchor-link"
+      aria-label="Copy link to this section"
+      title={copied ? 'Copied!' : 'Copy link'}
+    >
+      {copied ? '✓' : '#'}
+    </a>
+  );
 }
 
 export function Section({ step, title, subtitle, children, tinted = false, id }: SectionProps) {
@@ -55,6 +82,7 @@ export function Section({ step, title, subtitle, children, tinted = false, id }:
           >
             {title}
           </h2>
+          {id && <CopyLink id={id} />}
         </div>
         {subtitle && (
           <p

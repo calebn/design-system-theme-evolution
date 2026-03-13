@@ -73,6 +73,30 @@ html {
   animation: bounce-down 1.6s ease-in-out infinite;
 }
 
+/* ── Section anchor copy-link ── */
+.section-anchor-link {
+  opacity: 0;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: opacity 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+section:hover .section-anchor-link,
+.section-anchor-link:focus {
+  opacity: 1;
+}
+
+.section-anchor-link:hover {
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
 /* ── Sticky controls slide-down animation ── */
 @keyframes slideDown {
   from { transform: translateY(-100%); opacity: 0; }

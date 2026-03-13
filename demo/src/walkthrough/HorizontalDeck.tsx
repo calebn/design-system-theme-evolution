@@ -1,17 +1,42 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 interface HorizontalDeckProps {
   children: React.ReactNode;
   onLastSlide?: (isLast: boolean) => void;
+  /** Stable IDs for each slide, used for hash-based deep linking. */
+  slideIds?: string[];
 }
 
-export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
+export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDeckProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Compute initial index from URL hash before first paint to avoid a flash.
+  const initialIndex = (() => {
+    if (typeof window === 'undefined' || !slideIds) return 0;
+    const hash = window.location.hash.slice(1);
+    const idx = slideIds.indexOf(hash);
+    return idx !== -1 ? idx : 0;
+  })();
+
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
   const slideCount = Array.isArray(children) ? children.length : 1;
 
   // Throttle gate: prevents advancing more than one slide per wheel gesture
   const wheelCooldown = useRef(false);
+
+  // Sync initial scroll position from hash before first paint.
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track || initialIndex === 0) return;
+    track.scrollLeft = initialIndex * window.innerWidth;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Keep URL hash in sync with the active slide.
+  useEffect(() => {
+    const id = slideIds?.[activeIndex];
+    if (!id) return;
+    history.replaceState(null, '', `#${id}`);
+  }, [activeIndex, slideIds]);
 
   const goTo = useCallback((index: number) => {
     const track = trackRef.current;

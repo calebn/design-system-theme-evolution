@@ -129,6 +129,31 @@ a:focus-visible {
   to   { transform: translateY(0); opacity: 1; }
 }
 
+/* ── Pipeline diagram responsive layout ── */
+
+/* Medium screens: allow the flex row to wrap so steps pair up (2 per row) */
+@media (max-width: 880px) {
+  .pipeline-flow {
+    flex-wrap: wrap !important;
+    justify-content: center;
+  }
+  .pipeline-step {
+    flex: 1 1 140px !important;
+  }
+}
+
+/* Small screens: stack everything vertically; rotate arrows to point down */
+@media (max-width: 580px) {
+  .pipeline-flow {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .pipeline-arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
 /* ── Mobile responsive utilities (max-width: 768px) ── */
 @media (max-width: 768px) {
   .responsive-grid {

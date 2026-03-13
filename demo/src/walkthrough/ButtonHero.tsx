@@ -5,6 +5,8 @@ interface ButtonHeroProps {
   brand: string;
   cssLoadKey: number;
   showTokens?: boolean;
+  /** Render at 1x scale instead of 1.4x — for use inside diagrams/cards */
+  compact?: boolean;
 }
 
 const TOKEN_PROPS = [
@@ -14,7 +16,7 @@ const TOKEN_PROPS = [
   { name: '--font-body', label: 'font-body' },
 ];
 
-export function ButtonHero({ brand, cssLoadKey, showTokens = true }: ButtonHeroProps) {
+export function ButtonHero({ brand, cssLoadKey, showTokens = true, compact = false }: ButtonHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
 
@@ -40,7 +42,7 @@ export function ButtonHero({ brand, cssLoadKey, showTokens = true }: ButtonHeroP
         gap: 32,
       }}
     >
-      <div style={{ transform: 'scale(1.4)', transformOrigin: 'center' }}>
+      <div style={compact ? undefined : { transform: 'scale(1.4)', transformOrigin: 'center' }}>
         <Button size="lg" variant="primary">Get Started</Button>
       </div>
 

@@ -128,24 +128,27 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
                       {CHANGE_ICONS[c.type]}
                     </span>
                     <div>
-                      <span style={{ fontFamily: 'monospace', fontSize: '0.78rem', color: 'var(--color-on-surface)' }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--color-on-surface)' }}>
                         {c.path}
                       </span>
                       {c.type === 'restyle' && (
-                        <div style={{ fontSize: '0.72rem', marginTop: 2, opacity: 0.65 }}>
+                        <div style={{ fontSize: '0.875rem', marginTop: 3 }}>
                           <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
-                          {' → '}
+                          <span style={{ color: '#94a3b8', margin: '0 6px' }}>→</span>
                           <span style={{ color: '#16a34a' }}>{JSON.stringify(c.newValue)}</span>
                         </div>
                       )}
                       {c.type === 'added' && (
-                        <div style={{ fontSize: '0.72rem', color: '#16a34a', marginTop: 2 }}>
+                        <div style={{ fontSize: '0.875rem', color: '#16a34a', marginTop: 3 }}>
                           {JSON.stringify(c.newValue)}
                         </div>
                       )}
                       {c.type === 'removed' && (
-                        <div style={{ fontSize: '0.72rem', color: '#dc2626', marginTop: 2, textDecoration: 'line-through' }}>
-                          {JSON.stringify(c.oldValue)}
+                        <div style={{ fontSize: '0.875rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontSize: '0.7rem', fontWeight: 700, background: '#fecaca', color: '#991b1b', padding: '1px 6px', borderRadius: 3 }}>
+                            Deleted
+                          </span>
+                          <span style={{ color: '#dc2626' }}>{JSON.stringify(c.oldValue)}</span>
                         </div>
                       )}
                     </div>

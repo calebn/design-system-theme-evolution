@@ -12,19 +12,27 @@ import { StickyControls } from './walkthrough/StickyControls';
 import { TerminalBlock } from './walkthrough/TerminalBlock';
 import { TokenInspector } from './panels/TokenInspector';
 import { DiffPanel } from './panels/DiffPanel';
+import { Button } from './components/Button';
 
-import logosColorRaw from '../tokens/brand/logos/color.json?raw';
-import verbumColorRaw from '../tokens/brand/verbum/color.json?raw';
 import { logosVarsCss as logosVarsCssRaw, verbumVarsCss as verbumVarsCssRaw } from './token-css-strings';
 import buttonTsxRaw from './components/Button.tsx?raw';
 
 type Brand = 'logos' | 'verbum';
 type Version = '1.0.0' | '1.1.0' | '2.0.0';
 
+// Drifted buttons re-used in the CTA "Today" card
+const DRIFTED_STYLES: React.CSSProperties[] = [
+  { background: '#1E6AFE', borderRadius: 8,  padding: '10px 22px', fontSize: '0.9rem' },
+  { background: '#1a5fe0', borderRadius: 3,  padding: '12px 26px', fontSize: '1rem' },
+  { background: '#2B7EFF', borderRadius: 12, padding: '8px 18px',  fontSize: '0.85rem' },
+  { background: '#1659cc', borderRadius: 6,  padding: '13px 30px', fontSize: '0.95rem', letterSpacing: '0.02em' },
+];
+
 export function App() {
   const [brand, setBrand] = useState<Brand>('logos');
   const [version, setVersion] = useState<Version>('1.0.0');
   const [cssLoadKey, setCssLoadKey] = useState(0);
+  const [presentationStarted, setPresentationStarted] = useState(false);
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL;
@@ -45,6 +53,19 @@ export function App() {
     return () => link?.removeEventListener('load', onLoad);
   }, [brand, version]);
 
+  // Dismiss fullscreen overlay on any key press too
+  useEffect(() => {
+    if (presentationStarted) return;
+    const handler = () => setPresentationStarted(true);
+    window.addEventListener('keydown', handler, { once: true });
+    return () => window.removeEventListener('keydown', handler);
+  }, [presentationStarted]);
+
+  const enterPresentation = () => {
+    setPresentationStarted(true);
+    document.documentElement.requestFullscreen?.().catch(() => {});
+  };
+
   const inlinePill = (active: boolean): React.CSSProperties => ({
     padding: '6px 18px',
     borderRadius: 6,
@@ -57,8 +78,65 @@ export function App() {
     transition: 'all 0.12s',
   });
 
+  const darkCard: React.CSSProperties = {
+    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+    borderRadius: 16,
+    padding: '40px 32px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
   return (
     <div>
+      {/* ── Fullscreen entry overlay ────────────────────────────────── */}
+      {!presentationStarted && (
+        <div
+          onClick={enterPresentation}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(15,23,42,0.97)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 1000,
+            color: '#fff',
+            textAlign: 'center',
+            padding: '32px',
+          }}
+        >
+          <p style={{ margin: '0 0 12px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>
+            A design system story
+          </p>
+          <h1 style={{ margin: '0 0 40px', fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+            From Copy-Paste<br />to Source of Truth
+          </h1>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '16px 32px',
+              borderRadius: 10,
+              border: '1px solid rgba(255,255,255,0.25)',
+              background: 'rgba(255,255,255,0.08)',
+              fontSize: '1rem',
+              fontWeight: 600,
+            }}
+          >
+            <span style={{ fontSize: '1.2rem' }}>⛶</span>
+            Enter Fullscreen Presentation
+          </div>
+          <p style={{ margin: '16px 0 0', fontSize: '0.78rem', color: 'rgba(255,255,255,0.25)' }}>
+            Press any key to start without fullscreen
+          </p>
+        </div>
+      )}
+
       <StickyControls
         brand={brand}
         setBrand={setBrand}
@@ -87,9 +165,6 @@ export function App() {
               </p>
             </div>
             <SlideButtonVisual variant="single" />
-            <p style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.25)' }}>
-              Press → or click the arrow to continue
-            </p>
           </div>
         </Slide>
 
@@ -203,7 +278,85 @@ export function App() {
           </div>
         </Slide>
 
-        {/* SLIDE 6 — THE GAP */}
+        {/* SLIDE 6 — STORYBOOK (NEW) */}
+        <Slide>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', maxWidth: 900, width: '100%' }}>
+            <div>
+              <p style={{ margin: '0 0 12px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(100,180,255,0.7)' }}>
+                Visibility
+              </p>
+              <h2 style={{ margin: '0 0 28px', fontSize: 'clamp(1.8rem, 3vw, 2.75rem)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+                Storybook:<br />Design Can See<br />What's Built
+              </h2>
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {[
+                  "We're adding Storybook so designers can browse every component and variant",
+                  'It helps them understand what exists before designing changes',
+                  'But visibility alone doesn\'t prevent breaking changes — that still requires a plan',
+                ].map((point, i) => (
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: '1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
+                    <span style={{ color: 'rgba(100,180,255,0.5)', flexShrink: 0, marginTop: 2 }}>—</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Mock Storybook preview frame */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ width: 340, height: 210, borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', display: 'flex' }}>
+                {/* Sidebar */}
+                <div style={{ width: 110, background: 'rgba(255,255,255,0.05)', padding: '14px 8px', display: 'flex', flexDirection: 'column', gap: 4, flexShrink: 0 }}>
+                  <div style={{ fontSize: '0.55rem', color: 'rgba(255,255,255,0.3)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Components</div>
+                  {['Alert', 'Badge', 'Button', 'Card', 'Input'].map((name) => (
+                    <div
+                      key={name}
+                      style={{
+                        fontSize: '0.7rem',
+                        padding: '4px 8px',
+                        borderRadius: 3,
+                        background: name === 'Button' ? 'rgba(255,255,255,0.12)' : 'transparent',
+                        color: name === 'Button' ? '#fff' : 'rgba(255,255,255,0.4)',
+                      }}
+                    >
+                      {name}
+                    </div>
+                  ))}
+                  <div style={{ marginTop: 8, fontSize: '0.55rem', color: 'rgba(255,255,255,0.2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Stories</div>
+                  {['Default', 'Secondary', 'Sizes'].map((name) => (
+                    <div
+                      key={name}
+                      style={{
+                        fontSize: '0.65rem',
+                        padding: '3px 12px',
+                        borderRadius: 3,
+                        background: name === 'Default' ? 'rgba(100,180,255,0.15)' : 'transparent',
+                        color: name === 'Default' ? 'rgba(100,200,255,0.9)' : 'rgba(255,255,255,0.3)',
+                      }}
+                    >
+                      {name}
+                    </div>
+                  ))}
+                </div>
+                {/* Preview area */}
+                <div style={{ flex: 1, background: 'rgba(255,255,255,0.03)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+                  <button
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      background: '#1E6AFE', color: '#fff', borderRadius: 8,
+                      padding: '12px 28px', fontSize: '0.95rem', fontWeight: 600,
+                      border: 'none', whiteSpace: 'nowrap', cursor: 'default',
+                    }}
+                  >
+                    Get Started
+                  </button>
+                  <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>Button / Default</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Slide>
+
+        {/* SLIDE 7 — THE GAP (was Slide 6) */}
         <Slide>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', maxWidth: 900, width: '100%' }}>
             <div>
@@ -216,8 +369,8 @@ export function App() {
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
                 {[
                   'One shared button is great — until the next redesign',
-                  'Design goes from 4 button sizes to 3. Some variants don\'t map cleanly.',
-                  'Every page using an old variant must be found and fixed one by one',
+                  'Design drops the Super size. Pages using it have no obvious replacement.',
+                  'Every affected page must be found and fixed one by one',
                   "We're back to the same manual migration we started with",
                 ].map((point, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: '1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
@@ -231,7 +384,7 @@ export function App() {
           </div>
         </Slide>
 
-        {/* SLIDE 7 — SYSTEM PROBLEM */}
+        {/* SLIDE 8 — SYSTEM PROBLEM (was Slide 7) */}
         <Slide>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', maxWidth: 900, width: '100%' }}>
             <div>
@@ -255,7 +408,7 @@ export function App() {
           </div>
         </Slide>
 
-        {/* SLIDE 8 — THE BRIDGE */}
+        {/* SLIDE 9 — THE BRIDGE (was Slide 8) */}
         <Slide>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 40, maxWidth: 800, width: '100%' }}>
             <div>
@@ -288,28 +441,53 @@ export function App() {
           ================================================================ */}
       <Section
         title="This is a Design Token"
-        subtitle="Every visual property of this button comes from a token. Change a token, the button changes. No code edits."
+        subtitle="Every visual property of this button comes from a named, versioned value. Change the value — the button changes. No code edits."
         tinted
       >
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div data-brand={brand}>
+          <div data-brand={brand} style={darkCard}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ margin: 0, fontSize: '1.1rem', color: '#475569', lineHeight: 1.7 }}>
-              Each CSS variable is a <strong>token</strong> — a named, versioned design decision.
               Instead of hard-coding <code>#1E6AFE</code> into your component,
-              you reference <code>var(--color-primary)</code>.
-            </p>
-            <p style={{ margin: 0, fontSize: '1.1rem', color: '#475569', lineHeight: 1.7 }}>
+              you reference a <strong>token</strong> — a named, shared design decision.
               The token file is the contract between designers and developers.
-              Change the value in Figma, publish, and <em>every surface updates</em>.
             </p>
-            <SideBySide
-              left={{ title: 'tokens/brand/logos/color.json', code: logosColorRaw.trim(), language: 'json' }}
-              right={{ title: 'tokens/brand/verbum/color.json', code: verbumColorRaw.trim(), language: 'json' }}
-              maxHeight={280}
-            />
+            {/* Scannable token excerpt */}
+            <div
+              style={{
+                background: '#0f172a',
+                borderRadius: 10,
+                padding: '20px 24px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
+              }}
+            >
+              <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>
+                Logos brand tokens
+              </div>
+              {[
+                { name: '--color-primary',    value: '#1E6AFE', swatch: '#1E6AFE' },
+                { name: '--color-on-primary', value: '#FFFFFF',  swatch: '#FFFFFF' },
+                { name: '--radius-md',        value: '8px',      swatch: null },
+                { name: '--font-body',        value: "'Source Sans 3'", swatch: null },
+              ].map(({ name, value, swatch }) => (
+                <div key={name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, fontSize: '0.85rem', fontFamily: 'monospace' }}>
+                  <span style={{ color: 'rgba(255,255,255,0.5)' }}>{name}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    {swatch && (
+                      <div style={{ width: 14, height: 14, borderRadius: 3, background: swatch, border: '1px solid rgba(255,255,255,0.15)', flexShrink: 0 }} />
+                    )}
+                    <span style={{ color: '#7dd3fc' }}>{value}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p style={{ margin: 0, fontSize: '1rem', color: '#64748b', lineHeight: 1.6 }}>
+              Change the value in Figma, export, and <em>every surface updates automatically</em>.
+            </p>
           </div>
         </div>
       </Section>
@@ -331,23 +509,14 @@ export function App() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, width: '100%', alignItems: 'center' }}>
-            <div
-              data-brand={brand}
-              style={{
-                background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-                borderRadius: 16,
-                padding: '48px 32px',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
+            <div data-brand={brand} style={darkCard}>
               <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
             </div>
             <div>
               <Callout role="info">
                 How many lines of JavaScript ran to re-theme? <strong>Zero.</strong> The brand toggle
-                changes a single <code>data-brand</code> attribute. The browser's CSS engine does the rest.
-                Components don't re-render — they just repaint.
+                changes a single <code style={{ whiteSpace: 'nowrap' }}>data-brand</code> attribute.
+                The browser's CSS engine does the rest. Components don't re-render — they just repaint.
               </Callout>
               <div style={{ marginTop: 16, borderRadius: 12, border: '1px solid #e2e8f0', padding: 20, backgroundColor: 'var(--color-surface, #fff)' }}>
                 <div data-brand={brand}>
@@ -364,7 +533,7 @@ export function App() {
           ================================================================ */}
       <Section
         title="Design Evolves"
-        subtitle="Each change to a token is automatically classified as patch, minor, or major. Non-breaking changes ship without developer involvement."
+        subtitle="Each change to a token is automatically classified as safe or breaking. Safe changes ship without developer involvement."
         tinted
         id="section-evolves"
       >
@@ -380,23 +549,14 @@ export function App() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div
-            data-brand={brand}
-            style={{
-              background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-              borderRadius: 16,
-              padding: '48px 32px',
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
+          <div data-brand={brand} style={darkCard}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
           </div>
           <div>
             <p style={{ margin: '0 0 16px', fontSize: '1.05rem', color: '#475569', lineHeight: 1.65 }}>
               <strong>1.0.0 → 1.1.0:</strong> The primary color was restyled. A new accent token was added.
-              Two radius tokens were combined into one. CI classified this as <strong>non-breaking</strong>.
-              It shipped automatically.
+              Two radius tokens were combined into one. Our automated checks classified this as{' '}
+              <strong>safe</strong>. It shipped without any developer work.
             </p>
             <DiffPanel fromVersion="1.0.0" toVersion="1.1.0" />
           </div>
@@ -408,7 +568,7 @@ export function App() {
           ================================================================ */}
       <Section
         title="The Breaking Change"
-        subtitle="Version 2.0.0 split color.primary into two new tokens. The old name disappeared. The button falls back to hotpink — a visible scream that something broke."
+        subtitle="Version 2.0.0 split color.primary into two new tokens. The old name disappeared. In this demo, we set the fallback to hotpink so you can see exactly what broke."
       >
         <div style={{ display: 'flex', gap: 8, marginBottom: 32, alignItems: 'center', flexWrap: 'wrap' }}>
           <button onClick={() => setVersion('2.0.0')} style={inlinePill(version === '2.0.0')}>
@@ -427,24 +587,17 @@ export function App() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div
-            data-brand={brand}
-            style={{
-              background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-              borderRadius: 16,
-              padding: '48px 32px',
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
+          <div data-brand={brand} style={darkCard}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
           </div>
           <div>
             <p style={{ margin: '0 0 16px', fontSize: '1.05rem', color: '#475569', lineHeight: 1.65 }}>
               <code>color.primary</code> was split into <code>primary-light-mode</code> + <code>primary-dark-mode</code>.{' '}
-              <code>color.accent</code> was deleted. Every component that referenced the old names
-              now resolves to <strong style={{ color: 'hotpink' }}>hotpink</strong> — the CSS fallback
-              that makes missing tokens impossible to miss.
+              <code>color.accent</code> was deleted. We deliberately set the CSS fallback to{' '}
+              <strong style={{ color: 'hotpink' }}>hotpink</strong> for this demo so broken
+              references are impossible to miss. In a real system you'd choose your own fallback —
+              the point is that missing tokens become visible immediately rather than silently
+              inheriting the wrong value.
             </p>
             <DiffPanel fromVersion="1.1.0" toVersion="2.0.0" />
           </div>
@@ -456,37 +609,71 @@ export function App() {
           ================================================================ */}
       <Section
         title="The Safety Net"
-        subtitle="In CI, every change to a token file is automatically classified. Non-breaking changes ship. Breaking changes are blocked until a migration plan exists."
+        subtitle="Every change to a token file runs through an automated check. Safe changes ship. Breaking changes are flagged and blocked until a migration plan exists."
         tinted
       >
+        {/* Button pair: healthy vs broken */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 32 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, background: '#dcfce7', color: '#166534', padding: '3px 10px', borderRadius: 20, border: '1px solid #bbf7d0' }}>
+                ✓ v1.1.0 — Safe change passes
+              </span>
+            </div>
+            <div data-brand={brand} style={{ ...darkCard, padding: '28px 24px' }}>
+              <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, background: '#fef2f2', color: '#991b1b', padding: '3px 10px', borderRadius: 20, border: '1px solid #fecaca' }}>
+                ✖ v2.0.0 — Breaking change blocked
+              </span>
+            </div>
+            <div style={{ ...darkCard, padding: '28px 24px' }}>
+              {/* Static hotpink button — illustrates what would ship if the check didn't catch it */}
+              <button
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'hotpink', color: '#fff', borderRadius: 8,
+                  padding: '14px 32px', fontSize: '1rem', fontWeight: 600,
+                  border: 'none', whiteSpace: 'nowrap', cursor: 'default',
+                }}
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div style={{ display: 'grid', gap: 16, marginBottom: 24 }}>
           <TerminalBlock
             command="npm run check -- 1.0.0 1.1.0"
             output={`════════════════════════════════════════════════════════════
-  Governance check: 1.0.0  →  1.1.0
+  Automated check: 1.0.0  →  1.1.0
 ════════════════════════════════════════════════════════════
 
-[logos]  ✅ 2 restyled, 1 added — compliant
-[verbum]  ✅ 2 restyled, 1 added — compliant
+[logos]  ✅ 2 restyled, 1 added — safe
+[verbum]  ✅ 2 restyled, 1 added — safe
 
   ✅ PASSED — non-breaking. Suggested bump: MINOR`}
-            title="Non-breaking — CI passes"
+            title="Safe change — automated check passes"
           />
           <TerminalBlock
             command="npm run check -- 1.1.0 2.0.0"
             output={`════════════════════════════════════════════════════════════
-  Governance check: 1.1.0  →  2.0.0
+  Automated check: 1.1.0  →  2.0.0
 ════════════════════════════════════════════════════════════
 
-[logos]  ❌ REMOVED tokens (FORBIDDEN):
+[logos]  ❌ REMOVED tokens (breaking):
   ✖  color.accent   ✖  color.primary
 
-[verbum]  ❌ REMOVED tokens (FORBIDDEN):
+[verbum]  ❌ REMOVED tokens (breaking):
   ✖  color.accent   ✖  color.primary
 
-  ❌ FAILED — breaking changes detected.
+  ❌ BLOCKED — breaking changes detected.
   To proceed: bump MAJOR version + provide a migration guide.`}
-            title="Breaking — CI rejects"
+            title="Breaking change — automated check blocks"
           />
         </div>
 
@@ -514,19 +701,18 @@ export function App() {
           ================================================================ */}
       <Section
         title="The Full Pipeline"
-        subtitle="Designers update variables in Figma. Tokens Studio exports them as JSON. Style Dictionary generates CSS. Components re-theme. No developer bottleneck for visual changes."
+        subtitle="Figma exports variables as JSON. A build tool generates CSS custom properties. Components re-theme automatically. No developer bottleneck for visual changes."
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          {/* Pipeline diagram */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Pipeline diagram — button IS the output */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
             {[
               { label: 'Figma Variables', sub: 'Designer updates' },
               null,
               { label: 'tokens.json', sub: 'W3C DTCG format' },
               null,
-              { label: 'CSS Variables', sub: 'Style Dictionary' },
+              { label: 'CSS Variables', sub: 'Build tool generates' },
               null,
-              { label: 'Components', sub: 'Zero re-render' },
             ].map((item, i) =>
               item === null ? (
                 <div key={i} style={{ fontSize: '1.5rem', color: '#94a3b8' }}>→</div>
@@ -547,6 +733,21 @@ export function App() {
                 </div>
               )
             )}
+            {/* Live button as the final pipeline output */}
+            <div
+              data-brand={brand}
+              style={{
+                ...darkCard,
+                padding: '20px 28px',
+                border: '2px solid rgba(255,255,255,0.12)',
+                flexDirection: 'column',
+                gap: 8,
+                minWidth: 150,
+              }}
+            >
+              <div style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>Output</div>
+              <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
+            </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, width: '100%' }}>
@@ -574,21 +775,31 @@ export function App() {
         subtitle="Different roles, different wins — but the same system serves everyone."
         tinted
       >
+        {/* Button anchor above the cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 36 }}>
+          <div data-brand={brand} style={{ ...darkCard, padding: '32px 48px' }}>
+            <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
+          </div>
+          <p style={{ margin: '12px 0 0', fontSize: '0.82rem', color: '#94a3b8', letterSpacing: '0.04em' }}>
+            One component. Three perspectives.
+          </p>
+        </div>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16, marginBottom: 40 }}>
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f5f3ff' }}>
             <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>🎨</div>
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#5b21b6' }}>Designers</h3>
             <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
-              Change a color in Figma, publish, and every product surface updates.
-              No handoff ticket, no waiting for a dev sprint. Restyles ship automatically.
+              Change a color in Figma, export, and every product surface updates.
+              No handoff ticket, no waiting for a dev sprint. Safe changes ship automatically.
             </p>
           </div>
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#f0f9ff' }}>
             <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>⌨️</div>
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#0369a1' }}>Developers</h3>
             <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
-              Color changes require zero dev work — CI auto-approves. Breaking changes are explicit
-              major bumps with migration guides. The semver contract tells you exactly what's coming.
+              Color changes require zero dev work — automated checks approve them. Breaking changes are
+              explicit, versioned, and come with migration guides. You know exactly what's coming.
             </p>
           </div>
           <div style={{ padding: '24px', borderRadius: 10, border: '1px solid #e2e8f0', backgroundColor: '#fffbeb' }}>
@@ -596,7 +807,7 @@ export function App() {
             <h3 style={{ margin: '0 0 8px', fontSize: '1rem', fontWeight: 700, color: '#b45309' }}>Managers</h3>
             <p style={{ margin: 0, fontSize: '1rem', color: '#475569', lineHeight: 1.65 }}>
               Design changes that used to be cross-team tickets become self-service operations.
-              Breaking changes are visible in CI, not discovered in production. Multi-brand scales without multiplying effort.
+              Breaking changes are caught before they ship, not discovered in production.
             </p>
           </div>
         </div>
@@ -607,10 +818,10 @@ export function App() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {[
             { num: 1, title: 'Extract', desc: 'Convert hand-written colors.ts hex values into DTCG JSON using semantic names.' },
-            { num: 2, title: 'Add Style Dictionary', desc: 'colors.ts becomes a generated file. The token JSON is now the source of truth.' },
-            { num: 3, title: 'Close the CSS variable gap', desc: 'Update tailwind-helper.ts to reference var(--color-*) instead of hard-coded hex.' },
-            { num: 4, title: 'Add CI tools', desc: 'check-breaking.ts runs on every PR that touches token files. Auto-label as patch/minor/major.' },
-            { num: 5, title: 'Connect to Figma', desc: 'Tokens Studio syncs Figma Variables → JSON → automated PR. The designer workflow completes the loop.' },
+            { num: 2, title: 'Add a build tool', desc: 'colors.ts becomes a generated file. The token JSON is now the source of truth — Style Dictionary or any compatible tool transforms it.' },
+            { num: 3, title: 'Map tokens to CSS variables', desc: 'Every design token gets a corresponding CSS custom property. Tailwind, CSS modules, or any styling approach can reference them — no hard-coded hex values anywhere.' },
+            { num: 4, title: 'Add automated checks', desc: 'A check script runs on every proposed change that touches token files. Changes are automatically labeled as safe or breaking.' },
+            { num: 5, title: 'Connect to Figma', desc: 'Figma Variables export to JSON via native export or the REST API. An automated workflow picks up the file and opens a pull request.' },
           ].map((step) => (
             <div
               key={step.num}
@@ -673,7 +884,7 @@ export function App() {
             A Small Investment,<br />A Massive Return
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginBottom: 56 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginBottom: 48 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 We need a small, dedicated <strong style={{ color: '#fff' }}>Design System team</strong> —
@@ -681,7 +892,7 @@ export function App() {
               </p>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 This team would help Design adopt <strong style={{ color: '#fff' }}>Figma Variables</strong> (which
-                they don't currently use), build the Figma-to-token-to-theme pipeline, and maintain the tooling.
+                they don't currently use), build the Figma-to-token pipeline, and maintain the tooling.
               </p>
               <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>
                 The math is simple: a few dedicated people investing a few hours a week can
@@ -690,48 +901,46 @@ export function App() {
               </p>
             </div>
 
-            {/* Contrast visual */}
+            {/* Contrast visual — closing the visual loop */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              {/* Today */}
-              <div style={{ padding: '20px', borderRadius: 12, border: '1px solid rgba(255,100,100,0.3)', background: 'rgba(255,100,100,0.06)' }}>
-                <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,100,100,0.7)', marginBottom: 12 }}>Today</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {[
-                    { bg: '#1E6AFE', r: 8 },
-                    { bg: '#1a5fe0', r: 3 },
-                    { bg: '#2B7EFF', r: 12 },
-                    { bg: '#1659cc', r: 6 },
-                  ].map((d, i) => (
+              {/* Today — scattered buttons (echoes Slide 2) */}
+              <div style={{ padding: '24px 20px', borderRadius: 12, border: '1px solid rgba(255,100,100,0.3)', background: 'rgba(255,100,100,0.06)', display: 'flex', flexDirection: 'column', gap: 12, minHeight: 240 }}>
+                <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,100,100,0.8)', fontWeight: 700 }}>Today</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                  {DRIFTED_STYLES.map((s, i) => (
                     <div
                       key={i}
                       style={{
-                        height: 28,
-                        borderRadius: d.r,
-                        background: d.bg,
-                        opacity: 0.6 + i * 0.1,
-                        width: `${60 + i * 10}%`,
+                        height: 32,
+                        borderRadius: s.borderRadius as number,
+                        background: s.background as string,
+                        opacity: 0.55 + i * 0.1,
+                        width: `${58 + i * 11}%`,
                       }}
                     />
                   ))}
                 </div>
-                <div style={{ marginTop: 12, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>
-                  Years of manual work<br />per redesign
+                <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>
+                  Each redesign:<br />find every copy, fix it, repeat
                 </div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(255,100,100,0.9)' }}>~years of effort</div>
               </div>
 
-              {/* With a design system team */}
-              <div style={{ padding: '20px', borderRadius: 12, border: '1px solid rgba(100,220,150,0.3)', background: 'rgba(100,220,150,0.06)' }}>
-                <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(100,220,150,0.7)', marginBottom: 12 }}>With a Design System Team</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
-                  <div style={{ height: 28, borderRadius: 8, background: '#1E6AFE', width: '80%' }} />
-                  <div style={{ fontSize: '0.65rem', fontFamily: 'monospace', color: 'rgba(120,220,120,0.8)', padding: '4px 8px', border: '1px solid rgba(120,220,120,0.3)', borderRadius: 4 }}>
-                    var(--color-primary)
-                  </div>
-                  <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', marginTop: 4 }}>Figma → JSON → CSS → UI</div>
+              {/* With a design system team — live ButtonHero */}
+              <div style={{ padding: '24px 20px', borderRadius: 12, border: '1px solid rgba(100,220,150,0.3)', background: 'rgba(100,220,150,0.06)', display: 'flex', flexDirection: 'column', gap: 12, minHeight: 240 }}>
+                <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(100,220,150,0.8)', fontWeight: 700 }}>With a Design System Team</div>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }} data-brand={brand}>
+                  <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
                 </div>
-                <div style={{ marginTop: 12, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>
-                  Hours, not months.<br />Automated. Versioned.
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {['--color-primary', '--radius-md'].map((t) => (
+                    <div key={t} style={{ fontSize: '0.65rem', fontFamily: 'monospace', color: 'rgba(120,220,120,0.8)', padding: '2px 8px', border: '1px solid rgba(120,220,120,0.25)', borderRadius: 4, whiteSpace: 'nowrap' }}>
+                      {t}
+                    </div>
+                  ))}
+                  <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', marginTop: 4 }}>Figma → tokens → CSS → done</div>
                 </div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'rgba(100,220,150,0.9)' }}>~hours, not months</div>
               </div>
             </div>
           </div>

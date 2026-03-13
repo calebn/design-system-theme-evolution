@@ -123,64 +123,6 @@ export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
         {slidesWithKeys}
       </div>
 
-      {/* Left arrow */}
-      {activeIndex > 0 && (
-        <button
-          onClick={() => goTo(activeIndex - 1)}
-          aria-label="Previous slide"
-          style={{
-            position: 'absolute',
-            left: 20,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '50%',
-            width: 44,
-            height: 44,
-            color: '#fff',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10,
-            transition: 'background 0.15s',
-          }}
-        >
-          ‹
-        </button>
-      )}
-
-      {/* Right arrow */}
-      {activeIndex < slideCount - 1 && (
-        <button
-          onClick={() => goTo(activeIndex + 1)}
-          aria-label="Next slide"
-          style={{
-            position: 'absolute',
-            right: 20,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '50%',
-            width: 44,
-            height: 44,
-            color: '#fff',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10,
-            transition: 'background 0.15s',
-          }}
-        >
-          ›
-        </button>
-      )}
-
       {/* Progress dots */}
       <div
         style={{

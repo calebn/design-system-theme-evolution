@@ -210,21 +210,21 @@ function SplitButtons() {
   );
 }
 
-/* ---- 4→3 variant mapping ---- */
+/* ---- 4→3 variant mapping (SM/MD/LG/Super → SM/MD/LG) ---- */
 function VariantButtons() {
   const oldSizes = [
-    { label: 'XS', padding: '6px 14px', fontSize: '0.75rem' },
-    { label: 'SM', padding: '9px 20px', fontSize: '0.875rem' },
-    { label: 'MD', padding: '12px 28px', fontSize: '1rem' },
-    { label: 'LG', padding: '16px 36px', fontSize: '1.1rem' },
+    { label: 'SM',    padding: '9px 20px',   fontSize: '0.875rem' },
+    { label: 'MD',    padding: '12px 28px',  fontSize: '1rem' },
+    { label: 'LG',    padding: '16px 36px',  fontSize: '1.1rem' },
+    { label: 'Super', padding: '22px 56px',  fontSize: '1.3rem' },
   ];
   const newSizes = [
-    { label: 'SM', padding: '9px 20px', fontSize: '0.875rem' },
+    { label: 'SM', padding: '9px 20px',  fontSize: '0.875rem' },
     { label: 'MD', padding: '12px 28px', fontSize: '1rem' },
     { label: 'LG', padding: '16px 36px', fontSize: '1.1rem' },
   ];
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
         <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Before</span>
         <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
@@ -250,17 +250,17 @@ function VariantButtons() {
               <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>{s.label}</span>
             </div>
           ))}
+          {/* Super: no longer exists, shown as a prominent ghost */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
             <div
               style={{
                 ...BASE_BTN,
-                ...BLUE_BTN,
-                padding: '6px 14px',
-                fontSize: '0.75rem',
-                opacity: 0.3,
+                padding: '22px 56px',
+                fontSize: '1.3rem',
                 border: '2px dashed rgba(255,100,100,0.7)',
-                background: 'transparent',
-                color: 'rgba(255,100,100,0.9)',
+                background: 'rgba(255,100,100,0.06)',
+                color: 'rgba(255,100,100,0.7)',
+                borderRadius: 8,
                 position: 'relative',
               }}
             >
@@ -268,24 +268,24 @@ function VariantButtons() {
               <span
                 style={{
                   position: 'absolute',
-                  top: -10,
-                  right: -10,
-                  background: 'rgba(255,100,100,0.9)',
+                  top: -12,
+                  right: -12,
+                  background: 'rgba(220,38,38,0.9)',
                   color: '#fff',
                   borderRadius: '50%',
-                  width: 20,
-                  height: 20,
+                  width: 24,
+                  height: 24,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '0.7rem',
+                  fontSize: '0.8rem',
                   fontWeight: 700,
                 }}
               >
                 ?
               </span>
             </div>
-            <span style={{ fontSize: '0.65rem', color: 'rgba(255,100,100,0.7)' }}>XS → ?</span>
+            <span style={{ fontSize: '0.65rem', color: 'rgba(255,100,100,0.7)' }}>Super → ?</span>
           </div>
         </div>
       </div>

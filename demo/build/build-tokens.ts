@@ -258,8 +258,39 @@ async function main() {
     currentCssStrings[brand] = readFileSync(cssPath, 'utf-8');
   }
 
-  // Write a TS file so App.tsx can import CSS content as strings without
-  // Vite treating the .css files as actual stylesheets to inject.
+  console.log('\n── Building all history versions ──');
+  const historyDir = join(ROOT, 'tokens-history');
+  const versionedCssStrings: Record<string, Record<string, string>> = {};
+  if (existsSync(historyDir)) {
+    const versions = readdirSync(historyDir).filter((v) =>
+      existsSync(join(historyDir, v, 'core')),
+    );
+    for (const version of versions) {
+      versionedCssStrings[version] = {};
+      for (const brand of brands) {
+        await buildBrand(brand, join(historyDir, version), join(ROOT, 'public', 'generated', 'versions', version, brand));
+        await buildBrand(brand, join(historyDir, version), join(ROOT, 'generated', 'versions', version, brand));
+        const cssPath = join(ROOT, 'generated', 'versions', version, brand, 'variables.css');
+        versionedCssStrings[version][brand] = readFileSync(cssPath, 'utf-8');
+      }
+    }
+  }
+
+  // Write a TS file so App.tsx can import all CSS content as strings.
+  // This lets theme switching be a synchronous <style> textContent swap —
+  // no network requests, no flash of unstyled content on any switch.
+  const versionedCssBlock = [
+    `export const versionedCss: Record<string, Record<string, string>> = {`,
+    ...Object.entries(versionedCssStrings).map(([version, brandMap], vi, vArr) => {
+      const brandLines = Object.entries(brandMap)
+        .map(([brand, css], bi, bArr) =>
+          `    ${JSON.stringify(brand)}: ${JSON.stringify(css)}${bi < bArr.length - 1 ? ',' : ''}`,
+        );
+      return `  ${JSON.stringify(version)}: {\n${brandLines.join('\n')}\n  }${vi < vArr.length - 1 ? ',' : ''}`;
+    }),
+    `};`,
+  ].join('\n');
+
   const cssStringsSrc = [
     `// AUTO-GENERATED — do not edit. Run: npm run build:tokens`,
     ``,
@@ -267,22 +298,11 @@ async function main() {
       ([brand, css]) =>
         `export const ${brand}VarsCss = ${JSON.stringify(css)};`,
     ),
-  ].join('\n') + '\n';
+    ``,
+    versionedCssBlock,
+    ``,
+  ].join('\n');
   writeFileSync(join(ROOT, 'src', 'token-css-strings.ts'), cssStringsSrc);
-
-  console.log('\n── Building all history versions ──');
-  const historyDir = join(ROOT, 'tokens-history');
-  if (existsSync(historyDir)) {
-    const versions = readdirSync(historyDir).filter((v) =>
-      existsSync(join(historyDir, v, 'core')),
-    );
-    for (const version of versions) {
-      for (const brand of brands) {
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'public', 'generated', 'versions', version, brand));
-        await buildBrand(brand, join(historyDir, version), join(ROOT, 'generated', 'versions', version, brand));
-      }
-    }
-  }
 
   console.log('\n✅ Token build complete.\n');
 }

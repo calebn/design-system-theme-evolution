@@ -14,7 +14,7 @@ import { TokenInspector } from './panels/TokenInspector';
 import { DiffPanel } from './panels/DiffPanel';
 import { Button } from './components/Button';
 
-import { logosVarsCss as logosVarsCssRaw, verbumVarsCss as verbumVarsCssRaw } from './token-css-strings';
+import { logosVarsCss as logosVarsCssRaw, verbumVarsCss as verbumVarsCssRaw, versionedCss } from './token-css-strings';
 import buttonTsxRaw from './components/Button.tsx?raw';
 
 type Brand = 'logos' | 'verbum';
@@ -58,22 +58,30 @@ export function App() {
   const [presentationStarted, setPresentationStarted] = useState(false);
 
   useEffect(() => {
-    const base = import.meta.env.BASE_URL;
-    const cssPath = `${base}generated/versions/${version}/${brand}/variables.css`;
-    let link = document.getElementById('theme-css') as HTMLLinkElement | null;
-    if (link) {
-      link.href = cssPath;
+    const css = versionedCss[version]?.[brand] ?? '';
+
+    // Find the existing element (may be a <link> from index.html on first mount
+    // or a <style> we created on a previous switch).
+    const existing = document.getElementById('theme-css');
+
+    if (existing && existing.tagName === 'STYLE') {
+      // Fast path: just overwrite content — fully synchronous, zero flash.
+      (existing as HTMLStyleElement).textContent = css;
     } else {
-      link = document.createElement('link');
-      link.id = 'theme-css';
-      link.rel = 'stylesheet';
-      link.href = cssPath;
-      document.head.appendChild(link);
+      // First mount: replace the initial <link> with a <style> that has the
+      // same content. Both elements carry identical CSS so the swap is invisible.
+      const style = document.createElement('style');
+      style.id = 'theme-css';
+      style.textContent = css;
+      if (existing) {
+        existing.replaceWith(style);
+      } else {
+        document.head.appendChild(style);
+      }
     }
+
     document.documentElement.setAttribute('data-brand', brand);
-    const onLoad = () => setCssLoadKey((k) => k + 1);
-    link.addEventListener('load', onLoad, { once: true });
-    return () => link?.removeEventListener('load', onLoad);
+    setCssLoadKey((k) => k + 1);
   }, [brand, version]);
 
   // Dismiss fullscreen overlay on any key press too

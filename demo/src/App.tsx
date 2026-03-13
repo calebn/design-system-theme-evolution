@@ -32,6 +32,7 @@ type Version = '1.0.0' | '1.1.0' | '2.0.0';
 
 const SLIDE_IDS = [
   'title',
+  'the-hook',
   'content-admin-era',
   'theme-cost',
   'two-worlds',
@@ -259,7 +260,43 @@ export function App() {
           </div>
         </Slide>
 
-        {/* SLIDE 2 — CONTENT ADMIN ERA */}
+        {/* SLIDE 2 — THE HOOK */}
+        <Slide>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 48, maxWidth: 760, width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <p style={{ margin: 0, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>
+                What if...
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                {[
+                  { text: 'Design pushed a color change and saw it live everywhere — no ticket, no sprint.', color: 'rgba(100,220,150,0.9)' },
+                  { text: 'Design updates shipped without developers touching a line of code. Breaking changes caught automatically.', color: 'rgba(100,180,255,0.9)' },
+                  { text: 'The next major redesign took days, not months. And nobody lost a year of their life to it.', color: 'rgba(255,200,100,0.9)' },
+                ].map(({ text, color }, i) => (
+                  <p
+                    key={i}
+                    style={{
+                      margin: 0,
+                      fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
+                      fontWeight: 700,
+                      color,
+                      lineHeight: 1.4,
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    {text}
+                  </p>
+                ))}
+              </div>
+              <p style={{ margin: 0, fontSize: '1rem', color: 'rgba(255,255,255,0.35)', fontStyle: 'italic' }}>
+                Here's how we get there.
+              </p>
+            </div>
+            <SlideButtonVisual variant="single" />
+          </div>
+        </Slide>
+
+        {/* SLIDE 3 — CONTENT ADMIN ERA */}
         <Slide>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', maxWidth: 900, width: '100%' }}>
             <div>

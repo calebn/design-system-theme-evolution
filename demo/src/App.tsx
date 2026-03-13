@@ -284,7 +284,13 @@ export function App() {
                 Here's how we get there.
               </p>
             </div>
-            <SlideButtonVisual variant="single" />
+            <SlideButtonVisual
+              variant="single"
+              onButtonClick={() => {
+                const track = document.querySelector('.horizontal-deck-track') as HTMLElement | null;
+                track?.scrollTo({ left: window.innerWidth * 2, behavior: 'smooth' });
+              }}
+            />
           </div>
         </Slide>
 

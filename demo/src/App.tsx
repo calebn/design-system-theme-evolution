@@ -12,7 +12,6 @@ import { StickyControls } from './walkthrough/StickyControls';
 import { TerminalBlock } from './walkthrough/TerminalBlock';
 import { TokenInspector } from './panels/TokenInspector';
 import { DiffPanel } from './panels/DiffPanel';
-import { Button } from './components/Button';
 
 import logosColorRaw from '../tokens/brand/logos/color.json?raw';
 import verbumColorRaw from '../tokens/brand/verbum/color.json?raw';

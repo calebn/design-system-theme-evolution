@@ -10,6 +10,9 @@ export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const slideCount = Array.isArray(children) ? children.length : 1;
 
+  // Throttle gate: prevents advancing more than one slide per wheel gesture
+  const wheelCooldown = useRef(false);
+
   const goTo = useCallback((index: number) => {
     const track = trackRef.current;
     if (!track) return;
@@ -30,10 +33,59 @@ export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
     return () => track.removeEventListener('scroll', handleScroll);
   }, [slideCount, onLastSlide]);
 
-  // Keyboard navigation — only when not on last slide (to allow vertical scroll after)
+  // Lock/unlock vertical page scroll based on whether we're on the last slide.
+  // When locked, intercept wheel events to drive horizontal slide navigation.
+  useEffect(() => {
+    const onLastSlideNow = activeIndex === slideCount - 1;
+
+    if (onLastSlideNow) {
+      document.documentElement.style.overflowY = '';
+    } else {
+      document.documentElement.style.overflowY = 'hidden';
+    }
+
+    // Restore on unmount
+    return () => {
+      document.documentElement.style.overflowY = '';
+    };
+  }, [activeIndex, slideCount]);
+
+  // Intercept wheel/trackpad to drive horizontal navigation while deck is locked
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      // Only intercept while NOT on the last slide
+      if (activeIndex === slideCount - 1) return;
+
+      // Only act on the dominant axis — ignore tiny vertical wobble on a horizontal swipe
+      const isVertical = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+      if (!isVertical) return;
+
+      e.preventDefault();
+
+      if (wheelCooldown.current) return;
+      wheelCooldown.current = true;
+      setTimeout(() => { wheelCooldown.current = false; }, 700);
+
+      if (e.deltaY > 0) {
+        goTo(activeIndex + 1);
+      } else if (e.deltaY < 0) {
+        goTo(activeIndex - 1);
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [activeIndex, slideCount, goTo]);
+
+  // Keyboard navigation
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
+      // Only intercept arrows while the deck is visible (page scrolled to top)
+      if (window.scrollY > window.innerHeight * 0.5) return;
+
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        // On last slide, ArrowDown lets the page scroll normally
+        if (activeIndex === slideCount - 1 && e.key === 'ArrowDown') return;
         e.preventDefault();
         goTo(activeIndex + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
@@ -43,17 +95,14 @@ export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [activeIndex, goTo]);
+  }, [activeIndex, slideCount, goTo]);
 
-  // Inject activeIndex as a key into each child so animations replay on navigation
   const slides = Array.isArray(children) ? children : [children];
-  const slidesWithKeys = slides.map((child, i) =>
-    // We wrap each slide in a div keyed by `${i}-${activeIndex === i ? 'active' : 'inactive'}`
-    // Using a separate activationKey per slot: increments each time that slot becomes active
+  const slidesWithKeys = slides.map((child, i) => (
     <SlideWrapper key={i} isActive={activeIndex === i} slideIndex={i}>
       {child}
     </SlideWrapper>
-  );
+  ));
 
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
@@ -171,7 +220,6 @@ export function HorizontalDeck({ children, onLastSlide }: HorizontalDeckProps) {
 function SlideWrapper({
   children,
   isActive,
-  slideIndex,
 }: {
   children: React.ReactNode;
   isActive: boolean;
@@ -189,10 +237,8 @@ function SlideWrapper({
 
   return (
     <div
-      key={`slide-${slideIndex}-${activationCount}`}
       style={{ scrollSnapAlign: 'start', flexShrink: 0, width: '100vw', height: '100vh' }}
     >
-      {/* Force remount of children on each activation by keying this inner div */}
       <div key={activationCount} style={{ width: '100%', height: '100%' }}>
         {children}
       </div>

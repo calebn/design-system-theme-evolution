@@ -270,8 +270,8 @@ export function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 {[
                   { text: 'Design pushed a color change and saw it live everywhere — no ticket, no sprint.', color: 'rgba(100,220,150,0.9)' },
-                  { text: 'Design updates shipped without developers touching a line of code. Breaking changes caught automatically.', color: 'rgba(100,180,255,0.9)' },
-                  { text: 'The next major redesign took days, not months. And nobody lost a year of their life to it.', color: 'rgba(255,200,100,0.9)' },
+                  { text: 'Developers stop being the bottleneck for design changes. Breaking changes are caught automatically before they ship.', color: 'rgba(100,180,255,0.9)' },
+                  { text: 'The next major redesign takes days, not months.', color: 'rgba(255,200,100,0.9)' },
                 ].map(({ text, color }, i) => (
                   <p
                     key={i}

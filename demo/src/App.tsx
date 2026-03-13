@@ -524,43 +524,69 @@ export function App() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ margin: 0, fontSize: '1.1rem', color: '#475569', lineHeight: 1.7 }}>
-              Instead of hard-coding <code>#1E6AFE</code> into your component,
-              you reference a <strong>token</strong> — a named, shared design decision.
-              The token file is the contract between designers and developers.
+              A <strong>design token</strong> is a named design decision stored in a platform-neutral JSON file —
+              the format Figma can export directly. A build step then converts it into a{' '}
+              <strong>CSS variable</strong> your components use. Two distinct things; one clear handoff.
             </p>
-            {/* Scannable token excerpt */}
-            <div
-              style={{
-                background: '#0f172a',
-                borderRadius: 10,
-                padding: '20px 24px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 10,
-              }}
-            >
-              <div style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>
-                Logos brand tokens
-              </div>
-              {[
-                { name: '--color-primary',    value: '#1E6AFE', swatch: '#1E6AFE' },
-                { name: '--color-on-primary', value: '#FFFFFF',  swatch: '#FFFFFF' },
-                { name: '--radius-md',        value: '8px',      swatch: null },
-                { name: '--font-body',        value: "'Source Sans 3'", swatch: null },
-              ].map(({ name, value, swatch }) => (
-                <div key={name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, fontSize: '0.85rem', fontFamily: 'monospace' }}>
-                  <span style={{ color: 'rgba(255,255,255,0.5)' }}>{name}</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {swatch && (
-                      <div style={{ width: 14, height: 14, borderRadius: 3, background: swatch, border: '1px solid rgba(255,255,255,0.15)', flexShrink: 0 }} />
-                    )}
-                    <span style={{ color: '#7dd3fc' }}>{value}</span>
-                  </div>
+
+            {/* Token → CSS variable conversion diagram */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 12, alignItems: 'stretch' }}>
+              {/* Left: Design Token (JSON) */}
+              <div style={{ background: '#0f172a', borderRadius: 10, padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 2 }}>
+                  Design Token (JSON)
                 </div>
-              ))}
+                {[
+                  { path: 'color.primary',    value: '#1E6AFE', swatch: '#1E6AFE' },
+                  { path: 'color.on-primary', value: '#FFFFFF',  swatch: '#FFFFFF' },
+                  { path: 'dimension.radius-md', value: '8px',   swatch: null },
+                ].map(({ path, value, swatch }) => (
+                  <div key={path} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, fontSize: '0.78rem', fontFamily: 'monospace' }}>
+                    <span style={{ color: '#93c5fd' }}>{path}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      {swatch && <div style={{ width: 10, height: 10, borderRadius: 2, background: swatch, border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }} />}
+                      <span style={{ color: '#86efac' }}>{value}</span>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ marginTop: 6, fontSize: '0.6rem', color: 'rgba(255,255,255,0.22)', fontStyle: 'italic' }}>
+                  The designer's decision · exported from Figma
+                </div>
+              </div>
+
+              {/* Arrow */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, padding: '0 4px' }}>
+                <div style={{ fontSize: '1.1rem', color: '#94a3b8' }}>→</div>
+                <div style={{ fontSize: '0.6rem', color: '#94a3b8', textAlign: 'center', whiteSpace: 'nowrap' }}>build tool</div>
+              </div>
+
+              {/* Right: CSS Variable */}
+              <div style={{ background: '#f8fafc', borderRadius: 10, padding: '16px 18px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: 2 }}>
+                  CSS Variable (output)
+                </div>
+                {[
+                  { varName: '--color-primary',    value: '#1E6AFE', swatch: '#1E6AFE' },
+                  { varName: '--color-on-primary', value: '#FFFFFF',  swatch: '#FFFFFF' },
+                  { varName: '--dimension-radius-md', value: '8px',   swatch: null },
+                ].map(({ varName, value, swatch }) => (
+                  <div key={varName} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, fontSize: '0.78rem', fontFamily: 'monospace' }}>
+                    <span style={{ color: '#7c3aed' }}>{varName}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      {swatch && <div style={{ width: 10, height: 10, borderRadius: 2, background: swatch, border: '1px solid #e2e8f0', flexShrink: 0 }} />}
+                      <span style={{ color: '#0369a1' }}>{value}</span>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ marginTop: 6, fontSize: '0.6rem', color: '#94a3b8', fontStyle: 'italic' }}>
+                  What the browser uses · one per token
+                </div>
+              </div>
             </div>
+
             <p style={{ margin: 0, fontSize: '1rem', color: '#64748b', lineHeight: 1.6 }}>
-              Change the value in Figma, export, and <em>every surface updates automatically</em>.
+              Change the value in Figma, re-export, run the build tool, and{' '}
+              <em>every surface updates automatically</em> — no component code touched.
             </p>
           </div>
         </div>
@@ -787,9 +813,9 @@ export function App() {
             {[
               { label: 'Figma Variables', sub: 'Designer updates' },
               null,
-              { label: 'tokens.json', sub: 'W3C DTCG format' },
+              { label: 'tokens.json', sub: 'Design tokens · DTCG format' },
               null,
-              { label: 'CSS Variables', sub: 'Build tool generates' },
+              { label: 'CSS Variables', sub: 'Build tool converts tokens → vars' },
               null,
             ].map((item, i) =>
               item === null ? (

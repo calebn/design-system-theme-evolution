@@ -24,6 +24,10 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
   // Throttle gate: prevents advancing more than one slide per wheel gesture
   const wheelCooldown = useRef(false);
 
+  // Returns true when the page has been scrolled past the horizontal deck
+  // (user is in the vertical content area). Used to guard all scroll locks.
+  const isInVerticalContent = () => window.scrollY > 10;
+
   // Sync initial scroll position from hash before first paint.
   useLayoutEffect(() => {
     const track = trackRef.current;
@@ -58,12 +62,40 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
     return () => track.removeEventListener('scroll', handleScroll);
   }, [slideCount, onLastSlide]);
 
-  // Lock/unlock vertical page scroll based on whether we're on the last slide.
-  // When locked, intercept wheel events to drive horizontal slide navigation.
+  // Re-snap slide position and recalculate activeIndex when the viewport size
+  // changes (browser zoom, fullscreen enter/exit, window resize). Without this,
+  // track.scrollLeft becomes mis-aligned after the viewport width changes,
+  // causing activeIndex to land on a non-last slide and re-locking overflowY.
+  useEffect(() => {
+    let rafId: number;
+    const handleResize = () => {
+      // Debounce via rAF so we read the final viewport size, not an intermediate one
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        // Recalculate the correct index from the new viewport width
+        const newIdx = Math.round(track.scrollLeft / window.innerWidth);
+        const clamped = Math.max(0, Math.min(slideCount - 1, newIdx));
+        // Re-snap scroll position to the correct slide boundary
+        track.scrollLeft = clamped * window.innerWidth;
+        setActiveIndex(clamped);
+        onLastSlide?.(clamped === slideCount - 1);
+      });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(rafId);
+    };
+  }, [slideCount, onLastSlide]);
+
+  // Lock/unlock vertical page scroll based on slide position.
+  // Never lock when the user is already in the vertical content area.
   useEffect(() => {
     const onLastSlideNow = activeIndex === slideCount - 1;
 
-    if (onLastSlideNow) {
+    if (onLastSlideNow || isInVerticalContent()) {
       document.documentElement.style.overflowY = '';
     } else {
       document.documentElement.style.overflowY = 'hidden';
@@ -75,9 +107,12 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
     };
   }, [activeIndex, slideCount]);
 
-  // Intercept wheel/trackpad to drive horizontal navigation while deck is locked
+  // Intercept wheel/trackpad to drive horizontal navigation while deck is locked.
+  // Does nothing when the user is already scrolling the vertical content.
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Never intercept when user is in the vertical content area
+      if (isInVerticalContent()) return;
       // Only intercept while NOT on the last slide
       if (activeIndex === slideCount - 1) return;
 
@@ -102,11 +137,11 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
     return () => window.removeEventListener('wheel', handleWheel);
   }, [activeIndex, slideCount, goTo]);
 
-  // Keyboard navigation
+  // Keyboard navigation — only active while the deck is on screen
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      // Only intercept arrows while the deck is visible (page scrolled to top)
-      if (window.scrollY > window.innerHeight * 0.5) return;
+      // Don't intercept when user is in the vertical content area
+      if (isInVerticalContent()) return;
 
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         // On last slide, ArrowDown lets the page scroll normally

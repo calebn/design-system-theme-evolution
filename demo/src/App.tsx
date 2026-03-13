@@ -262,7 +262,7 @@ export function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 {[
                   { text: 'Design pushed a color change and saw it live everywhere — no ticket, no sprint.', color: 'rgba(100,220,150,0.9)' },
-                  { text: 'Developers stop being the bottleneck for design changes. Breaking changes are caught automatically before they ship.', color: 'rgba(100,180,255,0.9)' },
+                  { text: 'Developers are freed from manual design updates. Breaking changes are caught automatically before they ship.', color: 'rgba(100,180,255,0.9)' },
                   { text: 'The next major redesign takes days, not months.', color: 'rgba(255,200,100,0.9)' },
                 ].map(({ text, color }, i) => (
                   <p
@@ -418,7 +418,7 @@ export function App() {
                 {[
                   "We're adding Storybook so designers can browse every component and variant",
                   'It helps them understand what exists before designing changes',
-                  'But visibility alone doesn\'t prevent breaking changes — that still requires a plan',
+                  'Visibility is a great first step — design tokens are the next one',
                 ].map((point, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: '1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
                     <span style={{ color: 'rgba(100,180,255,0.5)', flexShrink: 0, marginTop: 2 }}>—</span>

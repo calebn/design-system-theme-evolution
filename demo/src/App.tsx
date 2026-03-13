@@ -515,13 +515,13 @@ export function App() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center', maxWidth: 900, width: '100%' }}>
             <div>
               <h2 style={{ margin: '0 0 28px', fontSize: 'clamp(1.8rem, 3vw, 2.75rem)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-                Designers Don't<br />Think in Breaking<br />Changes
+                Let Designers<br />Design
               </h2>
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
                 {[
-                  "They think about how things should look — not how code references old values",
-                  "They don't see every color, spacing value, and variant downstream pages depend on",
-                  "They shouldn't have to. That's a system problem, not a people problem.",
+                  'Designers think about how things should look — the colors, the shapes, the feel',
+                  'The system should know which of those changes are safe and which ones need a plan',
+                  "That's what design tokens solve. It's a system problem, not a people problem.",
                 ].map((point, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: '1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
                     <span style={{ color: 'rgba(255,255,255,0.25)', flexShrink: 0, marginTop: 2 }}>—</span>

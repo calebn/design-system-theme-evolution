@@ -204,12 +204,13 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
           <button
             key={i}
             onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={`Go to slide ${i + 1}${activeIndex === i ? ' (current)' : ''}`}
+            aria-current={activeIndex === i ? 'true' : undefined}
             style={{
               width: activeIndex === i ? 24 : 8,
               height: 8,
               borderRadius: 4,
-              backgroundColor: activeIndex === i ? '#fff' : 'rgba(255,255,255,0.35)',
+              backgroundColor: activeIndex === i ? '#fff' : 'rgba(255,255,255,0.5)',
               border: 'none',
               padding: 0,
               cursor: 'pointer',

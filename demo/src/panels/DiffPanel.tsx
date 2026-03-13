@@ -54,6 +54,12 @@ const CHANGE_ICONS: Record<string, string> = {
   removed: '✖',
 };
 
+const CHANGE_LABELS: Record<string, string> = {
+  restyle: 'restyled',
+  added: 'added',
+  removed: 'removed',
+};
+
 const CHANGE_COLORS: Record<string, string> = {
   restyle: '#2563eb',
   added: '#16a34a',
@@ -166,9 +172,10 @@ export function DiffPanel({ fromVersion, toVersion }: DiffPanelProps) {
                     }}
                   >
                     <span
+                      aria-label={CHANGE_LABELS[c.type]}
                       style={{ color: CHANGE_COLORS[c.type], fontWeight: 700, fontSize: '0.85rem' }}
                     >
-                      {CHANGE_ICONS[c.type]}
+                      <span aria-hidden="true">{CHANGE_ICONS[c.type]}</span>
                     </span>
                     <div>
                       <span

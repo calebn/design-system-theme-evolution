@@ -34,6 +34,7 @@ function ColorSwatch({ value }: { value: string }) {
   if (!isColor) return null;
   return (
     <span
+      aria-hidden="true"
       style={{
         display: 'inline-block',
         width: 14,
@@ -101,7 +102,10 @@ export function TokenInspector({ brand, version, cssLoadKey }: TokenInspectorPro
           backgroundColor: 'var(--color-surface)',
         }}
       >
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <table
+          style={{ width: '100%', borderCollapse: 'collapse' }}
+          aria-label={`Live CSS variables for ${brand} v${version}`}
+        >
           <thead>
             <tr style={{ backgroundColor: 'var(--color-surface-muted)' }}>
               <th style={{ ...cellStyle, textAlign: 'left', fontWeight: 700 }}>Token</th>

@@ -13,11 +13,7 @@
     <!-- Default brand/version: loaded by App.tsx on mount; this prevents FOUC -->
     <!-- Use %BASE_URL% so Vite serves this from public/ instead of bundling it as a source CSS file -->
     <link id="theme-css" rel="stylesheet" href="%BASE_URL%generated/versions/1.0.0/logos/variables.css" />
-    <!-- Prism.js — syntax highlighting for code blocks (Tomorrow Night theme) -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
-      rel="stylesheet"
-    />
+    <!-- Prism.js — syntax highlighting for code blocks -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js" defer></script>
@@ -90,6 +86,7 @@
     </style>
   </head>
   <body>
+    <a href="#sticky-sentinel" class="skip-link">Skip to main content</a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

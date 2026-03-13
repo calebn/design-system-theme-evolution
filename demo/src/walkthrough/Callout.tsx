@@ -26,7 +26,9 @@ export function Callout({ role = 'info', children }: CalloutProps) {
         margin: '16px 0',
       }}
     >
-      <span style={{ fontSize: '1.1rem', flexShrink: 0, lineHeight: 1.5 }}>{cfg.icon}</span>
+      <span aria-hidden="true" style={{ fontSize: '1.1rem', flexShrink: 0, lineHeight: 1.5 }}>
+        {cfg.icon}
+      </span>
       <div>
         <div
           style={{

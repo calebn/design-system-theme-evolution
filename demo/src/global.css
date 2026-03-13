@@ -2,6 +2,25 @@
   box-sizing: border-box;
 }
 
+/* ── Skip link — visually hidden until focused ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 8px;
+  padding: 8px 16px;
+  background: #1e293b;
+  color: #fff;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 body {
   margin: 0;
   font-size: 16px;
@@ -95,6 +114,13 @@ section:hover .section-anchor-link,
 .section-anchor-link:hover {
   color: #1e293b;
   background: #f1f5f9;
+}
+
+/* ── Focus-visible — consistent keyboard focus indicator ── */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #1e6afe;
+  outline-offset: 2px;
 }
 
 /* ── Sticky controls slide-down animation ── */

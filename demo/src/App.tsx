@@ -13,6 +13,7 @@ import { TokenInspector } from './panels/TokenInspector';
 import { DiffPanel } from './panels/DiffPanel';
 
 import { versionedCss } from './token-css-strings';
+import { Brand, Version } from './types';
 
 const LOGOS_COMPACT_CSS = `[data-brand="logos"] {
   --color-primary:       #1E6AFE;
@@ -26,9 +27,6 @@ const LOGOS_COMPACT_CSS = `[data-brand="logos"] {
 }
 
 /* Verbum uses the same structure — different brand values */`;
-
-type Brand = 'logos' | 'verbum';
-type Version = '1.0.0' | '1.1.0' | '2.0.0';
 
 const SLIDE_IDS = [
   'title',
@@ -82,6 +80,39 @@ const DRIFTED_STYLES: React.CSSProperties[] = [
     letterSpacing: '0.02em',
   },
 ];
+
+const DARK_CARD: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+  borderRadius: 16,
+  padding: '40px 32px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const PILL_ACTIVE: React.CSSProperties = {
+  padding: '6px 18px',
+  borderRadius: 6,
+  border: '2px solid #1e293b',
+  backgroundColor: '#1e293b',
+  color: '#fff',
+  fontSize: '0.95rem',
+  fontWeight: 700,
+  cursor: 'pointer',
+  transition: 'background 0.12s, color 0.12s, border-color 0.12s',
+};
+
+const PILL_INACTIVE: React.CSSProperties = {
+  padding: '6px 18px',
+  borderRadius: 6,
+  border: '2px solid #e2e8f0',
+  backgroundColor: '#fff',
+  color: '#475569',
+  fontSize: '0.95rem',
+  fontWeight: 500,
+  cursor: 'pointer',
+  transition: 'background 0.12s, color 0.12s, border-color 0.12s',
+};
 
 export function App() {
   const [brand, setBrand] = useState<Brand>('logos');
@@ -186,29 +217,8 @@ export function App() {
     return () => observer.disconnect();
   }, []);
 
-  const inlinePill = (active: boolean): React.CSSProperties => ({
-    padding: '6px 18px',
-    borderRadius: 6,
-    border: active ? '2px solid #1e293b' : '2px solid #e2e8f0',
-    backgroundColor: active ? '#1e293b' : '#fff',
-    color: active ? '#fff' : '#475569',
-    fontSize: '0.95rem',
-    fontWeight: active ? 700 : 500,
-    cursor: 'pointer',
-    transition: 'all 0.12s',
-  });
-
-  const darkCard: React.CSSProperties = {
-    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-    borderRadius: 16,
-    padding: '40px 32px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
   return (
-    <div>
+    <main>
       {/* ── Fullscreen hint pill — only shown when entering at the start ── */}
       {showFullscreenHint && (
         <button
@@ -235,10 +245,32 @@ export function App() {
             zIndex: 100,
           }}
         >
-          <span style={{ fontSize: '1rem' }}>⛶</span>
+          <span style={{ fontSize: '1rem' }} aria-hidden="true">
+            ⛶
+          </span>
           Fullscreen
         </button>
       )}
+
+      {/* Visually-hidden live region for screen-reader announcements */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        id="a11y-announcer"
+        style={{
+          position: 'absolute',
+          width: 1,
+          height: 1,
+          padding: 0,
+          margin: -1,
+          overflow: 'hidden',
+          clip: 'rect(0,0,0,0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+        }}
+      >
+        {`Brand: ${brand}, Version: ${version}`}
+      </div>
 
       <StickyControls
         brand={brand}
@@ -270,7 +302,7 @@ export function App() {
                   fontSize: '0.8rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.4)',
+                  color: 'rgba(255,255,255,0.65)',
                 }}
               >
                 A design system story
@@ -334,7 +366,7 @@ export function App() {
                   fontSize: '0.8rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                 }}
               >
                 The opportunity
@@ -386,7 +418,7 @@ export function App() {
                 style={{
                   margin: 0,
                   fontSize: '1rem',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                   fontStyle: 'italic',
                 }}
               >
@@ -427,7 +459,7 @@ export function App() {
                   fontSize: '0.75rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                 }}
               >
                 The Past
@@ -446,6 +478,7 @@ export function App() {
                 Admin Era
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -474,7 +507,7 @@ export function App() {
                   >
                     <span
                       style={{
-                        color: 'rgba(255,255,255,0.25)',
+                        color: 'rgba(255,255,255,0.5)',
                         flexShrink: 0,
                         marginTop: 2,
                       }}
@@ -489,7 +522,7 @@ export function App() {
                 style={{
                   margin: '20px 0 0',
                   fontSize: '0.85rem',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                   fontStyle: 'italic',
                 }}
               >
@@ -538,6 +571,7 @@ export function App() {
                 Have Cost Us Years
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -608,6 +642,7 @@ export function App() {
                 No Bridge
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -635,7 +670,7 @@ export function App() {
                   >
                     <span
                       style={{
-                        color: 'rgba(255,255,255,0.25)',
+                        color: 'rgba(255,255,255,0.5)',
                         flexShrink: 0,
                         marginTop: 2,
                       }}
@@ -650,7 +685,7 @@ export function App() {
                 style={{
                   margin: '24px 0 0',
                   fontSize: '0.85rem',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                   fontStyle: 'italic',
                 }}
               >
@@ -699,6 +734,7 @@ export function App() {
                 Shared Components
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -783,6 +819,7 @@ export function App() {
                 What's Built
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -981,6 +1018,7 @@ export function App() {
                 Not Solved
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -1052,6 +1090,7 @@ export function App() {
                 Design
               </h2>
               <ul
+                role="list"
                 style={{
                   margin: 0,
                   padding: 0,
@@ -1079,7 +1118,7 @@ export function App() {
                   >
                     <span
                       style={{
-                        color: 'rgba(255,255,255,0.25)',
+                        color: 'rgba(255,255,255,0.5)',
                         flexShrink: 0,
                         marginTop: 2,
                       }}
@@ -1144,7 +1183,7 @@ export function App() {
             >
               <div
                 className="scroll-cue-arrow"
-                style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.4)' }}
+                style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.65)' }}
               >
                 ↓
               </div>
@@ -1186,7 +1225,7 @@ export function App() {
             alignItems: 'center',
           }}
         >
-          <div data-brand={brand} style={darkCard}>
+          <div data-brand={brand} style={DARK_CARD}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -1281,7 +1320,7 @@ export function App() {
                   style={{
                     marginTop: 6,
                     fontSize: '0.6rem',
-                    color: 'rgba(255,255,255,0.22)',
+                    color: 'rgba(255,255,255,0.5)',
                     fontStyle: 'italic',
                   }}
                 >
@@ -1433,7 +1472,12 @@ export function App() {
         >
           <div style={{ display: 'flex', gap: 8 }}>
             {(['logos', 'verbum'] as Brand[]).map((b) => (
-              <button key={b} onClick={() => setBrand(b)} style={inlinePill(brand === b)}>
+              <button
+                key={b}
+                onClick={() => setBrand(b)}
+                aria-pressed={brand === b}
+                style={brand === b ? PILL_ACTIVE : PILL_INACTIVE}
+              >
                 {b === 'logos' ? 'Logos' : 'Verbum'}
               </button>
             ))}
@@ -1448,7 +1492,7 @@ export function App() {
               alignItems: 'center',
             }}
           >
-            <div data-brand={brand} style={darkCard}>
+            <div data-brand={brand} style={DARK_CARD}>
               <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
             </div>
             <div>
@@ -1573,7 +1617,12 @@ export function App() {
             Token version
           </span>
           {(['1.0.0', '1.1.0'] as Version[]).map((v) => (
-            <button key={v} onClick={() => setVersion(v)} style={inlinePill(version === v)}>
+            <button
+              key={v}
+              onClick={() => setVersion(v)}
+              aria-pressed={version === v}
+              style={version === v ? PILL_ACTIVE : PILL_INACTIVE}
+            >
               {v}
             </button>
           ))}
@@ -1587,7 +1636,7 @@ export function App() {
             alignItems: 'center',
           }}
         >
-          <div data-brand={brand} style={{ ...darkCard, flexDirection: 'column', gap: 16 }}>
+          <div data-brand={brand} style={{ ...DARK_CARD, flexDirection: 'column', gap: 16 }}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
             <div
               style={{
@@ -1668,7 +1717,11 @@ export function App() {
             flexWrap: 'wrap',
           }}
         >
-          <button onClick={() => setVersion('2.0.0')} style={inlinePill(version === '2.0.0')}>
+          <button
+            onClick={() => setVersion('2.0.0')}
+            aria-pressed={version === '2.0.0'}
+            style={version === '2.0.0' ? PILL_ACTIVE : PILL_INACTIVE}
+          >
             Switch to v2.0.0 to see the breakage
           </button>
           {version === '2.0.0' && (
@@ -1682,7 +1735,7 @@ export function App() {
               >
                 Active — look for the hotpink!
               </span>
-              <button onClick={() => setVersion('1.0.0')} style={inlinePill(false)}>
+              <button onClick={() => setVersion('1.0.0')} style={PILL_INACTIVE}>
                 Reset to 1.0.0
               </button>
             </>
@@ -1697,7 +1750,7 @@ export function App() {
             alignItems: 'center',
           }}
         >
-          <div data-brand={brand} style={{ ...darkCard, flexDirection: 'column', gap: 16 }}>
+          <div data-brand={brand} style={{ ...DARK_CARD, flexDirection: 'column', gap: 16 }}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} />
             <div
               style={{
@@ -1799,7 +1852,7 @@ export function App() {
                 ✓ v1.1.0 — Safe change passes
               </span>
             </div>
-            <div data-brand={brand} style={{ ...darkCard, padding: '28px 24px' }}>
+            <div data-brand={brand} style={{ ...DARK_CARD, padding: '28px 24px' }}>
               <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
             </div>
           </div>
@@ -1819,7 +1872,7 @@ export function App() {
                 ✖ v2.0.0 — Breaking change blocked
               </span>
             </div>
-            <div style={{ ...darkCard, padding: '28px 24px' }}>
+            <div style={{ ...DARK_CARD, padding: '28px 24px' }}>
               {/* Static hotpink button — illustrates what would ship if the check didn't catch it */}
               <button
                 style={{
@@ -2020,7 +2073,7 @@ BLOCKED — breaking changes detected`}
                   style={{
                     marginLeft: 4,
                     fontSize: '0.58rem',
-                    color: 'rgba(255,255,255,0.4)',
+                    color: 'rgba(255,255,255,0.65)',
                     fontFamily: 'monospace',
                   }}
                 >
@@ -2147,7 +2200,7 @@ BLOCKED — breaking changes detected`}
             <div
               data-brand={brand}
               style={{
-                ...darkCard,
+                ...DARK_CARD,
                 padding: '20px 28px',
                 border: '2px solid rgba(255,255,255,0.12)',
                 flexDirection: 'column',
@@ -2254,7 +2307,7 @@ BLOCKED — breaking changes detected`}
                   background: '#1e293b',
                   padding: '8px 16px',
                   fontSize: '0.7rem',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.6)',
                 }}
               >
                 No hard-coded colors. Every value is a CSS variable — a token in disguise.
@@ -2290,7 +2343,7 @@ BLOCKED — breaking changes detected`}
             marginBottom: 36,
           }}
         >
-          <div data-brand={brand} style={{ ...darkCard, padding: '32px 48px' }}>
+          <div data-brand={brand} style={{ ...DARK_CARD, padding: '32px 48px' }}>
             <ButtonHero brand={brand} cssLoadKey={cssLoadKey} compact showTokens={false} />
           </div>
           <p
@@ -2435,7 +2488,7 @@ BLOCKED — breaking changes detected`}
               fontSize: '0.75rem',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.35)',
+              color: 'rgba(255,255,255,0.6)',
             }}
           >
             The ask
@@ -2571,7 +2624,7 @@ BLOCKED — breaking changes detected`}
                 <div
                   style={{
                     fontSize: '0.8rem',
-                    color: 'rgba(255,255,255,0.45)',
+                    color: 'rgba(255,255,255,0.7)',
                     lineHeight: 1.5,
                   }}
                 >
@@ -2697,6 +2750,6 @@ BLOCKED — breaking changes detected`}
       >
         Design Tokens Pipeline Demo &middot; W3C DTCG &middot; React + Vite + Style Dictionary
       </footer>
-    </div>
+    </main>
   );
 }

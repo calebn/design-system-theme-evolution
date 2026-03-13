@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-
-type Brand = 'logos' | 'verbum';
-type Version = '1.0.0' | '1.1.0' | '2.0.0';
+import { Brand, Version } from '../types';
 
 interface StickyControlsProps {
   brand: Brand;
@@ -34,7 +32,6 @@ export function StickyControls({
           hasBeenOnScreen = true;
           setVisible(false);
         } else if (hasBeenOnScreen) {
-          // Only show sticky bar after the sentinel has been scrolled past
           const rect = sentinel.getBoundingClientRect();
           if (rect.top < 0) setVisible(true);
         }
@@ -56,11 +53,12 @@ export function StickyControls({
     fontSize: '0.78rem',
     fontWeight: active ? 700 : 500,
     cursor: 'pointer',
-    transition: 'all 0.12s',
+    transition: 'background 0.12s, color 0.12s, border-color 0.12s',
   });
 
   return (
-    <div
+    <nav
+      aria-label="Theme controls"
       style={{
         position: 'fixed',
         top: 0,
@@ -83,14 +81,19 @@ export function StickyControls({
           fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
-          color: '#94a3b8',
+          color: '#64748b',
         }}
       >
         Brand
       </span>
       <div style={{ display: 'flex', gap: 4 }}>
         {(['logos', 'verbum'] as Brand[]).map((b) => (
-          <button key={b} onClick={() => setBrand(b)} style={pill(brand === b)}>
+          <button
+            key={b}
+            onClick={() => setBrand(b)}
+            aria-pressed={brand === b}
+            style={pill(brand === b)}
+          >
             {b === 'logos' ? 'Logos' : 'Verbum'}
           </button>
         ))}
@@ -105,20 +108,25 @@ export function StickyControls({
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              color: '#94a3b8',
+              color: '#64748b',
             }}
           >
             Version
           </span>
           <div style={{ display: 'flex', gap: 4 }}>
             {VERSIONS.map((v) => (
-              <button key={v} onClick={() => setVersion(v)} style={pill(version === v)}>
+              <button
+                key={v}
+                onClick={() => setVersion(v)}
+                aria-pressed={version === v}
+                style={pill(version === v)}
+              >
                 {v}
               </button>
             ))}
           </div>
         </>
       )}
-    </div>
+    </nav>
   );
 }

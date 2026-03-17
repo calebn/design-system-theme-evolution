@@ -243,6 +243,64 @@ export function HorizontalDeck({ children, onLastSlide, slideIds }: HorizontalDe
         {slidesWithKeys}
       </div>
 
+      {/* Prev / Next buttons */}
+      {activeIndex > 0 && (
+        <button
+          onClick={() => goTo(activeIndex - 1)}
+          aria-label="Previous slide"
+          style={{
+            position: 'absolute',
+            left: 20,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+            background: 'rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.3)',
+            borderRadius: '50%',
+            width: 44,
+            height: 44,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontSize: '1.25rem',
+            cursor: 'pointer',
+            backdropFilter: 'blur(6px)',
+            transition: 'background 0.15s',
+          }}
+        >
+          ‹
+        </button>
+      )}
+      {activeIndex < slides.length - 1 && (
+        <button
+          onClick={() => goTo(activeIndex + 1)}
+          aria-label="Next slide"
+          style={{
+            position: 'absolute',
+            right: 20,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+            background: 'rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.3)',
+            borderRadius: '50%',
+            width: 44,
+            height: 44,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontSize: '1.25rem',
+            cursor: 'pointer',
+            backdropFilter: 'blur(6px)',
+            transition: 'background 0.15s',
+          }}
+        >
+          ›
+        </button>
+      )}
+
       {/* Progress dots */}
       <div
         style={{

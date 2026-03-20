@@ -1,0 +1,219 @@
+<canvas id="0:2" name="Internal Only Canvas" x="0" y="0" width="0" height="0" hidden="true">
+  <!-- Legacy internal palette nodes (hidden) -->
+  <rounded-rectangle id="5:4" name="Palette/Basic/White" x="0" y="0" width="100" height="100" hidden="true" />
+  <rounded-rectangle id="5:5" name="Text/UI Font Color" x="0" y="0" width="100" height="100" hidden="true" />
+  <text id="5:6" name="Spec / Body" x="0" y="0" width="59" height="28" hidden="true" />
+  <rounded-rectangle id="5:7" name="Text/UI Font Color - Medium" x="0" y="0" width="100" height="100" hidden="true" />
+  <text id="5:8" name="Spec / Caption" x="0" y="0" width="46" height="20" hidden="true" />
+
+  <!-- Core Swatches (local styles) -->
+  <rounded-rectangle id="5:15328" name="Core Swatches/White" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15329" name="Core Swatches/Gray 1" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15330" name="Core Swatches/Gray 2" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15336" name="Core Swatches/Gray 3" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15342" name="Core Swatches/Gray 4" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15348" name="Core Swatches/Dark Gray" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15359" name="Core Swatches/Black" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15375" name="Core Swatches/Dark Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15376" name="Core Swatches/Logos Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15377" name="Core Swatches/Logos Top Blue" x="0" y="0" width="100" height="100" />
+
+  <!-- Logos Swatches (local styles) -->
+  <rounded-rectangle id="5:15398" name="Logos Swatches/Faithlife Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15409" name="Logos Swatches/Very Dark Gray" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15426" name="Logos Swatches/Light Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15432" name="Logos Swatches/Lightest Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15456" name="Logos Swatches/Faithlife Green" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15457" name="Logos Swatches/Red" x="0" y="0" width="100" height="100" />
+
+  <!-- Shadows elevation scale (local styles - only 4dp and 6dp are variables) -->
+  <rounded-rectangle id="5:15638" name="Shadows/1dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15658" name="Shadows/2dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15659" name="Shadows/3dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15660" name="Shadows/4dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15661" name="Shadows/6dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15662" name="Shadows/8dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15663" name="Shadows/9dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15664" name="Shadows/12dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15665" name="Shadows/16dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15666" name="Shadows/24dp" x="0" y="0" width="100" height="100" />
+
+  <!-- Shadows - L9 alternate elevation scale (all local styles) -->
+  <rounded-rectangle id="5:15703" name="Shadows/L9/1dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15704" name="Shadows - L9/1dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15705" name="Shadows - L9/2dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15706" name="Shadows - L9/3dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15707" name="Shadows - L9/4dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15708" name="Shadows - L9/6dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15709" name="Shadows - L9/8dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15710" name="Shadows - L9/9dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15711" name="Shadows - L9/12dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15712" name="Shadows - L9/16dp" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="5:15713" name="Shadows - L9/24dp" x="0" y="0" width="100" height="100" />
+
+  <!-- Typography local styles (headings) -->
+  <text id="5:15802" name="Headings/H1" x="0" y="0" width="53" height="42" />
+  <text id="5:15803" name="Headings/H2" x="0" y="0" width="41" height="34" />
+  <text id="5:15804" name="Headings/H3" x="0" y="0" width="87" height="22" />
+  <text id="5:15805" name="Headings/H4" x="0" y="0" width="63" height="24" />
+  <text id="5:15806" name="Headings/H5" x="0" y="0" width="56" height="20" />
+  <text id="5:15807" name="Headings/H1.lg" x="0" y="0" width="76" height="55" />
+  <text id="5:15808" name="Headings/H2.lg" x="0" y="0" width="44" height="36" />
+  <text id="5:15809" name="UI/UI 1" x="0" y="0" width="19" height="18" />
+  <text id="5:15810" name="UI/UI 2" x="0" y="0" width="17" height="16" />
+  <text id="5:15811" name="UI/UI 3" x="0" y="0" width="15" height="14" />
+  <text id="5:15812" name="UI/UI 4" x="0" y="0" width="14" height="13" />
+  <text id="5:15813" name="UI/UI 5" x="0" y="0" width="13" height="12" />
+  <text id="5:15814" name="Content/B1" x="0" y="0" width="59" height="24" />
+  <text id="5:15815" name="Content/B2" x="0" y="0" width="53" height="22" />
+  <text id="5:15816" name="Content/B3" x="0" y="0" width="46" height="20" />
+  <text id="5:15817" name="Content/B4" x="0" y="0" width="43" height="18" />
+  <text id="5:15818" name="Content/B5" x="0" y="0" width="40" height="16" />
+  <text id="5:15819" name="Special Headings/H1" x="0" y="0" width="50" height="50" />
+  <text id="5:15820" name="Special Headings/H2" x="0" y="0" width="38" height="40" />
+  <text id="5:15821" name="Special Headings/H3" x="0" y="0" width="33" height="36" />
+  <text id="5:15822" name="Special Headings/H4" x="0" y="0" width="19" height="24" />
+  <text id="5:15823" name="Special Headings/H1.lg" x="0" y="0" width="57" height="56" />
+  <text id="5:15824" name="Special Headings/H2.lg" x="0" y="0" width="43" height="44" />
+  <text id="401:93" name="Headings/Kicker" x="0" y="0" width="56" height="20" />
+  <text id="410:93" name="Headings/H6" x="0" y="0" width="83" height="28" />
+
+  <!-- Primary colors (mapped to variables) -->
+  <rounded-rectangle id="901:446" name="Primary/Logos Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:447" name="Secondary/Alt Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:448" name="Primary/Deep Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:449" name="Secondary/Very Deep Gray" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:450" name="Secondary/White" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:451" name="Secondary/Light Blue 1" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:452" name="Secondary/Light Blue 2" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:453" name="Secondary/Light Blue 3" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:454" name="Secondary/Deep Blue 2" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:455" name="Secondary/Deep Blue 3" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:487" name="Deep Colors/Yellow" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:488" name="Deep Colors/Deep Orange" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:489" name="Deep Colors/Red" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:490" name="Deep Colors/Deep Purple" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:491" name="Deep Colors/Green" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:492" name="Bright Colors/Bright Yellow" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:493" name="Bright Colors/Alt Orange" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:494" name="Bright Colors/Bright Red" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:495" name="Bright Colors/Alt Purple" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="901:496" name="Bright Colors/Bright Green" x="0" y="0" width="100" height="100" />
+
+  <!-- 2023 updated heading styles (local styles) -->
+  <text id="915:380" name="2023/Headings/H1" x="0" y="0" width="137" height="37" />
+  <text id="915:381" name="2023/Headings/H2" x="0" y="0" width="109" height="29" />
+  <text id="915:382" name="2023/Headings/H3" x="0" y="0" width="87" height="23" />
+  <text id="915:383" name="2023/Headings/H4" x="0" y="0" width="63" height="24" />
+  <text id="915:384" name="2023/Headings/H5" x="0" y="0" width="56" height="20" />
+  <text id="915:385" name="2023/Headings/H6" x="0" y="0" width="83" height="28" />
+  <text id="915:386" name="2023/Headings/Kicker" x="0" y="0" width="56" height="20" />
+  <text id="915:387" name="2023/Headings/H1.lg" x="0" y="0" width="198" height="52" />
+  <text id="915:388" name="2023/Headings/H1.xl" x="0" y="0" width="300" height="80" />
+  <text id="916:91" name="2023/Special Headings/H1" x="0" y="0" width="124" height="50" />
+  <text id="916:92" name="2023/Special Headings/H2" x="0" y="0" width="94" height="40" />
+  <text id="916:93" name="2023/Special Headings/H3" x="0" y="0" width="83" height="36" />
+  <text id="916:94" name="2023/Special Headings/H4" x="0" y="0" width="48" height="24" />
+  <text id="916:95" name="2023/Special Headings/H1.lg" x="0" y="0" width="141" height="56" />
+  <text id="916:96" name="2023/Special Headings/H2.lg" x="0" y="0" width="106" height="44" />
+
+  <!-- Product Shadows (Small and Large are variables, Medium is local style) -->
+  <rounded-rectangle id="934:116" name="Product Shadows/Small" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="934:117" name="Product Shadows/Medium" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="934:118" name="Product Shadows/Large" x="0" y="0" width="100" height="100" />
+
+  <!-- Gradients (all local styles) -->
+  <rounded-rectangle id="934:127" name="Gradient/One" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="934:128" name="Gradient/Two" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="934:129" name="Gradient/Three" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="934:130" name="Gradient/Four" x="0" y="0" width="100" height="100" />
+
+  <!-- Neutral scale (all local styles) -->
+  <rounded-rectangle id="1029:92" name="Neutral/Gray 1" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="1029:93" name="Neutral/Gray 2" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="1029:96" name="Neutral/Gray 3" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="1029:97" name="Neutral/Gray 4" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="1029:98" name="Neutral/Deep Gray" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="1029:99" name="Neutral/Black" x="0" y="0" width="100" height="100" />
+
+  <!-- Responsive / special typography local styles -->
+  <text id="1179:339" name="Content/BL" x="0" y="0" width="26" height="30" />
+  <text id="1179:340" name="Content/B1" x="0" y="0" width="19" height="24" />
+  <text id="1179:341" name="Content/B2" x="0" y="0" width="17" height="22" />
+  <text id="1179:342" name="Content/B3" x="0" y="0" width="14" height="16" />
+  <text id="1179:345" name="Content/Spec/Desktop" x="0" y="0" width="11" height="13" />
+  <text id="1179:346" name="Special/H1/Desktop" x="0" y="0" width="49" height="55" />
+  <text id="1179:347" name="Content/Spec/Mobile+Tablet" x="0" y="0" width="9" height="10" />
+  <text id="1179:350" name="Special/H1/Mobile+Tablet" x="0" y="0" width="43" height="48" />
+  <text id="1179:351" name="Special/H2/Desktop" x="0" y="0" width="37" height="43" />
+  <text id="1179:354" name="Special/H2/Mobile+Tablet" x="0" y="0" width="37" height="43" />
+  <text id="1179:355" name="Special/H3" x="0" y="0" width="29" height="35" />
+  <text id="1179:356" name="Special/H4" x="0" y="0" width="17" height="24" />
+  <text id="1179:357" name="Content/H1/Desktop" x="0" y="0" width="112" height="84" />
+  <text id="1179:361" name="Content/H1/Tablet" x="0" y="0" width="90" height="67" />
+  <text id="1179:362" name="Content/H1/Mobile" x="0" y="0" width="68" height="50" />
+  <text id="1179:363" name="Content/Alt/Desktop" x="0" y="0" width="113" height="80" />
+  <text id="1180:365" name="Content/Alt/Tablet" x="0" y="0" width="90" height="64" />
+  <text id="1180:366" name="Content/Alt/Mobile" x="0" y="0" width="68" height="48" />
+  <text id="1180:368" name="Content/Alt.L/Desktop" x="0" y="0" width="169" height="120" />
+  <text id="1180:369" name="Content/Alt.L/Tablet" x="0" y="0" width="113" height="80" />
+  <text id="1180:370" name="Content/Alt.L/Mobile" x="0" y="0" width="90" height="64" />
+  <text id="1180:373" name="Content/H2/Tablet" x="0" y="0" width="68" height="50" />
+  <text id="1180:375" name="Content/H2/Desktop" x="0" y="0" width="91" height="67" />
+  <text id="1180:376" name="Content/H2/Mobile" x="0" y="0" width="57" height="42" />
+  <text id="1180:381" name="Content/H3/Desktop" x="0" y="0" width="68" height="55" />
+  <text id="1180:383" name="Content/H3/Mobile+Tablet" x="0" y="0" width="51" height="41" />
+  <text id="1180:387" name="Content/H4/Desktop" x="0" y="0" width="46" height="37" />
+  <text id="1180:389" name="Content/H4/Mobile+Tablet" x="0" y="0" width="43" height="34" />
+  <text id="1180:390" name="Content/H5 + H6/H5" x="0" y="0" width="34" height="30" />
+  <text id="1195:178" name="Content/H5 + H6/H6" x="0" y="0" width="27" height="28" />
+  <text id="1217:274" name="Components/Body/Large" x="0" y="0" width="94" height="30" />
+
+  <!-- Typography variables (hidden, backed by variable system) -->
+  <variable-set id="1235:8" name="Typography" x="0" y="0" width="0" height="0" hidden="true" />
+
+  <!-- Primary/Subscription Blue color -->
+  <rounded-rectangle id="1375:7" name="Primary/Subscription Blue" x="0" y="0" width="100" height="100" />
+
+  <!-- Typography variable nodes -->
+  <variable id="1735:3" name="Headings/H1" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:17" name="Headings/H2" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:18" name="Headings/H3" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:19" name="Headings/H4" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:20" name="Headings/H5" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:21" name="Headings/H6" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:22" name="Body/Body Large" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:23" name="Body/Body Regular" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:24" name="Body/Body Small" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:25" name="Body/Fine Print" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:26" name="Headings/Alt/H1" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:27" name="Headings/Alt/H2" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:29" name="Headings/Alt/H3" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:30" name="Headings/H1 Large" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:31" name="Headings/Spec Type" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:32" name="UI/1" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:33" name="UI/2" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:34" name="UI/3" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:35" name="UI/4" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:36" name="UI/5" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:37" name="Headings/Special/H1" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:38" name="Headings/Special/H2" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:39" name="Headings/Special/H3" x="0" y="0" width="0" height="0" hidden="true" />
+  <variable id="1735:40" name="Headings/Special/H4" x="0" y="0" width="0" height="0" hidden="true" />
+
+  <!-- Verbum sub-brand colors (all local styles) -->
+  <rounded-rectangle id="2073:1838" name="Verbum" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1839" name="Verbum/Verbum White" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1840" name="Verbum/Verbum Dk Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1841" name="Verbum/Verbum Lt Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1842" name="Verbum/Verbum Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1843" name="Verbum/Verbum Pale Blue" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1844" name="Verbum/Verbum Dk Grey" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1845" name="Verbum/Verbum Grey" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1846" name="Verbum/Dark Grey" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1847" name="Verbum/Verbum Gradient 1" x="0" y="0" width="100" height="100" />
+  <rounded-rectangle id="2073:1848" name="Verbum/Verbum Soft Black" x="0" y="0" width="100" height="100" />
+
+  <!-- Secondary/Light Blue 0 (local style) -->
+  <rounded-rectangle id="2529:286" name="Secondary/Light Blue 0" x="0" y="0" width="100" height="100" />
+</canvas>

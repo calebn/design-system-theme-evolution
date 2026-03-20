@@ -144,10 +144,15 @@ function normalizeHex(hex: string): string {
 // ---------------------------------------------------------------------------
 
 function analyzeColors(figmaTokens: TokenCategory, codeColors: CodeColor[]) {
-  const figmaColorMap = new Map(
-    figmaTokens.colors.map((t) => [normalizeHex(t.rawValue), t.figmaKey])
-  );
-  // Build multi-value map: hex -> all code keys that share this hex
+  // Map hex -> all figma keys sharing that hex (preserves duplicates like Secondary/White + white)
+  const figmaKeysByHex = new Map<string, string[]>();
+  for (const t of figmaTokens.colors) {
+    const h = normalizeHex(t.rawValue);
+    if (!figmaKeysByHex.has(h)) figmaKeysByHex.set(h, []);
+    figmaKeysByHex.get(h)!.push(t.figmaKey);
+  }
+
+  // Map hex -> all code keys sharing that hex
   const codeColorsByHex = new Map<string, string[]>();
   for (const c of codeColors) {
     const h = normalizeHex(c.hex);
@@ -160,18 +165,20 @@ function analyzeColors(figmaTokens: TokenCategory, codeColors: CodeColor[]) {
   const codeOnly: GapEntry[] = [];
   const matchedHexes = new Set<string>();
 
-  for (const [hex, figmaKey] of figmaColorMap.entries()) {
+  // One matched/figmaOnly entry per figma key so every token shows its own row
+  for (const t of figmaTokens.colors) {
+    const hex = normalizeHex(t.rawValue);
     if (codeColorsByHex.has(hex)) {
       const codeKeys = codeColorsByHex.get(hex)!;
       matched.push({
-        figmaKey,
+        figmaKey: t.figmaKey,
         figmaValue: `#${hex}`,
         codeKey: codeKeys.join(', '),
         codeValue: `#${hex}`,
       });
       matchedHexes.add(hex);
     } else {
-      figmaOnly.push({ figmaKey, figmaValue: `#${hex}` });
+      figmaOnly.push({ figmaKey: t.figmaKey, figmaValue: `#${hex}` });
     }
   }
 

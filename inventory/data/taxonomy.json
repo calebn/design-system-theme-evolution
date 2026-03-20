@@ -20,7 +20,9 @@
       ],
       "codeComponents": [
         "Button",
-        "ButtonGroup"
+        "ButtonGroup",
+        "IconButton",
+        "LinkButton"
       ]
     },
     {
@@ -182,23 +184,18 @@
       "directoryName": "button",
       "tier": "primitive",
       "functionalCategory": "actions",
-      "description": "The primary interactive control for actions, navigation, and CTAs.",
+      "description": "Standard labelled action button covering primary, secondary, tertiary, and stateful variants.",
       "htmlElement": "button",
       "figmaSources": [
         "Button",
-        "Text Button—Icon Right",
-        "Text Button—Icon Left",
-        "Close Button",
-        "Play Button",
         "Category Button",
-        "Floating Action Button",
         "Floating Action Button with Text",
         "Stateful Action Button"
       ],
       "props": [
         {
           "name": "variant",
-          "type": "'primary' | 'secondary' | 'tertiary' | 'arrow-link' | 'icon-only' | 'floating'",
+          "type": "'primary' | 'secondary' | 'tertiary' | 'stateful'",
           "figmaAxis": "Type",
           "default": "primary",
           "description": "Visual hierarchy — never use color/appearance words"
@@ -211,9 +208,83 @@
           "description": "Size — always a separate prop, never encoded in variant"
         },
         {
+          "name": "state",
+          "type": "'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'",
+          "figmaAxis": "State",
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "name": "IconButton",
+      "directoryName": "icon-button",
+      "tier": "primitive",
+      "functionalCategory": "actions",
+      "description": "Icon-only button with no visible label. Requires an aria-label. Covers close, play, and floating action variants.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Close Button",
+        "Play Button",
+        "Floating Action Button"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "'default' | 'floating' | 'close' | 'play'",
+          "figmaAxis": "Style",
+          "default": "default",
+          "description": "Semantic shape/context of the icon button"
+        },
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        },
+        {
+          "name": "state",
+          "type": "'default' | 'hover' | 'active' | 'disabled'",
+          "figmaAxis": "State",
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "name": "LinkButton",
+      "directoryName": "link-button",
+      "tier": "primitive",
+      "functionalCategory": "actions",
+      "description": "Inline text link with an optional leading or trailing icon. Renders as an anchor or button depending on context.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Text Button—Icon Left",
+        "Text Button—Icon Right"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "'default' | 'arrow-link'",
+          "figmaAxis": "Type",
+          "default": "default"
+        },
+        {
           "name": "iconPosition",
-          "type": "'leading' | 'trailing' | 'only'",
-          "description": "When variant includes an icon"
+          "type": "'leading' | 'trailing'",
+          "figmaAxis": "Type",
+          "default": "trailing",
+          "description": "Leading = icon left, trailing = icon right"
+        },
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        },
+        {
+          "name": "state",
+          "type": "'default' | 'hover' | 'active' | 'disabled'",
+          "figmaAxis": "State",
+          "default": "default"
         }
       ]
     },

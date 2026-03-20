@@ -8,7 +8,7 @@
         "codeValue": "#00042f"
       },
       {
-        "figmaKey": "white",
+        "figmaKey": "Secondary/White",
         "figmaValue": "#ffffff",
         "codeKey": "grey.c100, pureWhite",
         "codeValue": "#ffffff"
@@ -78,6 +78,12 @@
         "figmaValue": "#cc3333",
         "codeKey": "danger.base",
         "codeValue": "#cc3333"
+      },
+      {
+        "figmaKey": "white",
+        "figmaValue": "#ffffff",
+        "codeKey": "grey.c100, pureWhite",
+        "codeValue": "#ffffff"
       },
       {
         "figmaKey": "Secondary/Light Blue 1",

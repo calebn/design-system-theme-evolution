@@ -85,11 +85,11 @@ Semantic variants for status-bearing components:
 ### `scale` — Size
 Always a **separate prop** from `variant`. Never encode size in the variant name.
 
-| Value | Token reference |
-|-------|-----------------|
-| `sm` | `--cc-scale-sm` |
-| `md` | `--cc-scale-md` (default) |
-| `lg` | `--cc-scale-lg` |
+| Value | Typical spacing classes | Theme tokens |
+|-------|-------------------------|:-------------|
+| `sm` | `py-sp6 px-sp12` | `--theme-spacing-sp6`, `--theme-spacing-sp12` |
+| `md` | `py-sp14 px-sp16` (default) | `--theme-spacing-sp14`, `--theme-spacing-sp16` |
+| `lg` | `py-sp20 px-sp48` | `--theme-spacing-sp20`, `--theme-spacing-sp48` |
 
 ---
 
@@ -100,8 +100,12 @@ Map Figma `State=` axis values to these prop values. States are typically intern
 
 ---
 
-### CSS class prefix
-All components use the `cc-` prefix: `cc-button`, `cc-input`, `cc-product-card`.
+### Styling approach
+Components use **Tailwind utility classes** via the `cn()` helper, not component-scoped CSS classes. Always apply `tw-preflight` on the outermost root element to establish a CSS reset boundary.
+
+```tsx
+<div className={cn('tw-preflight', 'flex gap-sp12 bg-primary text-white', className)}>
+```
 
 ## C · Figma Axis → Code Prop Mapping
 
@@ -132,12 +136,12 @@ How Figma property axes translate to React component props.
 
 ### Examples
 
-| Figma Variable | CSS Variable | DTCG Tier |
-|----------------|-------------|-----------|
-| `Primary/Logos Blue` | `--cc-color-brand-primary` | Semantic |
-| `Deep Colors/Green` | `--cc-color-feedback-success` | Semantic |
-| `Spacing | Horizontal/MD` | `--cc-spacing-h-md` | Semantic |
-| `Spacing | In Component/CTA Button | Horizontal` | `--cc-component-button-padding-horizontal` | Component |
+| Figma Variable | CSS Variable (`--theme-*`) | Tailwind Class | DTCG Tier |
+|----------------|---------------------------|----------------|-----------|
+| `Primary/Logos Blue` | `--theme-colors-primary-c300-hex` | `bg-primary`, `text-primary`, `border-primary` | Semantic |
+| `Deep Colors/Green` | `--theme-colors-success-base-hex` | `bg-success`, `text-success` | Semantic |
+| `Spacing \| Horizontal/MD` | `--theme-spacing-sp16` | `px-sp16`, `gap-sp16` | Semantic |
+| `Spacing \| In Component/CTA Button` | `--theme-spacing-sp14` | `py-sp14 px-sp16` | Component |
 
 ## E · Directory Structure
 
@@ -164,79 +168,79 @@ packages/commerce-components/src/components/
 
 Every Figma frame and the code component it maps to.
 
-| Figma Frame | Code Component | Tier | CSS Class | Key Props |
+| Figma Frame | Code Component | Tier | Directory | Key Props |
 |-------------|----------------|------|-----------|-----------|
-| Accordion Section | `Accordion` | Composition | `cc-accordion` | `state`, `variant` |
-| Badges and Tags | `Badge` | Primitive | `cc-badge` | `variant`, `scale` |
-| Basic Form | `BasicForm` | Builder Block | `cc-basic-form` | — |
-| Breadcrumbs | `Breadcrumbs` | Primitive | `cc-breadcrumbs` | `scale` |
-| Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
-| Button group | `ButtonGroup` | Composition | `cc-button-group` | `layout`, `align` |
-| Button Menu | `Menu` | Primitive | `cc-menu` | `variant`, `state` |
-| Carousel Product | `ProductCarousel` | Builder Block | `cc-product-carousel` | `scale` |
-| Category Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
-| Checkbox | `Checkbox` | Primitive | `cc-checkbox` | `state` |
-| Close Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
-| CTA Row | `ButtonGroup` | Composition | `cc-button-group` | `layout`, `align` |
-| Dropdown | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
-| Email Capture | `EmailCapture` | Composition | `cc-email-capture` | `scale`, `state` |
-| Expand-Collapse Button | `Accordion` | Composition | `cc-accordion` | `state`, `variant` |
-| Floating Action Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
-| Floating Action Button with Text | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
-| Form Dropdown | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
-| Form Dropdown Option | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
-| Free Trial Card | `FreeTrialCard` | Composition | `cc-free-trial-card` | — |
+| Accordion Section | `Accordion` | Composition | `accordion/` | `state`, `variant` |
+| Badges and Tags | `Badge` | Primitive | `badge/` | `variant`, `scale` |
+| Basic Form | `BasicForm` | Builder Block | `basic-form/` | — |
+| Breadcrumbs | `Breadcrumbs` | Primitive | `breadcrumbs/` | `scale` |
+| Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| Button group | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
+| Button Menu | `Menu` | Primitive | `menu/` | `variant`, `state` |
+| Carousel Product | `ProductCarousel` | Builder Block | `product-carousel/` | `scale` |
+| Category Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| Checkbox | `Checkbox` | Primitive | `checkbox/` | `state` |
+| Close Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| CTA Row | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
+| Dropdown | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| Email Capture | `EmailCapture` | Composition | `email-capture/` | `scale`, `state` |
+| Expand-Collapse Button | `Accordion` | Composition | `accordion/` | `state`, `variant` |
+| Floating Action Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| Floating Action Button with Text | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| Form Dropdown | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| Form Dropdown Option | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| Free Trial Card | `FreeTrialCard` | Composition | `free-trial-card/` | — |
 | Image Ratios | — | — | — | — |
-| Increase-Decrease Buttons | `Stepper` | Primitive | `cc-stepper` | `variant`, `scale`, `state` |
+| Increase-Decrease Buttons | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
 | List | — | — | — | — |
-| Modal Button Group | `Modal` | Composition | `cc-modal` | `variant` |
-| Modal Dialog | `Modal` | Composition | `cc-modal` | `variant` |
-| Multi-CTA List | `CtaList` | Builder Block | `cc-cta-list` | — |
-| Multi-Select with Text | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Multi-Selector | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Next-Previous Buttons | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
-| Next-Previous Selector | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
-| Play Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
-| Price and Label | `PriceLabel` | Primitive | `cc-price-label` | `variant`, `scale` |
-| Product Content | `ProductDetail` | Composition | `cc-product-detail` | `variant` |
-| Product Grid Card | `ProductCard` | Composition | `cc-product-card` | `scale` |
+| Modal Button Group | `Modal` | Composition | `modal/` | `variant` |
+| Modal Dialog | `Modal` | Composition | `modal/` | `variant` |
+| Multi-CTA List | `CtaList` | Builder Block | `cta-list/` | — |
+| Multi-Select with Text | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Multi-Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Next-Previous Buttons | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| Next-Previous Selector | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| Play Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| Price and Label | `PriceLabel` | Primitive | `price-label/` | `variant`, `scale` |
+| Product Content | `ProductDetail` | Composition | `product-detail/` | `variant` |
+| Product Grid Card | `ProductCard` | Composition | `product-card/` | `scale` |
 | Product Images | — | — | — | — |
-| Product Lineup—Single | `ProductDetail` | Composition | `cc-product-detail` | `variant` |
-| Radio Button | `RadioButton` | Primitive | `cc-radio-button` | `state` |
-| Reviews | `StarRating` | Primitive | `cc-star-rating` | `variant`, `scale` |
-| Sale Percentage | `Badge` | Primitive | `cc-badge` | `variant`, `scale` |
-| Search Field | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |
-| Section Headline | `SectionLayout` | Builder Block | `cc-section-layout` | `variant` |
-| Section Headline with CTA | `SectionLayout` | Builder Block | `cc-section-layout` | `variant` |
-| Simple Menu | `Menu` | Primitive | `cc-menu` | `variant`, `state` |
-| Single Select Box | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Slider | `Slider` | Primitive | `cc-slider` | `state` |
-| Slider page selector | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
-| Slider Scroll Bar | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
-| Star | `StarRating` | Primitive | `cc-star-rating` | `variant`, `scale` |
-| Stateful Action Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
-| Stepper Control | `Stepper` | Primitive | `cc-stepper` | `variant`, `scale`, `state` |
-| Stepper CTA | `Stepper` | Primitive | `cc-stepper` | `variant`, `scale`, `state` |
-| Subnav Dropdown | `SubnavDropdown` | Primitive | `cc-subnav-dropdown` | `variant`, `state` |
-| Subnav Dropdown Options | `SubnavDropdown` | Primitive | `cc-subnav-dropdown` | `variant`, `state` |
-| Switch | `Toggle` | Primitive | `cc-toggle` | `variant`, `state` |
-| Tabbed Selector | `Tabs` | Primitive | `cc-tabs` | `variant`, `scale`, `state` |
-| Tabbed Selector Button | `Tabs` | Primitive | `cc-tabs` | `variant`, `scale`, `state` |
-| Text Button—Icon Left | `LinkButton` | Primitive | `cc-link-button` | `variant`, `iconPosition`, `scale`, `state` |
-| Text Button—Icon Right | `LinkButton` | Primitive | `cc-link-button` | `variant`, `iconPosition`, `scale`, `state` |
-| Text Input (name, two fields) | `TextInputGroup` | Primitive | `cc-text-input-group` | `scale` |
-| Text Input (single line) | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |
-| Text Input—Date | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |
-| Text Input—Multiline | `Textarea` | Primitive | `cc-textarea` | `scale`, `state` |
-| Text Input—Password | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |
-| Text Section | `SectionLayout` | Builder Block | `cc-section-layout` | `variant` |
-| Text Section with Button Group | `SectionLayout` | Builder Block | `cc-section-layout` | `variant` |
-| Text Toggle Selector | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Text Toggle Selector | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Toast Bar | `Toast` | Primitive | `cc-toast` | `variant` |
-| Toggle Switch (text) | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
-| Toggle with Text | `Toggle` | Primitive | `cc-toggle` | `variant`, `state` |
-| Upload Image Area | `FileUpload` | Composition | `cc-file-upload` | `state` |
+| Product Lineup—Single | `ProductDetail` | Composition | `product-detail/` | `variant` |
+| Radio Button | `RadioButton` | Primitive | `radio-button/` | `state` |
+| Reviews | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
+| Sale Percentage | `Badge` | Primitive | `badge/` | `variant`, `scale` |
+| Search Field | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| Section Headline | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| Section Headline with CTA | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| Simple Menu | `Menu` | Primitive | `menu/` | `variant`, `state` |
+| Single Select Box | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Slider | `Slider` | Primitive | `slider/` | `state` |
+| Slider page selector | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| Slider Scroll Bar | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| Star | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
+| Stateful Action Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| Stepper Control | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
+| Stepper CTA | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
+| Subnav Dropdown | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
+| Subnav Dropdown Options | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
+| Switch | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
+| Tabbed Selector | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
+| Tabbed Selector Button | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
+| Text Button—Icon Left | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
+| Text Button—Icon Right | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
+| Text Input (name, two fields) | `TextInputGroup` | Primitive | `text-input-group/` | `scale` |
+| Text Input (single line) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| Text Input—Date | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| Text Input—Multiline | `Textarea` | Primitive | `textarea/` | `scale`, `state` |
+| Text Input—Password | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| Text Section | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| Text Section with Button Group | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| Text Toggle Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Text Toggle Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Toast Bar | `Toast` | Primitive | `toast/` | `variant` |
+| Toggle Switch (text) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| Toggle with Text | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
+| Upload Image Area | `FileUpload` | Composition | `file-upload/` | `state` |
 
 ---
 *Generated by `build-inventory.ts`*

@@ -1,8 +1,8 @@
 # 12 · Component Surface Area
 
-> Proposed public API for each code component: props, CSS custom properties, slots, and accessibility requirements.
+> Proposed public API for each code component: props, Tailwind token usage, slots, and accessibility requirements.
 > This is the **contract** between design system consumers and component authors.
-> All CSS custom properties use the `--cc-` prefix. All class names use the `cc-` prefix.
+> Styling uses **Tailwind utility classes** backed by `@faithlife/commerce-theme` tokens. Underlying CSS variables use the `--theme-*` prefix (e.g. `--theme-colors-primary-c300-hex`). There are no component-scoped CSS custom properties.
 
 ## Reading This Document
 
@@ -14,13 +14,37 @@
 | **Figma Axis** | The Figma property axis this prop maps to |
 | **Description** | What the prop controls |
 
+## Common Conventions
+
+These rules apply to **every** component. They are sourced from
+[`copilot-instructions.md`](../../CommerceComponents/.github/copilot-instructions.md) and
+[`BuilderIoBestPractices.mdx`](../../CommerceComponents/packages/commerce-components/stories/guidelines/BuilderIoBestPractices.mdx).
+
+| Convention | Rule | Enforcement |
+|------------|------|-------------|
+| `tw-preflight` | Must appear on the **outermost root element** via `cn('tw-preflight', ...)`. Establishes a CSS reset boundary so Tailwind classes work in any host page. | Lint: `commerce-theme/require-tw-preflight` (presence); **code review** (placement) |
+| `cn()` utility | All class composition **must** use `cn()` from `../../utils` (combines `clsx` + `tailwind-merge`). Never import `clsx` directly. | Lint: `commerce-theme/no-direct-clsx` |
+| `Typography` | All text **must** use the `Typography` component. Raw `<h1>`–`<h6>` and `<p>` tags are forbidden. Use the `tag` prop when semantic HTML differs from visual style. | Lint: `commerce-theme/no-raw-html-text` |
+| `AmberImage` | Use `AmberImage` instead of `<img>` or `next/image`. Requires `width` and `height` props so the CDN serves the correct size. | Lint: `commerce-theme/no-img-element` |
+| No outer-boundary styling | Components **must not** style their own `width`, `height`, `margin`, or `padding`. Layout is the wrapping component's responsibility. | **Code review** |
+| sp-tokens for spacing | Spacing utilities (`p-*`, `m-*`, `gap-*`) **must** use sp-tokens (e.g. `p-sp16`, `gap-sp8`). Raw numeric (`p-4`) and arbitrary (`mt-[30px]`) spacing are forbidden. | Lint: `commerce-theme/no-numeric-spacing`, `commerce-theme/no-arbitrary-spacing` |
+| sp-tokens for spacing only | sp-tokens **must not** be used for sizing (`w-sp16`, `h-sp24`). Use standard Tailwind sizing (`w-12`, `h-[36px]`) instead. | Lint: `commerce-theme/no-sp-token-misuse` |
+| Font sizes | Use `text-fsXX` tokens (e.g. `text-fs16`) or the `Typography` component. Raw Tailwind font sizes like `text-lg` are forbidden. | Lint: `commerce-theme/no-raw-font-size` |
+| No hardcoded colors | Colors **must** reference theme CSS variables (`var(--theme-colors-*)`) or Tailwind theme classes (`bg-primary`, `text-grey-500`). No hex, rgb, or hsl values. | Lint: `commerce-theme/no-hardcoded-colors` |
+| `motion-reduce:` variants | Every `animate-*` class **must** include a `motion-reduce:` variant (at minimum `motion-reduce:animate-none`) to respect the OS reduced-motion preference. | Lint: `commerce-theme/no-animate-without-reduced-motion` |
+| Named exports only | No default exports. Use named exports for every component and type. | **Code review** |
+| File structure | `component.tsx` — React component (zero `@builder.io/*` imports); `register.tsx` — Builder.io registration; `index.ts` — re-export barrel; sub-components in kebab-case files within the same directory. | Lint: `commerce-theme/builder-registration-in-register-file` (partial) |
+| `BuilderBlocks` for content areas | Editable/extensible sections **must** use `<BuilderBlocks>` with a `defaultValue`. Scalar values, backend IDs, and fixed enums use explicit props. | Lint: `commerce-theme/builder-blocks-require-default-value` |
+| Backend data | Components requiring backend data **must** receive it via `CommerceComponentsContext` or an explicit prop callback — never by calling APIs directly. Storybook stories **must** provide stub implementations. | **Code review** |
+| Variant naming | `variant` describes visual hierarchy (`primary`, `secondary`, `tertiary`); `scale` is always a separate prop for size (`sm`, `md`, `lg`). Surface context: `-inverse` (dark surface), `-brand` (brand surface). No color or appearance words in variant names. | **Code review** |
+
 ## Primitives (21)
 
 ---
 
 ### `Button`
 
-**CSS class:** `cc-button` · **HTML element:** `<button>` · **Category:** Actions
+**HTML element:** `<button>` · **Directory:** `button/` · **Category:** Actions
 
 **Figma sources:** Button, Category Button, Floating Action Button with Text, Stateful Action Button
 
@@ -37,15 +61,14 @@
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-button-bg`
-- `--cc-button-color`
-- `--cc-button-border-color`
-- `--cc-button-border-radius`
-- `--cc-button-padding-x`
-- `--cc-button-padding-y`
-- `--cc-button-font-size`
+- **Colors:** `bg-primary`, `text-white`, `border-primary`, `hover:bg-primary-500`, `text-primary`, `disabled:bg-secondary-200`
+- **Spacing:** `py-sp6`, `py-sp14`, `py-sp20`, `px-sp12`, `px-sp16`, `px-sp48`, `gap-sp12`
+- **Typography:** `buttonTextLg`, `buttonTextSm`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -54,14 +77,47 @@
 - `aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)
 - `aria-pressed` for toggle-style buttons
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Button } from '@faithlife/commerce-components';
 
-<Button variant="primary" scale="md" state="default">
+<Button variant="primary" scale="medium" state="default">
   Add to cart
 </Button>
+
+// inverse variant for dark surfaces
+<Button variant="primary-inverse" scale="medium">Buy now</Button>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Button({ variant = 'primary', scale = 'medium', className, children, ...props }: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        'tw-preflight',
+        'inline-flex items-center justify-center gap-sp12 rounded-[2px]',
+        'transition-colors duration-short motion-reduce:transition-none',
+        // variant and scale class maps live in button-variants.ts
+        variantClasses[variant],
+        scaleClasses[scale],
+        className,
+      )}
+      {...props}
+    >
+      <Typography variant="buttonTextLg" tag="span">{children}</Typography>
+    </button>
+  );
+}
 ```
 
 </details>
@@ -70,7 +126,7 @@ import { Button } from '@faithlife/commerce-components';
 
 ### `IconButton`
 
-**CSS class:** `cc-icon-button` · **HTML element:** `<button>` · **Category:** Actions
+**HTML element:** `<button>` · **Directory:** `icon-button/` · **Category:** Actions
 
 **Figma sources:** Close Button, Play Button, Floating Action Button
 
@@ -87,12 +143,14 @@ import { Button } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-icon-button-size`
-- `--cc-icon-button-bg`
-- `--cc-icon-button-color`
-- `--cc-icon-button-border-radius`
+- **Colors:** `bg-primary`, `text-white`, `bg-transparent`, `text-primary`
+- **Spacing:** `p-sp6`, `p-sp10`, `p-sp14`, `gap-sp8`
+- **Shadows:** `shadow-dp4`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -100,12 +158,43 @@ import { Button } from '@faithlife/commerce-components';
 - `role="button"` (implicit on `<button>`)
 - `aria-disabled` when disabled
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { IconButton } from '@faithlife/commerce-components';
 
-<IconButton variant="close" scale="md" aria-label="Close dialog" />
+// aria-label is required — there is no visible text
+<IconButton variant="close" scale="medium" aria-label="Close dialog" />
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// icon-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function IconButton({ variant = 'default', scale = 'medium', className, children, ...props }: IconButtonProps) {
+  return (
+    <button
+      className={cn(
+        'tw-preflight',
+        'inline-flex items-center justify-center gap-sp12 rounded-[2px]',
+        'transition-colors duration-short motion-reduce:transition-none',
+        // variant and scale class maps live in icon-button-variants.ts
+        variantClasses[variant],
+        scaleClasses[scale],
+        className,
+      )}
+      {...props}
+    >
+      <Typography variant="buttonTextLg" tag="span">{children}</Typography>
+    </button>
+  );
+}
 ```
 
 </details>
@@ -114,7 +203,7 @@ import { IconButton } from '@faithlife/commerce-components';
 
 ### `LinkButton`
 
-**CSS class:** `cc-link-button` · **HTML element:** `<button>` · **Category:** Actions
+**HTML element:** `<button>` · **Directory:** `link-button/` · **Category:** Actions
 
 **Figma sources:** Text Button—Icon Left, Text Button—Icon Right
 
@@ -132,11 +221,14 @@ import { IconButton } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-link-button-color`
-- `--cc-link-button-color-hover`
-- `--cc-link-button-gap`
+- **Colors:** `text-primary`, `hover:text-primary-500`, `text-white`
+- **Spacing:** `gap-sp6`, `gap-sp8`
+- **Typography:** `buttonTextLg`, `buttonTextSm`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -144,12 +236,43 @@ import { IconButton } from '@faithlife/commerce-components';
 - If rendered as `<a>`, must have `href`
 - `aria-current="page"` when marking active link
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { LinkButton } from '@faithlife/commerce-components';
 
 <LinkButton iconPosition="trailing">Learn more</LinkButton>
+<LinkButton variant="arrow-link" iconPosition="trailing">Shop all</LinkButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// link-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function LinkButton({ variant = 'default', scale = 'medium', className, children, ...props }: LinkButtonProps) {
+  return (
+    <button
+      className={cn(
+        'tw-preflight',
+        'inline-flex items-center justify-center gap-sp12 rounded-[2px]',
+        'transition-colors duration-short motion-reduce:transition-none',
+        // variant and scale class maps live in link-button-variants.ts
+        variantClasses[variant],
+        scaleClasses[scale],
+        className,
+      )}
+      {...props}
+    >
+      <Typography variant="buttonTextLg" tag="span">{children}</Typography>
+    </button>
+  );
+}
 ```
 
 </details>
@@ -158,7 +281,7 @@ import { LinkButton } from '@faithlife/commerce-components';
 
 ### `Input`
 
-**CSS class:** `cc-input` · **HTML element:** `<input>` · **Category:** Data Entry
+**HTML element:** `<input>` · **Directory:** `input/` · **Category:** Data Entry
 
 **Figma sources:** Text Input (single line), Text Input—Date, Text Input—Password, Search Field
 
@@ -175,14 +298,14 @@ import { LinkButton } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-input-border-color`
-- `--cc-input-border-radius`
-- `--cc-input-bg`
-- `--cc-input-color`
-- `--cc-input-placeholder-color`
-- `--cc-input-focus-ring-color`
+- **Colors:** `border-primary`, `bg-white`, `text-primary`, `border-secondary-200`, `focus:border-primary`
+- **Spacing:** `py-sp8`, `py-sp12`, `px-sp12`, `px-sp16`, `gap-sp8`
+- **Typography:** `text-fs16`, `text-fs14`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -191,12 +314,32 @@ import { LinkButton } from '@faithlife/commerce-components';
 - `aria-invalid` + `aria-describedby` on error
 - `autocomplete` attribute for common fields
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Input } from '@faithlife/commerce-components';
 
-<Input type="text" scale="md" placeholder="Search..." />
+<Input type="text" scale="medium" placeholder="Search..." />
+<Input type="email" scale="medium" state="error" />
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// input/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Input({ variant = 'text', className, children, ...props }: InputProps) {
+  return (
+    <input className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </input>
+  );
+}
 ```
 
 </details>
@@ -205,7 +348,7 @@ import { Input } from '@faithlife/commerce-components';
 
 ### `Textarea`
 
-**CSS class:** `cc-textarea` · **HTML element:** `<textarea>` · **Category:** Data Entry
+**HTML element:** `<textarea>` · **Directory:** `textarea/` · **Category:** Data Entry
 
 **Figma sources:** Text Input—Multiline
 
@@ -227,7 +370,7 @@ import { Input } from '@faithlife/commerce-components';
 - `aria-required` when required
 - `aria-invalid` + `aria-describedby` on error
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Textarea } from '@faithlife/commerce-components';
@@ -237,11 +380,30 @@ import { Textarea } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// textarea/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Textarea({ variant = 'md', className, children, ...props }: TextareaProps) {
+  return (
+    <textarea className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </textarea>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `TextInputGroup`
 
-**CSS class:** `cc-text-input-group` · **HTML element:** `<div>` · **Category:** Data Entry
+**HTML element:** `<div>` · **Directory:** `text-input-group/` · **Category:** Data Entry
 
 **Figma sources:** Text Input (name, two fields)
 
@@ -256,7 +418,7 @@ import { Textarea } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { TextInputGroup } from '@faithlife/commerce-components';
@@ -266,11 +428,30 @@ import { TextInputGroup } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// text-input-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function TextInputGroup({ variant = 'md', className, children, ...props }: TextInputGroupProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Select`
 
-**CSS class:** `cc-select` · **HTML element:** `<select>` · **Category:** Data Entry
+**HTML element:** `<select>` · **Directory:** `select/` · **Category:** Data Entry
 
 **Figma sources:** Dropdown, Form Dropdown, Form Dropdown Option
 
@@ -287,12 +468,14 @@ import { TextInputGroup } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-select-border-color`
-- `--cc-select-border-radius`
-- `--cc-select-bg`
-- `--cc-select-color`
+- **Colors:** `border-primary`, `bg-white`, `text-primary`, `border-secondary-200`
+- **Spacing:** `py-sp8`, `py-sp12`, `px-sp12`, `px-sp16`
+- **Typography:** `text-fs16`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -300,7 +483,7 @@ import { TextInputGroup } from '@faithlife/commerce-components';
 - `aria-required` when required
 - `aria-expanded` when open
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Select } from '@faithlife/commerce-components';
@@ -310,11 +493,30 @@ import { Select } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// select/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Select({ variant = 'default', className, children, ...props }: SelectProps) {
+  return (
+    <select className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </select>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Checkbox`
 
-**CSS class:** `cc-checkbox` · **HTML element:** `<input[type=checkbox]>` · **Category:** Data Entry
+**HTML element:** `<input[type=checkbox]>` · **Directory:** `checkbox/` · **Category:** Data Entry
 
 **Figma sources:** Checkbox
 
@@ -329,12 +531,14 @@ import { Select } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-checkbox-size`
-- `--cc-checkbox-border-color`
-- `--cc-checkbox-checked-bg`
-- `--cc-checkbox-checked-color`
+- **Colors:** `border-primary`, `bg-primary`, `text-white`, `border-secondary-200`
+- **Spacing:** `gap-sp8`, `gap-sp12`
+- **Typography:** `text-fs14`, `text-fs16`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -342,7 +546,7 @@ import { Select } from '@faithlife/commerce-components';
 - `aria-checked` for indeterminate state
 - `aria-required` when required
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Checkbox } from '@faithlife/commerce-components';
@@ -352,11 +556,30 @@ import { Checkbox } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// checkbox/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Checkbox({ variant = 'default', className, children, ...props }: CheckboxProps) {
+  return (
+    <input[type=checkbox] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </input[type=checkbox]>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `RadioButton`
 
-**CSS class:** `cc-radio-button` · **HTML element:** `<input[type=radio]>` · **Category:** Data Entry
+**HTML element:** `<input[type=radio]>` · **Directory:** `radio-button/` · **Category:** Data Entry
 
 **Figma sources:** Radio Button
 
@@ -371,18 +594,21 @@ import { Checkbox } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-radio-size`
-- `--cc-radio-border-color`
-- `--cc-radio-checked-color`
+- **Colors:** `border-primary`, `bg-primary`, `text-primary`, `border-secondary-200`
+- **Spacing:** `gap-sp8`, `gap-sp12`
+- **Typography:** `text-fs14`, `text-fs16`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
 - `<fieldset>` + `<legend>` wrapping radio groups
 - `aria-required` on group
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { RadioButton } from '@faithlife/commerce-components';
@@ -392,11 +618,30 @@ import { RadioButton } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// radio-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function RadioButton({ variant = 'default', className, children, ...props }: RadioButtonProps) {
+  return (
+    <input[type=radio] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </input[type=radio]>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Toggle`
 
-**CSS class:** `cc-toggle` · **HTML element:** `<input[type=checkbox]>` · **Category:** Selection & Controls
+**HTML element:** `<input[type=checkbox]>` · **Directory:** `toggle/` · **Category:** Selection & Controls
 
 **Figma sources:** Switch, Toggle with Text
 
@@ -412,19 +657,20 @@ import { RadioButton } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-toggle-track-bg`
-- `--cc-toggle-thumb-bg`
-- `--cc-toggle-checked-track-bg`
-- `--cc-toggle-size`
+- **Colors:** `bg-secondary-200`, `bg-primary`, `text-white`
+- **Spacing:** `gap-sp8`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
 - `role="switch"` with `aria-checked`
 - `aria-label` describing what is toggled
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Toggle } from '@faithlife/commerce-components';
@@ -434,11 +680,30 @@ import { Toggle } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// toggle/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Toggle({ variant = 'default', className, children, ...props }: ToggleProps) {
+  return (
+    <input[type=checkbox] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </input[type=checkbox]>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Slider`
 
-**CSS class:** `cc-slider` · **HTML element:** `<input[type=range]>` · **Category:** Data Entry
+**HTML element:** `<input[type=range]>` · **Directory:** `slider/` · **Category:** Data Entry
 
 **Figma sources:** Slider
 
@@ -458,7 +723,7 @@ import { Toggle } from '@faithlife/commerce-components';
 - `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
 - `aria-label` or `<label>`
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Slider } from '@faithlife/commerce-components';
@@ -468,11 +733,30 @@ import { Slider } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// slider/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Slider({ variant = 'default', className, children, ...props }: SliderProps) {
+  return (
+    <input[type=range] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </input[type=range]>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Badge`
 
-**CSS class:** `cc-badge` · **HTML element:** `<span>` · **Category:** Data Display
+**HTML element:** `<span>` · **Directory:** `badge/` · **Category:** Data Display
 
 **Figma sources:** Badges and Tags, Sale Percentage
 
@@ -488,19 +772,20 @@ import { Slider } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-badge-bg`
-- `--cc-badge-color`
-- `--cc-badge-border-radius`
-- `--cc-badge-font-size`
+- **Colors:** `bg-primary`, `text-white`, `bg-secondary-100`, `text-primary`, `bg-success`, `bg-warning`, `bg-danger`
+- **Spacing:** `py-sp2`, `py-sp4`, `px-sp8`, `px-sp12`
+- **Typography:** `text-fs12`, `text-fs14`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
 - `role="status"` if dynamic
 - `aria-label` for icon-only badges
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Badge } from '@faithlife/commerce-components';
@@ -510,11 +795,30 @@ import { Badge } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// badge/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Badge({ variant = 'default', className, children, ...props }: BadgeProps) {
+  return (
+    <span className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </span>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `StarRating`
 
-**CSS class:** `cc-star-rating` · **HTML element:** `<div>` · **Category:** Data Display
+**HTML element:** `<div>` · **Directory:** `star-rating/` · **Category:** Data Display
 
 **Figma sources:** Star, Reviews
 
@@ -535,7 +839,7 @@ import { Badge } from '@faithlife/commerce-components';
 - `role="img"` with `aria-label` for display-only
 - `role="radiogroup"` for interactive rating
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { StarRating } from '@faithlife/commerce-components';
@@ -545,11 +849,30 @@ import { StarRating } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// star-rating/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function StarRating({ variant = 'star', className, children, ...props }: StarRatingProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `PriceLabel`
 
-**CSS class:** `cc-price-label` · **HTML element:** `<span>` · **Category:** Data Display
+**HTML element:** `<span>` · **Directory:** `price-label/` · **Category:** Data Display
 
 **Figma sources:** Price and Label
 
@@ -565,7 +888,7 @@ import { StarRating } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { PriceLabel } from '@faithlife/commerce-components';
@@ -575,11 +898,30 @@ import { PriceLabel } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// price-label/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function PriceLabel({ variant = 'default', className, children, ...props }: PriceLabelProps) {
+  return (
+    <span className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </span>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Breadcrumbs`
 
-**CSS class:** `cc-breadcrumbs` · **HTML element:** `<nav>` · **Category:** Navigation
+**HTML element:** `<nav>` · **Directory:** `breadcrumbs/` · **Category:** Navigation
 
 **Figma sources:** Breadcrumbs
 
@@ -599,7 +941,7 @@ import { PriceLabel } from '@faithlife/commerce-components';
 - `<nav aria-label="Breadcrumb">`
 - `aria-current="page"` on last item
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Breadcrumbs } from '@faithlife/commerce-components';
@@ -609,11 +951,30 @@ import { Breadcrumbs } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// breadcrumbs/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Breadcrumbs({ variant = 'md', className, children, ...props }: BreadcrumbsProps) {
+  return (
+    <nav className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </nav>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Menu`
 
-**CSS class:** `cc-menu` · **HTML element:** `<nav>` · **Category:** Navigation
+**HTML element:** `<nav>` · **Directory:** `menu/` · **Category:** Navigation
 
 **Figma sources:** Simple Menu, Button Menu
 
@@ -635,7 +996,7 @@ import { Breadcrumbs } from '@faithlife/commerce-components';
 - `aria-expanded` on trigger
 - `aria-haspopup` on trigger
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Menu } from '@faithlife/commerce-components';
@@ -645,11 +1006,30 @@ import { Menu } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// menu/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Menu({ variant = 'simple', className, children, ...props }: MenuProps) {
+  return (
+    <nav className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </nav>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Tabs`
 
-**CSS class:** `cc-tabs` · **HTML element:** `<div>` · **Category:** Navigation
+**HTML element:** `<div>` · **Directory:** `tabs/` · **Category:** Navigation
 
 **Figma sources:** Tabbed Selector, Tabbed Selector Button
 
@@ -666,11 +1046,14 @@ import { Menu } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-tabs-border-color`
-- `--cc-tab-active-color`
-- `--cc-tab-active-border-color`
+- **Colors:** `text-primary`, `border-primary`, `text-secondary-400`, `border-transparent`
+- **Spacing:** `py-sp12`, `px-sp16`, `gap-sp8`
+- **Typography:** `text-fs14`, `text-fs16`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -678,7 +1061,7 @@ import { Menu } from '@faithlife/commerce-components';
 - `aria-selected` on active tab
 - `aria-controls` linking tab to panel
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Tabs } from '@faithlife/commerce-components';
@@ -688,11 +1071,30 @@ import { Tabs } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// tabs/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Tabs({ variant = 'container', className, children, ...props }: TabsProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `SubnavDropdown`
 
-**CSS class:** `cc-subnav-dropdown` · **HTML element:** `<nav>` · **Category:** Navigation
+**HTML element:** `<nav>` · **Directory:** `subnav-dropdown/` · **Category:** Navigation
 
 **Figma sources:** Subnav Dropdown, Subnav Dropdown Options
 
@@ -708,7 +1110,7 @@ import { Tabs } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { SubnavDropdown } from '@faithlife/commerce-components';
@@ -718,11 +1120,30 @@ import { SubnavDropdown } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// subnav-dropdown/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function SubnavDropdown({ variant = 'trigger', className, children, ...props }: SubnavDropdownProps) {
+  return (
+    <nav className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </nav>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Stepper`
 
-**CSS class:** `cc-stepper` · **HTML element:** `<div>` · **Category:** Selection & Controls
+**HTML element:** `<div>` · **Directory:** `stepper/` · **Category:** Selection & Controls
 
 **Figma sources:** Stepper CTA, Stepper Control, Increase-Decrease Buttons
 
@@ -744,7 +1165,7 @@ import { SubnavDropdown } from '@faithlife/commerce-components';
 - `aria-label` on increment/decrement buttons
 - `aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Stepper } from '@faithlife/commerce-components';
@@ -754,11 +1175,30 @@ import { Stepper } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// stepper/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Stepper({ variant = 'control', className, children, ...props }: StepperProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Pagination`
 
-**CSS class:** `cc-pagination` · **HTML element:** `<nav>` · **Category:** Selection & Controls
+**HTML element:** `<nav>` · **Directory:** `pagination/` · **Category:** Selection & Controls
 
 **Figma sources:** Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar
 
@@ -775,10 +1215,14 @@ import { Stepper } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-pagination-gap`
-- `--cc-pagination-button-size`
+- **Colors:** `text-primary`, `bg-primary`, `text-white`, `bg-transparent`
+- **Spacing:** `gap-sp8`, `p-sp8`, `p-sp12`
+- **Typography:** `text-fs14`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -786,7 +1230,7 @@ import { Stepper } from '@faithlife/commerce-components';
 - `aria-current="page"` on current page
 - `aria-label` on prev/next buttons
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Pagination } from '@faithlife/commerce-components';
@@ -796,11 +1240,30 @@ import { Pagination } from '@faithlife/commerce-components';
 
 </details>
 
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// pagination/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Pagination({ variant = 'buttons', className, children, ...props }: PaginationProps) {
+  return (
+    <nav className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </nav>
+  );
+}
+```
+
+</details>
+
 ---
 
 ### `Toast`
 
-**CSS class:** `cc-toast` · **HTML element:** `<output>` · **Category:** Feedback & Overlays
+**HTML element:** `<output>` · **Directory:** `toast/` · **Category:** Feedback & Overlays
 
 **Figma sources:** Toast Bar
 
@@ -815,11 +1278,15 @@ import { Pagination } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-toast-bg`
-- `--cc-toast-color`
-- `--cc-toast-border-radius`
+- **Colors:** `bg-primary`, `bg-success`, `bg-danger`, `bg-warning`, `text-white`
+- **Spacing:** `py-sp12`, `px-sp16`, `gap-sp8`
+- **Typography:** `text-fs14`
+- **Shadows:** `shadow-dp4`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -827,12 +1294,31 @@ import { Pagination } from '@faithlife/commerce-components';
 - `aria-live="polite"` for non-urgent
 - `aria-live="assertive"` for urgent
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Toast } from '@faithlife/commerce-components';
 
 <Toast variant="info">{/* content */}</Toast>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// toast/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function Toast({ variant = 'info', className, children, ...props }: ToastProps) {
+  return (
+    <output className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </output>
+  );
+}
 ```
 
 </details>
@@ -843,7 +1329,7 @@ import { Toast } from '@faithlife/commerce-components';
 
 ### `Modal`
 
-**CSS class:** `cc-modal` · **HTML element:** `<dialog>` · **Category:** Feedback & Overlays
+**HTML element:** `<dialog>` · **Directory:** `modal/` · **Category:** Feedback & Overlays
 
 **Figma sources:** Modal Dialog, Modal Button Group
 
@@ -858,12 +1344,14 @@ import { Toast } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-modal-bg`
-- `--cc-modal-max-width`
-- `--cc-modal-border-radius`
-- `--cc-modal-overlay-bg`
+- **Colors:** `bg-white`, `bg-black/50`
+- **Spacing:** `p-sp24`, `p-sp32`, `gap-sp16`
+- **Shadows:** `shadow-dp24`
+- **Transitions:** `duration-short`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -878,14 +1366,35 @@ import { Toast } from '@faithlife/commerce-components';
 - `title` — modal heading (required for accessibility)
 - `footerActions` — action buttons rendered in the footer
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
-import { Modal } from '@faithlife/commerce-components';
+import { Modal, Button } from '@faithlife/commerce-components';
 
-<Modal title="Confirm purchase" footerActions={<Button>Confirm</Button>}>
-  Are you sure you want to purchase this item?
+<Modal title="Confirm purchase" footerActions={<Button variant="primary">Confirm</Button>}>
+  <Typography variant="bodyMd">Are you sure you want to purchase this item?</Typography>
 </Modal>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// modal/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function Modal({ title, content, ...props }: ModalProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -894,7 +1403,7 @@ import { Modal } from '@faithlife/commerce-components';
 
 ### `Accordion`
 
-**CSS class:** `cc-accordion` · **HTML element:** `<details>` · **Category:** Content Layout
+**HTML element:** `<details>` · **Directory:** `accordion/` · **Category:** Content Layout
 
 **Figma sources:** Accordion Section, Expand-Collapse Button
 
@@ -910,11 +1419,14 @@ import { Modal } from '@faithlife/commerce-components';
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
-**CSS custom properties:**
+**Tailwind token usage:**
 
-- `--cc-accordion-border-color`
-- `--cc-accordion-padding`
-- `--cc-accordion-trigger-color`
+- **Colors:** `text-primary`, `border-secondary-200`
+- **Spacing:** `py-sp16`, `px-sp16`, `gap-sp8`
+- **Typography:** `text-fs16`
+- **Transitions:** `duration-short`, `animate-radixAccordionItemSlideDown`
+
+> Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
 
 **Accessibility requirements:**
 
@@ -928,12 +1440,35 @@ import { Modal } from '@faithlife/commerce-components';
 - `trigger` — the clickable header row
 - `children` — the expandable panel content
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { Accordion } from '@faithlife/commerce-components';
 
-<Accordion state="collapsed">{/* content */}</Accordion>
+<Accordion state="collapsed">
+  {/* BuilderBlocks renders editable content here */}
+</Accordion>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// accordion/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function Accordion({ title, content, ...props }: AccordionProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -942,7 +1477,7 @@ import { Accordion } from '@faithlife/commerce-components';
 
 ### `EmailCapture`
 
-**CSS class:** `cc-email-capture` · **HTML element:** `<form>` · **Category:** Data Entry
+**HTML element:** `<form>` · **Directory:** `email-capture/` · **Category:** Data Entry
 
 **Figma sources:** Email Capture
 
@@ -962,12 +1497,35 @@ import { Accordion } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { EmailCapture } from '@faithlife/commerce-components';
 
-<EmailCapture scale="md">{/* content */}</EmailCapture>
+<EmailCapture scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</EmailCapture>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// email-capture/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function EmailCapture({ title, content, ...props }: EmailCaptureProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -976,7 +1534,7 @@ import { EmailCapture } from '@faithlife/commerce-components';
 
 ### `FileUpload`
 
-**CSS class:** `cc-file-upload` · **HTML element:** `<input[type=file]>` · **Category:** Data Entry
+**HTML element:** `<input[type=file]>` · **Directory:** `file-upload/` · **Category:** Data Entry
 
 **Figma sources:** Upload Image Area
 
@@ -995,12 +1553,35 @@ import { EmailCapture } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { FileUpload } from '@faithlife/commerce-components';
 
-<FileUpload state="default">{/* content */}</FileUpload>
+<FileUpload state="default">
+  {/* BuilderBlocks renders editable content here */}
+</FileUpload>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// file-upload/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FileUpload({ title, content, ...props }: FileUploadProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1009,7 +1590,7 @@ import { FileUpload } from '@faithlife/commerce-components';
 
 ### `SelectionGroup`
 
-**CSS class:** `cc-selection-group` · **HTML element:** `<div>` · **Category:** Selection & Controls
+**HTML element:** `<div>` · **Directory:** `selection-group/` · **Category:** Selection & Controls
 
 **Figma sources:** Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box
 
@@ -1030,12 +1611,35 @@ import { FileUpload } from '@faithlife/commerce-components';
 - `children` — primary content area
 - `children` — `Checkbox`, `RadioButton`, or `Toggle` elements
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { SelectionGroup } from '@faithlife/commerce-components';
 
-<SelectionGroup type="toggle">{/* content */}</SelectionGroup>
+<SelectionGroup type="toggle">
+  {/* BuilderBlocks renders editable content here */}
+</SelectionGroup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// selection-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function SelectionGroup({ title, content, ...props }: SelectionGroupProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1044,7 +1648,7 @@ import { SelectionGroup } from '@faithlife/commerce-components';
 
 ### `ButtonGroup`
 
-**CSS class:** `cc-button-group` · **HTML element:** `<div>` · **Category:** Actions
+**HTML element:** `<div>` · **Directory:** `button-group/` · **Category:** Actions
 
 **Figma sources:** Button group, CTA Row
 
@@ -1065,12 +1669,35 @@ import { SelectionGroup } from '@faithlife/commerce-components';
 - `children` — primary content area
 - `children` — `Button`, `LinkButton`, or `IconButton` elements
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { ButtonGroup } from '@faithlife/commerce-components';
 
-<ButtonGroup layout="horizontal">{/* content */}</ButtonGroup>
+<ButtonGroup layout="horizontal">
+  {/* BuilderBlocks renders editable content here */}
+</ButtonGroup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// button-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function ButtonGroup({ title, content, ...props }: ButtonGroupProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1079,7 +1706,7 @@ import { ButtonGroup } from '@faithlife/commerce-components';
 
 ### `ProductCard`
 
-**CSS class:** `cc-product-card` · **HTML element:** `<article>` · **Category:** Product
+**HTML element:** `<article>` · **Directory:** `product-card/` · **Category:** Product
 
 **Figma sources:** Product Grid Card
 
@@ -1098,12 +1725,35 @@ import { ButtonGroup } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { ProductCard } from '@faithlife/commerce-components';
 
-<ProductCard scale="md">{/* content */}</ProductCard>
+<ProductCard scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</ProductCard>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// product-card/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function ProductCard({ title, content, ...props }: ProductCardProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1112,7 +1762,7 @@ import { ProductCard } from '@faithlife/commerce-components';
 
 ### `ProductDetail`
 
-**CSS class:** `cc-product-detail` · **HTML element:** `<article>` · **Category:** Product
+**HTML element:** `<article>` · **Directory:** `product-detail/` · **Category:** Product
 
 **Figma sources:** Product Content, Product Lineup—Single
 
@@ -1131,12 +1781,35 @@ import { ProductCard } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { ProductDetail } from '@faithlife/commerce-components';
 
-<ProductDetail variant="full">{/* content */}</ProductDetail>
+<ProductDetail variant="full">
+  {/* BuilderBlocks renders editable content here */}
+</ProductDetail>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// product-detail/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function ProductDetail({ title, content, ...props }: ProductDetailProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1145,7 +1818,7 @@ import { ProductDetail } from '@faithlife/commerce-components';
 
 ### `FreeTrialCard`
 
-**CSS class:** `cc-free-trial-card` · **HTML element:** `<article>` · **Category:** Product
+**HTML element:** `<article>` · **Directory:** `free-trial-card/` · **Category:** Product
 
 **Figma sources:** Free Trial Card
 
@@ -1156,12 +1829,35 @@ import { ProductDetail } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { FreeTrialCard } from '@faithlife/commerce-components';
 
-<FreeTrialCard>{/* content */}</FreeTrialCard>
+<FreeTrialCard>
+  {/* BuilderBlocks renders editable content here */}
+</FreeTrialCard>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// free-trial-card/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FreeTrialCard({ title, content, ...props }: FreeTrialCardProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1172,7 +1868,7 @@ import { FreeTrialCard } from '@faithlife/commerce-components';
 
 ### `SectionLayout`
 
-**CSS class:** `cc-section-layout` · **HTML element:** `<section>` · **Category:** Content Layout
+**HTML element:** `<section>` · **Directory:** `section-layout/` · **Category:** Content Layout
 
 **Figma sources:** Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group
 
@@ -1191,12 +1887,33 @@ import { FreeTrialCard } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { SectionLayout } from '@faithlife/commerce-components';
 
-<SectionLayout variant="headline-only">{/* content */}</SectionLayout>
+<SectionLayout variant="headline-only">
+  {/* BuilderBlocks renders editable content here */}
+</SectionLayout>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// section-layout/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function SectionLayout({ variant = 'headline-only', className, children, ...props }: SectionLayoutProps) {
+  return (
+    <section className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1205,7 +1922,7 @@ import { SectionLayout } from '@faithlife/commerce-components';
 
 ### `ProductCarousel`
 
-**CSS class:** `cc-product-carousel` · **HTML element:** `<section>` · **Category:** Product
+**HTML element:** `<section>` · **Directory:** `product-carousel/` · **Category:** Product
 
 **Figma sources:** Carousel Product
 
@@ -1224,12 +1941,33 @@ import { SectionLayout } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { ProductCarousel } from '@faithlife/commerce-components';
 
-<ProductCarousel scale="md">{/* content */}</ProductCarousel>
+<ProductCarousel scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</ProductCarousel>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// product-carousel/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function ProductCarousel({ variant = 'md', className, children, ...props }: ProductCarouselProps) {
+  return (
+    <section className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </section>
+  );
+}
 ```
 
 </details>
@@ -1238,7 +1976,7 @@ import { ProductCarousel } from '@faithlife/commerce-components';
 
 ### `CtaList`
 
-**CSS class:** `cc-cta-list` · **HTML element:** `<ul>` · **Category:** Product
+**HTML element:** `<ul>` · **Directory:** `cta-list/` · **Category:** Product
 
 **Figma sources:** Multi-CTA List
 
@@ -1249,12 +1987,33 @@ import { ProductCarousel } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { CtaList } from '@faithlife/commerce-components';
 
-<CtaList>{/* content */}</CtaList>
+<CtaList>
+  {/* BuilderBlocks renders editable content here */}
+</CtaList>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// cta-list/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function CtaList({ variant = 'default', className, children, ...props }: CtaListProps) {
+  return (
+    <ul className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </ul>
+  );
+}
 ```
 
 </details>
@@ -1263,7 +2022,7 @@ import { CtaList } from '@faithlife/commerce-components';
 
 ### `BasicForm`
 
-**CSS class:** `cc-basic-form` · **HTML element:** `<form>` · **Category:** Data Entry
+**HTML element:** `<form>` · **Directory:** `basic-form/` · **Category:** Data Entry
 
 **Figma sources:** Basic Form
 
@@ -1274,12 +2033,33 @@ import { CtaList } from '@faithlife/commerce-components';
 
 - `children` — primary content area
 
-<details><summary>Usage example</summary>
+<details><summary>Consumer usage</summary>
 
 ```tsx
 import { BasicForm } from '@faithlife/commerce-components';
 
-<BasicForm>{/* content */}</BasicForm>
+<BasicForm>
+  {/* BuilderBlocks renders editable content here */}
+</BasicForm>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// basic-form/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function BasicForm({ variant = 'default', className, children, ...props }: BasicFormProps) {
+  return (
+    <form className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </form>
+  );
+}
 ```
 
 </details>

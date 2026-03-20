@@ -1,0 +1,35 @@
+{
+  "_note": "Curated consolidation guidance. Keys are 'ComponentA|||ComponentB' (exact names). Values replace the algorithmic reason in doc 05. Edit freely — this file persists across pipeline re-runs.",
+
+  "Text Button—Icon Left|||Text Button—Icon Right": "Merge into a single LinkButton component with an iconPosition prop ('leading' | 'trailing'). The only structural difference is icon placement — not a meaningful component boundary.",
+
+  "Floating Action Button|||Floating Action Button with Text": "Merge into a single IconButton or Button component using a variant='floating' prop. The text-label variant is additive (children prop), not a separate component.",
+
+  "Close Button|||Floating Action Button": "Both are icon-only buttons. Merge into IconButton with variant='close' | 'floating'. Close Button is contextually constrained (always inside a container), but the implementation is the same primitive.",
+
+  "Close Button|||Play Button": "Both are icon-only buttons. Merge into IconButton. Semantic intent differs (dismiss vs. media control), but the API is identical: icon, scale, state, aria-label.",
+
+  "Slider Scroll Bar|||Slider": "Merge into a single Slider component. Slider Scroll Bar is a visual variant (appears inside a carousel), not a distinct interaction pattern. Use a variant prop to differentiate.",
+
+  "Next-Previous Selector|||Slider page selector": "Slider page selector is a composition of Next-Previous Selector + Slider Scroll Bar. Keep them separate but ensure Next-Previous Selector is built as a standalone primitive first.",
+
+  "Stepper Control|||Stepper CTA": "Both map to the Stepper code component. Stepper CTA is the full quantity-selector (increment/decrement + display), Stepper Control is the bare control. Use a variant='cta' | 'control' prop.",
+
+  "Subnav Dropdown Options|||Subnav Dropdown": "SubnavDropdown options is the interior item list — it is a sub-component of SubnavDropdown, not a standalone component. Remove from the inventory as a top-level component.",
+
+  "Modal Button Group|||Modal Dialog": "Modal Button Group is an internal slot inside Modal Dialog, not a standalone primitive. Remove as a top-level component; expose it as a named slot (footerActions) on the Modal component.",
+
+  "Multi-CTA List|||Multi-Selector": "Different purposes despite the 'Multi' stem. Multi-CTA List is a layout component (list of CTAs), Multi-Selector is a form control (multi-select). Keep separate.",
+
+  "Text Input (single line)|||Text Input (name, two fields)": "Text Input (name, two fields) is a composition of two Text Input fields with a specific two-column layout. Map to TextInputGroup (a thin wrapper), not to the base Input primitive.",
+
+  "Tabbed Selector Button|||Tabbed Selector": "Tabbed Selector Button is the individual tab item; Tabbed Selector is the container. Keep as one Tabs component: the button is an internal child, not a separate exported component.",
+
+  "Badges and Tags|||Sale Percentage": "Merge into a single Badge component. Sale Percentage is a commerce-specific badge variant (use variant='sale'). Both are display-only spans with a label.",
+
+  "Toggle with Text|||Toggle Switch (text)": "Merge into a single Toggle component. 'With Text' describes the label presence — make it a children prop, not a separate component.",
+
+  "Button Menu|||Button group": "Different components despite the 'Button' stem. Button Menu is a navigation dropdown (nav element); ButtonGroup is a layout wrapper for action buttons. Keep separate.",
+
+  "Multi-CTA List|||Multi-Select with Text": "Unrelated despite the 'Multi' stem. Multi-CTA List is a content layout block; Multi-Select with Text is a form control. Keep separate."
+}

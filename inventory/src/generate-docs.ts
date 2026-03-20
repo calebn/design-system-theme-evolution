@@ -74,6 +74,11 @@ function colorSwatch(hex?: string): string {
   return `![](https://placehold.co/12x12/${clean}/${clean}.png) `;
 }
 
+// Escape pipe characters in Figma token names so they don't break markdown tables
+function escPipe(s: string): string {
+  return s.replace(/\|/g, '\\|');
+}
+
 function matchStatus(figmaKey: string, gapColors: GapAnalysis['colors']): string {
   if (gapColors.matched.some((e) => e.figmaKey === figmaKey)) return '✅ Matched';
   if (gapColors.figmaOnly.some((e) => e.figmaKey === figmaKey)) return '⚠️ Figma-only';
@@ -125,6 +130,8 @@ const DEPENDENCY_MAP: Record<string, string[]> = {
   'Product Lineup—Single': ['Button', 'Stepper CTA', 'Reviews', 'Badges and Tags', 'Price and Label'],
   'Subnav Dropdown': ['Subnav Dropdown Options'],
   'Button': [],
+  'IconButton': [],
+  'LinkButton': [],
   'Text Button—Icon Right': [],
   'Text Button—Icon Left': [],
   'Close Button': [],
@@ -165,18 +172,48 @@ function buildDependencyWeight(): Map<string, number> {
 interface ConsolidationCandidate {
   compA: string;
   compB: string;
+  sharedAxes: string[];
+  axisOverlap: number; // 0-1 fraction of shared axes
+  valueOverlap: number; // 0-1 fraction of shared axis values
+  sameCodeComponent: boolean;
   reason: string;
 }
 
-function detectConsolidationCandidates(components: FigmaComponent[]): ConsolidationCandidate[] {
+function variantValueOverlap(a: FigmaComponent, b: FigmaComponent, sharedAxes: string[]): number {
+  if (sharedAxes.length === 0) return 0;
+  let totalSharedValues = 0;
+  let totalUnionValues = 0;
+  for (const ax of sharedAxes) {
+    const aVals = new Set(a.properties[ax] ?? []);
+    const bVals = new Set(b.properties[ax] ?? []);
+    const union = new Set([...aVals, ...bVals]);
+    const intersection = [...aVals].filter((v) => bVals.has(v));
+    totalSharedValues += intersection.length;
+    totalUnionValues += union.size;
+  }
+  return totalUnionValues > 0 ? totalSharedValues / totalUnionValues : 0;
+}
+
+function detectConsolidationCandidates(
+  components: FigmaComponent[],
+  codeComponents: CodeComponent[]
+): ConsolidationCandidate[] {
   const candidates: ConsolidationCandidate[] = [];
   const seen = new Set<string>();
+
+  // Build frame -> code component map for quick lookup
+  const frameToCode = new Map<string, string>();
+  for (const cc of codeComponents) {
+    for (const src of cc.figmaSources) {
+      frameToCode.set(src, cc.name);
+    }
+  }
 
   for (let i = 0; i < components.length; i++) {
     for (let j = i + 1; j < components.length; j++) {
       const a = components[i];
       const b = components[j];
-      const pairKey = `${a.name}|${b.name}`;
+      const pairKey = `${a.name}|||${b.name}`;
       if (seen.has(pairKey)) continue;
       seen.add(pairKey);
 
@@ -185,6 +222,10 @@ function detectConsolidationCandidates(components: FigmaComponent[]): Consolidat
         candidates.push({
           compA: `${a.name} (Figma ID: ${a.figmaId})`,
           compB: `${b.name} (Figma ID: ${b.figmaId})`,
+          sharedAxes: [],
+          axisOverlap: 1,
+          valueOverlap: 1,
+          sameCodeComponent: frameToCode.get(a.name) === frameToCode.get(b.name),
           reason: 'Duplicate frame name — deduplicate in Figma',
         });
         continue;
@@ -194,18 +235,43 @@ function detectConsolidationCandidates(components: FigmaComponent[]): Consolidat
       const bAxes = Object.keys(b.properties);
       const aAxeSet = new Set(aAxes);
       const sharedAxes = bAxes.filter((ax) => aAxeSet.has(ax));
+      const axisOverlap = sharedAxes.length / Math.max(aAxes.length, bAxes.length, 1);
+      const valueOverlap = variantValueOverlap(a, b, sharedAxes);
+      const sameCodeComponent = !!(
+        frameToCode.get(a.name) &&
+        frameToCode.get(a.name) === frameToCode.get(b.name)
+      );
 
-      // Identical property axis sets (same axes, different names)
+      // Already collapsed into the same code component — highest priority
+      if (sameCodeComponent) {
+        candidates.push({
+          compA: a.name,
+          compB: b.name,
+          sharedAxes,
+          axisOverlap,
+          valueOverlap,
+          sameCodeComponent: true,
+          reason: `Already mapped to \`${frameToCode.get(a.name)}\` — will be a variant prop, not a separate component`,
+        });
+        continue;
+      }
+
+      // Identical property axis sets with high value overlap
       if (
         sharedAxes.length >= 2 &&
         sharedAxes.length === aAxes.length &&
         sharedAxes.length === bAxes.length &&
-        a.functionalCategory === b.functionalCategory
+        a.functionalCategory === b.functionalCategory &&
+        valueOverlap >= 0.5
       ) {
         candidates.push({
           compA: a.name,
           compB: b.name,
-          reason: `Same property axes [${sharedAxes.join(', ')}] and functional category — consider merging`,
+          sharedAxes,
+          axisOverlap,
+          valueOverlap,
+          sameCodeComponent: false,
+          reason: `Same axes [${sharedAxes.join(', ')}] · ${Math.round(valueOverlap * 100)}% value overlap — strong merge candidate`,
         });
         continue;
       }
@@ -216,19 +282,30 @@ function detectConsolidationCandidates(components: FigmaComponent[]): Consolidat
       if (
         aStem === bStem &&
         aStem.length > 4 &&
-        aStem !== 'Product' && // Product* components are intentionally separate
+        aStem !== 'Product' &&
         aStem !== 'Section'
       ) {
+        const detail = sharedAxes.length > 0
+          ? `shares [${sharedAxes.join(', ')}] axes`
+          : 'no shared axes';
         candidates.push({
           compA: a.name,
           compB: b.name,
-          reason: `Common name stem "${aStem}" — review whether these could share a single component with variant props`,
+          sharedAxes,
+          axisOverlap,
+          valueOverlap,
+          sameCodeComponent: false,
+          reason: `Common stem "${aStem}" · ${detail} — review for variant prop consolidation`,
         });
       }
     }
   }
 
-  return candidates;
+  // Sort: already-consolidated first, then by combined overlap score
+  return candidates.sort((a, b) => {
+    if (a.sameCodeComponent !== b.sameCodeComponent) return a.sameCodeComponent ? -1 : 1;
+    return (b.axisOverlap + b.valueOverlap) - (a.axisOverlap + a.valueOverlap);
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -236,6 +313,22 @@ function detectConsolidationCandidates(components: FigmaComponent[]): Consolidat
 // ---------------------------------------------------------------------------
 
 function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
+  // Load Brand Styles audit for cross-referencing code-only colors
+  const auditPath = join(ROOT, 'data', 'brand-styles-audit.json');
+  const brandStylesHexes = new Set<string>();
+  if (existsSync(auditPath)) {
+    try {
+      const audit = JSON.parse(readFileSync(auditPath, 'utf-8'));
+      for (const item of audit.items ?? []) {
+        if (item.extractedValue && item.extractedValue.startsWith('#')) {
+          brandStylesHexes.add(item.extractedValue.toLowerCase());
+        }
+      }
+    } catch {
+      // ignore if audit file is malformed
+    }
+  }
+
   const lines: string[] = [
     '# 01 · Design Token Map',
     '',
@@ -255,17 +348,28 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const matchStr = matchEntry ? '✅ Matched' : gap.colors.figmaOnly.some((e) => e.figmaKey === t.figmaKey) ? '⚠️ Figma-only' : '—';
     const codeKey = matchEntry?.codeKey ?? '—';
     const tier = /primary|secondary|deep colors|bright/i.test(t.figmaKey) ? 'P' : 'S';
-    lines.push(`| ${swatch} | \`${t.figmaKey}\` | \`${t.rawValue.toLowerCase()}\` | ${t.group} | ${tier} | ${matchStr} | \`${codeKey}\` |`);
+    lines.push(`| ${swatch} | \`${escPipe(t.figmaKey)}\` | \`${t.rawValue.toLowerCase()}\` | ${t.group} | ${tier} | ${matchStr} | \`${escPipe(codeKey)}\` |`);
   }
 
   if (gap.colors.codeOnly.length > 0) {
+    const hasBrandStylesData = brandStylesHexes.size > 0;
     lines.push('', '### Colors in `commerce-theme` not referenced in Figma', '');
     lines.push('These exist in code but have no matching Figma variable. Candidates for removal or addition to Figma.', '');
-    lines.push('| | Code Key | Hex |');
-    lines.push('|--|----------|-----|');
-    for (const e of gap.colors.codeOnly) {
-      const swatch = colorSwatch(e.codeValue ?? '#000');
-      lines.push(`| ${swatch} | \`${e.codeKey}\` | \`${e.codeValue}\` |`);
+    if (hasBrandStylesData) {
+      lines.push('| | Code Key | Hex | Brand Styles? |');
+      lines.push('|--|----------|-----|---------------|');
+      for (const e of gap.colors.codeOnly) {
+        const swatch = colorSwatch(e.codeValue ?? '#000');
+        const inBrandStyles = brandStylesHexes.has((e.codeValue ?? '').toLowerCase()) ? '⚠️ Local style' : '—';
+        lines.push(`| ${swatch} | \`${e.codeKey}\` | \`${e.codeValue}\` | ${inBrandStyles} |`);
+      }
+    } else {
+      lines.push('| | Code Key | Hex |');
+      lines.push('|--|----------|-----|');
+      for (const e of gap.colors.codeOnly) {
+        const swatch = colorSwatch(e.codeValue ?? '#000');
+        lines.push(`| ${swatch} | \`${e.codeKey}\` | \`${e.codeValue}\` |`);
+      }
     }
   }
 
@@ -276,7 +380,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   for (const t of tokens.typography) {
     const m = t.rawValue.match(/family:\s*"([^"]+)".*weight:\s*(\d+).*lineHeight:\s*([^,]+),.*letterSpacing:\s*([^)]+)/);
     if (m) {
-      lines.push(`| \`${t.figmaKey}\` | ${m[1]} | ${m[2]} | ${m[3].trim()} | ${m[4].trim()} | ${t.group} |`);
+      lines.push(`| \`${escPipe(t.figmaKey)}\` | ${m[1]} | ${m[2]} | ${m[3].trim()} | ${m[4].trim()} | ${t.group} |`);
     }
   }
 
@@ -288,9 +392,9 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     lines.push('|------------|-----------|---------------|------------|');
     for (const t of tokens.fontSizes) {
       const typoRef = tokens.typography.find((ty) => ty.rawValue.includes(t.figmaKey));
-      const refStr = typoRef ? `\`${typoRef.figmaKey}\`` : '—';
+      const refStr = typoRef ? `\`${escPipe(typoRef.figmaKey)}\`` : '—';
       const codeMatch = gap.typography.matched.some((e) => e.figmaKey === t.figmaKey);
-      lines.push(`| \`${t.figmaKey}\` | \`${t.rawValue}px\` | ${refStr} | ${codeMatch ? '✅ Matched' : '—'} |`);
+      lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` | ${refStr} | ${codeMatch ? '✅ Matched' : '—'} |`);
     }
   }
 
@@ -304,7 +408,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const matchEntry = gap.spacing.matched.find((e) => e.figmaKey === t.figmaKey);
     const spMatch = matchEntry ? '✅ Matched' : gap.spacing.figmaOnly.some((e) => e.figmaKey === t.figmaKey) ? '⚠️ Figma-only' : '—';
     const codeKey = matchEntry?.codeKey ?? '—';
-    lines.push(`| \`${t.figmaKey}\` | \`${t.rawValue}px\` | ${t.group} | ${tier} | ${spMatch} | \`${codeKey}\` |`);
+    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` | ${escPipe(t.group)} | ${tier} | ${spMatch} | \`${codeKey}\` |`);
   }
 
   if (gap.spacing.codeOnly.length > 0) {
@@ -325,7 +429,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const shadowMatch = matchEntry ? '✅ Matched' : '⚠️ Figma-only';
     const codeKey = matchEntry?.codeKey ?? '—';
     const firstEffect = t.rawValue.split(';')[0].trim().slice(0, 80);
-    lines.push(`| \`${t.figmaKey}\` | ${firstEffect}... | ${shadowMatch} | \`${codeKey}\` |`);
+    lines.push(`| \`${escPipe(t.figmaKey)}\` | ${firstEffect}... | ${shadowMatch} | \`${codeKey}\` |`);
   }
 
   if (gap.shadows.codeOnly.length > 0) {
@@ -342,7 +446,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   lines.push('| Figma Name | Value |');
   lines.push('|------------|-------|');
   for (const t of tokens.strokes) {
-    lines.push(`| \`${t.figmaKey}\` | \`${t.rawValue}px\` |`);
+    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` |`);
   }
 
   // Layout & Grid (columns, viewport — NOT font sizes)
@@ -350,7 +454,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   lines.push('| Figma Name | Value | Group |');
   lines.push('|------------|-------|-------|');
   for (const t of tokens.layout) {
-    lines.push(`| \`${t.figmaKey}\` | \`${t.rawValue}\` | ${t.group} |`);
+    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}\` | ${t.group} |`);
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -517,22 +621,43 @@ function doc04ResponsiveCatalog(components: FigmaComponent[]): string {
 // Doc 05: Variant Analysis (algorithmic consolidation + state axis pollution)
 // ---------------------------------------------------------------------------
 
-function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[]): string {
+function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[], codeComponents: CodeComponent[]): string {
+  // Load curated consolidation guidance if it exists
+  const guidancePath = join(ROOT, 'data', 'consolidation-guidance.json');
+  let curatedGuidance: Record<string, string> = {};
+  if (existsSync(guidancePath)) {
+    try {
+      curatedGuidance = JSON.parse(readFileSync(guidancePath, 'utf-8'));
+    } catch {
+      // ignore
+    }
+  }
+
   const lines: string[] = [
     '# 05 · Variant Analysis',
     '',
     '## Property Axes Used Across Components',
     '',
-    '| Axis | # Components | Values | Components |',
-    '|------|-------------|--------|------------|',
+    '> Component lists are collapsed below the summary table for readability.',
+    '',
+    '| Axis | # Components | Values |',
+    '|------|-------------|--------|',
   ];
 
   for (const ax of axes) {
-    lines.push(`| **${ax.axis}** | ${ax.components.length} | ${ax.values.join(', ')} | ${ax.components.join(', ')} |`);
+    lines.push(`| **${ax.axis}** | ${ax.components.length} | ${ax.values.join(', ')} |`);
+  }
+
+  // Expandable component lists per axis
+  lines.push('');
+  for (const ax of axes) {
+    lines.push(`<details><summary><strong>${ax.axis}</strong> — ${ax.components.length} components</summary>`, '');
+    lines.push(ax.components.map((c) => `- ${c}`).join('\n'));
+    lines.push('', '</details>', '');
   }
 
   // State axis pollution
-  lines.push('', '## ⚠️ State Axis Quality Issues', '');
+  lines.push('## ⚠️ State Axis Quality Issues', '');
   lines.push('The `State` property axis contains values that are not interaction states. These should be moved to separate axes in Figma.', '');
 
   const stateAxis = axes.find((a) => a.axis === 'State');
@@ -585,27 +710,51 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[])
     lines.push('No auto-generated names detected. ✅');
   }
 
-  // Consolidation opportunities (algorithmic)
+  // Consolidation opportunities (algorithmic + curated)
   lines.push('', '## 💡 Consolidation Opportunities', '');
-  lines.push('Detected algorithmically from shared axes, name stems, and duplicate frames.', '');
+  lines.push('Components ranked by consolidation strength. **Already consolidated** = frames already mapped to the same code component.', '');
 
-  const candidates = detectConsolidationCandidates(components);
+  const candidates = detectConsolidationCandidates(components, codeComponents);
   if (candidates.length > 0) {
-    lines.push('| Component A | Component B | Reason |');
-    lines.push('|-------------|-------------|--------|');
-    for (const c of candidates) {
-      lines.push(`| ${c.compA} | ${c.compB} | ${c.reason} |`);
+    const alreadyDone = candidates.filter((c) => c.sameCodeComponent);
+    const toReview = candidates.filter((c) => !c.sameCodeComponent);
+
+    if (alreadyDone.length > 0) {
+      lines.push('### ✅ Already Consolidated (mapped to same code component)', '');
+      lines.push('| Figma Frame A | Figma Frame B | Code Component |');
+      lines.push('|---------------|---------------|----------------|');
+      for (const c of alreadyDone) {
+        // Get code component name from reason string
+        const ccMatch = c.reason.match(/`([^`]+)`/);
+        const ccName = ccMatch ? ccMatch[1] : '—';
+        lines.push(`| ${c.compA} | ${c.compB} | \`${ccName}\` |`);
+      }
+      lines.push('');
+    }
+
+    if (toReview.length > 0) {
+      lines.push('### 🔍 Candidates for Review', '');
+      lines.push('| Component A | Component B | Shared Axes | Value Overlap | Recommendation |');
+      lines.push('|-------------|-------------|-------------|---------------|----------------|');
+      for (const c of toReview) {
+        const pairKey = `${c.compA}|||${c.compB}`;
+        const curated = curatedGuidance[pairKey] ?? curatedGuidance[`${c.compB}|||${c.compA}`];
+        const rec = curated ?? c.reason;
+        const axesStr = c.sharedAxes.length > 0 ? c.sharedAxes.join(', ') : '—';
+        const overlapStr = c.valueOverlap > 0 ? `${Math.round(c.valueOverlap * 100)}%` : '—';
+        lines.push(`| ${c.compA} | ${c.compB} | ${axesStr} | ${overlapStr} | ${rec} |`);
+      }
     }
   } else {
     lines.push('No consolidation candidates detected.');
   }
 
-  // Variant explosion
-  lines.push('', '## 💥 Variant Count Overview (Top 20)', '');
+  // Variant explosion — all components
+  lines.push('', '## 💥 Variant Count Overview', '');
   lines.push('| Component | Section | Variant Count | Axes |');
   lines.push('|-----------|---------|---------------|------|');
   const sortedByVariants = [...components].sort((a, b) => b.variantCount - a.variantCount);
-  for (const c of sortedByVariants.slice(0, 20)) {
+  for (const c of sortedByVariants) {
     const axeCount = Object.keys(c.properties).length;
     lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${c.variantCount} | ${axeCount} |`);
   }
@@ -627,7 +776,7 @@ function doc06DependencyGraph(components: FigmaComponent[]): string {
     '## Full Hierarchy',
     '',
     '```mermaid',
-    'graph TD',
+    'graph LR',
   ];
 
   lines.push('  subgraph htmlElements ["HTML Elements"]');
@@ -682,7 +831,7 @@ function doc06DependencyGraph(components: FigmaComponent[]): string {
   lines.push('```');
 
   lines.push('', '## Atoms with Internal Dependencies', '');
-  lines.push('```mermaid', 'graph TD');
+  lines.push('```mermaid', 'graph LR');
   lines.push('  subgraph atomDeps ["Atom Internal Dependencies"]');
   for (const [name, deps] of Object.entries(DEPENDENCY_MAP)) {
     const comp = components.find((c) => c.name === name && c.section === 'atoms');
@@ -743,17 +892,40 @@ function scorePriority(c: FigmaComponent, depWeight: Map<string, number>): Prior
 
   const total = sectionScore + variantScore + stateScore + responsiveScore + depScore;
 
+  // Build specific caveat list so the recommendation text is actionable
+  const caveats: string[] = [];
+  if (inconsistentCount > 0) {
+    caveats.push(`${inconsistentCount} inconsistent state name(s) in Figma`);
+  }
+  if (stateScore < 2 && stateValues.length > 0) {
+    const missingStates: string[] = [];
+    if (!stateValues.some((v) => /default/i.test(v))) missingStates.push('Default');
+    if (!stateValues.some((v) => /hover/i.test(v))) missingStates.push('Hover');
+    if (!stateValues.some((v) => /disabled?/i.test(v))) missingStates.push('Disabled');
+    if (missingStates.length > 0) caveats.push(`missing state(s): ${missingStates.join(', ')}`);
+  } else if (stateScore === 0) {
+    caveats.push('no state variants in Figma');
+  }
+  if (responsiveScore === 0) {
+    caveats.push('no responsive variants');
+  }
+  if (depScore === 0) {
+    caveats.push('no downstream dependents');
+  }
+
   let recommendation: string;
   if (inconsistentCount > 0) {
-    recommendation = '⚠️ Needs Figma cleanup (inconsistent state names)';
+    recommendation = `⚠️ Needs Figma cleanup (${caveats.join('; ')})`;
   } else if (total >= 7) {
     recommendation = '✅ Build first — high dependency weight';
   } else if (total >= 5) {
     recommendation = '✅ Ready to build';
   } else if (total >= 3) {
-    recommendation = '🔄 Build with minor caveats';
+    const caveatStr = caveats.length > 0 ? ` (${caveats.join('; ')})` : '';
+    recommendation = `🔄 Build with minor caveats${caveatStr}`;
   } else {
-    recommendation = '⏳ Address coverage gaps first';
+    const caveatStr = caveats.length > 0 ? ` (${caveats.join('; ')})` : '';
+    recommendation = `⏳ Address coverage gaps first${caveatStr}`;
   }
 
   return { component: c, sectionScore, variantScore, stateScore, responsiveScore, depScore, total, recommendation };
@@ -807,8 +979,28 @@ function doc07PriorityDashboard(components: FigmaComponent[], taxonomy: Taxonomy
   const lines: string[] = [
     '# 07 · Build Priority Dashboard',
     '',
-    '> Scored by **code component** (not Figma frame). Multiple Figma frames may contribute to one code component.',
-    '> Score = max across constituent Figma frames. **Scoring:** Section (atoms=3, inputs=2, molecules=1) + Variant quality (2) + State coverage (2) + Responsive (1) + Dependency weight (2). Max = 10.',
+    '> Scored by **code component** (not Figma frame). The "By Code Component" table uses the **max** score across all constituent Figma frames.',
+    '',
+    '## Scoring Methodology',
+    '',
+    '| Dimension | Max Points | How Points Are Earned |',
+    '|-----------|------------|----------------------|',
+    '| **Section** | 3 | Atoms = 3 · Inputs & Forms = 2 · Molecules = 1 · Other = 0 |',
+    '| **Variant Quality** | 2 | 2 if no auto-generated/inconsistent state names · −1 per issue (min 0) |',
+    '| **State Coverage** | 2 | 2 if Default + Hover + Disabled all present · 1 if any states exist · 0 otherwise |',
+    '| **Responsive** | 1 | 1 if Figma frame has Desktop/Tablet/Mobile variants |',
+    '| **Dependency Weight** | 2 | 2 if 3+ components depend on this · 1 if 1–2 · 0 if none |',
+    '| **Total** | **10** | |',
+    '',
+    '**Recommendation thresholds:**',
+    '',
+    '| Score | Label | Meaning |',
+    '|-------|-------|---------|',
+    '| 7–10 | ✅ Build first | High-value, well-specified, many dependents |',
+    '| 5–6 | ✅ Ready to build | Well-specified, few or no dependents |',
+    '| 3–4 | 🔄 Build with minor caveats | Missing some Figma specs; build is unblocked but gaps exist |',
+    '| 0–2 | ⏳ Address coverage gaps first | Significant Figma gaps; resolve before building |',
+    '| any | ⚠️ Needs Figma cleanup | Auto-generated state names present — resolve regardless of score |',
     '',
     '## By Code Component',
     '',
@@ -893,7 +1085,7 @@ function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string
   // Tier overview Mermaid
   lines.push('## Code Component Architecture', '');
   lines.push('```mermaid', 'graph TD');
-  lines.push('  subgraph primitives ["Primitives (18)"]');
+  lines.push(`  subgraph primitives ["Primitives (${primitives.length})"]`);
   for (const cc of primitives) {
     lines.push(`    ${cc.name}["${cc.name}"]`);
   }
@@ -1311,6 +1503,190 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
+  return lines.join('\n');
+}
+
+// ---------------------------------------------------------------------------
+// Doc 12: Component Surface Area
+// ---------------------------------------------------------------------------
+
+// Accessibility requirements per component category
+const ARIA_REQUIREMENTS: Record<string, string[]> = {
+  button: ['`role="button"` (implicit on `<button>`)', '`aria-label` when icon-only', '`aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)', '`aria-pressed` for toggle-style buttons'],
+  'icon-button': ['`aria-label` required (no visible text)', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled'],
+  'link-button': ['`aria-label` or visible text required', 'If rendered as `<a>`, must have `href`', '`aria-current="page"` when marking active link'],
+  input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
+  textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],
+  select: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-expanded` when open'],
+  checkbox: ['`<label>` associated', '`aria-checked` for indeterminate state', '`aria-required` when required'],
+  'radio-button': ['`<fieldset>` + `<legend>` wrapping radio groups', '`aria-required` on group'],
+  toggle: ['`role="switch"` with `aria-checked`', '`aria-label` describing what is toggled'],
+  slider: ['`role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`', '`aria-label` or `<label>`'],
+  badge: ['`role="status"` if dynamic', '`aria-label` for icon-only badges'],
+  'star-rating': ['`role="img"` with `aria-label` for display-only', '`role="radiogroup"` for interactive rating'],
+  breadcrumbs: ['`<nav aria-label="Breadcrumb">`', '`aria-current="page"` on last item'],
+  menu: ['`role="menu"` or `role="navigation"`', '`aria-expanded` on trigger', '`aria-haspopup` on trigger'],
+  tabs: ['`role="tablist"`, `role="tab"`, `role="tabpanel"`', '`aria-selected` on active tab', '`aria-controls` linking tab to panel'],
+  modal: ['`role="dialog"` with `aria-modal="true"`', '`aria-labelledby` pointing to title', 'Focus trap when open', 'Escape key closes'],
+  accordion: ['`role="region"` on panel', '`aria-expanded` on trigger button', '`aria-controls` linking trigger to panel'],
+  pagination: ['`<nav aria-label="Pagination">`', '`aria-current="page"` on current page', '`aria-label` on prev/next buttons'],
+  toast: ['`role="status"` or `role="alert"` depending on urgency', '`aria-live="polite"` for non-urgent', '`aria-live="assertive"` for urgent'],
+  stepper: ['`aria-label` on increment/decrement buttons', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display'],
+};
+
+// CSS custom properties per component
+const CSS_CUSTOM_PROPS: Record<string, string[]> = {
+  button: ['`--cc-button-bg`', '`--cc-button-color`', '`--cc-button-border-color`', '`--cc-button-border-radius`', '`--cc-button-padding-x`', '`--cc-button-padding-y`', '`--cc-button-font-size`'],
+  'icon-button': ['`--cc-icon-button-size`', '`--cc-icon-button-bg`', '`--cc-icon-button-color`', '`--cc-icon-button-border-radius`'],
+  'link-button': ['`--cc-link-button-color`', '`--cc-link-button-color-hover`', '`--cc-link-button-gap`'],
+  input: ['`--cc-input-border-color`', '`--cc-input-border-radius`', '`--cc-input-bg`', '`--cc-input-color`', '`--cc-input-placeholder-color`', '`--cc-input-focus-ring-color`'],
+  select: ['`--cc-select-border-color`', '`--cc-select-border-radius`', '`--cc-select-bg`', '`--cc-select-color`'],
+  checkbox: ['`--cc-checkbox-size`', '`--cc-checkbox-border-color`', '`--cc-checkbox-checked-bg`', '`--cc-checkbox-checked-color`'],
+  'radio-button': ['`--cc-radio-size`', '`--cc-radio-border-color`', '`--cc-radio-checked-color`'],
+  toggle: ['`--cc-toggle-track-bg`', '`--cc-toggle-thumb-bg`', '`--cc-toggle-checked-track-bg`', '`--cc-toggle-size`'],
+  badge: ['`--cc-badge-bg`', '`--cc-badge-color`', '`--cc-badge-border-radius`', '`--cc-badge-font-size`'],
+  modal: ['`--cc-modal-bg`', '`--cc-modal-max-width`', '`--cc-modal-border-radius`', '`--cc-modal-overlay-bg`'],
+  toast: ['`--cc-toast-bg`', '`--cc-toast-color`', '`--cc-toast-border-radius`'],
+  tabs: ['`--cc-tabs-border-color`', '`--cc-tab-active-color`', '`--cc-tab-active-border-color`'],
+  pagination: ['`--cc-pagination-gap`', '`--cc-pagination-button-size`'],
+  accordion: ['`--cc-accordion-border-color`', '`--cc-accordion-padding`', '`--cc-accordion-trigger-color`'],
+};
+
+function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
+  const codeComponents = taxonomy.codeComponents;
+
+  const lines: string[] = [
+    '# 12 · Component Surface Area',
+    '',
+    '> Proposed public API for each code component: props, CSS custom properties, slots, and accessibility requirements.',
+    '> This is the **contract** between design system consumers and component authors.',
+    '> All CSS custom properties use the `--cc-` prefix. All class names use the `cc-` prefix.',
+    '',
+    '## Reading This Document',
+    '',
+    '| Column | Meaning |',
+    '|--------|---------|',
+    '| **Prop** | React prop name |',
+    '| **Type** | TypeScript type |',
+    '| **Default** | Default value |',
+    '| **Figma Axis** | The Figma property axis this prop maps to |',
+    '| **Description** | What the prop controls |',
+    '',
+  ];
+
+  const tiers: ComponentTier[] = ['primitive', 'composition', 'builder-block'];
+  for (const tier of tiers) {
+    const group = codeComponents.filter((cc) => cc.tier === tier);
+    if (group.length === 0) continue;
+
+    lines.push(`## ${TIER_LABELS[tier]}s (${group.length})`, '');
+
+    for (const cc of group) {
+      lines.push(`---`, '');
+      lines.push(`### \`${cc.name}\``, '');
+      lines.push(`**CSS class:** \`cc-${cc.directoryName}\` · **HTML element:** \`<${cc.htmlElement}>\` · **Category:** ${CATEGORY_LABELS[cc.functionalCategory]}`, '');
+      lines.push(`**Figma sources:** ${cc.figmaSources.join(', ')}`, '');
+      if (cc.description) {
+        lines.push('', `> ${cc.description}`, '');
+      }
+
+      // Props table
+      if (cc.props.length > 0) {
+        lines.push('**Props:**', '');
+        lines.push('| Prop | Type | Default | Figma Axis | Description |');
+        lines.push('|------|------|---------|------------|-------------|');
+        for (const p of cc.props) {
+          const axis = p.figmaAxis ?? '—';
+          const def = p.default != null ? `\`${p.default}\`` : '—';
+          const desc = p.description ?? '—';
+          lines.push(`| \`${p.name}\` | \`${p.type}\` | ${def} | ${axis} | ${desc} |`);
+        }
+        // Standard props all components should support
+        lines.push(`| \`className\` | \`string\` | — | — | Additional CSS class |`);
+        lines.push(`| \`data-testid\` | \`string\` | — | — | Test selector hook |`);
+        lines.push('');
+      }
+
+      // CSS custom properties
+      const cssKey = cc.directoryName.replace(/-/g, '-');
+      const cssProps = CSS_CUSTOM_PROPS[cssKey] ?? CSS_CUSTOM_PROPS[cc.directoryName] ?? [];
+      if (cssProps.length > 0) {
+        lines.push('**CSS custom properties:**', '');
+        for (const prop of cssProps) {
+          lines.push(`- ${prop}`);
+        }
+        lines.push('');
+      }
+
+      // Accessibility
+      const ariaKey = cc.directoryName;
+      const ariaReqs = ARIA_REQUIREMENTS[ariaKey] ?? [];
+      if (ariaReqs.length > 0) {
+        lines.push('**Accessibility requirements:**', '');
+        for (const req of ariaReqs) {
+          lines.push(`- ${req}`);
+        }
+        lines.push('');
+      }
+
+      // Slots for compositions
+      if (cc.tier !== 'primitive') {
+        lines.push('**Slots / children:**', '');
+        lines.push(`- \`children\` — primary content area`);
+        if (cc.name === 'Modal') {
+          lines.push(`- \`title\` — modal heading (required for accessibility)`);
+          lines.push(`- \`footerActions\` — action buttons rendered in the footer`);
+        } else if (cc.name === 'Accordion') {
+          lines.push(`- \`trigger\` — the clickable header row`);
+          lines.push(`- \`children\` — the expandable panel content`);
+        } else if (cc.name === 'ButtonGroup') {
+          lines.push(`- \`children\` — \`Button\`, \`LinkButton\`, or \`IconButton\` elements`);
+        } else if (cc.name === 'SelectionGroup') {
+          lines.push(`- \`children\` — \`Checkbox\`, \`RadioButton\`, or \`Toggle\` elements`);
+        }
+        lines.push('');
+      }
+
+      // Usage example
+      lines.push('<details><summary>Usage example</summary>', '');
+      lines.push('```tsx');
+      if (cc.name === 'Button') {
+        lines.push(`import { Button } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<Button variant="primary" scale="md" state="default">`);
+        lines.push(`  Add to cart`);
+        lines.push(`</Button>`);
+      } else if (cc.name === 'IconButton') {
+        lines.push(`import { IconButton } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<IconButton variant="close" scale="md" aria-label="Close dialog" />`);
+      } else if (cc.name === 'LinkButton') {
+        lines.push(`import { LinkButton } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<LinkButton iconPosition="trailing">Learn more</LinkButton>`);
+      } else if (cc.name === 'Input') {
+        lines.push(`import { Input } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<Input type="text" scale="md" placeholder="Search..." />`);
+      } else if (cc.name === 'Modal') {
+        lines.push(`import { Modal } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<Modal title="Confirm purchase" footerActions={<Button>Confirm</Button>}>`);
+        lines.push(`  Are you sure you want to purchase this item?`);
+        lines.push(`</Modal>`);
+      } else {
+        const firstProp = cc.props[0];
+        const propStr = firstProp ? ` ${firstProp.name}="${firstProp.default ?? 'default'}"` : '';
+        lines.push(`import { ${cc.name} } from '@faithlife/commerce-components';`);
+        lines.push('');
+        lines.push(`<${cc.name}${propStr}>{/* content */}</${cc.name}>`);
+      }
+      lines.push('```');
+      lines.push('', '</details>', '');
+    }
+  }
+
+  lines.push('---', `*Generated by \`build-inventory.ts\`*`);
   return lines.join('\n');
 }
 
@@ -1745,6 +2121,7 @@ ${catCounts}
 | 09 | [Component Architecture](./09-component-architecture.md) | React-first component list, prop API conventions, Figma axis → prop mapping, directory structure |
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
 | 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
+| 12 | [Component Surface Area](./12-component-surface-area.md) | Proposed prop API, CSS custom properties, slots, and accessibility requirements per component |
 
 ## Data Files
 
@@ -1760,6 +2137,8 @@ ${catCounts}
 | \`data/dtcg/primitives.json\` | Tier 1 DTCG tokens (raw values) |
 | \`data/dtcg/semantic.json\` | Tier 2 DTCG tokens (intent-based aliases) |
 | \`data/dtcg/component.json\` | Tier 3 DTCG tokens (component-scoped) |
+|| \`raw/figma-brand-styles-metadata.xml\` | Logos Brand Styles Figma canvas structure (manually fetched via MCP) |
+|| \`raw/figma-brand-styles-extracted.json\` | Extracted color/gradient/shadow values from Brand Styles local styles |
 
 ## Pipeline
 
@@ -1769,7 +2148,7 @@ raw/figma-variables.json               ─┤─► parse-figma.ts ──► dat
                                         │
 commerce-theme/src/*.ts                ─┤─► gap-analysis.ts + map-dtcg.ts ──► data/*.json
 raw/figma-brand-styles-extracted.json  ─┘─► audit-brand-styles.ts ──► brand-styles-audit.json
-                                            generate-docs.ts ──► docs/*.md (11 docs + README)
+                                            generate-docs.ts ──► docs/*.md (12 docs + README)
 \`\`\`
 `;
 }
@@ -1793,12 +2172,13 @@ export async function generateDocs() {
   writeDoc(join(docsDir, '02-component-inventory.md'), doc02ComponentInventory(components));
   writeDoc(join(docsDir, '03-state-matrix.md'), doc03StateMatrix(components));
   writeDoc(join(docsDir, '04-responsive-catalog.md'), doc04ResponsiveCatalog(components));
-  writeDoc(join(docsDir, '05-variant-analysis.md'), doc05VariantAnalysis(components, axes));
+  writeDoc(join(docsDir, '05-variant-analysis.md'), doc05VariantAnalysis(components, axes, taxonomy.codeComponents));
   writeDoc(join(docsDir, '06-dependency-graph.md'), doc06DependencyGraph(components));
   writeDoc(join(docsDir, '07-priority-dashboard.md'), doc07PriorityDashboard(components, taxonomy));
   writeDoc(join(docsDir, '08-taxonomy.md'), doc08Taxonomy(components, taxonomy));
   writeDoc(join(docsDir, '09-component-architecture.md'), doc09ComponentArchitecture(components, taxonomy));
   writeDoc(join(docsDir, '10-figma-cleanup.md'), doc10FigmaCleanup(components, gap, taxonomy));
+  writeDoc(join(docsDir, '12-component-surface-area.md'), doc12ComponentSurfaceArea(taxonomy));
 
   const auditPath = join(ROOT, 'data', 'brand-styles-audit.json');
   if (existsSync(auditPath)) {

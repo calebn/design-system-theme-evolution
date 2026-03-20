@@ -1,5 +1,15 @@
 export type Section = 'atoms' | 'molecules' | 'inputs' | 'other';
 
+export type FunctionalCategory =
+  | 'actions'
+  | 'navigation'
+  | 'data-entry'
+  | 'data-display'
+  | 'feedback'
+  | 'content-layout'
+  | 'product'
+  | 'selection';
+
 export interface ComponentVariantProperties {
   [axis: string]: string[];
 }
@@ -8,6 +18,8 @@ export interface FigmaComponent {
   name: string;
   figmaId: string;
   section: Section;
+  functionalCategory: FunctionalCategory;
+  proposedCodeName: string;
   variantCount: number;
   properties: ComponentVariantProperties;
   hasResponsive: boolean;
@@ -25,7 +37,7 @@ export interface FigmaToken {
   group: string;
   name: string;
   rawValue: string;
-  type: 'color' | 'dimension' | 'typography' | 'shadow' | 'stroke' | 'layout';
+  type: 'color' | 'dimension' | 'typography' | 'shadow' | 'stroke' | 'layout' | 'fontSize';
 }
 
 export interface TokenCategory {
@@ -35,6 +47,7 @@ export interface TokenCategory {
   shadows: FigmaToken[];
   strokes: FigmaToken[];
   layout: FigmaToken[];
+  fontSizes: FigmaToken[];
   dimensions: FigmaToken[];
 }
 
@@ -60,4 +73,16 @@ export interface GapAnalysis {
   spacing: { matched: GapEntry[]; figmaOnly: GapEntry[]; codeOnly: GapEntry[] };
   typography: { matched: GapEntry[]; figmaOnly: GapEntry[]; codeOnly: GapEntry[] };
   shadows: { matched: GapEntry[]; figmaOnly: GapEntry[]; codeOnly: GapEntry[] };
+}
+
+export interface TaxonomyCategory {
+  id: FunctionalCategory;
+  label: string;
+  description: string;
+  components: string[];
+}
+
+export interface Taxonomy {
+  categories: TaxonomyCategory[];
+  proposedFolderStructure: string[];
 }

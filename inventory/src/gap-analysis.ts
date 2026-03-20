@@ -27,8 +27,7 @@ function writeJson(p: string, data: unknown) {
 }
 
 // ---------------------------------------------------------------------------
-// Extract code tokens from commerce-theme source files using regex
-// (avoids needing to import/execute TypeScript)
+// Extract code tokens from commerce-theme source files
 // ---------------------------------------------------------------------------
 
 interface CodeColor {
@@ -36,30 +35,46 @@ interface CodeColor {
   hex: string; // e.g. "#1e6afe"
 }
 
+/**
+ * Line-by-line parser that correctly includes the parent group name in the key.
+ * Handles the nested color structure in colors.ts:
+ *   primary: {
+ *     c300: { hex: '#1e6afe' },
+ *   }
+ * → { key: "primary.c300", hex: "#1e6afe" }
+ */
 function extractCodeColors(): CodeColor[] {
   const src = readFileSync(join(COMMERCE_THEME_PATH, 'colors.ts'), 'utf-8');
   const colors: CodeColor[] = [];
+  const lines = src.split('\n');
 
-  // Match patterns like: c300: { hex: '#1e6afe' },
-  // Also handle pureBlack: { hex: '#000000' }
-  const groupPattern = /(\w+):\s*\{([^}]+)\}/g;
-  let groupMatch: RegExpExecArray | null;
+  let currentGroup = '';
+  let currentShade = '';
 
-  while ((groupMatch = groupPattern.exec(src)) !== null) {
-    const groupName = groupMatch[1];
-    const groupBody = groupMatch[2];
-
-    // Check if it's a shade group (has cXXX: { hex: ... } entries)
-    const shadePattern = /(c\d+|base|vivid):\s*\{\s*hex:\s*'([^']+)'\s*\}/g;
-    let shadeMatch: RegExpExecArray | null;
-    while ((shadeMatch = shadePattern.exec(groupBody)) !== null) {
-      colors.push({ key: `${groupName}.${shadeMatch[1]}`, hex: shadeMatch[2] });
+  for (const line of lines) {
+    // Top-level group start: 2-space indent, word key, opening brace, no hex on same line
+    // e.g. "  primary: {" but NOT "  pureBlack: { hex: '#000' }"
+    const topGroupMatch = line.match(/^  (\w+):\s*\{\s*$/);
+    if (topGroupMatch) {
+      currentGroup = topGroupMatch[1];
+      currentShade = '';
+      continue;
     }
 
-    // Direct hex match (pureBlack, pureWhite)
-    const directHex = groupBody.match(/hex:\s*'([^']+)'/);
-    if (directHex && !/c\d+|base|vivid/.test(groupBody)) {
-      colors.push({ key: groupName, hex: directHex[1] });
+    // Shade entry: 4-space indent, shade key (cXXX, base, vivid) with opening brace
+    // e.g. "    c300: { hex: '#1e6afe' },"
+    const shadeWithHex = line.match(/^\s{4,}(c\d+|base|vivid|c\d+\w*):\s*\{\s*hex:\s*'(#[0-9A-Fa-f]+)'\s*\}/);
+    if (shadeWithHex) {
+      colors.push({ key: `${currentGroup}.${shadeWithHex[1]}`, hex: shadeWithHex[2] });
+      continue;
+    }
+
+    // Direct single-value entry: 2-space indent, word key, hex inline
+    // e.g. "  pureBlack: { hex: '#000000' },"
+    const directHex = line.match(/^  (\w+):\s*\{\s*hex:\s*'(#[0-9A-Fa-f]+)'\s*\}/);
+    if (directHex) {
+      colors.push({ key: directHex[1], hex: directHex[2] });
+      continue;
     }
   }
 
@@ -108,7 +123,6 @@ interface CodeShadow {
 function extractCodeShadows(): CodeShadow[] {
   const src = readFileSync(join(COMMERCE_THEME_PATH, 'shadows.ts'), 'utf-8');
   const shadows: CodeShadow[] = [];
-  // Match dp1: '...', imgSoft: '...' etc
   const pattern = /(\w+):\s*'([^']+)'/g;
   let m: RegExpExecArray | null;
   while ((m = pattern.exec(src)) !== null) {
@@ -125,12 +139,6 @@ function normalizeHex(hex: string): string {
   return hex.toLowerCase().replace(/^#/, '');
 }
 
-// Parse first layer of a Figma Effect shadow to extract color
-function figmaShadowColor(raw: string): string | null {
-  const m = raw.match(/color:\s*(#[0-9A-Fa-f]+)/);
-  return m ? normalizeHex(m[1]) : null;
-}
-
 // ---------------------------------------------------------------------------
 // Gap analysis per category
 // ---------------------------------------------------------------------------
@@ -139,30 +147,39 @@ function analyzeColors(figmaTokens: TokenCategory, codeColors: CodeColor[]) {
   const figmaColorMap = new Map(
     figmaTokens.colors.map((t) => [normalizeHex(t.rawValue), t.figmaKey])
   );
-  const codeColorMap = new Map(
-    codeColors.map((c) => [normalizeHex(c.hex), c.key])
-  );
+  // Build multi-value map: hex -> all code keys that share this hex
+  const codeColorsByHex = new Map<string, string[]>();
+  for (const c of codeColors) {
+    const h = normalizeHex(c.hex);
+    if (!codeColorsByHex.has(h)) codeColorsByHex.set(h, []);
+    codeColorsByHex.get(h)!.push(c.key);
+  }
 
   const matched: GapEntry[] = [];
   const figmaOnly: GapEntry[] = [];
   const codeOnly: GapEntry[] = [];
+  const matchedHexes = new Set<string>();
 
   for (const [hex, figmaKey] of figmaColorMap.entries()) {
-    if (codeColorMap.has(hex)) {
+    if (codeColorsByHex.has(hex)) {
+      const codeKeys = codeColorsByHex.get(hex)!;
       matched.push({
         figmaKey,
         figmaValue: `#${hex}`,
-        codeKey: codeColorMap.get(hex),
+        codeKey: codeKeys.join(', '),
         codeValue: `#${hex}`,
       });
+      matchedHexes.add(hex);
     } else {
       figmaOnly.push({ figmaKey, figmaValue: `#${hex}` });
     }
   }
 
-  for (const [hex, codeKey] of codeColorMap.entries()) {
-    if (!figmaColorMap.has(hex)) {
-      codeOnly.push({ codeKey, codeValue: `#${hex}` });
+  for (const c of codeColors) {
+    const hex = normalizeHex(c.hex);
+    if (!matchedHexes.has(hex)) {
+      codeOnly.push({ codeKey: c.key, codeValue: `#${hex}` });
+      matchedHexes.add(hex); // avoid duplicating code-only entries for same hex
     }
   }
 
@@ -170,32 +187,33 @@ function analyzeColors(figmaTokens: TokenCategory, codeColors: CodeColor[]) {
 }
 
 function analyzeSpacing(figmaTokens: TokenCategory, codeSpacing: CodeSpacing[]) {
-  const figmaSpacingMap = new Map(
-    figmaTokens.spacing.map((t) => [Number(t.rawValue), t.figmaKey])
-  );
-  const codeSpacingMap = new Map(codeSpacing.map((s) => [s.px, s.key]));
-
   const matched: GapEntry[] = [];
   const figmaOnly: GapEntry[] = [];
   const codeOnly: GapEntry[] = [];
 
-  for (const [px, figmaKey] of figmaSpacingMap.entries()) {
+  const matchedCodeKeys = new Set<string>();
+
+  // Each Figma spacing token is independently checked - multiple tokens can match the same code key
+  for (const t of figmaTokens.spacing) {
+    const px = Number(t.rawValue);
     if (isNaN(px)) continue;
-    if (codeSpacingMap.has(px)) {
+    const codeMatch = codeSpacing.find((s) => s.px === px);
+    if (codeMatch) {
       matched.push({
-        figmaKey,
+        figmaKey: t.figmaKey,
         figmaValue: `${px}px`,
-        codeKey: codeSpacingMap.get(px),
+        codeKey: codeMatch.key,
         codeValue: `${px}px`,
       });
+      matchedCodeKeys.add(codeMatch.key);
     } else {
-      figmaOnly.push({ figmaKey, figmaValue: `${px}px` });
+      figmaOnly.push({ figmaKey: t.figmaKey, figmaValue: `${px}px` });
     }
   }
 
-  for (const [px, codeKey] of codeSpacingMap.entries()) {
-    if (!figmaSpacingMap.has(px)) {
-      codeOnly.push({ codeKey, codeValue: `${px}px` });
+  for (const s of codeSpacing) {
+    if (!matchedCodeKeys.has(s.key)) {
+      codeOnly.push({ codeKey: s.key, codeValue: s.value });
     }
   }
 
@@ -203,21 +221,19 @@ function analyzeSpacing(figmaTokens: TokenCategory, codeSpacing: CodeSpacing[]) 
 }
 
 function analyzeTypography(figmaTokens: TokenCategory, codeFontSizes: CodeFontSize[]) {
-  // Extract font sizes from Figma typography tokens
   const figmaFontSizes = new Map<number, string>();
+
+  // Inline sizes from typography composite tokens
   for (const t of figmaTokens.typography) {
     const m = t.rawValue.match(/size:\s*(?:[\w\/]+|(\d+))/);
     if (m && m[1]) {
       figmaFontSizes.set(Number(m[1]), t.figmaKey);
     }
-    // Also check the raw dimension sizes
   }
-  // Also include heading/body dimension keys
-  for (const t of figmaTokens.layout) {
-    if (/headings|body|ui/i.test(t.figmaKey)) {
-      const num = Number(t.rawValue);
-      if (!isNaN(num)) figmaFontSizes.set(num, t.figmaKey);
-    }
+  // Explicit font size dimension tokens (Headings/*, Body/*, UI/*)
+  for (const t of figmaTokens.fontSizes) {
+    const num = Number(t.rawValue);
+    if (!isNaN(num)) figmaFontSizes.set(num, t.figmaKey);
   }
 
   const codeSizeMap = new Map(codeFontSizes.map((s) => [s.px, s.key]));
@@ -248,7 +264,6 @@ function analyzeShadows(figmaTokens: TokenCategory, codeShadows: CodeShadow[]) {
   const figmaOnly: GapEntry[] = [];
   const codeOnly: GapEntry[] = [];
 
-  // Match by dp level in the name
   const figmaShadowNames = figmaTokens.shadows.map((t) => ({
     figmaKey: t.figmaKey,
     rawValue: t.rawValue,
@@ -286,7 +301,7 @@ function analyzeShadows(figmaTokens: TokenCategory, codeShadows: CodeShadow[]) {
     }
   }
 
-  for (const cs of codeShadowNames.slice(0, 10)) { // Only include dp shadows, not button shadows
+  for (const cs of codeShadowNames) {
     if (!codeMatchedKeys.has(cs.codeKey) && /^dp\d+$/.test(cs.codeKey)) {
       codeOnly.push({ codeKey: cs.codeKey, codeValue: cs.value.slice(0, 60) + '...' });
     }

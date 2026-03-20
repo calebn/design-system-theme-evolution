@@ -98,7 +98,7 @@ graph TD
     Single_Select_Box["Single Select Box"]
   end
 
-  %% HTML to Atom connections
+  %% HTML to Atom and Input connections
   button --> Button
   button --> Next_Previous_Buttons
   button --> Increase_Decrease_Buttons
@@ -150,6 +150,8 @@ graph TD
   select --> Single_Select_Box
 
   %% Atom/Input to Molecule connections
+  Button --> Button_group
+  Text_Button_Icon_Right --> Button_group
   Close_Button --> Toast_Bar
   Button --> Text_Section_with_Button_Group
   Text_Button_Icon_Right --> Text_Section_with_Button_Group
@@ -192,7 +194,7 @@ graph TD
 
 ```mermaid
 graph TD
-  subgraph atomDeps ["Atom Dependencies"]
+  subgraph atomDeps ["Atom Internal Dependencies"]
     Tabbed_Selector_Button["Tabbed Selector Button"] --> Tabbed_Selector["Tabbed Selector"]
     Expand_Collapse_Button["Expand-Collapse Button"] --> Accordion_Section["Accordion Section"]
     Button["Button"] --> Modal_Button_Group["Modal Button Group"]
@@ -210,7 +212,7 @@ graph TD
 | Molecule | Depends On |
 |----------|------------|
 | Basic Form | Text Input (single line), Dropdown, Checkbox, Radio Button, Button |
-| Button group | — |
+| Button group | Button, Text Button—Icon Right |
 | Carousel Product | Next-Previous Buttons, Slider Scroll Bar, Slider page selector |
 | Free Trial Card | Button, Stepper CTA |
 | Modal Dialog | Button, Close Button, Modal Button Group |

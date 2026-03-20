@@ -4,147 +4,194 @@
       {
         "figmaKey": "Primary/Subscription Blue",
         "figmaValue": "#00042f",
-        "codeKey": "c500",
+        "codeKey": "primary.c500",
         "codeValue": "#00042f"
       },
       {
         "figmaKey": "white",
         "figmaValue": "#ffffff",
-        "codeKey": "pureWhite",
+        "codeKey": "grey.c100, pureWhite",
         "codeValue": "#ffffff"
       },
       {
         "figmaKey": "Primary/Logos Blue",
         "figmaValue": "#1e6afe",
-        "codeKey": "c300",
+        "codeKey": "primary.c300",
         "codeValue": "#1e6afe"
+      },
+      {
+        "figmaKey": "Secondary/Light Blue 3",
+        "figmaValue": "#f5fbff",
+        "codeKey": "secondary.c100",
+        "codeValue": "#f5fbff"
       },
       {
         "figmaKey": "Secondary/Alt Blue",
         "figmaValue": "#4885fe",
-        "codeKey": "c200",
+        "codeKey": "secondary.c200",
         "codeValue": "#4885fe"
+      },
+      {
+        "figmaKey": "Secondary/Light Blue 2",
+        "figmaValue": "#e9f5ff",
+        "codeKey": "primary.c100",
+        "codeValue": "#e9f5ff"
       },
       {
         "figmaKey": "Secondary/Deep Blue 2",
         "figmaValue": "#040f8b",
-        "codeKey": "c400",
+        "codeKey": "secondary.c400",
         "codeValue": "#040f8b"
       },
       {
         "figmaKey": "Primary/Deep Blue",
         "figmaValue": "#030b60",
-        "codeKey": "c400",
+        "codeKey": "primary.c400",
         "codeValue": "#030b60"
+      },
+      {
+        "figmaKey": "Deep Colors/Green",
+        "figmaValue": "#5ba224",
+        "codeKey": "success.base",
+        "codeValue": "#5ba224"
       },
       {
         "figmaKey": "Bright Colors/Bright Yellow",
         "figmaValue": "#fff369",
-        "codeKey": "vivid",
+        "codeKey": "warning.vivid",
         "codeValue": "#fff369"
       },
       {
         "figmaKey": "Bright Colors/Bright Red",
         "figmaValue": "#ff6d6d",
-        "codeKey": "vivid",
+        "codeKey": "danger.vivid",
         "codeValue": "#ff6d6d"
+      },
+      {
+        "figmaKey": "Deep Colors/Yellow",
+        "figmaValue": "#dba910",
+        "codeKey": "warning.base",
+        "codeValue": "#dba910"
+      },
+      {
+        "figmaKey": "Deep Colors/Red",
+        "figmaValue": "#cc3333",
+        "codeKey": "danger.base",
+        "codeValue": "#cc3333"
+      },
+      {
+        "figmaKey": "Secondary/Light Blue 1",
+        "figmaValue": "#c1e4ff",
+        "codeKey": "primary.c200",
+        "codeValue": "#c1e4ff"
       },
       {
         "figmaKey": "Secondary/Very Deep Gray",
         "figmaValue": "#303030",
-        "codeKey": "c300",
+        "codeKey": "black.c300",
         "codeValue": "#303030"
       }
     ],
-    "figmaOnly": [
-      {
-        "figmaKey": "Secondary/Light Blue 3",
-        "figmaValue": "#f5fbff"
-      },
-      {
-        "figmaKey": "Secondary/Light Blue 2",
-        "figmaValue": "#e9f5ff"
-      },
-      {
-        "figmaKey": "Deep Colors/Green",
-        "figmaValue": "#5ba224"
-      },
-      {
-        "figmaKey": "Deep Colors/Yellow",
-        "figmaValue": "#dba910"
-      },
-      {
-        "figmaKey": "Deep Colors/Red",
-        "figmaValue": "#cc3333"
-      },
-      {
-        "figmaKey": "Secondary/Light Blue 1",
-        "figmaValue": "#c1e4ff"
-      }
-    ],
+    "figmaOnly": [],
     "codeOnly": [
       {
-        "codeKey": "c150",
+        "codeKey": "secondary.c150",
         "codeValue": "#9bcdff"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "secondary.c300",
         "codeValue": "#3640b8"
       },
       {
-        "codeKey": "vivid",
+        "codeKey": "success.vivid",
         "codeValue": "#54eb54"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "yellow.c100",
+        "codeValue": "#f2ebbd"
+      },
+      {
+        "codeKey": "yellow.c200",
         "codeValue": "#efdf79"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "yellow.c300",
+        "codeValue": "#dec62b"
+      },
+      {
+        "codeKey": "orange.c100",
+        "codeValue": "#ecd1c1"
+      },
+      {
+        "codeKey": "orange.c200",
+        "codeValue": "#d87c44"
+      },
+      {
+        "codeKey": "orange.c300",
         "codeValue": "#ad4100"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "red.c100",
+        "codeValue": "#edcbcb"
+      },
+      {
+        "codeKey": "red.c200",
         "codeValue": "#da6969"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "red.c300",
         "codeValue": "#b31e31"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "purple.c100",
+        "codeValue": "#debbda"
+      },
+      {
+        "codeKey": "purple.c200",
         "codeValue": "#a4619c"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "purple.c300",
         "codeValue": "#502d4c"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "green.c100",
+        "codeValue": "#c8e4c8"
+      },
+      {
+        "codeKey": "green.c200",
         "codeValue": "#88ce88"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "green.c300",
         "codeValue": "#227421"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "grey.c200",
         "codeValue": "#f5f5f5"
       },
       {
-        "codeKey": "c300",
+        "codeKey": "grey.c300",
         "codeValue": "#ebebeb"
       },
       {
-        "codeKey": "c400",
+        "codeKey": "grey.c400",
         "codeValue": "#dbdbdb"
       },
       {
-        "codeKey": "c200",
+        "codeKey": "grey.c500",
+        "codeValue": "#c7c7c7"
+      },
+      {
+        "codeKey": "black.c100",
+        "codeValue": "#7e7e7e"
+      },
+      {
+        "codeKey": "black.c200",
         "codeValue": "#3d3d3d"
       },
       {
-        "codeKey": "c400",
+        "codeKey": "black.c400",
         "codeValue": "#1f1d20"
       },
       {
@@ -156,7 +203,7 @@
   "spacing": {
     "matched": [
       {
-        "figmaKey": "Spacing | In Component/Kicker - Headline",
+        "figmaKey": "Spacing | Horizontal/MD",
         "figmaValue": "12px",
         "codeKey": "sp12",
         "codeValue": "12px"
@@ -168,19 +215,19 @@
         "codeValue": "8px"
       },
       {
-        "figmaKey": "Spacing | In Component/Headline - Note",
+        "figmaKey": "Spacing | Horizontal/XS",
         "figmaValue": "6px",
         "codeKey": "sp6",
         "codeValue": "6px"
       },
       {
-        "figmaKey": "Padding/SM",
+        "figmaKey": "Spacing | In Component/CTA Button - CTA Button | Horizontal",
         "figmaValue": "16px",
         "codeKey": "sp16",
         "codeValue": "16px"
       },
       {
-        "figmaKey": "Spacing | Horizontal/XL",
+        "figmaKey": "Padding/MD",
         "figmaValue": "24px",
         "codeKey": "sp24",
         "codeValue": "24px"
@@ -192,10 +239,64 @@
         "codeValue": "30px"
       },
       {
-        "figmaKey": "Vertical/Small",
+        "figmaKey": "Spacing | In Component/Accordion Padding | Vertical",
+        "figmaValue": "24px",
+        "codeKey": "sp24",
+        "codeValue": "24px"
+      },
+      {
+        "figmaKey": "Spacing | Vertical/XXS",
+        "figmaValue": "24px",
+        "codeKey": "sp24",
+        "codeValue": "24px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/Text - Image",
         "figmaValue": "48px",
         "codeKey": "sp48",
         "codeValue": "48px"
+      },
+      {
+        "figmaKey": "Padding/XL",
+        "figmaValue": "48px",
+        "codeKey": "sp48",
+        "codeValue": "48px"
+      },
+      {
+        "figmaKey": "Padding/XS",
+        "figmaValue": "12px",
+        "codeKey": "sp12",
+        "codeValue": "12px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/CTA - Disclaimer",
+        "figmaValue": "16px",
+        "codeKey": "sp16",
+        "codeValue": "16px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/CTA Button - CTA Button | Vertical",
+        "figmaValue": "16px",
+        "codeKey": "sp16",
+        "codeValue": "16px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/Body CTA",
+        "figmaValue": "36px",
+        "codeKey": "sp36",
+        "codeValue": "36px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/Headline - Note",
+        "figmaValue": "6px",
+        "codeKey": "sp6",
+        "codeValue": "6px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/Kicker - Headline",
+        "figmaValue": "12px",
+        "codeKey": "sp12",
+        "codeValue": "12px"
       },
       {
         "figmaKey": "Spacing | Vertical/XS",
@@ -204,16 +305,44 @@
         "codeValue": "36px"
       },
       {
+        "figmaKey": "Spacing | Vertical/SM",
+        "figmaValue": "60px",
+        "codeKey": "sp60",
+        "codeValue": "60px"
+      },
+      {
         "figmaKey": "Padding/XXL",
         "figmaValue": "60px",
         "codeKey": "sp60",
         "codeValue": "60px"
+      },
+      {
+        "figmaKey": "Padding/SM",
+        "figmaValue": "16px",
+        "codeKey": "sp16",
+        "codeValue": "16px"
+      },
+      {
+        "figmaKey": "Vertical/Small",
+        "figmaValue": "48px",
+        "codeKey": "sp48",
+        "codeValue": "48px"
+      },
+      {
+        "figmaKey": "Spacing | Horizontal/XL",
+        "figmaValue": "24px",
+        "codeKey": "sp24",
+        "codeValue": "24px"
       }
     ],
     "figmaOnly": [
       {
         "figmaKey": "Spacing | Horizontal/LG",
         "figmaValue": "18px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/CTA Button - CTA text link | Horizontal",
+        "figmaValue": "32px"
       },
       {
         "figmaKey": "Padding/LG",

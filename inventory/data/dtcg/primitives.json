@@ -286,47 +286,12 @@
     "tier": "primitive",
     "figmaKey": "Spacing | Horizontal/XL"
   },
-  "headings-h1-large": {
-    "$value": "120px",
-    "$type": "dimension",
-    "$description": "Figma: Headings/H1 Large",
-    "tier": "primitive",
-    "figmaKey": "Headings/H1 Large"
-  },
-  "ui-1": {
-    "$value": "18px",
-    "$type": "dimension",
-    "$description": "Figma: UI/1",
-    "tier": "primitive",
-    "figmaKey": "UI/1"
-  },
-  "ui-2": {
-    "$value": "16px",
-    "$type": "dimension",
-    "$description": "Figma: UI/2",
-    "tier": "primitive",
-    "figmaKey": "UI/2"
-  },
   "columns-2": {
     "$value": "480px",
     "$type": "dimension",
     "$description": "Figma: Columns/2",
     "tier": "primitive",
     "figmaKey": "Columns/2"
-  },
-  "ui-4": {
-    "$value": "12px",
-    "$type": "dimension",
-    "$description": "Figma: UI/4",
-    "tier": "primitive",
-    "figmaKey": "UI/4"
-  },
-  "body-fine-print": {
-    "$value": "12px",
-    "$type": "dimension",
-    "$description": "Figma: Body/Fine Print",
-    "tier": "primitive",
-    "figmaKey": "Body/Fine Print"
   },
   "gutter-large": {
     "$value": "32px",
@@ -341,27 +306,6 @@
     "$description": "Figma: Viewport/Container Width",
     "tier": "primitive",
     "figmaKey": "Viewport/Container Width"
-  },
-  "body-body-regular": {
-    "$value": "18px",
-    "$type": "dimension",
-    "$description": "Figma: Body/Body Regular",
-    "tier": "primitive",
-    "figmaKey": "Body/Body Regular"
-  },
-  "ui-3": {
-    "$value": "14px",
-    "$type": "dimension",
-    "$description": "Figma: UI/3",
-    "tier": "primitive",
-    "figmaKey": "UI/3"
-  },
-  "body-body-small": {
-    "$value": "16px",
-    "$type": "dimension",
-    "$description": "Figma: Body/Body Small",
-    "tier": "primitive",
-    "figmaKey": "Body/Body Small"
   },
   "columns-4": {
     "$value": "960px",
@@ -383,13 +327,6 @@
     "$description": "Figma: Columns/5",
     "tier": "primitive",
     "figmaKey": "Columns/5"
-  },
-  "body-body-large": {
-    "$value": "24px",
-    "$type": "dimension",
-    "$description": "Figma: Body/Body Large",
-    "tier": "primitive",
-    "figmaKey": "Body/Body Large"
   },
   "gutter-default": {
     "$value": "16px",

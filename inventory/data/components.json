@@ -3,6 +3,8 @@
     "name": "Button",
     "figmaId": "1623:3480",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "Button",
     "variantCount": 216,
     "properties": {
       "Type": [
@@ -38,6 +40,8 @@
     "name": "Next-Previous Buttons",
     "figmaId": "1623:4561",
     "section": "atoms",
+    "functionalCategory": "selection",
+    "proposedCodeName": "PreviousNextButtons",
     "variantCount": 144,
     "properties": {
       "Size": [
@@ -72,6 +76,8 @@
     "name": "Increase-Decrease Buttons",
     "figmaId": "1623:4610",
     "section": "atoms",
+    "functionalCategory": "selection",
+    "proposedCodeName": "QuantityButtons",
     "variantCount": 48,
     "properties": {
       "Size": [
@@ -101,6 +107,8 @@
     "name": "Expand-Collapse Button",
     "figmaId": "1623:4708",
     "section": "atoms",
+    "functionalCategory": "selection",
+    "proposedCodeName": "ExpandCollapseButton",
     "variantCount": 48,
     "properties": {
       "Size": [
@@ -130,6 +138,8 @@
     "name": "Close Button",
     "figmaId": "1623:4757",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "CloseButton",
     "variantCount": 48,
     "properties": {
       "Size": [
@@ -159,6 +169,8 @@
     "name": "Text Button—Icon Right",
     "figmaId": "1623:4782",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "TextButtonIconRight",
     "variantCount": 32,
     "properties": {
       "Type": [
@@ -187,6 +199,8 @@
     "name": "Text Button—Icon Left",
     "figmaId": "5762:102995",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "TextButtonIconLeft",
     "variantCount": 16,
     "properties": {
       "Type": [
@@ -216,6 +230,8 @@
     "name": "Floating Action Button",
     "figmaId": "1623:4908",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "FloatingActionButton",
     "variantCount": 36,
     "properties": {
       "Size": [
@@ -242,6 +258,8 @@
     "name": "Play Button",
     "figmaId": "1864:94164",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "PlayButton",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -258,6 +276,8 @@
     "name": "Breadcrumbs",
     "figmaId": "1623:4917",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "Breadcrumbs",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -274,6 +294,8 @@
     "name": "Simple Menu",
     "figmaId": "1623:4958",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "SimpleMenu",
     "variantCount": 5,
     "properties": {
       "State": [
@@ -291,6 +313,8 @@
     "name": "Button Menu",
     "figmaId": "1623:5096",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "ButtonMenu",
     "variantCount": 10,
     "properties": {
       "State": [
@@ -312,6 +336,8 @@
     "name": "Tabbed Selector Button",
     "figmaId": "2532:76553",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "TabbedSelectorTab",
     "variantCount": 10,
     "properties": {
       "Size": [
@@ -333,6 +359,8 @@
     "name": "Floating Action Button with Text",
     "figmaId": "5650:121531",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "FloatingActionButtonLabel",
     "variantCount": 10,
     "properties": {
       "Size": [
@@ -354,6 +382,8 @@
     "name": "Slider Scroll Bar",
     "figmaId": "2245:93685",
     "section": "atoms",
+    "functionalCategory": "selection",
+    "proposedCodeName": "ScrollBar",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -370,6 +400,8 @@
     "name": "Next-Previous Selector",
     "figmaId": "1758:5088",
     "section": "atoms",
+    "functionalCategory": "selection",
+    "proposedCodeName": "PreviousNextSelector",
     "variantCount": 4,
     "properties": {
       "Size": [
@@ -388,6 +420,8 @@
     "name": "Stepper Control",
     "figmaId": "1623:5401",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "StepperControl",
     "variantCount": 8,
     "properties": {
       "Size": [
@@ -408,6 +442,8 @@
     "name": "Stepper CTA",
     "figmaId": "5773:64162",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "StepperCta",
     "variantCount": 12,
     "properties": {
       "Stage": [
@@ -431,6 +467,8 @@
     "name": "Star",
     "figmaId": "1770:9407",
     "section": "atoms",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "StarIcon",
     "variantCount": 12,
     "properties": {
       "State": [
@@ -453,6 +491,8 @@
     "name": "Tabbed Selector",
     "figmaId": "2529:76540",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "TabbedSelector",
     "variantCount": 5,
     "properties": {
       "Selection": [
@@ -470,6 +510,8 @@
     "name": "Reviews",
     "figmaId": "1770:9371",
     "section": "atoms",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "ReviewRating",
     "variantCount": 22,
     "properties": {
       "Rating": [
@@ -497,6 +539,8 @@
     "name": "CTA Row",
     "figmaId": "2769:25152",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "CtaRow",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -513,6 +557,8 @@
     "name": "Category Button",
     "figmaId": "1935:4111",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "CategoryButton",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -529,6 +575,8 @@
     "name": "Modal Button Group",
     "figmaId": "5762:105611",
     "section": "atoms",
+    "functionalCategory": "feedback",
+    "proposedCodeName": "ModalButtonGroup",
     "variantCount": 5,
     "properties": {
       "Style": [
@@ -549,6 +597,8 @@
     "name": "Accordion Section",
     "figmaId": "1859:51731",
     "section": "atoms",
+    "functionalCategory": "content-layout",
+    "proposedCodeName": "Accordion",
     "variantCount": 12,
     "properties": {
       "Size": [
@@ -570,6 +620,8 @@
     "name": "Subnav Dropdown Options",
     "figmaId": "6331:34528",
     "section": "atoms",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "SubnavDropdownOption",
     "variantCount": 7,
     "properties": {
       "State": [
@@ -592,6 +644,8 @@
     "name": "Stateful Action Button",
     "figmaId": "7538:45104",
     "section": "atoms",
+    "functionalCategory": "actions",
+    "proposedCodeName": "StatefulButton",
     "variantCount": 6,
     "properties": {
       "State": [
@@ -610,6 +664,8 @@
     "name": "Toast Bar",
     "figmaId": "1770:8729",
     "section": "molecules",
+    "functionalCategory": "feedback",
+    "proposedCodeName": "Toast",
     "variantCount": 8,
     "properties": {
       "Type": [
@@ -630,6 +686,8 @@
     "name": "Button group",
     "figmaId": "1623:5083",
     "section": "molecules",
+    "functionalCategory": "selection",
+    "proposedCodeName": "ButtonGroup",
     "variantCount": 6,
     "properties": {
       "Size": [
@@ -649,6 +707,8 @@
     "name": "Text Section with Button Group",
     "figmaId": "1770:9202",
     "section": "molecules",
+    "functionalCategory": "content-layout",
+    "proposedCodeName": "TextSectionWithButtons",
     "variantCount": 3,
     "properties": {
       "Size": [
@@ -664,6 +724,8 @@
     "name": "Text Section",
     "figmaId": "2529:76369",
     "section": "molecules",
+    "functionalCategory": "content-layout",
+    "proposedCodeName": "TextSection",
     "variantCount": 5,
     "properties": {
       "Headline Size": [
@@ -681,6 +743,8 @@
     "name": "Free Trial Card",
     "figmaId": "1880:108955",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "FreeTrialCard",
     "variantCount": 1,
     "properties": {
       "Style": [
@@ -694,6 +758,8 @@
     "name": "Product Content",
     "figmaId": "1949:59922",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "ProductContent",
     "variantCount": 3,
     "properties": {
       "Style": [
@@ -709,6 +775,8 @@
     "name": "Slider page selector",
     "figmaId": "1756:2384",
     "section": "molecules",
+    "functionalCategory": "selection",
+    "proposedCodeName": "PageSelector",
     "variantCount": 2,
     "properties": {
       "Style": [
@@ -726,6 +794,8 @@
     "name": "Carousel Product",
     "figmaId": "2262:261677",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "ProductCarousel",
     "variantCount": 1,
     "properties": {
       "Style": [
@@ -739,6 +809,8 @@
     "name": "Section Headline with CTA",
     "figmaId": "2457:71522",
     "section": "molecules",
+    "functionalCategory": "content-layout",
+    "proposedCodeName": "SectionHeadlineWithCta",
     "variantCount": 4,
     "properties": {
       "Size": [
@@ -755,6 +827,8 @@
     "name": "Section Headline",
     "figmaId": "2529:76419",
     "section": "molecules",
+    "functionalCategory": "content-layout",
+    "proposedCodeName": "SectionHeadline",
     "variantCount": 3,
     "properties": {
       "Size": [
@@ -770,6 +844,8 @@
     "name": "Basic Form",
     "figmaId": "2761:34608",
     "section": "molecules",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Form",
     "variantCount": 7,
     "properties": {
       "Size": [
@@ -793,6 +869,8 @@
     "name": "Multi-CTA List",
     "figmaId": "2769:25078",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "CtaList",
     "variantCount": 1,
     "properties": {
       "Size": [
@@ -806,6 +884,8 @@
     "name": "Product Grid Card",
     "figmaId": "1982:24943",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "ProductCard",
     "variantCount": 3,
     "properties": {
       "Size": [
@@ -824,6 +904,8 @@
     "name": "Modal Dialog",
     "figmaId": "5787:116045",
     "section": "molecules",
+    "functionalCategory": "feedback",
+    "proposedCodeName": "Modal",
     "variantCount": 6,
     "properties": {
       "Size": [
@@ -846,6 +928,8 @@
     "name": "Product Lineup—Single",
     "figmaId": "1949:49395",
     "section": "molecules",
+    "functionalCategory": "product",
+    "proposedCodeName": "ProductLineup",
     "variantCount": 3,
     "properties": {
       "Size": [
@@ -861,6 +945,8 @@
     "name": "Subnav Dropdown",
     "figmaId": "6331:34404",
     "section": "molecules",
+    "functionalCategory": "navigation",
+    "proposedCodeName": "SubnavDropdown",
     "variantCount": 3,
     "properties": {
       "Size": [
@@ -876,6 +962,8 @@
     "name": "Checkbox",
     "figmaId": "1623:5118",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Checkbox",
     "variantCount": 2,
     "properties": {
       "State": [
@@ -890,6 +978,8 @@
     "name": "Switch",
     "figmaId": "1623:5125",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Switch",
     "variantCount": 2,
     "properties": {
       "On-Off": [
@@ -907,6 +997,8 @@
     "name": "Text Input (single line)",
     "figmaId": "1623:5130",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "TextInput",
     "variantCount": 12,
     "properties": {
       "Style": [
@@ -929,6 +1021,8 @@
     "name": "Text Input (name, two fields)",
     "figmaId": "2758:3449",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "TextInputGroup",
     "variantCount": 6,
     "properties": {
       "Style": [
@@ -948,6 +1042,8 @@
     "name": "Radio Button",
     "figmaId": "1623:5243",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "RadioButton",
     "variantCount": 2,
     "properties": {
       "State": [
@@ -962,6 +1058,8 @@
     "name": "Multi-Select with Text",
     "figmaId": "1623:5250",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "MultiSelect",
     "variantCount": 24,
     "properties": {
       "State": [
@@ -988,6 +1086,8 @@
     "name": "Toggle with Text",
     "figmaId": "1623:5311",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "Toggle",
     "variantCount": 6,
     "properties": {
       "Property 1": [
@@ -1006,6 +1106,8 @@
     "name": "Upload Image Area",
     "figmaId": "1623:5327",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "FileUpload",
     "variantCount": 4,
     "properties": {
       "Property 1": [
@@ -1022,6 +1124,8 @@
     "name": "Toggle Switch (text)",
     "figmaId": "1623:5340",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "ToggleGroup",
     "variantCount": 10,
     "properties": {
       "Selection": [
@@ -1048,6 +1152,8 @@
     "name": "Text Input—Multiline",
     "figmaId": "1623:5422",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Textarea",
     "variantCount": 6,
     "properties": {
       "State": [
@@ -1066,6 +1172,8 @@
     "name": "Dropdown",
     "figmaId": "1623:5473",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Dropdown",
     "variantCount": 7,
     "properties": {
       "State": [
@@ -1084,6 +1192,8 @@
     "name": "Form Dropdown",
     "figmaId": "1623:5532",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "FormDropdown",
     "variantCount": 3,
     "properties": {
       "State": [
@@ -1099,6 +1209,8 @@
     "name": "Multi-Selector",
     "figmaId": "1623:5614",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "MultiSelector",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -1114,6 +1226,8 @@
     "name": "Text Toggle Selector",
     "figmaId": "1623:5649",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "TextToggleSelector",
     "variantCount": 1,
     "properties": {
       "Property 1": [
@@ -1127,6 +1241,8 @@
     "name": "Text Toggle Selector",
     "figmaId": "1623:5653",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "TextToggleSelector",
     "variantCount": 1,
     "properties": {
       "Property 1": [
@@ -1140,6 +1256,8 @@
     "name": "Text Input—Date",
     "figmaId": "1623:5660",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "DateInput",
     "variantCount": 6,
     "properties": {
       "State": [
@@ -1158,6 +1276,8 @@
     "name": "Text Input—Password",
     "figmaId": "1623:5741",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "PasswordInput",
     "variantCount": 7,
     "properties": {
       "State": [
@@ -1177,6 +1297,8 @@
     "name": "Slider",
     "figmaId": "1623:5807",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "Slider",
     "variantCount": 6,
     "properties": {
       "State": [
@@ -1195,6 +1317,8 @@
     "name": "Search Field",
     "figmaId": "1623:5874",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "SearchField",
     "variantCount": 10,
     "properties": {
       "Size": [
@@ -1216,6 +1340,8 @@
     "name": "Email Capture",
     "figmaId": "1623:5925",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "EmailCaptureField",
     "variantCount": 6,
     "properties": {
       "State": [
@@ -1234,6 +1360,8 @@
     "name": "Form Dropdown Option",
     "figmaId": "2015:39220",
     "section": "inputs",
+    "functionalCategory": "data-entry",
+    "proposedCodeName": "DropdownOption",
     "variantCount": 5,
     "properties": {
       "State": [
@@ -1251,6 +1379,8 @@
     "name": "Single Select Box",
     "figmaId": "4543:14867",
     "section": "inputs",
+    "functionalCategory": "selection",
+    "proposedCodeName": "SelectBox",
     "variantCount": 2,
     "properties": {
       "State": [
@@ -1265,6 +1395,8 @@
     "name": "Badges and Tags",
     "figmaId": "1773:12115",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "Badge",
     "variantCount": 12,
     "properties": {
       "Style": [
@@ -1286,6 +1418,8 @@
     "name": "Product Images",
     "figmaId": "1946:5555",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "ProductImage",
     "variantCount": 7,
     "properties": {
       "Aspect Ratio": [
@@ -1305,6 +1439,8 @@
     "name": "Price and Label",
     "figmaId": "3707:42767",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "PriceLabel",
     "variantCount": 7,
     "properties": {
       "Style": [
@@ -1324,6 +1460,8 @@
     "name": "Image Ratios",
     "figmaId": "4450:79904",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "ImageContainer",
     "variantCount": 8,
     "properties": {
       "Aspect Ratio": [
@@ -1344,6 +1482,8 @@
     "name": "Sale Percentage",
     "figmaId": "5173:41321",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "SaleBadge",
     "variantCount": 8,
     "properties": {
       "Style": [
@@ -1364,6 +1504,8 @@
     "name": "List",
     "figmaId": "1874:101886",
     "section": "other",
+    "functionalCategory": "data-display",
+    "proposedCodeName": "List",
     "variantCount": 4,
     "properties": {
       "Style": [

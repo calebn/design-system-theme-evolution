@@ -2,7 +2,7 @@
  * parse-figma.ts
  *
  * Parses raw Figma MCP output into structured inventory JSON:
- *   raw/figma-metadata.xml  -> data/components.json, data/variant-axes.json
+ *   raw/figma-metadata.xml  -> data/components.json, data/variant-axes.json, data/taxonomy.json
  *   raw/figma-variables.json -> data/tokens.json
  */
 
@@ -16,6 +16,9 @@ import type {
   TokenCategory,
   Section,
   ComponentVariantProperties,
+  FunctionalCategory,
+  Taxonomy,
+  TaxonomyCategory,
 } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -29,6 +32,184 @@ function writeJson(p: string, data: unknown) {
   ensureDir(dirname(p));
   writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
   console.log(`  wrote ${p.replace(ROOT, '.')}`);
+}
+
+// ---------------------------------------------------------------------------
+// Functional category assignment (explicit name lookup)
+// ---------------------------------------------------------------------------
+
+const FUNCTIONAL_CATEGORY_MAP: Record<string, FunctionalCategory> = {
+  // Navigation
+  'Breadcrumbs': 'navigation',
+  'Simple Menu': 'navigation',
+  'Button Menu': 'navigation',
+  'Tabbed Selector': 'navigation',
+  'Tabbed Selector Button': 'navigation',
+  'Subnav Dropdown': 'navigation',
+  'Subnav Dropdown Options': 'navigation',
+  // Actions
+  'Button': 'actions',
+  'Text Button—Icon Right': 'actions',
+  'Text Button—Icon Left': 'actions',
+  'Close Button': 'actions',
+  'Floating Action Button': 'actions',
+  'Floating Action Button with Text': 'actions',
+  'Play Button': 'actions',
+  'Category Button': 'actions',
+  'CTA Row': 'actions',
+  'Stateful Action Button': 'actions',
+  'Stepper CTA': 'actions',
+  'Stepper Control': 'actions',
+  // Feedback
+  'Toast Bar': 'feedback',
+  'Modal Dialog': 'feedback',
+  'Modal Button Group': 'feedback',
+  // Content Layout
+  'Section Headline': 'content-layout',
+  'Section Headline with CTA': 'content-layout',
+  'Text Section': 'content-layout',
+  'Text Section with Button Group': 'content-layout',
+  'Accordion Section': 'content-layout',
+  // Product
+  'Product Content': 'product',
+  'Product Grid Card': 'product',
+  'Product Lineup—Single': 'product',
+  'Free Trial Card': 'product',
+  'Carousel Product': 'product',
+  'Multi-CTA List': 'product',
+  // Data Display
+  'Badges and Tags': 'data-display',
+  'Price and Label': 'data-display',
+  'Sale Percentage': 'data-display',
+  'Reviews': 'data-display',
+  'Star': 'data-display',
+  'Product Images': 'data-display',
+  'Image Ratios': 'data-display',
+  'List': 'data-display',
+  // Selection / Controls
+  'Next-Previous Buttons': 'selection',
+  'Next-Previous Selector': 'selection',
+  'Increase-Decrease Buttons': 'selection',
+  'Expand-Collapse Button': 'selection',
+  'Slider Scroll Bar': 'selection',
+  'Slider page selector': 'selection',
+  'Button group': 'selection',
+  'Multi-Select with Text': 'selection',
+  'Multi-Selector': 'selection',
+  'Toggle Switch (text)': 'selection',
+  'Toggle with Text': 'selection',
+  'Text Toggle Selector': 'selection',
+  'Single Select Box': 'selection',
+  // Data Entry
+  'Checkbox': 'data-entry',
+  'Dropdown': 'data-entry',
+  'Email Capture': 'data-entry',
+  'Form Dropdown': 'data-entry',
+  'Form Dropdown Option': 'data-entry',
+  'Radio Button': 'data-entry',
+  'Search Field': 'data-entry',
+  'Slider': 'data-entry',
+  'Switch': 'data-entry',
+  'Text Input (name, two fields)': 'data-entry',
+  'Text Input (single line)': 'data-entry',
+  'Text Input—Date': 'data-entry',
+  'Text Input—Multiline': 'data-entry',
+  'Text Input—Password': 'data-entry',
+  'Upload Image Area': 'data-entry',
+  'Basic Form': 'data-entry',
+};
+
+function assignFunctionalCategory(name: string): FunctionalCategory {
+  return FUNCTIONAL_CATEGORY_MAP[name] ?? 'data-display';
+}
+
+// ---------------------------------------------------------------------------
+// Proposed code names (PascalCase, no em-dashes, no ambiguous abbreviations)
+// ---------------------------------------------------------------------------
+
+const PROPOSED_CODE_NAMES: Record<string, string> = {
+  'Button': 'Button',
+  'Text Button—Icon Right': 'TextButtonIconRight',
+  'Text Button—Icon Left': 'TextButtonIconLeft',
+  'Close Button': 'CloseButton',
+  'Floating Action Button': 'FloatingActionButton',
+  'Floating Action Button with Text': 'FloatingActionButtonLabel',
+  'Play Button': 'PlayButton',
+  'Category Button': 'CategoryButton',
+  'CTA Row': 'CtaRow',
+  'Stateful Action Button': 'StatefulButton',
+  'Stepper CTA': 'StepperCta',
+  'Stepper Control': 'StepperControl',
+  'Modal Button Group': 'ModalButtonGroup',
+  'Button group': 'ButtonGroup',
+  'Breadcrumbs': 'Breadcrumbs',
+  'Simple Menu': 'SimpleMenu',
+  'Button Menu': 'ButtonMenu',
+  'Tabbed Selector': 'TabbedSelector',
+  'Tabbed Selector Button': 'TabbedSelectorTab',
+  'Subnav Dropdown': 'SubnavDropdown',
+  'Subnav Dropdown Options': 'SubnavDropdownOption',
+  'Accordion Section': 'Accordion',
+  'Next-Previous Buttons': 'PreviousNextButtons',
+  'Next-Previous Selector': 'PreviousNextSelector',
+  'Increase-Decrease Buttons': 'QuantityButtons',
+  'Expand-Collapse Button': 'ExpandCollapseButton',
+  'Slider Scroll Bar': 'ScrollBar',
+  'Slider page selector': 'PageSelector',
+  'Reviews': 'ReviewRating',
+  'Star': 'StarIcon',
+  'Badges and Tags': 'Badge',
+  'Price and Label': 'PriceLabel',
+  'Sale Percentage': 'SaleBadge',
+  'Image Ratios': 'ImageContainer',
+  'Product Images': 'ProductImage',
+  'List': 'List',
+  'Toast Bar': 'Toast',
+  'Modal Dialog': 'Modal',
+  'Section Headline': 'SectionHeadline',
+  'Section Headline with CTA': 'SectionHeadlineWithCta',
+  'Text Section': 'TextSection',
+  'Text Section with Button Group': 'TextSectionWithButtons',
+  'Product Content': 'ProductContent',
+  'Product Grid Card': 'ProductCard',
+  'Product Lineup—Single': 'ProductLineup',
+  'Free Trial Card': 'FreeTrialCard',
+  'Carousel Product': 'ProductCarousel',
+  'Multi-CTA List': 'CtaList',
+  'Basic Form': 'Form',
+  'Text Input (single line)': 'TextInput',
+  'Text Input (name, two fields)': 'TextInputGroup',
+  'Text Input—Date': 'DateInput',
+  'Text Input—Multiline': 'Textarea',
+  'Text Input—Password': 'PasswordInput',
+  'Dropdown': 'Dropdown',
+  'Form Dropdown': 'FormDropdown',
+  'Form Dropdown Option': 'DropdownOption',
+  'Checkbox': 'Checkbox',
+  'Radio Button': 'RadioButton',
+  'Switch': 'Switch',
+  'Toggle with Text': 'Toggle',
+  'Toggle Switch (text)': 'ToggleGroup',
+  'Multi-Select with Text': 'MultiSelect',
+  'Multi-Selector': 'MultiSelector',
+  'Text Toggle Selector': 'TextToggleSelector',
+  'Single Select Box': 'SelectBox',
+  'Search Field': 'SearchField',
+  'Email Capture': 'EmailCaptureField',
+  'Upload Image Area': 'FileUpload',
+  'Slider': 'Slider',
+};
+
+function assignProposedCodeName(name: string): string {
+  if (PROPOSED_CODE_NAMES[name]) return PROPOSED_CODE_NAMES[name];
+  // Fallback: PascalCase from name, strip em-dashes and special chars
+  return name
+    .replace(/—/g, ' ')
+    .replace(/[^a-zA-Z0-9 ]/g, '')
+    .split(' ')
+    .filter(Boolean)
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join('');
 }
 
 // ---------------------------------------------------------------------------
@@ -58,7 +239,7 @@ const HTML_ELEMENT_MAP: Array<[RegExp, string]> = [
   [/checkbox/i, 'input[type=checkbox]'],
   [/radio/i, 'input[type=radio]'],
   [/switch|toggle/i, 'input[type=checkbox]'],
-  [/text area|multiline/i, 'textarea'],
+  [/multiline/i, 'textarea'],
   [/upload/i, 'input[type=file]'],
   [/breadcrumb/i, 'nav'],
   [/menu|navigation|subnav/i, 'nav'],
@@ -85,12 +266,10 @@ function inferHtmlElement(name: string): string {
 
 // ---------------------------------------------------------------------------
 // Parse variant name string into property map
-// e.g. "Type=CTA (Default), Size=Large, Style=Solid" -> { Type: ["CTA (Default)"], Size: ["Large"] }
 // ---------------------------------------------------------------------------
 
 function parseVariantName(variantName: string): Record<string, string> {
   const props: Record<string, string> = {};
-  // Split on ", " but not inside parentheses
   const parts = variantName.split(/,\s*(?![^(]*\))/);
   for (const part of parts) {
     const eqIdx = part.indexOf('=');
@@ -115,24 +294,14 @@ interface RawFrame {
 
 function parseXml(xml: string): RawFrame[] {
   const frames: RawFrame[] = [];
-  let currentSection = 'atoms';
 
-  // Extract section names
-  const sectionPattern = /<section\s+[^>]*name="([^"]+)"/g;
-  const sectionMatches = [...xml.matchAll(sectionPattern)];
-  const sectionNames = sectionMatches.map((m) => m[1]);
-
-  // Find section boundaries (byte offsets)
   const sectionBoundaries: Array<{ name: string; start: number }> = [];
-  let sectionSearch = sectionPattern;
-  sectionSearch.lastIndex = 0;
-  let m: RegExpExecArray | null;
   const sp2 = /<section\s+[^>]*name="([^"]+)"/g;
+  let m: RegExpExecArray | null;
   while ((m = sp2.exec(xml)) !== null) {
     sectionBoundaries.push({ name: m[1], start: m.index });
   }
 
-  // Parse each <frame> with its child <symbol> elements
   const framePattern = /<frame\s+id="([^"]+)"\s+name="([^"]+)"[^>]*>([\s\S]*?)<\/frame>/g;
   let fm: RegExpExecArray | null;
   while ((fm = framePattern.exec(xml)) !== null) {
@@ -144,7 +313,6 @@ function parseXml(xml: string): RawFrame[] {
     const body = fm[3];
     const frameStart = fm.index;
 
-    // Determine which section this frame belongs to
     let parentSection = 'atoms';
     for (const boundary of sectionBoundaries) {
       if (boundary.start <= frameStart) {
@@ -152,7 +320,6 @@ function parseXml(xml: string): RawFrame[] {
       }
     }
 
-    // Extract symbols (variants)
     const symbols: Array<{ id: string; name: string }> = [];
     const symbolPattern = /<symbol\s+id="([^"]+)"\s+name="([^"]+)"/g;
     let sm: RegExpExecArray | null;
@@ -192,12 +359,12 @@ function framesToComponents(frames: RawFrame[]): FigmaComponent[] {
       (s) => /desktop|tablet|mobile/i.test(s.name)
     );
 
-    const section = detectSection(frame.parentSection);
-
     return {
       name: frame.name,
       figmaId: frame.id,
-      section,
+      section: detectSection(frame.parentSection),
+      functionalCategory: assignFunctionalCategory(frame.name),
+      proposedCodeName: assignProposedCodeName(frame.name),
       variantCount: frame.symbols.length,
       properties,
       hasResponsive,
@@ -230,19 +397,181 @@ function buildVariantAxes(components: FigmaComponent[]): VariantAxis[] {
 }
 
 // ---------------------------------------------------------------------------
+// Build taxonomy.json
+// ---------------------------------------------------------------------------
+
+const TAXONOMY_DEFINITIONS: TaxonomyCategory[] = [
+  {
+    id: 'actions',
+    label: 'Actions',
+    description: 'Buttons and interactive controls that trigger an operation or navigate.',
+    components: [],
+  },
+  {
+    id: 'navigation',
+    label: 'Navigation',
+    description: 'Components that help users move between pages, sections, or states.',
+    components: [],
+  },
+  {
+    id: 'data-entry',
+    label: 'Data Entry',
+    description: 'Form controls that capture user input.',
+    components: [],
+  },
+  {
+    id: 'selection',
+    label: 'Selection & Controls',
+    description: 'Controls for choosing values, navigating ranges, or toggling options.',
+    components: [],
+  },
+  {
+    id: 'data-display',
+    label: 'Data Display',
+    description: 'Read-only components that present information or status.',
+    components: [],
+  },
+  {
+    id: 'feedback',
+    label: 'Feedback & Overlays',
+    description: 'Components that communicate system state or require user acknowledgment.',
+    components: [],
+  },
+  {
+    id: 'content-layout',
+    label: 'Content Layout',
+    description: 'Structural components that arrange and present content sections.',
+    components: [],
+  },
+  {
+    id: 'product',
+    label: 'Product',
+    description: 'Commerce-specific compositions for displaying and selling products.',
+    components: [],
+  },
+];
+
+const PROPOSED_FOLDER_STRUCTURE = [
+  'src/',
+  '  actions/',
+  '    Button/',
+  '    TextButtonIconRight/',
+  '    TextButtonIconLeft/',
+  '    CloseButton/',
+  '    FloatingActionButton/',
+  '    FloatingActionButtonLabel/',
+  '    PlayButton/',
+  '    CategoryButton/',
+  '    CtaRow/',
+  '    StatefulButton/',
+  '    StepperCta/',
+  '    StepperControl/',
+  '  navigation/',
+  '    Breadcrumbs/',
+  '    SimpleMenu/',
+  '    ButtonMenu/',
+  '    TabbedSelector/',
+  '    TabbedSelectorTab/',
+  '    SubnavDropdown/',
+  '    SubnavDropdownOption/',
+  '  data-entry/',
+  '    TextInput/',
+  '    TextInputGroup/',
+  '    DateInput/',
+  '    Textarea/',
+  '    PasswordInput/',
+  '    Dropdown/',
+  '    FormDropdown/',
+  '    DropdownOption/',
+  '    Checkbox/',
+  '    RadioButton/',
+  '    Switch/',
+  '    SearchField/',
+  '    EmailCaptureField/',
+  '    FileUpload/',
+  '    Slider/',
+  '    Form/',
+  '  selection/',
+  '    PreviousNextButtons/',
+  '    PreviousNextSelector/',
+  '    QuantityButtons/',
+  '    ExpandCollapseButton/',
+  '    ScrollBar/',
+  '    PageSelector/',
+  '    ButtonGroup/',
+  '    MultiSelect/',
+  '    MultiSelector/',
+  '    ToggleGroup/',
+  '    Toggle/',
+  '    TextToggleSelector/',
+  '    SelectBox/',
+  '  data-display/',
+  '    Badge/',
+  '    PriceLabel/',
+  '    SaleBadge/',
+  '    ReviewRating/',
+  '    StarIcon/',
+  '    ProductImage/',
+  '    ImageContainer/',
+  '    List/',
+  '  feedback/',
+  '    Toast/',
+  '    Modal/',
+  '    ModalButtonGroup/',
+  '  content-layout/',
+  '    SectionHeadline/',
+  '    SectionHeadlineWithCta/',
+  '    TextSection/',
+  '    TextSectionWithButtons/',
+  '    Accordion/',
+  '  product/',
+  '    ProductContent/',
+  '    ProductCard/',
+  '    ProductLineup/',
+  '    FreeTrialCard/',
+  '    ProductCarousel/',
+  '    CtaList/',
+];
+
+function buildTaxonomy(components: FigmaComponent[]): Taxonomy {
+  const categories = TAXONOMY_DEFINITIONS.map((def) => ({
+    ...def,
+    components: components
+      .filter((c) => c.functionalCategory === def.id)
+      .map((c) => c.name)
+      .sort(),
+  }));
+
+  return {
+    categories,
+    proposedFolderStructure: PROPOSED_FOLDER_STRUCTURE,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Parse Figma variables
 // ---------------------------------------------------------------------------
 
 type RawVars = Record<string, string>;
 
+// Keys that are font size references (numeric values used by typography tokens)
+const FONT_SIZE_KEY_PREFIXES = ['Headings/', 'Body/', 'UI/'];
+
+function isFontSizeKey(key: string): boolean {
+  return FONT_SIZE_KEY_PREFIXES.some((prefix) => key.startsWith(prefix));
+}
+
 function classifyToken(key: string, value: string): FigmaToken['type'] {
-  if (value.startsWith('#') || (value.startsWith('rgba') ?? value.startsWith('rgb'))) return 'color';
+  if (value.startsWith('#') || value.startsWith('rgba') || value.startsWith('rgb')) return 'color';
   if (value.startsWith('Font(')) return 'typography';
   if (value.startsWith('Effect(')) return 'shadow';
   const lower = key.toLowerCase();
   if (lower.includes('stroke')) return 'stroke';
   if (lower.includes('column') || lower.includes('viewport') || lower.includes('gutter')) return 'layout';
-  if (!isNaN(Number(value))) return 'dimension';
+  if (!isNaN(Number(value))) {
+    if (isFontSizeKey(key)) return 'fontSize';
+    return 'dimension';
+  }
   return 'dimension';
 }
 
@@ -270,6 +599,7 @@ function parseVariables(rawVars: RawVars): TokenCategory {
     shadows: [],
     strokes: [],
     layout: [],
+    fontSizes: [],
     dimensions: [],
   };
 
@@ -303,10 +633,11 @@ function parseVariables(rawVars: RawVars): TokenCategory {
       tokens.shadows.push(token);
     } else if (type === 'stroke') {
       tokens.strokes.push(token);
+    } else if (type === 'fontSize') {
+      tokens.fontSizes.push(token);
     } else if (type === 'layout') {
       tokens.layout.push(token);
     } else {
-      // dimension - route by group
       const grp = parseGroup(key).toLowerCase();
       if (grp.includes('spacing') || grp.includes('padding') || grp.includes('gutter') ||
           grp.includes('vertical') || grp.includes('horizontal')) {
@@ -333,22 +664,24 @@ export async function parseFigma() {
   const xml = readFileSync(xmlPath, 'utf-8');
   const rawVars: RawVars = JSON.parse(readFileSync(varsPath, 'utf-8'));
 
-  // Parse components
   const frames = parseXml(xml);
   console.log(`  parsed ${frames.length} component frames from XML`);
 
   const components = framesToComponents(frames);
   const variantAxes = buildVariantAxes(components);
   const tokens = parseVariables(rawVars);
+  const taxonomy = buildTaxonomy(components);
 
   writeJson(join(ROOT, 'data', 'components.json'), components);
   writeJson(join(ROOT, 'data', 'variant-axes.json'), variantAxes);
   writeJson(join(ROOT, 'data', 'tokens.json'), tokens);
+  writeJson(join(ROOT, 'data', 'taxonomy.json'), taxonomy);
 
+  const catSummary = taxonomy.categories.map((c) => `${c.label}=${c.components.length}`).join(', ');
   console.log(`  ${components.length} components, ${variantAxes.length} variant axes`);
-  console.log(`  tokens: ${tokens.colors.length} colors, ${tokens.typography.length} typography, ${tokens.spacing.length} spacing, ${tokens.shadows.length} shadows`);
+  console.log(`  taxonomy: ${catSummary}`);
+  console.log(`  tokens: ${tokens.colors.length} colors, ${tokens.typography.length} typography, ${tokens.fontSizes.length} font sizes, ${tokens.spacing.length} spacing, ${tokens.shadows.length} shadows`);
 }
 
-// Run standalone when called directly
 const isMain = process.argv[1]?.endsWith('parse-figma.ts') || process.argv[1]?.endsWith('parse-figma.js');
 if (isMain) parseFigma().catch((e) => { console.error(e); process.exit(1); });

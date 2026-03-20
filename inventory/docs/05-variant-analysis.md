@@ -21,38 +21,72 @@
 | **Background Color** | 1 | Dark, Light | Basic Form |
 | **On-Off** | 1 | Off, On | Switch |
 
-## ⚠️ Naming Inconsistencies
+## ⚠️ State Axis Quality Issues
 
-The following property values are auto-generated Figma names and should be given descriptive names:
+The `State` property axis contains values that are not interaction states. These should be moved to separate axes in Figma.
 
-| Component | Axis | Bad Value(s) | Recommendation |
-|-----------|------|-------------|----------------|
-| Text Button—Icon Left | State | `State8` | Replace with descriptive state name (e.g., `Checked`, `Read-only`) |
-| Play Button | State | `State2`, `State3`, `State4` | Replace with descriptive state name (e.g., `Checked`, `Read-only`) |
-| Category Button | State | `Variant4` | Replace with descriptive state name (e.g., `Checked`, `Read-only`) |
-| Toggle with Text | Property 1 | `Variant6` | Replace with descriptive state name (e.g., `Checked`, `Read-only`) |
-| Text Input—Multiline | State | `State4`, `State6` | Replace with descriptive state name (e.g., `Checked`, `Read-only`) |
+**Breakpoint values mixed into State axis:** `Desktop`, `Mobile`, `Tablet`
+→ These should be the `Size` axis (Desktop/Tablet/Mobile), not State.
+
+**Input type values mixed into State axis:** `Checkbox`, `Radio`
+→ These should be the `Style` axis (Checkbox/Radio), not State.
+
+**Typos / inconsistent naming in State axis:**
+
+| Found | Should Be |
+|-------|-----------|
+| `Disable` | `Disabled` |
+| `Focu` | `Focus` |
+| `Focused` | `Focus (duplicate of "Focus")` |
+| `Maxium` | `Maximum` |
+
+**Auto-generated state names:** `State2`, `State3`, `State4`, `State6`, `State8`, `Variant4`
+→ Replace with descriptive names.
+
+
+## Auto-Generated Property Values
+
+| Component | Axis | Bad Value(s) | Action |
+|-----------|------|-------------|--------|
+| Text Button—Icon Left | State | `State8` | Rename with descriptive value in Figma |
+| Play Button | State | `State2`, `State3`, `State4` | Rename with descriptive value in Figma |
+| Category Button | State | `Variant4` | Rename with descriptive value in Figma |
+| Toggle with Text | Property 1 | `Variant6` | Rename with descriptive value in Figma |
+| Text Input—Multiline | State | `State4`, `State6` | Rename with descriptive value in Figma |
 
 ## 💡 Consolidation Opportunities
 
-Components that could potentially be merged (same property axes, similar names):
+Detected algorithmically from shared axes, name stems, and duplicate frames.
 
-| Component A | Component B | Opportunity |
-|-------------|-------------|-------------|
-| Text Button—Icon Right | Text Button—Icon Left | Merge into `TextButton` with `iconPosition: "left" | "right"` prop |
-| Toggle Switch (text) | Multi-Select with Text | Consider unified `SelectionGroup` with `type: "toggle" | "checkbox" | "radio"` |
-| Text Input (single line) | Text Input (name, two fields) | Consider `TextInput` with `layout: "single" | "twoColumn"` prop |
-| Text Toggle Selector | Text Toggle Selector | Two separate frames with same name — deduplicate in Figma |
-| Tabbed Selector | Tabbed Selector Button | These may be the container vs. item — clarify relationship |
-| Form Dropdown | Dropdown | Consider unified `Dropdown` with `variant: "form" | "inline"` prop |
-| Next-Previous Selector | Slider page selector | Both are pagination-style controls — consider unifying |
+| Component A | Component B | Reason |
+|-------------|-------------|--------|
+| Button | Button Menu | Common name stem "Button" — review whether these could share a single component with variant props |
+| Button | Button group | Common name stem "Button" — review whether these could share a single component with variant props |
+| Text Button—Icon Right | Text Button—Icon Left | Same property axes [Type, Size, Background, State] and functional category — consider merging |
+| Floating Action Button | Floating Action Button with Text | Common name stem "Floating" — review whether these could share a single component with variant props |
+| Button Menu | Tabbed Selector Button | Same property axes [Size, State] and functional category — consider merging |
+| Button Menu | Button group | Common name stem "Button" — review whether these could share a single component with variant props |
+| Tabbed Selector Button | Tabbed Selector | Common name stem "Tabbed" — review whether these could share a single component with variant props |
+| Floating Action Button with Text | Stepper Control | Same property axes [Size, State] and functional category — consider merging |
+| Slider Scroll Bar | Slider page selector | Common name stem "Slider" — review whether these could share a single component with variant props |
+| Slider Scroll Bar | Slider | Common name stem "Slider" — review whether these could share a single component with variant props |
+| Next-Previous Selector | Slider page selector | Same property axes [Style, Size] and functional category — consider merging |
+| Stepper Control | Stepper CTA | Common name stem "Stepper" — review whether these could share a single component with variant props |
+| Modal Button Group | Modal Dialog | Common name stem "Modal" — review whether these could share a single component with variant props |
+| Subnav Dropdown Options | Subnav Dropdown | Common name stem "Subnav" — review whether these could share a single component with variant props |
+| Slider page selector | Slider | Common name stem "Slider" — review whether these could share a single component with variant props |
+| Multi-CTA List | Multi-Select with Text | Common name stem "Multi" — review whether these could share a single component with variant props |
+| Multi-CTA List | Multi-Selector | Common name stem "Multi" — review whether these could share a single component with variant props |
+| Text Input (single line) | Text Input (name, two fields) | Same property axes [Style, State] and functional category — consider merging |
+| Multi-Select with Text | Multi-Selector | Common name stem "Multi" — review whether these could share a single component with variant props |
+| Toggle with Text | Toggle Switch (text) | Common name stem "Toggle" — review whether these could share a single component with variant props |
+| Text Toggle Selector (Figma ID: 1623:5649) | Text Toggle Selector (Figma ID: 1623:5653) | Duplicate frame name — deduplicate in Figma |
+| Badges and Tags | Sale Percentage | Same property axes [Style, Size] and functional category — consider merging |
 
-## 💥 Variant Count Overview
+## 💥 Variant Count Overview (Top 20)
 
-Components ordered by variant count (highest = most complex to implement):
-
-| Component | Section | Variant Count | Property Axes |
-|-----------|---------|---------------|---------------|
+| Component | Section | Variant Count | Axes |
+|-----------|---------|---------------|------|
 | Button | Atoms | 216 | 5 |
 | Next-Previous Buttons | Atoms | 144 | 5 |
 | Increase-Decrease Buttons | Atoms | 48 | 4 |

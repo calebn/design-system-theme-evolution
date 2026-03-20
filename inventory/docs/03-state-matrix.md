@@ -56,7 +56,7 @@
 
 ## Inconsistency Summary
 
-The following components have unnamed/auto-generated state values that should be renamed in Figma:
+The following components have auto-generated state values that should be renamed in Figma:
 
 - Category Button: "Variant4"
 - Play Button: "State2"

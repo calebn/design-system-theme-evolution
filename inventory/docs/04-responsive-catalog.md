@@ -4,8 +4,6 @@
 
 ## ✅ Fully Responsive (11)
 
-Components with Desktop + Tablet + Mobile variants:
-
 | Component | Section | Breakpoint Variants |
 |-----------|---------|---------------------|
 | Accordion Section | Atoms | Desktop, Mobile, Tablet |
@@ -22,14 +20,10 @@ Components with Desktop + Tablet + Mobile variants:
 
 ## ⚠️ Partially Responsive (0)
 
-Components with some but not all responsive variants:
-
 | Component | Section | Has | Missing |
 |-----------|---------|-----|---------|
 
 ## — Not Responsive (60)
-
-Single-size components. Flag for responsive treatment as needed:
 
 | Component | Section | Sizes Available | HTML Element |
 |-----------|---------|-----------------|--------------|

@@ -115,3 +115,27 @@ export interface Taxonomy {
   codeComponents: CodeComponent[];
   proposedFolderStructure: string[];
 }
+
+// ─── Brand Styles Migration Types ────────────────────────────────────────────
+
+export type TokenSource = 'brand-components' | 'brand-styles' | 'both';
+
+export type MigrationStatus =
+  | 'variable'        // already a Figma variable - no action needed
+  | 'local-style-only' // exists as a local style but NOT a variable - needs migration
+  | 'duplicate'       // same value exists under a different name as a variable
+  | 'missing';        // referenced but value not extractable
+
+export type MigrationPriority = 'critical' | 'high' | 'medium' | 'low';
+
+export interface TokenMigrationItem {
+  styleName: string;
+  group: string;
+  type: 'color' | 'shadow' | 'gradient' | 'typography';
+  status: MigrationStatus;
+  extractedValue?: string;
+  existingVariableKey?: string;
+  priority: MigrationPriority;
+  notes: string;
+  scope?: 'sub-brand';
+}

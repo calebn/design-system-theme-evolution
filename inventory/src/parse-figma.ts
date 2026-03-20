@@ -1078,6 +1078,8 @@ export async function parseFigma() {
 
   const xmlPath = join(ROOT, 'raw', 'figma-metadata.xml');
   const varsPath = join(ROOT, 'raw', 'figma-variables.json');
+  const brandStylesAuditPath = join(ROOT, 'raw', 'figma-brand-styles-extracted.json');
+  const hasBrandStyles = existsSync(brandStylesAuditPath);
 
   const xml = readFileSync(xmlPath, 'utf-8');
   const rawVars: RawVars = JSON.parse(readFileSync(varsPath, 'utf-8'));
@@ -1100,6 +1102,9 @@ export async function parseFigma() {
   console.log(`  ${components.length} Figma frames → ${taxonomy.codeComponents.length} code components`);
   console.log(`  taxonomy: ${catSummary}`);
   console.log(`  tokens: ${tokens.colors.length} colors, ${tokens.typography.length} typography, ${tokens.fontSizes.length} font sizes, ${tokens.spacing.length} spacing, ${tokens.shadows.length} shadows`);
+  if (hasBrandStyles) {
+    console.log('  Brand Styles extracted file found — run audit-brand-styles for migration report');
+  }
 }
 
 const isMain = process.argv[1]?.endsWith('parse-figma.ts') || process.argv[1]?.endsWith('parse-figma.js');

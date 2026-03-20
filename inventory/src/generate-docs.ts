@@ -17,6 +17,9 @@ import type {
   Taxonomy,
   CodeComponent,
   ComponentTier,
+  TokenMigrationItem,
+  MigrationStatus,
+  MigrationPriority,
 } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -65,9 +68,10 @@ const TIER_LABELS: Record<ComponentTier, string> = {
 };
 
 // Color swatch using placehold.co image (renders on GitHub as a real colored square)
-function colorSwatch(hex: string): string {
-  const clean = hex.replace(/^#/, '').toLowerCase();
-  return `![](https://placehold.co/12x12/${clean}/${clean}.png)`;
+function colorSwatch(hex?: string): string {
+  if (!hex || !hex.startsWith('#')) return '';
+  const clean = hex.replace(/^#/, '').toUpperCase().padEnd(6, '0').slice(0, 6);
+  return `![](https://placehold.co/12x12/${clean}/${clean}.png) `;
 }
 
 function matchStatus(figmaKey: string, gapColors: GapAnalysis['colors']): string {
@@ -1314,6 +1318,371 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
 // README (updated with new docs)
 // ---------------------------------------------------------------------------
 
+// ─── Doc 11: Design Token Migration Guide ────────────────────────────────────
+
+interface BrandStylesAuditFile {
+  summary: {
+    counts: Record<MigrationStatus, number>;
+    byPriority: Record<MigrationPriority, number>;
+    total: number;
+  };
+  bySummaryType: Record<string, { counts: Record<MigrationStatus, number>; total: number }>;
+  items: TokenMigrationItem[];
+}
+
+function statusBadge(status: MigrationStatus): string {
+  switch (status) {
+    case 'variable': return '✅ variable';
+    case 'local-style-only': return '🔴 local style';
+    case 'duplicate': return '🟡 duplicate';
+    case 'missing': return '⬜ missing';
+  }
+}
+
+function priorityBadge(priority: MigrationPriority): string {
+  switch (priority) {
+    case 'critical': return '🚨 critical';
+    case 'high': return '🔶 high';
+    case 'medium': return '🔷 medium';
+    case 'low': return '⚪ low';
+  }
+}
+
+function doc11DesignTokenMigration(audit: BrandStylesAuditFile): string {
+  const items = audit.items;
+  const needsMigration = items.filter(i => i.status === 'local-style-only');
+  const duplicates = items.filter(i => i.status === 'duplicate');
+  const alreadyVariables = items.filter(i => i.status === 'variable');
+
+  // Group local-style-only items by type
+  const colorItems = needsMigration.filter(i => i.type === 'color');
+  const shadowItems = needsMigration.filter(i => i.type === 'shadow');
+  const gradientItems = needsMigration.filter(i => i.type === 'gradient');
+  const typographyItems = needsMigration.filter(i => i.type === 'typography');
+
+  const colorDupes = duplicates.filter(i => i.type === 'color');
+  const typographyDupes = duplicates.filter(i => i.type === 'typography');
+
+  // Build color migration rows grouped by sub-group
+  function colorRows(colorList: TokenMigrationItem[], showSwatch = true): string {
+    return colorList.map(item => {
+      const swatch = showSwatch ? colorSwatch(item.extractedValue) : '';
+      const value = item.extractedValue ? `\`${item.extractedValue}\`` : '—';
+      return `| ${item.styleName} | ${swatch}${value} | ${priorityBadge(item.priority)} | ${item.notes || '—'} |`;
+    }).join('\n');
+  }
+
+  // Build the recommended variable naming for new colors
+  function suggestVariableName(styleName: string): string {
+    const map: Record<string, string> = {
+      'Secondary/Deep Blue 3': 'Secondary/Deep Blue 3',
+      'Secondary/Light Blue 0': 'Secondary/Light Blue 0',
+      'Deep Colors/Deep Orange': 'Deep Colors/Deep Orange',
+      'Deep Colors/Deep Purple': 'Deep Colors/Deep Purple',
+      'Bright Colors/Alt Orange': 'Bright Colors/Alt Orange',
+      'Bright Colors/Alt Purple': 'Bright Colors/Alt Purple',
+      'Bright Colors/Bright Green': 'Bright Colors/Bright Green',
+      'Neutral/Black': 'Neutral/Black',
+      'Core Swatches/Dark Blue': 'Core Swatches/Dark Blue',
+      'Core Swatches/Logos Top Blue': 'Core Swatches/Logos Top Blue',
+      'Logos Swatches/Faithlife Blue': 'Logos Swatches/Faithlife Blue',
+      'Logos Swatches/Light Blue': 'Logos Swatches/Light Blue',
+      'Logos Swatches/Faithlife Green': 'Logos Swatches/Faithlife Green',
+      'Logos Swatches/Red': 'Logos Swatches/Red',
+    };
+    return map[styleName] ?? styleName;
+  }
+
+  // Split color items into sub-groups
+  const primaryMissing = colorItems.filter(i => i.group === 'Primary' || i.group === 'Secondary');
+  const paletteMissing = colorItems.filter(i => i.group === 'Deep Colors' || i.group === 'Bright Colors' || i.group === 'Neutral');
+  const legacyMissing = colorItems.filter(i => i.group === 'Core Swatches' || i.group === 'Logos Swatches');
+  const verbumMissing = colorItems.filter(i => i.group === 'Verbum');
+
+  return `# 11 — Design Token Migration Guide
+
+> **Audience:** Design team (Figma).
+> **Purpose:** This document identifies every value in the Logos Brand Styles file that exists as a **local style** rather than a **Figma variable**. Local styles cannot be exported as W3C Design Tokens — they are invisible to the token pipeline. Each item below is an action for the design team to complete before it will appear in generated documentation and CSS.
+
+---
+
+## A. The Problem: Local Styles vs. Variables
+
+Figma has two systems for reusable values:
+
+| System | Exportable as DTCG token? | Supports modes/themes? | Status |
+|---|---|---|---|
+| **Figma Variables** (new) | ✅ Yes | ✅ Yes | Path forward |
+| **Figma Local Styles** (legacy) | ❌ No | ❌ No | Needs migration |
+
+When the MCP tool \`get_variable_defs\` is called on the Brand Styles file, it returns only the values that are **Figma Variables** — roughly 8 values shared from the Brand Components library. Everything else (colors, shadows, gradients, typography) is defined as a **local style** and is invisible to the export pipeline.
+
+\`\`\`mermaid
+graph LR
+  subgraph brandComponents ["Brand Components File ✅"]
+    vars["Figma Variables\\n(~101 tokens)"]
+    vars -->|"get_variable_defs"| pipeline["Inventory Pipeline"]
+  end
+  subgraph brandStyles ["Brand Styles File ⚠️"]
+    localStyles["Local Styles\\n(${needsMigration.length} items need migration)"]
+    fewVars["Shared Variables\\n(${alreadyVariables.length} tokens)"]
+    localStyles -.->|"NOT exportable"| gap["Design Token Gap"]
+    fewVars -->|"get_variable_defs"| pipeline
+  end
+  pipeline --> docs["Generated Docs & CSS Variables"]
+  gap --> migration["This Migration Guide"]
+\`\`\`
+
+---
+
+## B. Migration Summary
+
+| Metric | Count |
+|---|---|
+| Total items audited | **${items.length}** |
+| ✅ Already a Figma variable (no action needed) | **${alreadyVariables.length}** |
+| 🔴 Local style only — **needs migration to variable** | **${needsMigration.length}** |
+| 🟡 Duplicate — same value exists as variable under different name | **${duplicates.length}** |
+
+### By Type
+
+| Type | Local Style Only | Duplicates | Variables |
+|---|---|---|---|
+| Colors | ${colorItems.length} | ${colorDupes.length} | ${alreadyVariables.filter(i=>i.type==='color').length} |
+| Shadows | ${shadowItems.length} | 0 | ${alreadyVariables.filter(i=>i.type==='shadow').length} |
+| Gradients | ${gradientItems.length} | 0 | 0 |
+| Typography | ${typographyItems.length} | ${typographyDupes.length} | ${alreadyVariables.filter(i=>i.type==='typography').length} |
+
+### By Priority (items needing migration only)
+
+| Priority | Count | What it means |
+|---|---|---|
+| 🚨 Critical | ${needsMigration.filter(i=>i.priority==='critical').length} | Used by components — blocking design-to-code connection |
+| 🔶 High | ${needsMigration.filter(i=>i.priority==='high').length} | Core palette — high visibility, used in many places |
+| 🔷 Medium | ${needsMigration.filter(i=>i.priority==='medium').length} | Secondary colors, extended shadow scale |
+| ⚪ Low | ${needsMigration.filter(i=>i.priority==='low').length} | Sub-brand (Verbum), gradients, legacy typography variants |
+
+---
+
+## C. Migration Checklist by Type
+
+### C1. Colors — Needs Migration (${colorItems.length} items)
+
+#### Primary & Secondary Palette Gaps (${primaryMissing.length} items)
+
+These are the most critical — they are part of the core color system but not yet variables.
+
+| Style Name | Value | Priority | Notes |
+|---|---|---|---|
+${colorRows(primaryMissing)}
+
+#### Deep & Bright Colors + Neutral Gaps (${paletteMissing.length} items)
+
+| Style Name | Value | Priority | Notes |
+|---|---|---|---|
+${colorRows(paletteMissing)}
+
+#### Legacy Swatch Groups (${legacyMissing.length} items)
+
+These are legacy groups (Core Swatches, Logos Swatches) that predate the current variable structure. Some values are unique (need new variables); others are duplicates of existing values under different names.
+
+| Style Name | Value | Priority | Notes |
+|---|---|---|---|
+${colorRows(legacyMissing)}
+
+#### Verbum Sub-Brand Colors (${verbumMissing.length} items)
+
+Sub-brand colors — only needed if Verbum brand is actively maintained in this file.
+
+| Style Name | Value | Priority | Notes |
+|---|---|---|---|
+${colorRows(verbumMissing)}
+
+### C2. Shadows — Needs Migration (${shadowItems.length} items)
+
+Currently only **Shadows/4dp** and **Shadows/6dp** are Figma variables. The full elevation scale and the entire "Shadows - L9" alternate set need to be converted.
+
+| Style Name | Priority | Notes |
+|---|---|---|
+${shadowItems.map(i => `| ${i.styleName} | ${priorityBadge(i.priority)} | ${i.notes || 'Needs variable definition'} |`).join('\n')}
+
+**Recommended approach:** Create a \`Shadows\` variable collection with elevation levels 1dp–24dp. The L9 variant set can be a second collection or a mode within the same collection (decision for design team).
+
+### C3. Gradients — Needs Migration (${gradientItems.length} items)
+
+No gradient variables exist today. Figma does not natively support gradient-type variables in the same way as colors, but the approach is to either:
+- Use **string variables** with CSS gradient notation, or
+- Document gradient tokens as comments/annotations and map them manually in Style Dictionary
+
+| Style Name | Value | Priority | Notes |
+|---|---|---|---|
+${gradientItems.map(i => `| ${i.styleName} | \`${i.extractedValue ?? '—'}\` | ${priorityBadge(i.priority)} | ${i.notes} |`).join('\n')}
+
+### C4. Typography — Needs Migration (${typographyItems.length} items)
+
+The current variable set covers H1–H6, Body, UI sizes, and Special Headings. Missing are:
+
+- **2023/Headings/\*** — updated type scale from 2023, should replace or be reconciled with the legacy \`Headings/*\` local styles
+- **Content responsive variants** (H1–H4 at Desktop/Tablet/Mobile) — no variable-backed responsive typography
+- **Special/H\* responsive variants** — no variable counterpart
+
+| Style Name | Priority | Notes |
+|---|---|---|
+${typographyItems.map(i => `| ${i.styleName} | ${priorityBadge(i.priority)} | ${i.notes} |`).join('\n')}
+
+---
+
+## D. Duplicate Consolidation (${duplicates.length} items)
+
+These local styles have the **same value** as an existing Figma variable under a different name. The local style should be deleted and any usages should reference the existing variable directly.
+
+### Color Duplicates (${colorDupes.length} items)
+
+| Local Style | Existing Variable | Value |
+|---|---|---|
+${colorDupes.map(i => {
+  const swatch = colorSwatch(i.extractedValue);
+  const val = i.extractedValue ? `${swatch}\`${i.extractedValue}\`` : '—';
+  return `| ${i.styleName} | ${i.existingVariableKey ?? '—'} | ${val} |`;
+}).join('\n')}
+
+### Typography Duplicates (${typographyDupes.length} items)
+
+These local text styles have a variable counterpart — the local style should link to the variable rather than defining its own values.
+
+| Local Style | Variable Counterpart | Action |
+|---|---|---|
+${typographyDupes.map(i => `| ${i.styleName} | ${i.existingVariableKey ?? '—'} | Link local style to variable |`).join('\n')}
+
+---
+
+## E. Recommended Variable Structure
+
+### Color Variable Collection
+
+Create or extend the **"Colors"** variable collection with these groups:
+
+\`\`\`
+Colors/
+  Primary/
+    Logos Blue          #1E6AFE  ✅ exists
+    Subscription Blue   #00042F  ✅ exists
+    Deep Blue           #030B60  ✅ exists
+  Secondary/
+    Alt Blue            #4885FE  ✅ exists
+    Deep Blue 2         #040F8B  ✅ exists
+    Deep Blue 3         #3640B8  🔴 ADD
+    Light Blue 0        #9BCDFF  🔴 ADD
+    Light Blue 1        #C1E4FF  ✅ exists
+    Light Blue 2        #E9F5FF  ✅ exists
+    Light Blue 3        #F5FBFF  ✅ exists
+    Very Deep Gray      #303030  ✅ exists
+    White               #FFFFFF  ✅ exists
+  Neutral/
+    Gray 1              #F5F5F5  🔴 ADD (consolidate from Core Swatches/Gray 1)
+    Gray 2              #EBEBEB  🔴 ADD
+    Gray 3              #DBDBDB  🔴 ADD
+    Gray 4              #C7C7C7  🔴 ADD
+    Deep Gray           #303030  🔴 ADD (= Very Deep Gray — confirm & deduplicate)
+    Black               #000000  🔴 ADD
+  Deep Colors/
+    Yellow              #DBA910  ✅ exists
+    Red                 #CC3333  ✅ exists
+    Green               #5BA224  ✅ exists
+    Deep Orange         #AD4100  🔴 ADD
+    Deep Purple         #502D4C  🔴 ADD
+  Bright Colors/
+    Bright Yellow       #FFF369  ✅ exists
+    Bright Red          #FF6D6D  ✅ exists
+    Bright Green        #54EB54  🔴 ADD
+    Alt Orange          #D87C44  🔴 ADD
+    Alt Purple          #A4619C  🔴 ADD
+\`\`\`
+
+> **Note on duplicate groups:** "Core Swatches" and "Logos Swatches" are legacy groups — their unique values (Dark Blue, Logos Top Blue, Faithlife Blue, etc.) should be moved into the appropriate Primary/Secondary/Neutral groups above. The duplicate entries should be deleted once migrated.
+
+### Shadow Variable Collection
+
+Create a **"Shadows"** variable collection:
+
+\`\`\`
+Shadows/
+  1dp    🔴 ADD
+  2dp    🔴 ADD
+  3dp    🔴 ADD
+  4dp    ✅ exists
+  6dp    ✅ exists
+  8dp    🔴 ADD
+  9dp    🔴 ADD
+  12dp   🔴 ADD
+  16dp   🔴 ADD
+  24dp   🔴 ADD
+Shadows - L9/  (or as a Mode within Shadows collection)
+  1dp–24dp   🔴 ADD all 10 values
+Product Shadows/
+  Small    ✅ exists
+  Medium   🔴 ADD
+  Large    ✅ exists
+\`\`\`
+
+### Gradient Variable Collection (new)
+
+\`\`\`
+Gradients/
+  One     🔴 ADD  linear-gradient(90deg, #F6FCFF, #FFFFFF)
+  Two     🔴 ADD  linear-gradient(90deg, #E7F5FF, #F5FBFF)
+  Three   🔴 ADD  linear-gradient(90deg, #C1E4FF, #E9F5FF)
+  Four    🔴 ADD  linear-gradient(-90deg, #C1E4FF, #ACD7FF)
+\`\`\`
+
+> ⚠️ Figma variables do not yet have a native "gradient" type. Options:
+> 1. Store as a **string variable** with the CSS value
+> 2. Store the constituent stop colors as separate color variables and compose in code
+> 3. Document as a Figma annotation — the token pipeline will pick them up once Figma supports gradient variables
+
+### Typography
+
+The current variable set in Brand Styles (via the Typography variable collection) covers H1–H6, Body sizes, and Special Headings. To complete coverage:
+
+1. **Reconcile 2023/Headings/* with Headings/*** — Determine which is canonical and update variable values to match
+2. **Add responsive scale** — Add variables for Content/H1-H4 at Desktop/Tablet/Mobile breakpoints (or implement via CSS \`clamp()\` in code, referencing existing heading variables)
+3. **Add Special Headings/* responsive variants** — Add Special/H1-H2 Desktop and Mobile+Tablet variants
+
+### Naming Conventions for New Variables
+
+Follow the existing convention in Brand Components: \`Group/Subgroup/Name\`
+
+- Group: \`Primary\`, \`Secondary\`, \`Neutral\`, \`Deep Colors\`, \`Bright Colors\`, \`Shadows\`, \`Gradients\`
+- Use Title Case for group names
+- Sub-group names in same style as existing tokens (e.g. \`Light Blue 1\`, \`Gray 1\`)
+- Avoid encoding appearance (e.g. "Dark" in "Dark Gray") when a semantic name works; if you must use a descriptive name, match the existing scale naming
+
+---
+
+## F. Quick Action Checklist for Design Team
+
+\`\`\`
+[ ] Add Secondary/Deep Blue 3 (#3640B8) as a color variable
+[ ] Add Secondary/Light Blue 0 (#9BCDFF) as a color variable
+[ ] Add Deep Colors/Deep Orange (#AD4100) as a color variable
+[ ] Add Deep Colors/Deep Purple (#502D4C) as a color variable
+[ ] Add Bright Colors/Bright Green (#54EB54) as a color variable
+[ ] Add Bright Colors/Alt Orange (#D87C44) as a color variable
+[ ] Add Bright Colors/Alt Purple (#A4619C) as a color variable
+[ ] Add Neutral/Gray 1–4 as color variables (consolidating from Core Swatches)
+[ ] Add Neutral/Black (#000000) as a color variable
+[ ] Add Shadows/1dp, 2dp, 3dp, 8dp, 9dp, 12dp, 16dp, 24dp as shadow variables
+[ ] Add Product Shadows/Medium as a shadow variable
+[ ] Add all 10 Shadows - L9/* as shadow variables (or as a shadow collection Mode)
+[ ] Add Gradient/One–Four as gradient variables (string type or component stops)
+[ ] Reconcile 2023/Headings/* with Headings/* typography variables
+[ ] Delete duplicate local styles that reference existing variables (${colorDupes.length} color, ${typographyDupes.length} typography)
+[ ] Review Core Swatches/Logos Blue (#005EC3) — different from Primary/Logos Blue (#1E6AFE), confirm which is correct
+[ ] Decide Verbum sub-brand scope — if active, add ${verbumMissing.length} Verbum variables
+\`\`\`
+`;
+}
+
 function readme(components: FigmaComponent[], tokens: TokenCategory, gap: GapAnalysis, taxonomy: Taxonomy): string {
   const totalVariants = components.reduce((s, c) => s + c.variantCount, 0);
   const responsiveCount = components.filter((c) => c.hasResponsive).length;
@@ -1375,6 +1744,7 @@ ${catCounts}
 | 08 | [Functional Taxonomy](./08-taxonomy.md) | Three-axis classification (atomic · category · tier), Mermaid diagram, folder structure |
 | 09 | [Component Architecture](./09-component-architecture.md) | React-first component list, prop API conventions, Figma axis → prop mapping, directory structure |
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
+| 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
 
 ## Data Files
 
@@ -1386,6 +1756,7 @@ ${catCounts}
 | \`data/variant-axes.json\` | Deduplicated property axes across all Figma frames |
 | \`data/taxonomy.json\` | Category definitions, code components, and proposed folder structure |
 | \`data/gap-analysis.json\` | Figma vs. commerce-theme token comparison |
+| \`data/brand-styles-audit.json\` | Brand Styles local styles vs. variables audit |
 | \`data/dtcg/primitives.json\` | Tier 1 DTCG tokens (raw values) |
 | \`data/dtcg/semantic.json\` | Tier 2 DTCG tokens (intent-based aliases) |
 | \`data/dtcg/component.json\` | Tier 3 DTCG tokens (component-scoped) |
@@ -1393,12 +1764,12 @@ ${catCounts}
 ## Pipeline
 
 \`\`\`
-raw/figma-metadata.xml     ─┐
-raw/figma-variables.json   ─┤─► parse-figma.ts ──► data/*.json + data/code-components.json
-                            │
-commerce-theme/src/*.ts    ─┘─► gap-analysis.ts ──► data/gap-analysis.json
-                                map-dtcg.ts ──────► data/dtcg/*.json
-                                generate-docs.ts ──► docs/*.md (10 docs + README)
+raw/figma-metadata.xml                 ─┐
+raw/figma-variables.json               ─┤─► parse-figma.ts ──► data/*.json + code-components.json
+                                        │
+commerce-theme/src/*.ts                ─┤─► gap-analysis.ts + map-dtcg.ts ──► data/*.json
+raw/figma-brand-styles-extracted.json  ─┘─► audit-brand-styles.ts ──► brand-styles-audit.json
+                                            generate-docs.ts ──► docs/*.md (11 docs + README)
 \`\`\`
 `;
 }
@@ -1428,9 +1799,17 @@ export async function generateDocs() {
   writeDoc(join(docsDir, '08-taxonomy.md'), doc08Taxonomy(components, taxonomy));
   writeDoc(join(docsDir, '09-component-architecture.md'), doc09ComponentArchitecture(components, taxonomy));
   writeDoc(join(docsDir, '10-figma-cleanup.md'), doc10FigmaCleanup(components, gap, taxonomy));
+
+  const auditPath = join(ROOT, 'data', 'brand-styles-audit.json');
+  if (existsSync(auditPath)) {
+    const audit = JSON.parse(readFileSync(auditPath, 'utf-8')) as BrandStylesAuditFile;
+    writeDoc(join(docsDir, '11-design-token-migration.md'), doc11DesignTokenMigration(audit));
+    console.log(`  doc 11 written (brand-styles audit found)`);
+  }
+
   writeDoc(join(docsDir, 'README.md'), readme(components, tokens, gap, taxonomy));
 
-  console.log(`  11 documents written to ./docs/`);
+  console.log(`  documents written to ./docs/`);
 }
 
 const isMain = process.argv[1]?.endsWith('generate-docs.ts') || process.argv[1]?.endsWith('generate-docs.js');

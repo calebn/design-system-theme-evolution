@@ -46,7 +46,7 @@ These rules apply to **every** component. They are sourced from
 
 **HTML element:** `<button>` · **Directory:** `button/` · **Category:** Actions
 
-**Figma sources:** Button, Category Button, Floating Action Button with Text, Stateful Action Button
+**Figma sources:** [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480), [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111), [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531), [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104)
 
 
 > Standard labelled action button covering primary, secondary, tertiary, and stateful variants.
@@ -64,8 +64,8 @@ These rules apply to **every** component. They are sourced from
 **Tailwind token usage:**
 
 - **Colors:** `bg-primary`, `text-white`, `border-primary`, `hover:bg-primary-500`, `text-primary`, `disabled:bg-secondary-200`
-- **Spacing:** `py-sp6`, `py-sp14`, `py-sp20`, `px-sp12`, `px-sp16`, `px-sp48`, `gap-sp12`
-- **Typography:** `buttonTextLg`, `buttonTextSm`
+- **Spacing:** `py-sp6`, `py-sp12`, `py-sp18`, `px-sp12`, `px-sp16`, `px-sp48`
+- **Typography:** `text-fs18`, `text-fs16`
 - **Transitions:** `duration-short`
 
 > Token source: `@faithlife/commerce-theme` · See `packages/commerce-theme/src/` for raw values.
@@ -128,7 +128,7 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 **HTML element:** `<button>` · **Directory:** `icon-button/` · **Category:** Actions
 
-**Figma sources:** Close Button, Play Button, Floating Action Button
+**Figma sources:** [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908)
 
 
 > Icon-only button with no visible label. Requires an aria-label. Covers close, play, and floating action variants.
@@ -205,7 +205,7 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 
 **HTML element:** `<button>` · **Directory:** `link-button/` · **Category:** Actions
 
-**Figma sources:** Text Button—Icon Left, Text Button—Icon Right
+**Figma sources:** [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995), [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782)
 
 
 > Inline text link with an optional leading or trailing icon. Renders as an anchor or button depending on context.
@@ -283,7 +283,7 @@ export function LinkButton({ variant = 'default', scale = 'medium', className, c
 
 **HTML element:** `<input>` · **Directory:** `input/` · **Category:** Data Entry
 
-**Figma sources:** Text Input (single line), Text Input—Date, Text Input—Password, Search Field
+**Figma sources:** [Text Input (single line)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5130), [Text Input—Date](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660), [Text Input—Password](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741), [Search Field](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5874)
 
 
 > Single-line text entry field covering all text, date, password, and search variants.
@@ -350,7 +350,7 @@ export function Input({ variant = 'text', className, children, ...props }: Input
 
 **HTML element:** `<textarea>` · **Directory:** `textarea/` · **Category:** Data Entry
 
-**Figma sources:** Text Input—Multiline
+**Figma sources:** [Text Input—Multiline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422)
 
 
 > Multi-line text entry field.
@@ -405,7 +405,7 @@ export function Textarea({ variant = 'md', className, children, ...props }: Text
 
 **HTML element:** `<div>` · **Directory:** `text-input-group/` · **Category:** Data Entry
 
-**Figma sources:** Text Input (name, two fields)
+**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449)
 
 
 > Two-column name-capture input (first + last).
@@ -453,7 +453,7 @@ export function TextInputGroup({ variant = 'md', className, children, ...props }
 
 **HTML element:** `<select>` · **Directory:** `select/` · **Category:** Data Entry
 
-**Figma sources:** Dropdown, Form Dropdown, Form Dropdown Option
+**Figma sources:** [Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5473), [Form Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5532), [Form Dropdown Option](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2015-39220)
 
 
 > Dropdown select control. Covers both inline and form-embedded variants.
@@ -518,7 +518,7 @@ export function Select({ variant = 'default', className, children, ...props }: S
 
 **HTML element:** `<input[type=checkbox]>` · **Directory:** `checkbox/` · **Category:** Data Entry
 
-**Figma sources:** Checkbox
+**Figma sources:** [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118)
 
 
 > Boolean checkbox input with label.
@@ -581,7 +581,7 @@ export function Checkbox({ variant = 'default', className, children, ...props }:
 
 **HTML element:** `<input[type=radio]>` · **Directory:** `radio-button/` · **Category:** Data Entry
 
-**Figma sources:** Radio Button
+**Figma sources:** [Radio Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5243)
 
 
 > Single radio option — used inside a RadioGroup.
@@ -643,7 +643,7 @@ export function RadioButton({ variant = 'default', className, children, ...props
 
 **HTML element:** `<input[type=checkbox]>` · **Directory:** `toggle/` · **Category:** Selection & Controls
 
-**Figma sources:** Switch, Toggle with Text
+**Figma sources:** [Switch](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5125), [Toggle with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311)
 
 
 > On/off toggle switch, optionally with a text label.
@@ -705,7 +705,7 @@ export function Toggle({ variant = 'default', className, children, ...props }: T
 
 **HTML element:** `<input[type=range]>` · **Directory:** `slider/` · **Category:** Data Entry
 
-**Figma sources:** Slider
+**Figma sources:** [Slider](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5807)
 
 
 > Range input slider for selecting a numeric value.
@@ -758,7 +758,7 @@ export function Slider({ variant = 'default', className, children, ...props }: S
 
 **HTML element:** `<span>` · **Directory:** `badge/` · **Category:** Data Display
 
-**Figma sources:** Badges and Tags, Sale Percentage
+**Figma sources:** [Badges and Tags](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1773-12115), [Sale Percentage](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5173-41321)
 
 
 > Small label for tags, status indicators, and sale callouts.
@@ -820,7 +820,7 @@ export function Badge({ variant = 'default', className, children, ...props }: Ba
 
 **HTML element:** `<div>` · **Directory:** `star-rating/` · **Category:** Data Display
 
-**Figma sources:** Star, Reviews
+**Figma sources:** [Star](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9407), [Reviews](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9371)
 
 
 > Star icon for ratings, with optional count display.
@@ -874,7 +874,7 @@ export function StarRating({ variant = 'star', className, children, ...props }: 
 
 **HTML element:** `<span>` · **Directory:** `price-label/` · **Category:** Data Display
 
-**Figma sources:** Price and Label
+**Figma sources:** [Price and Label](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=3707-42767)
 
 
 > Price display with optional original/sale price.
@@ -923,7 +923,7 @@ export function PriceLabel({ variant = 'default', className, children, ...props 
 
 **HTML element:** `<nav>` · **Directory:** `breadcrumbs/` · **Category:** Navigation
 
-**Figma sources:** Breadcrumbs
+**Figma sources:** [Breadcrumbs](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4917)
 
 
 > Hierarchical page location indicator.
@@ -976,7 +976,7 @@ export function Breadcrumbs({ variant = 'md', className, children, ...props }: B
 
 **HTML element:** `<nav>` · **Directory:** `menu/` · **Category:** Navigation
 
-**Figma sources:** Simple Menu, Button Menu
+**Figma sources:** [Simple Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4958), [Button Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5096)
 
 
 > Navigation menu — simple text links or button-style items.
@@ -1031,7 +1031,7 @@ export function Menu({ variant = 'simple', className, children, ...props }: Menu
 
 **HTML element:** `<div>` · **Directory:** `tabs/` · **Category:** Navigation
 
-**Figma sources:** Tabbed Selector, Tabbed Selector Button
+**Figma sources:** [Tabbed Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76540), [Tabbed Selector Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2532-76553)
 
 
 > Tab bar for switching between content panels. Covers container and individual tab item.
@@ -1096,7 +1096,7 @@ export function Tabs({ variant = 'container', className, children, ...props }: T
 
 **HTML element:** `<nav>` · **Directory:** `subnav-dropdown/` · **Category:** Navigation
 
-**Figma sources:** Subnav Dropdown, Subnav Dropdown Options
+**Figma sources:** [Subnav Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34404), [Subnav Dropdown Options](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34528)
 
 
 > Sub-navigation dropdown with trigger and option list.
@@ -1145,7 +1145,7 @@ export function SubnavDropdown({ variant = 'trigger', className, children, ...pr
 
 **HTML element:** `<div>` · **Directory:** `stepper/` · **Category:** Selection & Controls
 
-**Figma sources:** Stepper CTA, Stepper Control, Increase-Decrease Buttons
+**Figma sources:** [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162), [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610)
 
 
 > Quantity control with increment/decrement. Covers standalone controls and CTA-embedded variants.
@@ -1200,7 +1200,7 @@ export function Stepper({ variant = 'control', className, children, ...props }: 
 
 **HTML element:** `<nav>` · **Directory:** `pagination/` · **Category:** Selection & Controls
 
-**Figma sources:** Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar
+**Figma sources:** [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561), [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088), [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
 
 
 > Navigation controls for paging through content.
@@ -1265,7 +1265,7 @@ export function Pagination({ variant = 'buttons', className, children, ...props 
 
 **HTML element:** `<output>` · **Directory:** `toast/` · **Category:** Feedback & Overlays
 
-**Figma sources:** Toast Bar
+**Figma sources:** [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729)
 
 
 > Transient status notification.
@@ -1331,7 +1331,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 **HTML element:** `<dialog>` · **Directory:** `modal/` · **Category:** Feedback & Overlays
 
-**Figma sources:** Modal Dialog, Modal Button Group
+**Figma sources:** [Modal Dialog](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5787-116045), [Modal Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-105611)
 
 
 > Dialog overlay with header, body, and action group. Content areas use BuilderBlocks.
@@ -1405,7 +1405,7 @@ export function Modal({ title, content, ...props }: ModalProps) {
 
 **HTML element:** `<details>` · **Directory:** `accordion/` · **Category:** Content Layout
 
-**Figma sources:** Accordion Section, Expand-Collapse Button
+**Figma sources:** [Accordion Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1859-51731), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708)
 
 
 > Expandable/collapsible section with header and body content.
@@ -1479,7 +1479,7 @@ export function Accordion({ title, content, ...props }: AccordionProps) {
 
 **HTML element:** `<form>` · **Directory:** `email-capture/` · **Category:** Data Entry
 
-**Figma sources:** Email Capture
+**Figma sources:** [Email Capture](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5925)
 
 
 > Email address input with inline submit action.
@@ -1536,7 +1536,7 @@ export function EmailCapture({ title, content, ...props }: EmailCaptureProps) {
 
 **HTML element:** `<input[type=file]>` · **Directory:** `file-upload/` · **Category:** Data Entry
 
-**Figma sources:** Upload Image Area
+**Figma sources:** [Upload Image Area](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5327)
 
 
 > Drag-and-drop / click-to-browse file upload area.
@@ -1592,7 +1592,7 @@ export function FileUpload({ title, content, ...props }: FileUploadProps) {
 
 **HTML element:** `<div>` · **Directory:** `selection-group/` · **Category:** Selection & Controls
 
-**Figma sources:** Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box
+**Figma sources:** [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250), [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867)
 
 
 > Group of mutually exclusive or multi-select options (toggles, checkboxes, radio buttons, or text tabs).
@@ -1650,7 +1650,7 @@ export function SelectionGroup({ title, content, ...props }: SelectionGroupProps
 
 **HTML element:** `<div>` · **Directory:** `button-group/` · **Category:** Actions
 
-**Figma sources:** Button group, CTA Row
+**Figma sources:** [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083), [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152)
 
 
 > Horizontal or vertical group of Button components for related actions.
@@ -1708,7 +1708,7 @@ export function ButtonGroup({ title, content, ...props }: ButtonGroupProps) {
 
 **HTML element:** `<article>` · **Directory:** `product-card/` · **Category:** Product
 
-**Figma sources:** Product Grid Card
+**Figma sources:** [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943)
 
 
 > Grid-format product card with image, title, price, reviews, and actions.
@@ -1764,7 +1764,7 @@ export function ProductCard({ title, content, ...props }: ProductCardProps) {
 
 **HTML element:** `<article>` · **Directory:** `product-detail/` · **Category:** Product
 
-**Figma sources:** Product Content, Product Lineup—Single
+**Figma sources:** [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922), [Product Lineup—Single](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-49395)
 
 
 > Full product detail display with purchase actions.
@@ -1820,7 +1820,7 @@ export function ProductDetail({ title, content, ...props }: ProductDetailProps) 
 
 **HTML element:** `<article>` · **Directory:** `free-trial-card/` · **Category:** Product
 
-**Figma sources:** Free Trial Card
+**Figma sources:** [Free Trial Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1880-108955)
 
 
 > Promotional card for free trial offers.
@@ -1870,7 +1870,7 @@ export function FreeTrialCard({ title, content, ...props }: FreeTrialCardProps) 
 
 **HTML element:** `<section>` · **Directory:** `section-layout/` · **Category:** Content Layout
 
-**Figma sources:** Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group
+**Figma sources:** [Section Headline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76419), [Section Headline with CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2457-71522), [Text Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76369), [Text Section with Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9202)
 
 
 > Page section with headline, body copy, and optional CTA slots. Content authors manage children via BuilderBlocks.
@@ -1924,7 +1924,7 @@ export function SectionLayout({ variant = 'headline-only', className, children, 
 
 **HTML element:** `<section>` · **Directory:** `product-carousel/` · **Category:** Product
 
-**Figma sources:** Carousel Product
+**Figma sources:** [Carousel Product](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2262-261677)
 
 
 > Horizontally scrollable carousel of ProductCard items backed by API data.
@@ -1978,7 +1978,7 @@ export function ProductCarousel({ variant = 'md', className, children, ...props 
 
 **HTML element:** `<ul>` · **Directory:** `cta-list/` · **Category:** Product
 
-**Figma sources:** Multi-CTA List
+**Figma sources:** [Multi-CTA List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25078)
 
 
 > Vertical list of CTA rows, each linking to a product or resource.
@@ -2024,7 +2024,7 @@ export function CtaList({ variant = 'default', className, children, ...props }: 
 
 **HTML element:** `<form>` · **Directory:** `basic-form/` · **Category:** Data Entry
 
-**Figma sources:** Basic Form
+**Figma sources:** [Basic Form](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2761-34608)
 
 
 > Generic form with field layout managed via BuilderBlocks.

@@ -11,50 +11,50 @@
 
 | Component | Directory | Category | Figma Sources | HTML |
 |-----------|-----------|----------|---------------|------|
-| `Button` | `button/` | Actions | Button, Category Button, Floating Action Button with Text, Stateful Action Button | `<button>` |
-| `IconButton` | `icon-button/` | Actions | Close Button, Play Button, Floating Action Button | `<button>` |
-| `LinkButton` | `link-button/` | Actions | Text Button—Icon Left, Text Button—Icon Right | `<button>` |
-| `Input` | `input/` | Data Entry | Text Input (single line), Text Input—Date, Text Input—Password, Search Field | `<input>` |
-| `Textarea` | `textarea/` | Data Entry | Text Input—Multiline | `<textarea>` |
-| `TextInputGroup` | `text-input-group/` | Data Entry | Text Input (name, two fields) | `<div>` |
-| `Select` | `select/` | Data Entry | Dropdown, Form Dropdown, Form Dropdown Option | `<select>` |
-| `Checkbox` | `checkbox/` | Data Entry | Checkbox | `<input[type=checkbox]>` |
-| `RadioButton` | `radio-button/` | Data Entry | Radio Button | `<input[type=radio]>` |
-| `Toggle` | `toggle/` | Selection & Controls | Switch, Toggle with Text | `<input[type=checkbox]>` |
-| `Slider` | `slider/` | Data Entry | Slider | `<input[type=range]>` |
-| `Badge` | `badge/` | Data Display | Badges and Tags, Sale Percentage | `<span>` |
-| `StarRating` | `star-rating/` | Data Display | Star, Reviews | `<div>` |
-| `PriceLabel` | `price-label/` | Data Display | Price and Label | `<span>` |
-| `Breadcrumbs` | `breadcrumbs/` | Navigation | Breadcrumbs | `<nav>` |
-| `Menu` | `menu/` | Navigation | Simple Menu, Button Menu | `<nav>` |
-| `Tabs` | `tabs/` | Navigation | Tabbed Selector, Tabbed Selector Button | `<div>` |
-| `SubnavDropdown` | `subnav-dropdown/` | Navigation | Subnav Dropdown, Subnav Dropdown Options | `<nav>` |
-| `Stepper` | `stepper/` | Selection & Controls | Stepper CTA, Stepper Control, Increase-Decrease Buttons | `<div>` |
-| `Pagination` | `pagination/` | Selection & Controls | Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar | `<nav>` |
-| `Toast` | `toast/` | Feedback & Overlays | Toast Bar | `<output>` |
+| `Button` | `button/` | Actions | [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480), [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111), [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531), [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) | `<button>` |
+| `IconButton` | `icon-button/` | Actions | [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) | `<button>` |
+| `LinkButton` | `link-button/` | Actions | [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995), [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782) | `<button>` |
+| `Input` | `input/` | Data Entry | [Text Input (single line)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5130), [Text Input—Date](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660), [Text Input—Password](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741), [Search Field](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5874) | `<input>` |
+| `Textarea` | `textarea/` | Data Entry | [Text Input—Multiline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422) | `<textarea>` |
+| `TextInputGroup` | `text-input-group/` | Data Entry | [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | `<div>` |
+| `Select` | `select/` | Data Entry | [Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5473), [Form Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5532), [Form Dropdown Option](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2015-39220) | `<select>` |
+| `Checkbox` | `checkbox/` | Data Entry | [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118) | `<input[type=checkbox]>` |
+| `RadioButton` | `radio-button/` | Data Entry | [Radio Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5243) | `<input[type=radio]>` |
+| `Toggle` | `toggle/` | Selection & Controls | [Switch](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5125), [Toggle with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311) | `<input[type=checkbox]>` |
+| `Slider` | `slider/` | Data Entry | [Slider](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5807) | `<input[type=range]>` |
+| `Badge` | `badge/` | Data Display | [Badges and Tags](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1773-12115), [Sale Percentage](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5173-41321) | `<span>` |
+| `StarRating` | `star-rating/` | Data Display | [Star](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9407), [Reviews](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9371) | `<div>` |
+| `PriceLabel` | `price-label/` | Data Display | [Price and Label](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=3707-42767) | `<span>` |
+| `Breadcrumbs` | `breadcrumbs/` | Navigation | [Breadcrumbs](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4917) | `<nav>` |
+| `Menu` | `menu/` | Navigation | [Simple Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4958), [Button Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5096) | `<nav>` |
+| `Tabs` | `tabs/` | Navigation | [Tabbed Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76540), [Tabbed Selector Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2532-76553) | `<div>` |
+| `SubnavDropdown` | `subnav-dropdown/` | Navigation | [Subnav Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34404), [Subnav Dropdown Options](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34528) | `<nav>` |
+| `Stepper` | `stepper/` | Selection & Controls | [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162), [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `<div>` |
+| `Pagination` | `pagination/` | Selection & Controls | [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561), [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088), [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) | `<nav>` |
+| `Toast` | `toast/` | Feedback & Overlays | [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `<output>` |
 
 ### Compositions (9)
 
 | Component | Directory | Category | Figma Sources | HTML |
 |-----------|-----------|----------|---------------|------|
-| `Modal` | `modal/` | Feedback & Overlays | Modal Dialog, Modal Button Group | `<dialog>` |
-| `Accordion` | `accordion/` | Content Layout | Accordion Section, Expand-Collapse Button | `<details>` |
-| `EmailCapture` | `email-capture/` | Data Entry | Email Capture | `<form>` |
-| `FileUpload` | `file-upload/` | Data Entry | Upload Image Area | `<input[type=file]>` |
-| `SelectionGroup` | `selection-group/` | Selection & Controls | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box | `<div>` |
-| `ButtonGroup` | `button-group/` | Actions | Button group, CTA Row | `<div>` |
-| `ProductCard` | `product-card/` | Product | Product Grid Card | `<article>` |
-| `ProductDetail` | `product-detail/` | Product | Product Content, Product Lineup—Single | `<article>` |
-| `FreeTrialCard` | `free-trial-card/` | Product | Free Trial Card | `<article>` |
+| `Modal` | `modal/` | Feedback & Overlays | [Modal Dialog](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5787-116045), [Modal Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-105611) | `<dialog>` |
+| `Accordion` | `accordion/` | Content Layout | [Accordion Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1859-51731), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `<details>` |
+| `EmailCapture` | `email-capture/` | Data Entry | [Email Capture](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5925) | `<form>` |
+| `FileUpload` | `file-upload/` | Data Entry | [Upload Image Area](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5327) | `<input[type=file]>` |
+| `SelectionGroup` | `selection-group/` | Selection & Controls | [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250), [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867) | `<div>` |
+| `ButtonGroup` | `button-group/` | Actions | [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083), [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152) | `<div>` |
+| `ProductCard` | `product-card/` | Product | [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943) | `<article>` |
+| `ProductDetail` | `product-detail/` | Product | [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922), [Product Lineup—Single](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-49395) | `<article>` |
+| `FreeTrialCard` | `free-trial-card/` | Product | [Free Trial Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1880-108955) | `<article>` |
 
 ### Builder Blocks (4)
 
 | Component | Directory | Category | Figma Sources | HTML |
 |-----------|-----------|----------|---------------|------|
-| `SectionLayout` | `section-layout/` | Content Layout | Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group | `<section>` |
-| `ProductCarousel` | `product-carousel/` | Product | Carousel Product | `<section>` |
-| `CtaList` | `cta-list/` | Product | Multi-CTA List | `<ul>` |
-| `BasicForm` | `basic-form/` | Data Entry | Basic Form | `<form>` |
+| `SectionLayout` | `section-layout/` | Content Layout | [Section Headline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76419), [Section Headline with CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2457-71522), [Text Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76369), [Text Section with Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9202) | `<section>` |
+| `ProductCarousel` | `product-carousel/` | Product | [Carousel Product](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2262-261677) | `<section>` |
+| `CtaList` | `cta-list/` | Product | [Multi-CTA List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25078) | `<ul>` |
+| `BasicForm` | `basic-form/` | Data Entry | [Basic Form](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2761-34608) | `<form>` |
 
 ## B · Prop API Conventions
 
@@ -166,77 +166,77 @@ Every Figma frame and the code component it maps to.
 
 | Figma Frame | Code Component | Tier | Directory | Key Props |
 |-------------|----------------|------|-----------|-----------|
-| Accordion Section | `Accordion` | Composition | `accordion/` | `state`, `variant` |
-| Badges and Tags | `Badge` | Primitive | `badge/` | `variant`, `scale` |
-| Basic Form | `BasicForm` | Builder Block | `basic-form/` | — |
-| Breadcrumbs | `Breadcrumbs` | Primitive | `breadcrumbs/` | `scale` |
-| Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
-| Button group | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
-| Button Menu | `Menu` | Primitive | `menu/` | `variant`, `state` |
-| Carousel Product | `ProductCarousel` | Builder Block | `product-carousel/` | `scale` |
-| Category Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
-| Checkbox | `Checkbox` | Primitive | `checkbox/` | `state` |
-| Close Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
-| CTA Row | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
-| Dropdown | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
-| Email Capture | `EmailCapture` | Composition | `email-capture/` | `scale`, `state` |
-| Expand-Collapse Button | `Accordion` | Composition | `accordion/` | `state`, `variant` |
-| Floating Action Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
-| Floating Action Button with Text | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
-| Form Dropdown | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
-| Form Dropdown Option | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
-| Free Trial Card | `FreeTrialCard` | Composition | `free-trial-card/` | — |
-| Image Ratios | — | — | — | — |
-| Increase-Decrease Buttons | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
-| List | — | — | — | — |
-| Modal Button Group | `Modal` | Composition | `modal/` | `variant` |
-| Modal Dialog | `Modal` | Composition | `modal/` | `variant` |
-| Multi-CTA List | `CtaList` | Builder Block | `cta-list/` | — |
-| Multi-Select with Text | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Multi-Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Next-Previous Buttons | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
-| Next-Previous Selector | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
-| Play Button | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
-| Price and Label | `PriceLabel` | Primitive | `price-label/` | `variant`, `scale` |
-| Product Content | `ProductDetail` | Composition | `product-detail/` | `variant` |
-| Product Grid Card | `ProductCard` | Composition | `product-card/` | `scale` |
-| Product Images | — | — | — | — |
-| Product Lineup—Single | `ProductDetail` | Composition | `product-detail/` | `variant` |
-| Radio Button | `RadioButton` | Primitive | `radio-button/` | `state` |
-| Reviews | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
-| Sale Percentage | `Badge` | Primitive | `badge/` | `variant`, `scale` |
-| Search Field | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
-| Section Headline | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
-| Section Headline with CTA | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
-| Simple Menu | `Menu` | Primitive | `menu/` | `variant`, `state` |
-| Single Select Box | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Slider | `Slider` | Primitive | `slider/` | `state` |
-| Slider page selector | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
-| Slider Scroll Bar | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
-| Star | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
-| Stateful Action Button | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
-| Stepper Control | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
-| Stepper CTA | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
-| Subnav Dropdown | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
-| Subnav Dropdown Options | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
-| Switch | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
-| Tabbed Selector | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
-| Tabbed Selector Button | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
-| Text Button—Icon Left | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
-| Text Button—Icon Right | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
-| Text Input (name, two fields) | `TextInputGroup` | Primitive | `text-input-group/` | `scale` |
-| Text Input (single line) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
-| Text Input—Date | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
-| Text Input—Multiline | `Textarea` | Primitive | `textarea/` | `scale`, `state` |
-| Text Input—Password | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
-| Text Section | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
-| Text Section with Button Group | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
-| Text Toggle Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Text Toggle Selector | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Toast Bar | `Toast` | Primitive | `toast/` | `variant` |
-| Toggle Switch (text) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
-| Toggle with Text | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
-| Upload Image Area | `FileUpload` | Composition | `file-upload/` | `state` |
+| [Accordion Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1859-51731) | `Accordion` | Composition | `accordion/` | `state`, `variant` |
+| [Badges and Tags](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1773-12115) | `Badge` | Primitive | `badge/` | `variant`, `scale` |
+| [Basic Form](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2761-34608) | `BasicForm` | Builder Block | `basic-form/` | — |
+| [Breadcrumbs](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4917) | `Breadcrumbs` | Primitive | `breadcrumbs/` | `scale` |
+| [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480) | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083) | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
+| [Button Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5096) | `Menu` | Primitive | `menu/` | `variant`, `state` |
+| [Carousel Product](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2262-261677) | `ProductCarousel` | Builder Block | `product-carousel/` | `scale` |
+| [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111) | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118) | `Checkbox` | Primitive | `checkbox/` | `state` |
+| [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152) | `ButtonGroup` | Composition | `button-group/` | `layout`, `align` |
+| [Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5473) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| [Email Capture](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5925) | `EmailCapture` | Composition | `email-capture/` | `scale`, `state` |
+| [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `Accordion` | Composition | `accordion/` | `state`, `variant` |
+| [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| [Form Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5532) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| [Form Dropdown Option](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2015-39220) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
+| [Free Trial Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1880-108955) | `FreeTrialCard` | Composition | `free-trial-card/` | — |
+| [Image Ratios](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4450-79904) | — | — | — | — |
+| [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
+| [List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1874-101886) | — | — | — | — |
+| [Modal Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-105611) | `Modal` | Composition | `modal/` | `variant` |
+| [Modal Dialog](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5787-116045) | `Modal` | Composition | `modal/` | `variant` |
+| [Multi-CTA List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25078) | `CtaList` | Builder Block | `cta-list/` | — |
+| [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Price and Label](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=3707-42767) | `PriceLabel` | Primitive | `price-label/` | `variant`, `scale` |
+| [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922) | `ProductDetail` | Composition | `product-detail/` | `variant` |
+| [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943) | `ProductCard` | Composition | `product-card/` | `scale` |
+| [Product Images](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1946-5555) | — | — | — | — |
+| [Product Lineup—Single](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-49395) | `ProductDetail` | Composition | `product-detail/` | `variant` |
+| [Radio Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5243) | `RadioButton` | Primitive | `radio-button/` | `state` |
+| [Reviews](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9371) | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
+| [Sale Percentage](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5173-41321) | `Badge` | Primitive | `badge/` | `variant`, `scale` |
+| [Search Field](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5874) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| [Section Headline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76419) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| [Section Headline with CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2457-71522) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| [Simple Menu](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4958) | `Menu` | Primitive | `menu/` | `variant`, `state` |
+| [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Slider](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5807) | `Slider` | Primitive | `slider/` | `state` |
+| [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
+| [Star](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9407) | `StarRating` | Primitive | `star-rating/` | `variant`, `scale` |
+| [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) | `Button` | Primitive | `button/` | `variant`, `scale`, `state` |
+| [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401) | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
+| [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162) | `Stepper` | Primitive | `stepper/` | `variant`, `scale`, `state` |
+| [Subnav Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34404) | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
+| [Subnav Dropdown Options](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34528) | `SubnavDropdown` | Primitive | `subnav-dropdown/` | `variant`, `state` |
+| [Switch](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5125) | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
+| [Tabbed Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76540) | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
+| [Tabbed Selector Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2532-76553) | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
+| [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995) | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
+| [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782) | `LinkButton` | Primitive | `link-button/` | `variant`, `iconPosition`, `scale`, `state` |
+| [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | `TextInputGroup` | Primitive | `text-input-group/` | `scale` |
+| [Text Input (single line)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5130) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| [Text Input—Date](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| [Text Input—Multiline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422) | `Textarea` | Primitive | `textarea/` | `scale`, `state` |
+| [Text Input—Password](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
+| [Text Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76369) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| [Text Section with Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9202) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
+| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5649) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `Toast` | Primitive | `toast/` | `variant` |
+| [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340) | `SelectionGroup` | Composition | `selection-group/` | `type`, `layout` |
+| [Toggle with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311) | `Toggle` | Primitive | `toggle/` | `variant`, `state` |
+| [Upload Image Area](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5327) | `FileUpload` | Composition | `file-upload/` | `state` |
 
 ---
 *Generated by `build-inventory.ts`*

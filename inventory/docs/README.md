@@ -65,11 +65,14 @@
 | `data/taxonomy.json` | Category definitions, code components, and proposed folder structure |
 | `data/gap-analysis.json` | Figma vs. commerce-theme token comparison |
 | `data/brand-styles-audit.json` | Brand Styles local styles vs. variables audit |
+| `data/verified-dependencies.json` | Component dependencies verified via `get_design_context` MCP calls — confidence levels and notes per entry |
 | `data/dtcg/primitives.json` | Tier 1 DTCG tokens (raw values) |
 | `data/dtcg/semantic.json` | Tier 2 DTCG tokens (intent-based aliases) |
 | `data/dtcg/component.json` | Tier 3 DTCG tokens (component-scoped) |
-|| `raw/figma-brand-styles-metadata.xml` | Logos Brand Styles Figma canvas structure (manually fetched via MCP) |
-|| `raw/figma-brand-styles-extracted.json` | Extracted color/gradient/shadow values from Brand Styles local styles |
+| `raw/figma-brand-styles-metadata.xml` | Logos Brand Styles Figma canvas structure (manually fetched via MCP) |
+| `raw/figma-brand-styles-extracted.json` | Extracted color/gradient/shadow values from Brand Styles local styles |
+| `raw/design-context/` | Full `get_design_context` MCP responses per component — layer hierarchy, auto-layout, generated code. See README inside. |
+| `screenshots/` | Component screenshots downloaded via Figma REST API. See README inside for capture instructions. |
 
 ## Pipeline
 
@@ -80,4 +83,9 @@ raw/figma-variables.json               ─┤─► parse-figma.ts ──► dat
 commerce-theme/src/*.ts                ─┤─► gap-analysis.ts + map-dtcg.ts ──► data/*.json
 raw/figma-brand-styles-extracted.json  ─┘─► audit-brand-styles.ts ──► brand-styles-audit.json
                                             generate-docs.ts ──► docs/*.md (12 docs + README)
+
+One-time capture (not part of regular build):
+raw/design-context/   ◄── get_design_context MCP (run manually per component)
+screenshots/          ◄── src/capture-screenshots.ts (Figma REST API, requires FIGMA_TOKEN env var)
+data/verified-dependencies.json ◄── analysed from raw/design-context/ output
 ```

@@ -8,7 +8,7 @@
 ## Pipeline Overview
 
 ```mermaid
-flowchart LR
+flowchart TD
   subgraph s1 [Stage 1 · Figma Export]
     Figma[Figma Variables]
     FigmaExport[Export Tool]
@@ -16,30 +16,30 @@ flowchart LR
   end
 
   subgraph cA [Contract A · DTCG JSON]
-    DTCG["@faithlife/design-tokens\nW3C DTCG JSON\n(npm, semver)"]
+    DTCG["@faithlife/design-tokens — W3C DTCG JSON — npm, semver"]
   end
 
   subgraph s3 [Stage 3 · Token Transform]
-    Transform["Style Dictionary v4\nor Cobalt UI"]
+    Transform["Style Dictionary v4 or Cobalt UI"]
   end
 
   subgraph cB [Contract B · CSS Vars]
-    CSS["theme-variables.css\n(:root block, --theme-* names)"]
+    CSS["theme-variables.css — :root block, --theme-* names"]
   end
 
   subgraph s4 [Stage 4 · Tailwind Mapping]
-    TW["tailwind-helper.ts\n(or Cobalt plugin-tailwind)"]
+    TW["tailwind-helper.ts or Cobalt plugin-tailwind"]
   end
 
   subgraph cC [Contract C · Tailwind Config]
-    TWC["JS config objects\n(colors, spacing, shadows…)"]
+    TWC["JS config objects — colors, spacing, shadows…"]
   end
 
   subgraph s56 [Stages 5-6 · Consumers]
-    CC["@faithlife/commerce-components\n(Storybook)"]
+    CC["@faithlife/commerce-components"]
     CW[CommerceWeb]
     CWNJ[CommerceWebNextJs]
-    Native["Future consumers\n(iOS, Android, etc.)"]
+    Native["Future consumers — iOS, Android, etc."]
   end
 
   FigmaExport --> DTCG
@@ -476,16 +476,20 @@ This workflow can be triggered by anyone — a designer who wants to see their t
 ```mermaid
 flowchart TD
   subgraph normal [Normal PR Flow]
-    cwPR[CommerceWeb PR] --> autoBuild[Auto build + deploy]
-    autoBuild --> prComment["Comment: https://N.pr.new.logos.com/"]
+    cwPR[CommerceWeb PR]
+    autoBuild[Auto build + deploy]
+    prComment["Comment: https://N.pr.new.logos.com/"]
+    cwPR --> autoBuild --> prComment
   end
 
   subgraph tokenFlow [Token Preview Flow]
-    upstream["Upstream change\n(tokens, theme, or components PR)"] --> dispatch[workflow_dispatch\nwith version overrides]
-    dispatch --> overrideDeps[Override npm deps\nin src/CommerceWeb/package.json]
-    overrideDeps --> sameBuild[Same build pipeline]
-    sameBuild --> lighthouse[Lighthouse audit]
-    lighthouse --> notify["Post URL + scores\nto PR or Slack"]
+    upstream["Upstream change — tokens, theme, or components PR"]
+    dispatch["workflow_dispatch with version overrides"]
+    overrideDeps["Override npm deps in src/CommerceWeb/package.json"]
+    sameBuild[Same build pipeline]
+    lighthouse[Lighthouse audit]
+    notify["Post URL + scores to PR or Slack"]
+    upstream --> dispatch --> overrideDeps --> sameBuild --> lighthouse --> notify
   end
 ```
 

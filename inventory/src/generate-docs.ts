@@ -74,9 +74,11 @@ function colorSwatch(hex?: string): string {
   return `![](https://placehold.co/12x12/${clean}/${clean}.png) `;
 }
 
-// Escape pipe characters in Figma token names so they don't break markdown tables
-function escPipe(s: string): string {
-  return s.replace(/\|/g, '\\|');
+// Build a markdown table row with automatic pipe-escaping in every cell.
+// Use this for ALL dynamic table rows — prevents pipe chars in TypeScript union
+// types, Figma names, descriptions, etc. from breaking markdown table rendering.
+function mdRow(...cells: string[]): string {
+  return '| ' + cells.map((c) => c.replace(/\|/g, '\\|')).join(' | ') + ' |';
 }
 
 function matchStatus(figmaKey: string, gapColors: GapAnalysis['colors']): string {
@@ -348,7 +350,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const matchStr = matchEntry ? '✅ Matched' : gap.colors.figmaOnly.some((e) => e.figmaKey === t.figmaKey) ? '⚠️ Figma-only' : '—';
     const codeKey = matchEntry?.codeKey ?? '—';
     const tier = /primary|secondary|deep colors|bright/i.test(t.figmaKey) ? 'P' : 'S';
-    lines.push(`| ${swatch} | \`${escPipe(t.figmaKey)}\` | \`${t.rawValue.toLowerCase()}\` | ${t.group} | ${tier} | ${matchStr} | \`${escPipe(codeKey)}\` |`);
+    lines.push(mdRow(swatch, `\`${t.figmaKey}\``, `\`${t.rawValue.toLowerCase()}\``, t.group, tier, matchStr, `\`${codeKey}\``));
   }
 
   if (gap.colors.codeOnly.length > 0) {
@@ -361,14 +363,14 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
       for (const e of gap.colors.codeOnly) {
         const swatch = colorSwatch(e.codeValue ?? '#000');
         const inBrandStyles = brandStylesHexes.has((e.codeValue ?? '').toLowerCase()) ? '⚠️ Local style' : '—';
-        lines.push(`| ${swatch} | \`${e.codeKey}\` | \`${e.codeValue}\` | ${inBrandStyles} |`);
+        lines.push(mdRow(swatch, `\`${e.codeKey}\``, `\`${e.codeValue}\``, inBrandStyles));
       }
     } else {
       lines.push('| | Code Key | Hex |');
       lines.push('|--|----------|-----|');
       for (const e of gap.colors.codeOnly) {
         const swatch = colorSwatch(e.codeValue ?? '#000');
-        lines.push(`| ${swatch} | \`${e.codeKey}\` | \`${e.codeValue}\` |`);
+        lines.push(mdRow(swatch, `\`${e.codeKey}\``, `\`${e.codeValue}\``));
       }
     }
   }
@@ -380,7 +382,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   for (const t of tokens.typography) {
     const m = t.rawValue.match(/family:\s*"([^"]+)".*weight:\s*(\d+).*lineHeight:\s*([^,]+),.*letterSpacing:\s*([^)]+)/);
     if (m) {
-      lines.push(`| \`${escPipe(t.figmaKey)}\` | ${m[1]} | ${m[2]} | ${m[3].trim()} | ${m[4].trim()} | ${t.group} |`);
+      lines.push(mdRow(`\`${t.figmaKey}\``, m[1], m[2], m[3].trim(), m[4].trim(), t.group));
     }
   }
 
@@ -392,9 +394,9 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     lines.push('|------------|-----------|---------------|------------|');
     for (const t of tokens.fontSizes) {
       const typoRef = tokens.typography.find((ty) => ty.rawValue.includes(t.figmaKey));
-      const refStr = typoRef ? `\`${escPipe(typoRef.figmaKey)}\`` : '—';
+      const refStr = typoRef ? `\`${typoRef.figmaKey}\`` : '—';
       const codeMatch = gap.typography.matched.some((e) => e.figmaKey === t.figmaKey);
-      lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` | ${refStr} | ${codeMatch ? '✅ Matched' : '—'} |`);
+      lines.push(mdRow(`\`${t.figmaKey}\``, `\`${t.rawValue}px\``, refStr, codeMatch ? '✅ Matched' : '—'));
     }
   }
 
@@ -408,7 +410,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const matchEntry = gap.spacing.matched.find((e) => e.figmaKey === t.figmaKey);
     const spMatch = matchEntry ? '✅ Matched' : gap.spacing.figmaOnly.some((e) => e.figmaKey === t.figmaKey) ? '⚠️ Figma-only' : '—';
     const codeKey = matchEntry?.codeKey ?? '—';
-    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` | ${escPipe(t.group)} | ${tier} | ${spMatch} | \`${codeKey}\` |`);
+    lines.push(mdRow(`\`${t.figmaKey}\``, `\`${t.rawValue}px\``, t.group, tier, spMatch, `\`${codeKey}\``));
   }
 
   if (gap.spacing.codeOnly.length > 0) {
@@ -416,7 +418,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     lines.push('| Code Key | Value |');
     lines.push('|----------|-------|');
     for (const e of gap.spacing.codeOnly) {
-      lines.push(`| \`${e.codeKey}\` | \`${e.codeValue}\` |`);
+      lines.push(mdRow(`\`${e.codeKey}\``, `\`${e.codeValue}\``));
     }
   }
 
@@ -429,7 +431,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     const shadowMatch = matchEntry ? '✅ Matched' : '⚠️ Figma-only';
     const codeKey = matchEntry?.codeKey ?? '—';
     const firstEffect = t.rawValue.split(';')[0].trim().slice(0, 80);
-    lines.push(`| \`${escPipe(t.figmaKey)}\` | ${firstEffect}... | ${shadowMatch} | \`${codeKey}\` |`);
+    lines.push(mdRow(`\`${t.figmaKey}\``, `${firstEffect}...`, shadowMatch, `\`${codeKey}\``));
   }
 
   if (gap.shadows.codeOnly.length > 0) {
@@ -437,7 +439,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
     lines.push('| Code Key | First Layer |');
     lines.push('|----------|-------------|');
     for (const e of gap.shadows.codeOnly) {
-      lines.push(`| \`${e.codeKey}\` | ${(e.codeValue ?? '').slice(0, 80)}... |`);
+      lines.push(mdRow(`\`${e.codeKey}\``, `${(e.codeValue ?? '').slice(0, 80)}...`));
     }
   }
 
@@ -446,7 +448,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   lines.push('| Figma Name | Value |');
   lines.push('|------------|-------|');
   for (const t of tokens.strokes) {
-    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}px\` |`);
+    lines.push(mdRow(`\`${t.figmaKey}\``, `\`${t.rawValue}px\``));
   }
 
   // Layout & Grid (columns, viewport — NOT font sizes)
@@ -454,7 +456,7 @@ function doc01TokenMap(tokens: TokenCategory, gap: GapAnalysis): string {
   lines.push('| Figma Name | Value | Group |');
   lines.push('|------------|-------|-------|');
   for (const t of tokens.layout) {
-    lines.push(`| \`${escPipe(t.figmaKey)}\` | \`${t.rawValue}\` | ${t.group} |`);
+    lines.push(mdRow(`\`${t.figmaKey}\``, `\`${t.rawValue}\``, t.group));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -483,7 +485,7 @@ function doc02ComponentInventory(components: FigmaComponent[]): string {
       const axes = Object.keys(c.properties).join(', ');
       const responsive = c.hasResponsive ? '✅' : '—';
       const cat = CATEGORY_LABELS[c.functionalCategory];
-      lines.push(`| ${c.name} | ${cat} | ${c.variantCount} | ${axes || '—'} | ${responsive} | \`<${c.suggestedHtmlElement}>\` | \`${c.figmaId}\` |`);
+      lines.push(mdRow(c.name, cat, `${c.variantCount}`, axes || '—', responsive, `\`<${c.suggestedHtmlElement}>\``, `\`${c.figmaId}\``));
     }
     lines.push('');
   }
@@ -512,8 +514,8 @@ function doc03StateMatrix(components: FigmaComponent[]): string {
     (c) => c.properties['State'] || c.properties['Property 1']
   );
 
-  lines.push(`| Component | Section | ${EXPECTED_STATES.join(' | ')} |`);
-  lines.push(`|-----------|---------|${EXPECTED_STATES.map(() => '---').join('|')}|`);
+  lines.push(mdRow('Component', 'Section', ...EXPECTED_STATES));
+  lines.push(mdRow('-----------', '---------', ...EXPECTED_STATES.map(() => '---')));
 
   for (const c of stateComponents.sort((a, b) => a.name.localeCompare(b.name))) {
     const stateValues = c.properties['State'] ?? c.properties['Property 1'] ?? [];
@@ -532,7 +534,7 @@ function doc03StateMatrix(components: FigmaComponent[]): string {
     const inconsistentNames = stateValues.filter((v) => isInconsistentStateName(v));
     const noteStr = inconsistentNames.length > 0 ? ` ⚠️ *${inconsistentNames.join(', ')}*` : '';
 
-    lines.push(`| ${c.name}${noteStr} | ${SECTION_LABELS[c.section]} | ${cells.join(' | ')} |`);
+    lines.push(mdRow(`${c.name}${noteStr}`, SECTION_LABELS[c.section], ...cells));
   }
 
   lines.push('', '## Inconsistency Summary', '');
@@ -592,7 +594,7 @@ function doc04ResponsiveCatalog(components: FigmaComponent[]): string {
   lines.push('|-----------|---------|---------------------|');
   for (const c of fullyResponsive.sort((a, b) => a.name.localeCompare(b.name))) {
     const sizes = (c.properties['Size'] ?? []).filter((v) => /desktop|tablet|mobile/i.test(v)).join(', ');
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${sizes || 'Desktop, Tablet, Mobile'} |`);
+    lines.push(mdRow(c.name, SECTION_LABELS[c.section], sizes || 'Desktop, Tablet, Mobile'));
   }
 
   lines.push('', `## ⚠️ Partially Responsive (${partiallyResponsive.length})`, '');
@@ -602,7 +604,7 @@ function doc04ResponsiveCatalog(components: FigmaComponent[]): string {
     const has = (c.properties['Size'] ?? []).filter((v) => /desktop|tablet|mobile/i.test(v)).join(', ');
     const all = ['Desktop', 'Tablet', 'Mobile'];
     const missing = all.filter((bp) => !has.toLowerCase().includes(bp.toLowerCase())).join(', ');
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${has || '—'} | ${missing} |`);
+    lines.push(mdRow(c.name, SECTION_LABELS[c.section], has || '—', missing));
   }
 
   lines.push('', `## — Not Responsive (${notResponsive.length})`, '');
@@ -610,7 +612,7 @@ function doc04ResponsiveCatalog(components: FigmaComponent[]): string {
   lines.push('|-----------|---------|-----------------|--------------|');
   for (const c of notResponsive.sort((a, b) => a.name.localeCompare(b.name))) {
     const sizes = (c.properties['Size'] ?? []).join(', ') || '—';
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${sizes} | \`<${c.suggestedHtmlElement}>\` |`);
+    lines.push(mdRow(c.name, SECTION_LABELS[c.section], sizes, `\`<${c.suggestedHtmlElement}>\``));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -645,7 +647,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
   ];
 
   for (const ax of axes) {
-    lines.push(`| **${ax.axis}** | ${ax.components.length} | ${ax.values.join(', ')} |`);
+    lines.push(mdRow(`**${ax.axis}**`, `${ax.components.length}`, ax.values.join(', ')));
   }
 
   // Expandable component lists per axis
@@ -680,7 +682,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
       lines.push('| Found | Should Be |');
       lines.push('|-------|-----------|');
       for (const t of typos) {
-        lines.push(`| \`${t}\` | \`${STATE_TYPOS[t]}\` |`);
+        lines.push(mdRow(`\`${t}\``, `\`${STATE_TYPOS[t]}\``));
       }
       lines.push('');
     }
@@ -704,7 +706,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
     lines.push('| Component | Axis | Bad Value(s) | Action |');
     lines.push('|-----------|------|-------------|--------|');
     for (const issue of issues) {
-      lines.push(`| ${issue.component} | ${issue.axis} | \`${issue.badValues.join('`, `')}\` | Rename with descriptive value in Figma |`);
+      lines.push(mdRow(issue.component, issue.axis, `\`${issue.badValues.join('`, `')}\``, 'Rename with descriptive value in Figma'));
     }
   } else {
     lines.push('No auto-generated names detected. ✅');
@@ -727,7 +729,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
         // Get code component name from reason string
         const ccMatch = c.reason.match(/`([^`]+)`/);
         const ccName = ccMatch ? ccMatch[1] : '—';
-        lines.push(`| ${c.compA} | ${c.compB} | \`${ccName}\` |`);
+        lines.push(mdRow(c.compA, c.compB, `\`${ccName}\``));
       }
       lines.push('');
     }
@@ -742,7 +744,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
         const rec = curated ?? c.reason;
         const axesStr = c.sharedAxes.length > 0 ? c.sharedAxes.join(', ') : '—';
         const overlapStr = c.valueOverlap > 0 ? `${Math.round(c.valueOverlap * 100)}%` : '—';
-        lines.push(`| ${c.compA} | ${c.compB} | ${axesStr} | ${overlapStr} | ${rec} |`);
+        lines.push(mdRow(c.compA, c.compB, axesStr, overlapStr, rec));
       }
     }
   } else {
@@ -756,7 +758,7 @@ function doc05VariantAnalysis(components: FigmaComponent[], axes: VariantAxis[],
   const sortedByVariants = [...components].sort((a, b) => b.variantCount - a.variantCount);
   for (const c of sortedByVariants) {
     const axeCount = Object.keys(c.properties).length;
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${c.variantCount} | ${axeCount} |`);
+    lines.push(mdRow(c.name, SECTION_LABELS[c.section], `${c.variantCount}`, `${axeCount}`));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -849,7 +851,7 @@ function doc06DependencyGraph(components: FigmaComponent[]): string {
   lines.push('|----------|------------|');
   for (const c of molecules.sort((a, b) => a.name.localeCompare(b.name))) {
     const deps = DEPENDENCY_MAP[c.name] ?? [];
-    lines.push(`| ${c.name} | ${deps.length > 0 ? deps.join(', ') : '—'} |`);
+    lines.push(mdRow(c.name, deps.length > 0 ? deps.join(', ') : '—'));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -1015,9 +1017,15 @@ function doc07PriorityDashboard(components: FigmaComponent[], taxonomy: Taxonomy
   for (const s of scores) {
     const depLabel = s.allDepCount > 0 ? `${s.allDepCount}` : '0';
     const cleanup = s.hasCleanupNeeded ? ' ⚠️' : '';
-    lines.push(
-      `| \`${s.cc.name}\` | ${TIER_LABELS[s.cc.tier]} | ${CATEGORY_LABELS[s.cc.functionalCategory]} | ${s.figmaFrameCount}${cleanup} | ${depLabel} | **${s.maxTotal}** | ${s.maxRecommendation} |`
-    );
+    lines.push(mdRow(
+      `\`${s.cc.name}\``,
+      TIER_LABELS[s.cc.tier],
+      CATEGORY_LABELS[s.cc.functionalCategory],
+      `${s.figmaFrameCount}${cleanup}`,
+      depLabel,
+      `**${s.maxTotal}**`,
+      s.maxRecommendation,
+    ));
   }
 
   // Also keep the full Figma-frame view for reference
@@ -1035,8 +1043,18 @@ function doc07PriorityDashboard(components: FigmaComponent[], taxonomy: Taxonomy
     const depLabel = depCount > 0 ? `${s.depScore} (${depCount})` : '0';
     const codeName = taxonomy.codeComponents.find((cc) => cc.figmaSources.includes(s.component.name))?.name ?? '—';
     lines.push(
-      `| ${s.component.name} | \`${codeName}\` | ${SECTION_LABELS[s.component.section]} | ${s.sectionScore} | ${s.variantScore} | ${s.stateScore} | ${s.responsiveScore} | ${depLabel} | **${s.total}** | ${s.recommendation} |`
-    );
+      mdRow(
+    s.component.name,
+    `\`${codeName}\``,
+    SECTION_LABELS[s.component.section],
+    `${s.sectionScore}`,
+    `${s.variantScore}`,
+    `${s.stateScore}`,
+    `${s.responsiveScore}`,
+    depLabel,
+    `**${s.total}**`,
+    s.recommendation,
+  ));
   }
 
   const ready = frameScores.filter((s) => s.recommendation.startsWith('✅')).length;
@@ -1046,10 +1064,10 @@ function doc07PriorityDashboard(components: FigmaComponent[], taxonomy: Taxonomy
 
   lines.push('', '## Summary', '');
   lines.push('| Status | Count |', '|--------|-------|');
-  lines.push(`| ✅ Ready / high priority | ${ready} |`);
-  lines.push(`| 🔄 Build with minor caveats | ${minor} |`);
-  lines.push(`| ⚠️ Needs Figma cleanup | ${cleanup} |`);
-  lines.push(`| ⏳ Deferred | ${deferred} |`);
+  lines.push(mdRow('✅ Ready / high priority', `${ready}`));
+  lines.push(mdRow('🔄 Build with minor caveats', `${minor}`));
+  lines.push(mdRow('⚠️ Needs Figma cleanup', `${cleanup}`));
+  lines.push(mdRow('⏳ Deferred', `${deferred}`));
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
   return lines.join('\n');
@@ -1120,7 +1138,7 @@ function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string
       lines.push('| Code Component | Tier | Figma Sources |');
       lines.push('|----------------|------|---------------|');
       for (const cc of catCodeComps) {
-        lines.push(`| \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | ${cc.figmaSources.join(', ')} |`);
+        lines.push(mdRow(`\`${cc.name}\``, TIER_LABELS[cc.tier], cc.figmaSources.join(', ')));
       }
     }
     lines.push('');
@@ -1135,7 +1153,7 @@ function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string
     const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
     const codeName = cc ? `\`${cc.name}\`` : '—';
     const tier = cc ? TIER_LABELS[cc.tier] : '—';
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${CATEGORY_LABELS[c.functionalCategory]} | ${codeName} | ${tier} |`);
+    lines.push(mdRow(c.name, SECTION_LABELS[c.section], CATEGORY_LABELS[c.functionalCategory], codeName, tier));
   }
 
   // Proposed folder structure
@@ -1163,7 +1181,7 @@ function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string
   };
   for (const c of others) {
     const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
-    lines.push(`| ${c.name} | ${CATEGORY_LABELS[c.functionalCategory]} | ${cc ? `\`${cc.name}\`` : '—'} | ${otherRationale[c.name] ?? '—'} |`);
+    lines.push(mdRow(c.name, CATEGORY_LABELS[c.functionalCategory], cc ? `\`${cc.name}\`` : '—', otherRationale[c.name] ?? '—'));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -1202,7 +1220,7 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
     lines.push('|-----------|-----------|----------|---------------|------|');
     for (const cc of list) {
       lines.push(
-        `| \`${cc.name}\` | \`${cc.directoryName}/\` | ${CATEGORY_LABELS[cc.functionalCategory]} | ${cc.figmaSources.join(', ')} | \`<${cc.htmlElement}>\` |`
+        mdRow(`\`${cc.name}\``, `\`${cc.directoryName}/\``, CATEGORY_LABELS[cc.functionalCategory], cc.figmaSources.join(', '), `\`<${cc.htmlElement}>\``)
       );
     }
     lines.push('');
@@ -1325,11 +1343,11 @@ Components use **Tailwind utility classes** via the \`cn()\` helper, not compone
   for (const c of [...components].sort((a, b) => a.name.localeCompare(b.name))) {
     const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
     if (!cc) {
-      lines.push(`| ${c.name} | — | — | — | — |`);
+      lines.push(mdRow(c.name, '—', '—', '—', '—'));
       continue;
     }
     const keyProps = cc.props.map((p) => `\`${p.name}\``).join(', ') || '—';
-    lines.push(`| ${c.name} | \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | \`${cc.directoryName}/\` | ${keyProps} |`);
+    lines.push(mdRow(c.name, `\`${cc.name}\``, TIER_LABELS[cc.tier], `\`${cc.directoryName}/\``, keyProps));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -1357,7 +1375,7 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
   lines.push('| Code Component | Tier | Figma Frames |');
   lines.push('|----------------|------|--------------|');
   for (const cc of codeComponents) {
-    lines.push(`| \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | ${cc.figmaSources.join(', ')} |`);
+    lines.push(mdRow(`\`${cc.name}\``, TIER_LABELS[cc.tier], cc.figmaSources.join(', ')));
   }
   lines.push('');
   const unmappedFrames = components.filter((c) => !codeComponents.some((cc) => cc.figmaSources.includes(c.name)));
@@ -1717,11 +1735,11 @@ function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
           const axis = p.figmaAxis ?? '—';
           const def = p.default != null ? `\`${p.default}\`` : '—';
           const desc = p.description ?? '—';
-          lines.push(`| \`${p.name}\` | \`${p.type}\` | ${def} | ${axis} | ${desc} |`);
+          lines.push(mdRow(`\`${p.name}\``, `\`${p.type}\``, def, axis, desc));
         }
         // Standard props all components should support
-        lines.push(`| \`className\` | \`string\` | — | — | Additional CSS class |`);
-        lines.push(`| \`data-testid\` | \`string\` | — | — | Test selector hook |`);
+        lines.push(mdRow('`className`', '`string`', '—', '—', 'Additional CSS class'));
+        lines.push(mdRow('`data-testid`', '`string`', '—', '—', 'Test selector hook'));
         lines.push('');
       }
 

@@ -5,7 +5,7 @@
 **Note:** Components without a `State` property axis are excluded from this table.
 
 | Component | Section | Default | Hover | Focus | Active | Disabled | Error | Loading | Success | Selected |
-|-----------|---------|---|---|---|---|---|---|---|---|---|
+| ----------- | --------- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Accordion Section | Atoms | Y | Y | Y | MISS | MISS | — | — | — | — |
 | Basic Form | Molecules | Y | MISS | MISS | MISS | MISS | — | — | Y | — |
 | Breadcrumbs | Atoms | Y | Y | MISS | Y | Y | — | — | — | — |

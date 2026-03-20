@@ -55,9 +55,9 @@ These rules apply to **every** component. They are sourced from
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'primary' | 'secondary' | 'tertiary' | 'stateful'` | `primary` | Type | Visual hierarchy — never use color/appearance words |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | Size — always a separate prop, never encoded in variant |
-| `state` | `'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'` | `default` | State | — |
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'stateful'` | `primary` | Type | Visual hierarchy — never use color/appearance words |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | Size — always a separate prop, never encoded in variant |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled' \| 'loading' \| 'success'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -137,9 +137,9 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'floating' | 'close' | 'play'` | `default` | Style | Semantic shape/context of the icon button |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'active' | 'disabled'` | `default` | State | — |
+| `variant` | `'default' \| 'floating' \| 'close' \| 'play'` | `default` | Style | Semantic shape/context of the icon button |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -214,10 +214,10 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'arrow-link'` | `default` | Type | — |
-| `iconPosition` | `'leading' | 'trailing'` | `trailing` | Type | Leading = icon left, trailing = icon right |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'active' | 'disabled'` | `default` | State | — |
+| `variant` | `'default' \| 'arrow-link'` | `default` | Type | — |
+| `iconPosition` | `'leading' \| 'trailing'` | `trailing` | Type | Leading = icon left, trailing = icon right |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -292,9 +292,9 @@ export function LinkButton({ variant = 'default', scale = 'medium', className, c
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `type` | `'text' | 'date' | 'password' | 'search'` | `text` | Type | — |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error' | 'success'` | `default` | State | — |
+| `type` | `'text' \| 'date' \| 'password' \| 'search'` | `text` | Type | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'filled' \| 'disabled' \| 'error' \| 'success'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -359,8 +359,8 @@ export function Input({ variant = 'text', className, children, ...props }: Input
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error'` | `default` | State | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'filled' \| 'disabled' \| 'error'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -414,7 +414,7 @@ export function Textarea({ variant = 'md', className, children, ...props }: Text
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -462,9 +462,9 @@ export function TextInputGroup({ variant = 'md', className, children, ...props }
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'form'` | `default` | Type | Use form for label+border style in a form context |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'focus' | 'open' | 'disabled' | 'error'` | `default` | State | — |
+| `variant` | `'default' \| 'form'` | `default` | Type | Use form for label+border style in a form context |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'open' \| 'disabled' \| 'error'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -527,7 +527,7 @@ export function Select({ variant = 'default', className, children, ...props }: S
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `state` | `'default' | 'hover' | 'checked' | 'indeterminate' | 'disabled'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'checked' \| 'indeterminate' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -590,7 +590,7 @@ export function Checkbox({ variant = 'default', className, children, ...props }:
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `state` | `'default' | 'hover' | 'checked' | 'disabled'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'checked' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -652,8 +652,8 @@ export function RadioButton({ variant = 'default', className, children, ...props
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'with-label'` | `default` | Type | — |
-| `state` | `'on' | 'off' | 'disabled'` | `off` | State | — |
+| `variant` | `'default' \| 'with-label'` | `default` | Type | — |
+| `state` | `'on' \| 'off' \| 'disabled'` | `off` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -714,7 +714,7 @@ export function Toggle({ variant = 'default', className, children, ...props }: T
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `state` | `'default' | 'hover' | 'focus' | 'disabled'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -767,8 +767,8 @@ export function Slider({ variant = 'default', className, children, ...props }: S
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'sale' | 'tag' | 'info' | 'success' | 'warning' | 'error'` | `default` | Type | Use semantic variants (success/warning/error) not color words |
-| `scale` | `'sm' | 'md'` | `md` | Size | — |
+| `variant` | `'default' \| 'sale' \| 'tag' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | Type | Use semantic variants (success/warning/error) not color words |
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -829,8 +829,8 @@ export function Badge({ variant = 'default', className, children, ...props }: Ba
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'star' | 'with-count'` | `star` | Type | — |
-| `scale` | `'sm' | 'md'` | `md` | Size | — |
+| `variant` | `'star' \| 'with-count'` | `star` | Type | — |
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -883,8 +883,8 @@ export function StarRating({ variant = 'star', className, children, ...props }: 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'with-sale'` | `default` | Type | — |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
+| `variant` | `'default' \| 'with-sale'` | `default` | Type | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -932,7 +932,7 @@ export function PriceLabel({ variant = 'default', className, children, ...props 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md'` | `md` | Size | — |
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -985,8 +985,8 @@ export function Breadcrumbs({ variant = 'md', className, children, ...props }: B
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'simple' | 'button'` | `simple` | Type | — |
-| `state` | `'default' | 'hover' | 'active' | 'disabled'` | `default` | State | — |
+| `variant` | `'simple' \| 'button'` | `simple` | Type | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1040,9 +1040,9 @@ export function Menu({ variant = 'simple', className, children, ...props }: Menu
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'container' | 'item'` | `container` | Type | container is the full tab bar; item is a single tab |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'hover' | 'active' | 'disabled'` | `default` | State | — |
+| `variant` | `'container' \| 'item'` | `container` | Type | container is the full tab bar; item is a single tab |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1105,8 +1105,8 @@ export function Tabs({ variant = 'container', className, children, ...props }: T
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'trigger' | 'option'` | `trigger` | Type | — |
-| `state` | `'default' | 'hover' | 'open' | 'disabled'` | `default` | State | — |
+| `variant` | `'trigger' \| 'option'` | `trigger` | Type | — |
+| `state` | `'default' \| 'hover' \| 'open' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1154,9 +1154,9 @@ export function SubnavDropdown({ variant = 'trigger', className, children, ...pr
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'cta' | 'control' | 'quantity'` | `control` | Type | cta = with add-to-cart button, control = inline control, quantity = bare +/- buttons |
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'minimum' | 'maximum' | 'disabled'` | `default` | State | — |
+| `variant` | `'cta' \| 'control' \| 'quantity'` | `control` | Type | cta = with add-to-cart button, control = inline control, quantity = bare +/- buttons |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'minimum' \| 'maximum' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1209,9 +1209,9 @@ export function Stepper({ variant = 'control', className, children, ...props }: 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'buttons' | 'selector' | 'page' | 'scroll'` | `buttons` | Type | — |
-| `scale` | `'sm' | 'md'` | `md` | Size | — |
-| `state` | `'default' | 'first-page' | 'last-page' | 'disabled'` | `default` | State | — |
+| `variant` | `'buttons' \| 'selector' \| 'page' \| 'scroll'` | `buttons` | Type | — |
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
+| `state` | `'default' \| 'first-page' \| 'last-page' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1274,7 +1274,7 @@ export function Pagination({ variant = 'buttons', className, children, ...props 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'info' | 'success' | 'warning' | 'error'` | `info` | Type | Always semantic — never color words |
+| `variant` | `'info' \| 'success' \| 'warning' \| 'error'` | `info` | Type | Always semantic — never color words |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1340,7 +1340,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' | 'confirmation' | 'fullscreen'` | `default` | Type | — |
+| `variant` | `'default' \| 'confirmation' \| 'fullscreen'` | `default` | Type | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1414,8 +1414,8 @@ export function Modal({ title, content, ...props }: ModalProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `state` | `'expanded' | 'collapsed'` | `collapsed` | State | — |
-| `variant` | `'standalone' | 'section'` | `section` | Type | — |
+| `state` | `'expanded' \| 'collapsed'` | `collapsed` | State | — |
+| `variant` | `'standalone' \| 'section'` | `section` | Type | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1488,8 +1488,8 @@ export function Accordion({ title, content, ...props }: AccordionProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
-| `state` | `'default' | 'focus' | 'error' | 'success'` | `default` | State | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `state` | `'default' \| 'focus' \| 'error' \| 'success'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1545,7 +1545,7 @@ export function EmailCapture({ title, content, ...props }: EmailCaptureProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `state` | `'default' | 'hover' | 'active' | 'uploaded' | 'error'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'uploaded' \| 'error'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1601,8 +1601,8 @@ export function FileUpload({ title, content, ...props }: FileUploadProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `type` | `'toggle' | 'checkbox' | 'radio' | 'single-select'` | `toggle` | Style | Selection mode — drives the underlying input semantics |
-| `layout` | `'horizontal' | 'vertical'` | `horizontal` | — | — |
+| `type` | `'toggle' \| 'checkbox' \| 'radio' \| 'single-select'` | `toggle` | Style | Selection mode — drives the underlying input semantics |
+| `layout` | `'horizontal' \| 'vertical'` | `horizontal` | — | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1659,8 +1659,8 @@ export function SelectionGroup({ title, content, ...props }: SelectionGroupProps
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `layout` | `'horizontal' | 'vertical'` | `horizontal` | — | — |
-| `align` | `'start' | 'center' | 'end'` | `start` | — | — |
+| `layout` | `'horizontal' \| 'vertical'` | `horizontal` | — | — |
+| `align` | `'start' \| 'center' \| 'end'` | `start` | — | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1717,7 +1717,7 @@ export function ButtonGroup({ title, content, ...props }: ButtonGroupProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1773,7 +1773,7 @@ export function ProductCard({ title, content, ...props }: ProductCardProps) {
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'full' | 'lineup'` | `full` | Type | — |
+| `variant` | `'full' \| 'lineup'` | `full` | Type | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1879,7 +1879,7 @@ export function FreeTrialCard({ title, content, ...props }: FreeTrialCardProps) 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'headline-only' | 'headline-cta' | 'text' | 'text-buttons'` | `headline-only` | Type | — |
+| `variant` | `'headline-only' \| 'headline-cta' \| 'text' \| 'text-buttons'` | `headline-only` | Type | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1933,7 +1933,7 @@ export function SectionLayout({ variant = 'headline-only', className, children, 
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `scale` | `'sm' | 'md' | 'lg'` | `md` | Size | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 

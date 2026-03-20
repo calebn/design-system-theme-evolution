@@ -25,6 +25,12 @@ import type {
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
 
+const FIGMA_FILE_KEY = '8J2B4UtoSMRvkLqBqyoZjB';
+
+function figmaNodeUrl(nodeId: string): string {
+  return `https://www.figma.com/design/${FIGMA_FILE_KEY}/Logos-Brand-Components?node-id=${nodeId.replace(':', '-')}`;
+}
+
 function ensureDir(p: string) {
   if (!existsSync(p)) mkdirSync(p, { recursive: true });
 }
@@ -114,22 +120,24 @@ function classifyStateValue(val: string): 'valid' | 'breakpoint' | 'inputType' |
 // Dependency map (atom/molecule composition)
 // ---------------------------------------------------------------------------
 
+// Dependencies verified via Figma Desktop MCP get_design_context calls (2026-03-19).
+// See data/verified-dependencies.json for full verification record and confidence levels.
 const DEPENDENCY_MAP: Record<string, string[]> = {
   'Button group': ['Button', 'Text Button—Icon Right'],
-  'Toast Bar': ['Close Button'],
+  'Toast Bar': ['Button', 'Close Button'], // verified: Button + Close Button both used
   'Text Section with Button Group': ['Button', 'Text Button—Icon Right'],
-  'Free Trial Card': ['Button', 'Stepper CTA'],
-  'Product Content': ['Button', 'Stepper CTA', 'Reviews', 'Badges and Tags', 'Price and Label'],
+  'Free Trial Card': ['Button', 'Badges and Tags'], // verified: Stepper CTA not present; Badges used
+  'Product Content': ['Button', 'Stepper Control', 'Star', 'Badges and Tags', 'Price and Label', 'Text Button—Icon Right'], // verified
   'Slider page selector': ['Next-Previous Selector', 'Slider Scroll Bar'],
-  'Carousel Product': ['Next-Previous Buttons', 'Slider Scroll Bar', 'Slider page selector'],
+  'Carousel Product': ['Star', 'Badges and Tags', 'Price and Label', 'Button'], // verified: no Slider/NextPrev found
   'Section Headline with CTA': ['Button', 'Text Button—Icon Right'],
   'Section Headline': [],
   'Text Section': [],
   'Basic Form': ['Text Input (single line)', 'Dropdown', 'Checkbox', 'Radio Button', 'Button'],
   'Multi-CTA List': ['CTA Row'],
-  'Product Grid Card': ['Button', 'Badges and Tags', 'Price and Label', 'Reviews'],
-  'Modal Dialog': ['Button', 'Close Button', 'Modal Button Group'],
-  'Product Lineup—Single': ['Button', 'Stepper CTA', 'Reviews', 'Badges and Tags', 'Price and Label'],
+  'Product Grid Card': ['Button', 'Badges and Tags', 'Price and Label', 'Star'], // verified: Star used directly, not Reviews
+  'Modal Dialog': ['Button', 'Close Button', 'Modal Button Group', 'Text Section'], // verified: added Text Section
+  'Product Lineup—Single': ['Button', 'Stepper CTA', 'Badges and Tags', 'Price and Label', 'Star'],
   'Subnav Dropdown': ['Subnav Dropdown Options'],
   'Button': [],
   'IconButton': [],
@@ -137,9 +145,9 @@ const DEPENDENCY_MAP: Record<string, string[]> = {
   'Text Button—Icon Right': [],
   'Text Button—Icon Left': [],
   'Close Button': [],
-  'Next-Previous Buttons': [],
+  'Next-Previous Buttons': [], // verified: leaf — only inlined SVG icons
   'Expand-Collapse Button': [],
-  'Increase-Decrease Buttons': [],
+  'Increase-Decrease Buttons': [], // verified: leaf — only inlined SVG icons
   'Floating Action Button': [],
   'Floating Action Button with Text': [],
   'Play Button': [],
@@ -148,13 +156,14 @@ const DEPENDENCY_MAP: Record<string, string[]> = {
   'Button Menu': [],
   'Tabbed Selector': ['Tabbed Selector Button'],
   'Accordion Section': ['Expand-Collapse Button'],
-  'Modal Button Group': ['Button'],
-  'CTA Row': ['Button'],
+  'Modal Button Group': ['Button'], // verified
+  'CTA Row': [], // verified: no component function calls — pure inlined HTML/icons
   'Category Button': [],
   'Stepper CTA': ['Increase-Decrease Buttons', 'Button'],
   'Stepper Control': ['Increase-Decrease Buttons'],
-  'Reviews': ['Star'],
+  'Reviews': ['Star'], // verified
   'Stateful Action Button': ['Button'],
+  'Email Capture': ['Button'], // verified
 };
 
 function buildDependencyWeight(): Map<string, number> {
@@ -485,7 +494,8 @@ function doc02ComponentInventory(components: FigmaComponent[]): string {
       const axes = Object.keys(c.properties).join(', ');
       const responsive = c.hasResponsive ? '✅' : '—';
       const cat = CATEGORY_LABELS[c.functionalCategory];
-      lines.push(mdRow(c.name, cat, `${c.variantCount}`, axes || '—', responsive, `\`<${c.suggestedHtmlElement}>\``, `\`${c.figmaId}\``));
+      const figmaLink = `[${c.figmaId}](${figmaNodeUrl(c.figmaId)})`;
+      lines.push(mdRow(c.name, cat, `${c.variantCount}`, axes || '—', responsive, `\`<${c.suggestedHtmlElement}>\``, figmaLink));
     }
     lines.push('');
   }
@@ -1197,6 +1207,7 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
   const primitives = codeComponents.filter((cc) => cc.tier === 'primitive');
   const compositions = codeComponents.filter((cc) => cc.tier === 'composition');
   const builderBlocks = codeComponents.filter((cc) => cc.tier === 'builder-block');
+  const figmaIdByName = new Map(components.map((c) => [c.name, c.figmaId]));
 
   const lines: string[] = [
     '# 09 · Component Architecture',
@@ -1219,8 +1230,14 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
     lines.push('| Component | Directory | Category | Figma Sources | HTML |');
     lines.push('|-----------|-----------|----------|---------------|------|');
     for (const cc of list) {
+      const linkedSources = cc.figmaSources
+        .map((s) => {
+          const id = figmaIdByName.get(s);
+          return id ? `[${s}](${figmaNodeUrl(id)})` : s;
+        })
+        .join(', ');
       lines.push(
-        mdRow(`\`${cc.name}\``, `\`${cc.directoryName}/\``, CATEGORY_LABELS[cc.functionalCategory], cc.figmaSources.join(', '), `\`<${cc.htmlElement}>\``)
+        mdRow(`\`${cc.name}\``, `\`${cc.directoryName}/\``, CATEGORY_LABELS[cc.functionalCategory], linkedSources, `\`<${cc.htmlElement}>\``)
       );
     }
     lines.push('');
@@ -1338,12 +1355,13 @@ Components use **Tailwind utility classes** via the \`cn()\` helper, not compone
   lines.push('|-------------|----------------|------|-----------|-----------|');
   for (const c of [...components].sort((a, b) => a.name.localeCompare(b.name))) {
     const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
+    const frameLink = `[${c.name}](${figmaNodeUrl(c.figmaId)})`;
     if (!cc) {
-      lines.push(mdRow(c.name, '—', '—', '—', '—'));
+      lines.push(mdRow(frameLink, '—', '—', '—', '—'));
       continue;
     }
     const keyProps = cc.props.map((p) => `\`${p.name}\``).join(', ') || '—';
-    lines.push(mdRow(c.name, `\`${cc.name}\``, TIER_LABELS[cc.tier], `\`${cc.directoryName}/\``, keyProps));
+    lines.push(mdRow(frameLink, `\`${cc.name}\``, TIER_LABELS[cc.tier], `\`${cc.directoryName}/\``, keyProps));
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -1561,9 +1579,10 @@ const COMPONENT_TOKENS: Record<string, {
   transitions: string[];
 }> = {
   button: {
+    // Verified from Figma design context: large=py-sp18/px-sp48, medium=py-sp12/px-sp16, small=py-sp6/px-sp12
     colors: ['bg-primary', 'text-white', 'border-primary', 'hover:bg-primary-500', 'text-primary', 'disabled:bg-secondary-200'],
-    spacing: ['py-sp6', 'py-sp14', 'py-sp20', 'px-sp12', 'px-sp16', 'px-sp48', 'gap-sp12'],
-    typography: ['buttonTextLg', 'buttonTextSm'],
+    spacing: ['py-sp6', 'py-sp12', 'py-sp18', 'px-sp12', 'px-sp16', 'px-sp48'],
+    typography: ['text-fs18', 'text-fs16'],
     shadows: [],
     transitions: ['duration-short'],
   },
@@ -1658,10 +1677,27 @@ const COMPONENT_TOKENS: Record<string, {
     shadows: [],
     transitions: ['duration-short', 'animate-radixAccordionItemSlideDown'],
   },
+  star: {
+    // Verified from Figma design context: SVG only, size-[12px] small / size-[16px] large
+    colors: ['text-warning', 'text-secondary-200'],
+    spacing: ['gap-sp2'],
+    typography: [],
+    shadows: [],
+    transitions: [],
+  },
+  reviews: {
+    // Verified from Figma design context: Stars row + count text
+    colors: ['text-primary', 'text-secondary-400'],
+    spacing: ['gap-sp6', 'gap-sp12'],
+    typography: ['text-fs12', 'text-fs14'],
+    shadows: [],
+    transitions: [],
+  },
 };
 
-function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
+function doc12ComponentSurfaceArea(taxonomy: Taxonomy, components: FigmaComponent[]): string {
   const codeComponents = taxonomy.codeComponents;
+  const figmaIdByName = new Map(components.map((c) => [c.name, c.figmaId]));
 
   const lines: string[] = [
     '# 12 · Component Surface Area',
@@ -1717,7 +1753,13 @@ function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
       lines.push(`---`, '');
       lines.push(`### \`${cc.name}\``, '');
       lines.push(`**HTML element:** \`<${cc.htmlElement}>\` · **Directory:** \`${cc.directoryName}/\` · **Category:** ${CATEGORY_LABELS[cc.functionalCategory]}`, '');
-      lines.push(`**Figma sources:** ${cc.figmaSources.join(', ')}`, '');
+      const linkedSources12 = cc.figmaSources
+        .map((s) => {
+          const id = figmaIdByName.get(s);
+          return id ? `[${s}](${figmaNodeUrl(id)})` : s;
+        })
+        .join(', ');
+      lines.push(`**Figma sources:** ${linkedSources12}`, '');
       if (cc.description) {
         lines.push('', `> ${cc.description}`, '');
       }
@@ -2389,7 +2431,7 @@ export async function generateDocs() {
   writeDoc(join(docsDir, '08-taxonomy.md'), doc08Taxonomy(components, taxonomy));
   writeDoc(join(docsDir, '09-component-architecture.md'), doc09ComponentArchitecture(components, taxonomy));
   writeDoc(join(docsDir, '10-figma-cleanup.md'), doc10FigmaCleanup(components, gap, taxonomy));
-  writeDoc(join(docsDir, '12-component-surface-area.md'), doc12ComponentSurfaceArea(taxonomy));
+  writeDoc(join(docsDir, '12-component-surface-area.md'), doc12ComponentSurfaceArea(taxonomy, components));
 
   const auditPath = join(ROOT, 'data', 'brand-styles-audit.json');
   if (existsSync(auditPath)) {

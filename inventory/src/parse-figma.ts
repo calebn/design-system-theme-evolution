@@ -25,6 +25,17 @@ import type {
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
 
+// Figma file key for the primary brand components file.
+// Used to construct deep-link URLs to specific component frames.
+export const FIGMA_FILE_KEY = '8J2B4UtoSMRvkLqBqyoZjB';
+
+// Build a Figma deep-link URL for a given node ID.
+// Node IDs use colons internally (e.g. "1623:3480") but hyphens in URLs.
+export function figmaNodeUrl(nodeId: string): string {
+  const urlId = nodeId.replace(':', '-');
+  return `https://www.figma.com/design/${FIGMA_FILE_KEY}/Logos-Brand-Components?node-id=${urlId}`;
+}
+
 function ensureDir(p: string) {
   if (!existsSync(p)) mkdirSync(p, { recursive: true });
 }

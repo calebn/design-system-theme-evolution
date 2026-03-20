@@ -1231,23 +1231,19 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
   lines.push('These conventions come from `CommerceComponents/.github/copilot-instructions.md` and `BuilderIoBestPractices.mdx`.', '');
   lines.push(`
 ### \`variant\` — Visual hierarchy
-Describes **what the variant is**, never how it looks. No color words.
+Describes **what the variant is**, never how it looks. No color or appearance words.
 
-| Value | Meaning |
-|-------|---------|
-| \`primary\` | Highest visual prominence, main CTA |
-| \`secondary\` | Supporting action |
-| \`tertiary\` | Low-emphasis, ghost-style action |
-| \`arrow-link\` | Inline navigational link with arrow |
-| \`icon-only\` | No label, icon carries meaning |
-| \`floating\` | FAB — fixed/absolute positioned |
+The established hierarchy in \`CommerceComponents\` is \`primary\` > \`secondary\`. A \`tertiary\` level can be added when a third tier of emphasis is needed. Hierarchy levels follow decreasing visual prominence — never use color words like \`blue\`, \`dark\`, or \`filled\`.
 
-Surface suffixes append to variant values when needed:
+Surface context is expressed as a suffix on the base variant, not as a separate prop:
 - \`primary-inverse\` — primary on a dark/inverted surface
 - \`primary-brand\` — primary on the brand blue surface
+- \`secondary-inverse\`, \`secondary-brand\` — same pattern for secondary
 
-Semantic variants for status-bearing components:
-- \`success\`, \`warning\`, \`error\`, \`info\`
+For status-bearing components (toast, badge, alert), use semantic variants instead:
+\`success\` | \`warning\` | \`error\` | \`info\`
+
+See **doc 12** for the specific \`variant\` values defined for each component.
 
 ---
 
@@ -1263,7 +1259,7 @@ Always a **separate prop** from \`variant\`. Never encode size in the variant na
 ---
 
 ### \`state\` — Interaction state
-Map Figma \`State=\` axis values to these prop values. States are typically internal (controlled via CSS) but exposed as a prop for Storybook testing.
+Map Figma \`State=\` axis values to these prop values. States are typically internal (driven by CSS \`:hover\`, \`:focus\`, etc.) but exposed as a prop for Storybook testing and forced-state stories.
 
 \`default\` | \`hover\` | \`focus\` | \`active\` | \`disabled\` | \`error\` | \`success\` | \`filled\` | \`loading\`
 
@@ -1735,7 +1731,8 @@ function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
           const axis = p.figmaAxis ?? '—';
           const def = p.default != null ? `\`${p.default}\`` : '—';
           const desc = p.description ?? '—';
-          lines.push(mdRow(`\`${p.name}\``, `\`${p.type}\``, def, axis, desc));
+          const typeCell = p.proposed ? `\`${p.type}\` _(proposed)_` : `\`${p.type}\``;
+          lines.push(mdRow(`\`${p.name}\``, typeCell, def, axis, desc));
         }
         // Standard props all components should support
         lines.push(mdRow('`className`', '`string`', '—', '—', 'Additional CSS class'));
@@ -1815,7 +1812,7 @@ function doc12ComponentSurfaceArea(taxonomy: Taxonomy): string {
         lines.push(`import { LinkButton } from '@faithlife/commerce-components';`);
         lines.push('');
         lines.push(`<LinkButton iconPosition="trailing">Learn more</LinkButton>`);
-        lines.push(`<LinkButton variant="arrow-link" iconPosition="trailing">Shop all</LinkButton>`);
+        lines.push(`<LinkButton iconPosition="leading">Back to results</LinkButton>`);
       } else if (cc.name === 'Input') {
         lines.push(`import { Input } from '@faithlife/commerce-components';`);
         lines.push('');

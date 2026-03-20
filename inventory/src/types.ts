@@ -85,10 +85,11 @@ export interface GapAnalysis {
 
 export interface CodeComponentProp {
   name: string;       // e.g. "variant"
-  type: string;       // e.g. "'primary' | 'secondary' | 'arrow-link'"
+  type: string;       // e.g. "'primary' | 'secondary'"
   figmaAxis?: string; // Figma property axis this maps from
   default?: string;   // default value
   description?: string;
+  proposed?: boolean; // true = values are proposed/TBD, not from Figma axes or a real implementation
 }
 
 export interface CodeComponent {

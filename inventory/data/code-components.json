@@ -18,7 +18,8 @@
         "type": "'primary' | 'secondary' | 'tertiary' | 'stateful'",
         "figmaAxis": "Type",
         "default": "primary",
-        "description": "Visual hierarchy — never use color/appearance words"
+        "description": "Visual hierarchy — never use color/appearance words. primary/secondary are implemented; tertiary and stateful are proposed.",
+        "proposed": true
       },
       {
         "name": "scale",
@@ -53,7 +54,8 @@
         "type": "'default' | 'floating' | 'close' | 'play'",
         "figmaAxis": "Style",
         "default": "default",
-        "description": "Semantic shape/context of the icon button"
+        "description": "Distinguishes Close Button, Play Button, and Floating Action Button Figma frames within one component. Values are proposed — derived from Figma frame names, not a Figma axis.",
+        "proposed": true
       },
       {
         "name": "scale",
@@ -85,7 +87,9 @@
         "name": "variant",
         "type": "'default' | 'arrow-link'",
         "figmaAxis": "Type",
-        "default": "default"
+        "default": "default",
+        "description": "Distinguishes a plain text link from a directional/arrow-style link. Values are proposed — not derived from a Figma axis.",
+        "proposed": true
       },
       {
         "name": "iconPosition",

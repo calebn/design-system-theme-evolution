@@ -55,7 +55,7 @@ These rules apply to **every** component. They are sourced from
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'stateful'` | `primary` | Type | Visual hierarchy — never use color/appearance words |
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'stateful'` _(proposed)_ | `primary` | Type | Visual hierarchy — never use color/appearance words. primary/secondary are implemented; tertiary and stateful are proposed. |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | Size — always a separate prop, never encoded in variant |
 | `state` | `'default' \| 'hover' \| 'active' \| 'disabled' \| 'loading' \| 'success'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
@@ -137,7 +137,7 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' \| 'floating' \| 'close' \| 'play'` | `default` | Style | Semantic shape/context of the icon button |
+| `variant` | `'default' \| 'floating' \| 'close' \| 'play'` _(proposed)_ | `default` | Style | Distinguishes Close Button, Play Button, and Floating Action Button Figma frames within one component. Values are proposed — derived from Figma frame names, not a Figma axis. |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
@@ -214,7 +214,7 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' \| 'arrow-link'` | `default` | Type | — |
+| `variant` | `'default' \| 'arrow-link'` _(proposed)_ | `default` | Type | Distinguishes a plain text link from a directional/arrow-style link. Values are proposed — not derived from a Figma axis. |
 | `iconPosition` | `'leading' \| 'trailing'` | `trailing` | Type | Leading = icon left, trailing = icon right |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
@@ -242,7 +242,7 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 import { LinkButton } from '@faithlife/commerce-components';
 
 <LinkButton iconPosition="trailing">Learn more</LinkButton>
-<LinkButton variant="arrow-link" iconPosition="trailing">Shop all</LinkButton>
+<LinkButton iconPosition="leading">Back to results</LinkButton>
 ```
 
 </details>

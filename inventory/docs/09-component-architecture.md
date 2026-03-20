@@ -62,23 +62,19 @@ These conventions come from `CommerceComponents/.github/copilot-instructions.md`
 
 
 ### `variant` — Visual hierarchy
-Describes **what the variant is**, never how it looks. No color words.
+Describes **what the variant is**, never how it looks. No color or appearance words.
 
-| Value | Meaning |
-|-------|---------|
-| `primary` | Highest visual prominence, main CTA |
-| `secondary` | Supporting action |
-| `tertiary` | Low-emphasis, ghost-style action |
-| `arrow-link` | Inline navigational link with arrow |
-| `icon-only` | No label, icon carries meaning |
-| `floating` | FAB — fixed/absolute positioned |
+The established hierarchy in `CommerceComponents` is `primary` > `secondary`. A `tertiary` level can be added when a third tier of emphasis is needed. Hierarchy levels follow decreasing visual prominence — never use color words like `blue`, `dark`, or `filled`.
 
-Surface suffixes append to variant values when needed:
+Surface context is expressed as a suffix on the base variant, not as a separate prop:
 - `primary-inverse` — primary on a dark/inverted surface
 - `primary-brand` — primary on the brand blue surface
+- `secondary-inverse`, `secondary-brand` — same pattern for secondary
 
-Semantic variants for status-bearing components:
-- `success`, `warning`, `error`, `info`
+For status-bearing components (toast, badge, alert), use semantic variants instead:
+`success` | `warning` | `error` | `info`
+
+See **doc 12** for the specific `variant` values defined for each component.
 
 ---
 
@@ -94,7 +90,7 @@ Always a **separate prop** from `variant`. Never encode size in the variant name
 ---
 
 ### `state` — Interaction state
-Map Figma `State=` axis values to these prop values. States are typically internal (controlled via CSS) but exposed as a prop for Storybook testing.
+Map Figma `State=` axis values to these prop values. States are typically internal (driven by CSS `:hover`, `:focus`, etc.) but exposed as a prop for Storybook testing and forced-state stories.
 
 `default` | `hover` | `focus` | `active` | `disabled` | `error` | `success` | `filled` | `loading`
 

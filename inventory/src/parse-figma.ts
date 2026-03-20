@@ -418,7 +418,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       'Stateful Action Button',
     ],
     props: [
-      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'stateful'", figmaAxis: 'Type', default: 'primary', description: 'Visual hierarchy — never use color/appearance words' },
+      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'stateful'", figmaAxis: 'Type', default: 'primary', description: 'Visual hierarchy — never use color/appearance words. primary/secondary are implemented; tertiary and stateful are proposed.', proposed: true },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md', description: 'Size — always a separate prop, never encoded in variant' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
@@ -437,7 +437,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       'Floating Action Button',
     ],
     props: [
-      { name: 'variant', type: "'default' | 'floating' | 'close' | 'play'", figmaAxis: 'Style', default: 'default', description: 'Semantic shape/context of the icon button' },
+      { name: 'variant', type: "'default' | 'floating' | 'close' | 'play'", figmaAxis: 'Style', default: 'default', description: 'Distinguishes Close Button, Play Button, and Floating Action Button Figma frames within one component. Values are proposed — derived from Figma frame names, not a Figma axis.', proposed: true },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
@@ -455,7 +455,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       'Text Button—Icon Right',
     ],
     props: [
-      { name: 'variant', type: "'default' | 'arrow-link'", figmaAxis: 'Type', default: 'default' },
+      { name: 'variant', type: "'default' | 'arrow-link'", figmaAxis: 'Type', default: 'default', description: 'Distinguishes a plain text link from a directional/arrow-style link. Values are proposed — not derived from a Figma axis.', proposed: true },
       { name: 'iconPosition', type: "'leading' | 'trailing'", figmaAxis: 'Type', default: 'trailing', description: 'Leading = icon left, trailing = icon right' },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },

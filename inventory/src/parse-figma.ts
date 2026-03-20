@@ -19,6 +19,7 @@ import type {
   FunctionalCategory,
   Taxonomy,
   TaxonomyCategory,
+  CodeComponent,
 } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -397,153 +398,570 @@ function buildVariantAxes(components: FigmaComponent[]): VariantAxis[] {
 }
 
 // ---------------------------------------------------------------------------
+// Code component mapping: many Figma frames -> one React component
+// ---------------------------------------------------------------------------
+
+const CODE_COMPONENT_MAP: CodeComponent[] = [
+  // ── Primitives ──────────────────────────────────────────────────────────────
+
+  {
+    name: 'Button',
+    directoryName: 'button',
+    tier: 'primitive',
+    functionalCategory: 'actions',
+    description: 'The primary interactive control for actions, navigation, and CTAs.',
+    htmlElement: 'button',
+    figmaSources: [
+      'Button',
+      'Text Button—Icon Right',
+      'Text Button—Icon Left',
+      'Close Button',
+      'Play Button',
+      'Category Button',
+      'Floating Action Button',
+      'Floating Action Button with Text',
+      'Stateful Action Button',
+    ],
+    props: [
+      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'arrow-link' | 'icon-only' | 'floating'", figmaAxis: 'Type', default: 'primary', description: 'Visual hierarchy — never use color/appearance words' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md', description: 'Size — always a separate prop, never encoded in variant' },
+      { name: 'iconPosition', type: "'leading' | 'trailing' | 'only'", figmaAxis: undefined, default: undefined, description: 'When variant includes an icon' },
+    ],
+  },
+
+  {
+    name: 'Input',
+    directoryName: 'input',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Single-line text entry field covering all text, date, password, and search variants.',
+    htmlElement: 'input',
+    figmaSources: [
+      'Text Input (single line)',
+      'Text Input—Date',
+      'Text Input—Password',
+      'Search Field',
+    ],
+    props: [
+      { name: 'type', type: "'text' | 'date' | 'password' | 'search'", figmaAxis: 'Type', default: 'text' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Textarea',
+    directoryName: 'textarea',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Multi-line text entry field.',
+    htmlElement: 'textarea',
+    figmaSources: ['Text Input—Multiline'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'TextInputGroup',
+    directoryName: 'text-input-group',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Two-column name-capture input (first + last).',
+    htmlElement: 'div',
+    figmaSources: ['Text Input (name, two fields)'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'Select',
+    directoryName: 'select',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Dropdown select control. Covers both inline and form-embedded variants.',
+    htmlElement: 'select',
+    figmaSources: ['Dropdown', 'Form Dropdown', 'Form Dropdown Option'],
+    props: [
+      { name: 'variant', type: "'default' | 'form'", figmaAxis: 'Type', default: 'default', description: 'Use form for label+border style in a form context' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'open' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Checkbox',
+    directoryName: 'checkbox',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Boolean checkbox input with label.',
+    htmlElement: 'input[type=checkbox]',
+    figmaSources: ['Checkbox'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'checked' | 'indeterminate' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'RadioButton',
+    directoryName: 'radio-button',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Single radio option — used inside a RadioGroup.',
+    htmlElement: 'input[type=radio]',
+    figmaSources: ['Radio Button'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'checked' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Toggle',
+    directoryName: 'toggle',
+    tier: 'primitive',
+    functionalCategory: 'selection',
+    description: 'On/off toggle switch, optionally with a text label.',
+    htmlElement: 'input[type=checkbox]',
+    figmaSources: ['Switch', 'Toggle with Text'],
+    props: [
+      { name: 'variant', type: "'default' | 'with-label'", figmaAxis: 'Type', default: 'default' },
+      { name: 'state', type: "'on' | 'off' | 'disabled'", figmaAxis: 'State', default: 'off' },
+    ],
+  },
+
+  {
+    name: 'Slider',
+    directoryName: 'slider',
+    tier: 'primitive',
+    functionalCategory: 'data-entry',
+    description: 'Range input slider for selecting a numeric value.',
+    htmlElement: 'input[type=range]',
+    figmaSources: ['Slider'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Badge',
+    directoryName: 'badge',
+    tier: 'primitive',
+    functionalCategory: 'data-display',
+    description: 'Small label for tags, status indicators, and sale callouts.',
+    htmlElement: 'span',
+    figmaSources: ['Badges and Tags', 'Sale Percentage'],
+    props: [
+      { name: 'variant', type: "'default' | 'sale' | 'tag' | 'info' | 'success' | 'warning' | 'error'", figmaAxis: 'Type', default: 'default', description: 'Use semantic variants (success/warning/error) not color words' },
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'StarRating',
+    directoryName: 'star-rating',
+    tier: 'primitive',
+    functionalCategory: 'data-display',
+    description: 'Star icon for ratings, with optional count display.',
+    htmlElement: 'div',
+    figmaSources: ['Star', 'Reviews'],
+    props: [
+      { name: 'variant', type: "'star' | 'with-count'", figmaAxis: 'Type', default: 'star' },
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'PriceLabel',
+    directoryName: 'price-label',
+    tier: 'primitive',
+    functionalCategory: 'data-display',
+    description: 'Price display with optional original/sale price.',
+    htmlElement: 'span',
+    figmaSources: ['Price and Label'],
+    props: [
+      { name: 'variant', type: "'default' | 'with-sale'", figmaAxis: 'Type', default: 'default' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'Breadcrumbs',
+    directoryName: 'breadcrumbs',
+    tier: 'primitive',
+    functionalCategory: 'navigation',
+    description: 'Hierarchical page location indicator.',
+    htmlElement: 'nav',
+    figmaSources: ['Breadcrumbs'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'Menu',
+    directoryName: 'menu',
+    tier: 'primitive',
+    functionalCategory: 'navigation',
+    description: 'Navigation menu — simple text links or button-style items.',
+    htmlElement: 'nav',
+    figmaSources: ['Simple Menu', 'Button Menu'],
+    props: [
+      { name: 'variant', type: "'simple' | 'button'", figmaAxis: 'Type', default: 'simple' },
+      { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Tabs',
+    directoryName: 'tabs',
+    tier: 'primitive',
+    functionalCategory: 'navigation',
+    description: 'Tab bar for switching between content panels. Covers container and individual tab item.',
+    htmlElement: 'div',
+    figmaSources: ['Tabbed Selector', 'Tabbed Selector Button'],
+    props: [
+      { name: 'variant', type: "'container' | 'item'", figmaAxis: 'Type', default: 'container', description: 'container is the full tab bar; item is a single tab' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'SubnavDropdown',
+    directoryName: 'subnav-dropdown',
+    tier: 'primitive',
+    functionalCategory: 'navigation',
+    description: 'Sub-navigation dropdown with trigger and option list.',
+    htmlElement: 'nav',
+    figmaSources: ['Subnav Dropdown', 'Subnav Dropdown Options'],
+    props: [
+      { name: 'variant', type: "'trigger' | 'option'", figmaAxis: 'Type', default: 'trigger' },
+      { name: 'state', type: "'default' | 'hover' | 'open' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Stepper',
+    directoryName: 'stepper',
+    tier: 'primitive',
+    functionalCategory: 'selection',
+    description: 'Quantity control with increment/decrement. Covers standalone controls and CTA-embedded variants.',
+    htmlElement: 'div',
+    figmaSources: ['Stepper CTA', 'Stepper Control', 'Increase-Decrease Buttons'],
+    props: [
+      { name: 'variant', type: "'cta' | 'control' | 'quantity'", figmaAxis: 'Type', default: 'control', description: 'cta = with add-to-cart button, control = inline control, quantity = bare +/- buttons' },
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'minimum' | 'maximum' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Pagination',
+    directoryName: 'pagination',
+    tier: 'primitive',
+    functionalCategory: 'selection',
+    description: 'Navigation controls for paging through content.',
+    htmlElement: 'nav',
+    figmaSources: [
+      'Next-Previous Buttons',
+      'Next-Previous Selector',
+      'Slider page selector',
+      'Slider Scroll Bar',
+    ],
+    props: [
+      { name: 'variant', type: "'buttons' | 'selector' | 'page' | 'scroll'", figmaAxis: 'Type', default: 'buttons' },
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'first-page' | 'last-page' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Toast',
+    directoryName: 'toast',
+    tier: 'primitive',
+    functionalCategory: 'feedback',
+    description: 'Transient status notification.',
+    htmlElement: 'output',
+    figmaSources: ['Toast Bar'],
+    props: [
+      { name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", figmaAxis: 'Type', default: 'info', description: 'Always semantic — never color words' },
+    ],
+  },
+
+  // ── Compositions ─────────────────────────────────────────────────────────────
+
+  {
+    name: 'Modal',
+    directoryName: 'modal',
+    tier: 'composition',
+    functionalCategory: 'feedback',
+    description: 'Dialog overlay with header, body, and action group. Content areas use BuilderBlocks.',
+    htmlElement: 'dialog',
+    figmaSources: ['Modal Dialog', 'Modal Button Group'],
+    props: [
+      { name: 'variant', type: "'default' | 'confirmation' | 'fullscreen'", figmaAxis: 'Type', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'Accordion',
+    directoryName: 'accordion',
+    tier: 'composition',
+    functionalCategory: 'content-layout',
+    description: 'Expandable/collapsible section with header and body content.',
+    htmlElement: 'details',
+    figmaSources: ['Accordion Section', 'Expand-Collapse Button'],
+    props: [
+      { name: 'state', type: "'expanded' | 'collapsed'", figmaAxis: 'State', default: 'collapsed' },
+      { name: 'variant', type: "'standalone' | 'section'", figmaAxis: 'Type', default: 'section' },
+    ],
+  },
+
+  {
+    name: 'EmailCapture',
+    directoryName: 'email-capture',
+    tier: 'composition',
+    functionalCategory: 'data-entry',
+    description: 'Email address input with inline submit action.',
+    htmlElement: 'form',
+    figmaSources: ['Email Capture'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'focus' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'FileUpload',
+    directoryName: 'file-upload',
+    tier: 'composition',
+    functionalCategory: 'data-entry',
+    description: 'Drag-and-drop / click-to-browse file upload area.',
+    htmlElement: 'input[type=file]',
+    figmaSources: ['Upload Image Area'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'active' | 'uploaded' | 'error'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'SelectionGroup',
+    directoryName: 'selection-group',
+    tier: 'composition',
+    functionalCategory: 'selection',
+    description: 'Group of mutually exclusive or multi-select options (toggles, checkboxes, radio buttons, or text tabs).',
+    htmlElement: 'div',
+    figmaSources: [
+      'Toggle Switch (text)',
+      'Multi-Select with Text',
+      'Multi-Selector',
+      'Text Toggle Selector',
+      'Single Select Box',
+    ],
+    props: [
+      { name: 'type', type: "'toggle' | 'checkbox' | 'radio' | 'single-select'", figmaAxis: 'Style', default: 'toggle', description: 'Selection mode — drives the underlying input semantics' },
+      { name: 'layout', type: "'horizontal' | 'vertical'", figmaAxis: undefined, default: 'horizontal' },
+    ],
+  },
+
+  {
+    name: 'ButtonGroup',
+    directoryName: 'button-group',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Horizontal or vertical group of Button components for related actions.',
+    htmlElement: 'div',
+    figmaSources: ['Button group', 'CTA Row'],
+    props: [
+      { name: 'layout', type: "'horizontal' | 'vertical'", figmaAxis: undefined, default: 'horizontal' },
+      { name: 'align', type: "'start' | 'center' | 'end'", figmaAxis: undefined, default: 'start' },
+    ],
+  },
+
+  {
+    name: 'ProductCard',
+    directoryName: 'product-card',
+    tier: 'composition',
+    functionalCategory: 'product',
+    description: 'Grid-format product card with image, title, price, reviews, and actions.',
+    htmlElement: 'article',
+    figmaSources: ['Product Grid Card'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'ProductDetail',
+    directoryName: 'product-detail',
+    tier: 'composition',
+    functionalCategory: 'product',
+    description: 'Full product detail display with purchase actions.',
+    htmlElement: 'article',
+    figmaSources: ['Product Content', 'Product Lineup—Single'],
+    props: [
+      { name: 'variant', type: "'full' | 'lineup'", figmaAxis: 'Type', default: 'full' },
+    ],
+  },
+
+  {
+    name: 'FreeTrialCard',
+    directoryName: 'free-trial-card',
+    tier: 'composition',
+    functionalCategory: 'product',
+    description: 'Promotional card for free trial offers.',
+    htmlElement: 'article',
+    figmaSources: ['Free Trial Card'],
+    props: [],
+  },
+
+  // ── Builder Blocks ────────────────────────────────────────────────────────────
+
+  {
+    name: 'SectionLayout',
+    directoryName: 'section-layout',
+    tier: 'builder-block',
+    functionalCategory: 'content-layout',
+    description: 'Page section with headline, body copy, and optional CTA slots. Content authors manage children via BuilderBlocks.',
+    htmlElement: 'section',
+    figmaSources: [
+      'Section Headline',
+      'Section Headline with CTA',
+      'Text Section',
+      'Text Section with Button Group',
+    ],
+    props: [
+      { name: 'variant', type: "'headline-only' | 'headline-cta' | 'text' | 'text-buttons'", figmaAxis: 'Type', default: 'headline-only' },
+    ],
+  },
+
+  {
+    name: 'ProductCarousel',
+    directoryName: 'product-carousel',
+    tier: 'builder-block',
+    functionalCategory: 'product',
+    description: 'Horizontally scrollable carousel of ProductCard items backed by API data.',
+    htmlElement: 'section',
+    figmaSources: ['Carousel Product'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
+    ],
+  },
+
+  {
+    name: 'CtaList',
+    directoryName: 'cta-list',
+    tier: 'builder-block',
+    functionalCategory: 'product',
+    description: 'Vertical list of CTA rows, each linking to a product or resource.',
+    htmlElement: 'ul',
+    figmaSources: ['Multi-CTA List'],
+    props: [],
+  },
+
+  {
+    name: 'BasicForm',
+    directoryName: 'basic-form',
+    tier: 'builder-block',
+    functionalCategory: 'data-entry',
+    description: 'Generic form with field layout managed via BuilderBlocks.',
+    htmlElement: 'form',
+    figmaSources: ['Basic Form'],
+    props: [],
+  },
+];
+
+function buildCodeComponents(): CodeComponent[] {
+  return CODE_COMPONENT_MAP;
+}
+
+// ---------------------------------------------------------------------------
 // Build taxonomy.json
 // ---------------------------------------------------------------------------
 
 const TAXONOMY_DEFINITIONS: TaxonomyCategory[] = [
-  {
-    id: 'actions',
-    label: 'Actions',
-    description: 'Buttons and interactive controls that trigger an operation or navigate.',
-    components: [],
-  },
-  {
-    id: 'navigation',
-    label: 'Navigation',
-    description: 'Components that help users move between pages, sections, or states.',
-    components: [],
-  },
-  {
-    id: 'data-entry',
-    label: 'Data Entry',
-    description: 'Form controls that capture user input.',
-    components: [],
-  },
-  {
-    id: 'selection',
-    label: 'Selection & Controls',
-    description: 'Controls for choosing values, navigating ranges, or toggling options.',
-    components: [],
-  },
-  {
-    id: 'data-display',
-    label: 'Data Display',
-    description: 'Read-only components that present information or status.',
-    components: [],
-  },
-  {
-    id: 'feedback',
-    label: 'Feedback & Overlays',
-    description: 'Components that communicate system state or require user acknowledgment.',
-    components: [],
-  },
-  {
-    id: 'content-layout',
-    label: 'Content Layout',
-    description: 'Structural components that arrange and present content sections.',
-    components: [],
-  },
-  {
-    id: 'product',
-    label: 'Product',
-    description: 'Commerce-specific compositions for displaying and selling products.',
-    components: [],
-  },
+  { id: 'actions', label: 'Actions', description: 'Buttons and interactive controls that trigger an operation or navigate.', components: [], codeComponents: [] },
+  { id: 'navigation', label: 'Navigation', description: 'Components that help users move between pages, sections, or states.', components: [], codeComponents: [] },
+  { id: 'data-entry', label: 'Data Entry', description: 'Form controls that capture user input.', components: [], codeComponents: [] },
+  { id: 'selection', label: 'Selection & Controls', description: 'Controls for choosing values, navigating ranges, or toggling options.', components: [], codeComponents: [] },
+  { id: 'data-display', label: 'Data Display', description: 'Read-only components that present information or status.', components: [], codeComponents: [] },
+  { id: 'feedback', label: 'Feedback & Overlays', description: 'Components that communicate system state or require user acknowledgment.', components: [], codeComponents: [] },
+  { id: 'content-layout', label: 'Content Layout', description: 'Structural components that arrange and present content sections.', components: [], codeComponents: [] },
+  { id: 'product', label: 'Product', description: 'Commerce-specific compositions for displaying and selling products.', components: [], codeComponents: [] },
 ];
 
+// Kebab-case directory structure matching commerce-components/src/components/ convention
 const PROPOSED_FOLDER_STRUCTURE = [
-  'src/',
-  '  actions/',
-  '    Button/',
-  '    TextButtonIconRight/',
-  '    TextButtonIconLeft/',
-  '    CloseButton/',
-  '    FloatingActionButton/',
-  '    FloatingActionButtonLabel/',
-  '    PlayButton/',
-  '    CategoryButton/',
-  '    CtaRow/',
-  '    StatefulButton/',
-  '    StepperCta/',
-  '    StepperControl/',
-  '  navigation/',
-  '    Breadcrumbs/',
-  '    SimpleMenu/',
-  '    ButtonMenu/',
-  '    TabbedSelector/',
-  '    TabbedSelectorTab/',
-  '    SubnavDropdown/',
-  '    SubnavDropdownOption/',
-  '  data-entry/',
-  '    TextInput/',
-  '    TextInputGroup/',
-  '    DateInput/',
-  '    Textarea/',
-  '    PasswordInput/',
-  '    Dropdown/',
-  '    FormDropdown/',
-  '    DropdownOption/',
-  '    Checkbox/',
-  '    RadioButton/',
-  '    Switch/',
-  '    SearchField/',
-  '    EmailCaptureField/',
-  '    FileUpload/',
-  '    Slider/',
-  '    Form/',
-  '  selection/',
-  '    PreviousNextButtons/',
-  '    PreviousNextSelector/',
-  '    QuantityButtons/',
-  '    ExpandCollapseButton/',
-  '    ScrollBar/',
-  '    PageSelector/',
-  '    ButtonGroup/',
-  '    MultiSelect/',
-  '    MultiSelector/',
-  '    ToggleGroup/',
-  '    Toggle/',
-  '    TextToggleSelector/',
-  '    SelectBox/',
-  '  data-display/',
-  '    Badge/',
-  '    PriceLabel/',
-  '    SaleBadge/',
-  '    ReviewRating/',
-  '    StarIcon/',
-  '    ProductImage/',
-  '    ImageContainer/',
-  '    List/',
-  '  feedback/',
-  '    Toast/',
-  '    Modal/',
-  '    ModalButtonGroup/',
-  '  content-layout/',
-  '    SectionHeadline/',
-  '    SectionHeadlineWithCta/',
-  '    TextSection/',
-  '    TextSectionWithButtons/',
-  '    Accordion/',
-  '  product/',
-  '    ProductContent/',
-  '    ProductCard/',
-  '    ProductLineup/',
-  '    FreeTrialCard/',
-  '    ProductCarousel/',
-  '    CtaList/',
+  'packages/commerce-components/src/components/',
+  '  # Primitives',
+  '  button/',
+  '    component.tsx   # React component — no Builder.io imports',
+  '    register.tsx    # Builder.io registration only',
+  '    component.test.tsx',
+  '    index.ts        # barrel re-export',
+  '  input/',
+  '  textarea/',
+  '  text-input-group/',
+  '  select/',
+  '  checkbox/',
+  '  radio-button/',
+  '  toggle/',
+  '  slider/',
+  '  badge/',
+  '  star-rating/',
+  '  price-label/',
+  '  breadcrumbs/',
+  '  menu/',
+  '  tabs/',
+  '  subnav-dropdown/',
+  '  stepper/',
+  '  pagination/',
+  '  toast/',
+  '  # Compositions (React-first, Builder.io optional)',
+  '  modal/',
+  '  accordion/',
+  '  email-capture/',
+  '  file-upload/',
+  '  selection-group/',
+  '  button-group/',
+  '  product-card/',
+  '  product-detail/',
+  '  free-trial-card/',
+  '  # Builder Blocks (require register.tsx with BuilderBlocks)',
+  '  section-layout/',
+  '  product-carousel/',
+  '  cta-list/',
+  '  basic-form/',
 ];
 
 function buildTaxonomy(components: FigmaComponent[]): Taxonomy {
+  const codeComponents = buildCodeComponents();
+
+  // Build a reverse map: figma frame name -> code component name
+  const figmaToCode = new Map<string, string>();
+  for (const cc of codeComponents) {
+    for (const src of cc.figmaSources) {
+      figmaToCode.set(src, cc.name);
+    }
+  }
+
   const categories = TAXONOMY_DEFINITIONS.map((def) => ({
     ...def,
     components: components
       .filter((c) => c.functionalCategory === def.id)
       .map((c) => c.name)
       .sort(),
+    codeComponents: codeComponents
+      .filter((cc) => cc.functionalCategory === def.id)
+      .map((cc) => cc.name)
+      .sort(),
   }));
 
   return {
     categories,
+    codeComponents,
     proposedFolderStructure: PROPOSED_FOLDER_STRUCTURE,
   };
 }
@@ -676,9 +1094,10 @@ export async function parseFigma() {
   writeJson(join(ROOT, 'data', 'variant-axes.json'), variantAxes);
   writeJson(join(ROOT, 'data', 'tokens.json'), tokens);
   writeJson(join(ROOT, 'data', 'taxonomy.json'), taxonomy);
+  writeJson(join(ROOT, 'data', 'code-components.json'), taxonomy.codeComponents);
 
   const catSummary = taxonomy.categories.map((c) => `${c.label}=${c.components.length}`).join(', ');
-  console.log(`  ${components.length} components, ${variantAxes.length} variant axes`);
+  console.log(`  ${components.length} Figma frames → ${taxonomy.codeComponents.length} code components`);
   console.log(`  taxonomy: ${catSummary}`);
   console.log(`  tokens: ${tokens.colors.length} colors, ${tokens.typography.length} typography, ${tokens.fontSizes.length} font sizes, ${tokens.spacing.length} spacing, ${tokens.shadows.length} shadows`);
 }

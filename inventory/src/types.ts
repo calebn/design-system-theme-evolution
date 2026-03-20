@@ -10,6 +10,14 @@ export type FunctionalCategory =
   | 'product'
   | 'selection';
 
+/**
+ * Three tiers of code components, matching the React-first architecture:
+ * - primitive: standalone, reusable React component (Button, Input, Badge)
+ * - composition: multi-primitive React component (Modal, Accordion, ProductCard)
+ * - builder-block: page-level composition registered in Builder.io with BuilderBlocks slots
+ */
+export type ComponentTier = 'primitive' | 'composition' | 'builder-block';
+
 export interface ComponentVariantProperties {
   [axis: string]: string[];
 }
@@ -75,14 +83,35 @@ export interface GapAnalysis {
   shadows: { matched: GapEntry[]; figmaOnly: GapEntry[]; codeOnly: GapEntry[] };
 }
 
+export interface CodeComponentProp {
+  name: string;       // e.g. "variant"
+  type: string;       // e.g. "'primary' | 'secondary' | 'arrow-link'"
+  figmaAxis?: string; // Figma property axis this maps from
+  default?: string;   // default value
+  description?: string;
+}
+
+export interface CodeComponent {
+  name: string;              // PascalCase React component name
+  directoryName: string;     // kebab-case directory name
+  tier: ComponentTier;
+  functionalCategory: FunctionalCategory;
+  description: string;
+  figmaSources: string[];    // Figma frame names that collapse into this component
+  props: CodeComponentProp[];
+  htmlElement: string;
+}
+
 export interface TaxonomyCategory {
   id: FunctionalCategory;
   label: string;
   description: string;
   components: string[];
+  codeComponents: string[];  // code component names in this category
 }
 
 export interface Taxonomy {
   categories: TaxonomyCategory[];
+  codeComponents: CodeComponent[];
   proposedFolderStructure: string[];
 }

@@ -1,311 +1,319 @@
 # 08 · Functional Taxonomy
 
-> A two-axis classification: **Atomic level** (Atom/Molecule/Input/Other) from Figma section · **Functional category** (what the component does) proposed for code organization.
+> **Three-axis classification:** Atomic level (Figma) · Functional category (purpose) · Component tier (code architecture).
+
+## Component Tiers
+
+> The tier determines the file structure, Builder.io registration requirement, and how content authors interact with the component.
+
+| Tier | Description | Builder.io | File Structure |
+|------|-------------|------------|----------------|
+| **Primitive** | Standalone React component. No Builder.io dependency in `component.tsx`. | Optional `register.tsx` | `component.tsx`, `register.tsx`, `component.test.tsx`, `index.ts` |
+| **Composition** | Multi-primitive React component, React-first. May use `BuilderBlocks` for editable slots. | `register.tsx` recommended | Same as primitive |
+| **Builder Block** | Page-level composition primarily consumed via Builder.io. `BuilderBlocks` required for content areas. | `register.tsx` required | Same + default block values in `register.tsx` |
+
+## Code Component Architecture
+
+```mermaid
+graph TD
+  subgraph primitives ["Primitives (18)"]
+    Button["Button"]
+    Input["Input"]
+    Textarea["Textarea"]
+    TextInputGroup["TextInputGroup"]
+    Select["Select"]
+    Checkbox["Checkbox"]
+    RadioButton["RadioButton"]
+    Toggle["Toggle"]
+    Slider["Slider"]
+    Badge["Badge"]
+    StarRating["StarRating"]
+    PriceLabel["PriceLabel"]
+    Breadcrumbs["Breadcrumbs"]
+    Menu["Menu"]
+    Tabs["Tabs"]
+    SubnavDropdown["SubnavDropdown"]
+    Stepper["Stepper"]
+    Pagination["Pagination"]
+    Toast["Toast"]
+  end
+  subgraph compositions ["Compositions (9)"]
+    Modal["Modal"]
+    Accordion["Accordion"]
+    EmailCapture["EmailCapture"]
+    FileUpload["FileUpload"]
+    SelectionGroup["SelectionGroup"]
+    ButtonGroup["ButtonGroup"]
+    ProductCard["ProductCard"]
+    ProductDetail["ProductDetail"]
+    FreeTrialCard["FreeTrialCard"]
+  end
+  subgraph builderBlocks ["Builder Blocks (4)"]
+    SectionLayout["SectionLayout"]
+    ProductCarousel["ProductCarousel"]
+    CtaList["CtaList"]
+    BasicForm["BasicForm"]
+  end
+```
 
 ## Category Overview
 
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(12 components)"]
-  DesignSystem --> navigation["Navigation\n(7 components)"]
-  DesignSystem --> data_entry["Data Entry\n(16 components)"]
-  DesignSystem --> selection["Selection & Controls\n(14 components)"]
-  DesignSystem --> data_display["Data Display\n(8 components)"]
-  DesignSystem --> feedback["Feedback & Overlays\n(3 components)"]
-  DesignSystem --> content_layout["Content Layout\n(5 components)"]
-  DesignSystem --> product["Product\n(6 components)"]
+  DesignSystem --> actions["Actions\n(2 code / 12 Figma)"]
+  DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
+  DesignSystem --> data_entry["Data Entry\n(10 code / 16 Figma)"]
+  DesignSystem --> selection["Selection & Controls\n(4 code / 14 Figma)"]
+  DesignSystem --> data_display["Data Display\n(3 code / 8 Figma)"]
+  DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
+  DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
+  DesignSystem --> product["Product\n(5 code / 6 Figma)"]
 ```
 
 ## Category Definitions
 
-### Actions (12)
+### Actions
 
 > Buttons and interactive controls that trigger an operation or navigate.
 
-- Button
-- CTA Row
-- Category Button
-- Close Button
-- Floating Action Button
-- Floating Action Button with Text
-- Play Button
-- Stateful Action Button
-- Stepper CTA
-- Stepper Control
-- Text Button—Icon Left
-- Text Button—Icon Right
+**Code components:**
 
-### Navigation (7)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Button` | Primitive | Button, Text Button—Icon Right, Text Button—Icon Left, Close Button, Play Button, Category Button, Floating Action Button, Floating Action Button with Text, Stateful Action Button |
+| `ButtonGroup` | Composition | Button group, CTA Row |
+
+### Navigation
 
 > Components that help users move between pages, sections, or states.
 
-- Breadcrumbs
-- Button Menu
-- Simple Menu
-- Subnav Dropdown
-- Subnav Dropdown Options
-- Tabbed Selector
-- Tabbed Selector Button
+**Code components:**
 
-### Data Entry (16)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Breadcrumbs` | Primitive | Breadcrumbs |
+| `Menu` | Primitive | Simple Menu, Button Menu |
+| `Tabs` | Primitive | Tabbed Selector, Tabbed Selector Button |
+| `SubnavDropdown` | Primitive | Subnav Dropdown, Subnav Dropdown Options |
+
+### Data Entry
 
 > Form controls that capture user input.
 
-- Basic Form
-- Checkbox
-- Dropdown
-- Email Capture
-- Form Dropdown
-- Form Dropdown Option
-- Radio Button
-- Search Field
-- Slider
-- Switch
-- Text Input (name, two fields)
-- Text Input (single line)
-- Text Input—Date
-- Text Input—Multiline
-- Text Input—Password
-- Upload Image Area
+**Code components:**
 
-### Selection & Controls (14)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
+| `Textarea` | Primitive | Text Input—Multiline |
+| `TextInputGroup` | Primitive | Text Input (name, two fields) |
+| `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
+| `Checkbox` | Primitive | Checkbox |
+| `RadioButton` | Primitive | Radio Button |
+| `Slider` | Primitive | Slider |
+| `EmailCapture` | Composition | Email Capture |
+| `FileUpload` | Composition | Upload Image Area |
+| `BasicForm` | Builder Block | Basic Form |
+
+### Selection & Controls
 
 > Controls for choosing values, navigating ranges, or toggling options.
 
-- Button group
-- Expand-Collapse Button
-- Increase-Decrease Buttons
-- Multi-Select with Text
-- Multi-Selector
-- Next-Previous Buttons
-- Next-Previous Selector
-- Single Select Box
-- Slider Scroll Bar
-- Slider page selector
-- Text Toggle Selector
-- Text Toggle Selector
-- Toggle Switch (text)
-- Toggle with Text
+**Code components:**
 
-### Data Display (8)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Toggle` | Primitive | Switch, Toggle with Text |
+| `Stepper` | Primitive | Stepper CTA, Stepper Control, Increase-Decrease Buttons |
+| `Pagination` | Primitive | Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
+
+### Data Display
 
 > Read-only components that present information or status.
 
-- Badges and Tags
-- Image Ratios
-- List
-- Price and Label
-- Product Images
-- Reviews
-- Sale Percentage
-- Star
+**Code components:**
 
-### Feedback & Overlays (3)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Badge` | Primitive | Badges and Tags, Sale Percentage |
+| `StarRating` | Primitive | Star, Reviews |
+| `PriceLabel` | Primitive | Price and Label |
+
+### Feedback & Overlays
 
 > Components that communicate system state or require user acknowledgment.
 
-- Modal Button Group
-- Modal Dialog
-- Toast Bar
+**Code components:**
 
-### Content Layout (5)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Toast` | Primitive | Toast Bar |
+| `Modal` | Composition | Modal Dialog, Modal Button Group |
+
+### Content Layout
 
 > Structural components that arrange and present content sections.
 
-- Accordion Section
-- Section Headline
-- Section Headline with CTA
-- Text Section
-- Text Section with Button Group
+**Code components:**
 
-### Product (6)
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `Accordion` | Composition | Accordion Section, Expand-Collapse Button |
+| `SectionLayout` | Builder Block | Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group |
+
+### Product
 
 > Commerce-specific compositions for displaying and selling products.
 
-- Carousel Product
-- Free Trial Card
-- Multi-CTA List
-- Product Content
-- Product Grid Card
-- Product Lineup—Single
+**Code components:**
 
-## Dual-Axis Classification
+| Code Component | Tier | Figma Sources |
+|----------------|------|---------------|
+| `ProductCard` | Composition | Product Grid Card |
+| `ProductDetail` | Composition | Product Content, Product Lineup—Single |
+| `FreeTrialCard` | Composition | Free Trial Card |
+| `ProductCarousel` | Builder Block | Carousel Product |
+| `CtaList` | Builder Block | Multi-CTA List |
 
-Every component mapped to both its Figma atomic level and proposed functional category.
+## Triple-Axis Classification
 
-| Component | Atomic Level | Functional Category | Proposed Code Name |
-|-----------|-------------|--------------------|--------------------|
-| Accordion Section | Atoms | Content Layout | `Accordion` |
-| Badges and Tags | Other | Data Display | `Badge` |
-| Basic Form | Molecules | Data Entry | `Form` |
-| Breadcrumbs | Atoms | Navigation | `Breadcrumbs` |
-| Button | Atoms | Actions | `Button` |
-| Button group | Molecules | Selection & Controls | `ButtonGroup` |
-| Button Menu | Atoms | Navigation | `ButtonMenu` |
-| Carousel Product | Molecules | Product | `ProductCarousel` |
-| Category Button | Atoms | Actions | `CategoryButton` |
-| Checkbox | Inputs & Forms | Data Entry | `Checkbox` |
-| Close Button | Atoms | Actions | `CloseButton` |
-| CTA Row | Atoms | Actions | `CtaRow` |
-| Dropdown | Inputs & Forms | Data Entry | `Dropdown` |
-| Email Capture | Inputs & Forms | Data Entry | `EmailCaptureField` |
-| Expand-Collapse Button | Atoms | Selection & Controls | `ExpandCollapseButton` |
-| Floating Action Button | Atoms | Actions | `FloatingActionButton` |
-| Floating Action Button with Text | Atoms | Actions | `FloatingActionButtonLabel` |
-| Form Dropdown | Inputs & Forms | Data Entry | `FormDropdown` |
-| Form Dropdown Option | Inputs & Forms | Data Entry | `DropdownOption` |
-| Free Trial Card | Molecules | Product | `FreeTrialCard` |
-| Image Ratios | Other | Data Display | `ImageContainer` |
-| Increase-Decrease Buttons | Atoms | Selection & Controls | `QuantityButtons` |
-| List | Other | Data Display | `List` |
-| Modal Button Group | Atoms | Feedback & Overlays | `ModalButtonGroup` |
-| Modal Dialog | Molecules | Feedback & Overlays | `Modal` |
-| Multi-CTA List | Molecules | Product | `CtaList` |
-| Multi-Select with Text | Inputs & Forms | Selection & Controls | `MultiSelect` |
-| Multi-Selector | Inputs & Forms | Selection & Controls | `MultiSelector` |
-| Next-Previous Buttons | Atoms | Selection & Controls | `PreviousNextButtons` |
-| Next-Previous Selector | Atoms | Selection & Controls | `PreviousNextSelector` |
-| Play Button | Atoms | Actions | `PlayButton` |
-| Price and Label | Other | Data Display | `PriceLabel` |
-| Product Content | Molecules | Product | `ProductContent` |
-| Product Grid Card | Molecules | Product | `ProductCard` |
-| Product Images | Other | Data Display | `ProductImage` |
-| Product Lineup—Single | Molecules | Product | `ProductLineup` |
-| Radio Button | Inputs & Forms | Data Entry | `RadioButton` |
-| Reviews | Atoms | Data Display | `ReviewRating` |
-| Sale Percentage | Other | Data Display | `SaleBadge` |
-| Search Field | Inputs & Forms | Data Entry | `SearchField` |
-| Section Headline | Molecules | Content Layout | `SectionHeadline` |
-| Section Headline with CTA | Molecules | Content Layout | `SectionHeadlineWithCta` |
-| Simple Menu | Atoms | Navigation | `SimpleMenu` |
-| Single Select Box | Inputs & Forms | Selection & Controls | `SelectBox` |
-| Slider | Inputs & Forms | Data Entry | `Slider` |
-| Slider page selector | Molecules | Selection & Controls | `PageSelector` |
-| Slider Scroll Bar | Atoms | Selection & Controls | `ScrollBar` |
-| Star | Atoms | Data Display | `StarIcon` |
-| Stateful Action Button | Atoms | Actions | `StatefulButton` |
-| Stepper Control | Atoms | Actions | `StepperControl` |
-| Stepper CTA | Atoms | Actions | `StepperCta` |
-| Subnav Dropdown | Molecules | Navigation | `SubnavDropdown` |
-| Subnav Dropdown Options | Atoms | Navigation | `SubnavDropdownOption` |
-| Switch | Inputs & Forms | Data Entry | `Switch` |
-| Tabbed Selector | Atoms | Navigation | `TabbedSelector` |
-| Tabbed Selector Button | Atoms | Navigation | `TabbedSelectorTab` |
-| Text Button—Icon Left | Atoms | Actions | `TextButtonIconLeft` |
-| Text Button—Icon Right | Atoms | Actions | `TextButtonIconRight` |
-| Text Input (name, two fields) | Inputs & Forms | Data Entry | `TextInputGroup` |
-| Text Input (single line) | Inputs & Forms | Data Entry | `TextInput` |
-| Text Input—Date | Inputs & Forms | Data Entry | `DateInput` |
-| Text Input—Multiline | Inputs & Forms | Data Entry | `Textarea` |
-| Text Input—Password | Inputs & Forms | Data Entry | `PasswordInput` |
-| Text Section | Molecules | Content Layout | `TextSection` |
-| Text Section with Button Group | Molecules | Content Layout | `TextSectionWithButtons` |
-| Text Toggle Selector | Inputs & Forms | Selection & Controls | `TextToggleSelector` |
-| Text Toggle Selector | Inputs & Forms | Selection & Controls | `TextToggleSelector` |
-| Toast Bar | Molecules | Feedback & Overlays | `Toast` |
-| Toggle Switch (text) | Inputs & Forms | Selection & Controls | `ToggleGroup` |
-| Toggle with Text | Inputs & Forms | Selection & Controls | `Toggle` |
-| Upload Image Area | Inputs & Forms | Data Entry | `FileUpload` |
+Every Figma frame mapped to its atomic level, functional category, and code component tier.
+
+| Figma Frame | Atomic Level | Functional Category | Code Component | Tier |
+|-------------|-------------|---------------------|----------------|------|
+| Accordion Section | Atoms | Content Layout | `Accordion` | Composition |
+| Badges and Tags | Other | Data Display | `Badge` | Primitive |
+| Basic Form | Molecules | Data Entry | `BasicForm` | Builder Block |
+| Breadcrumbs | Atoms | Navigation | `Breadcrumbs` | Primitive |
+| Button | Atoms | Actions | `Button` | Primitive |
+| Button group | Molecules | Selection & Controls | `ButtonGroup` | Composition |
+| Button Menu | Atoms | Navigation | `Menu` | Primitive |
+| Carousel Product | Molecules | Product | `ProductCarousel` | Builder Block |
+| Category Button | Atoms | Actions | `Button` | Primitive |
+| Checkbox | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
+| Close Button | Atoms | Actions | `Button` | Primitive |
+| CTA Row | Atoms | Actions | `ButtonGroup` | Composition |
+| Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
+| Email Capture | Inputs & Forms | Data Entry | `EmailCapture` | Composition |
+| Expand-Collapse Button | Atoms | Selection & Controls | `Accordion` | Composition |
+| Floating Action Button | Atoms | Actions | `Button` | Primitive |
+| Floating Action Button with Text | Atoms | Actions | `Button` | Primitive |
+| Form Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
+| Form Dropdown Option | Inputs & Forms | Data Entry | `Select` | Primitive |
+| Free Trial Card | Molecules | Product | `FreeTrialCard` | Composition |
+| Image Ratios | Other | Data Display | — | — |
+| Increase-Decrease Buttons | Atoms | Selection & Controls | `Stepper` | Primitive |
+| List | Other | Data Display | — | — |
+| Modal Button Group | Atoms | Feedback & Overlays | `Modal` | Composition |
+| Modal Dialog | Molecules | Feedback & Overlays | `Modal` | Composition |
+| Multi-CTA List | Molecules | Product | `CtaList` | Builder Block |
+| Multi-Select with Text | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Multi-Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Next-Previous Buttons | Atoms | Selection & Controls | `Pagination` | Primitive |
+| Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
+| Play Button | Atoms | Actions | `Button` | Primitive |
+| Price and Label | Other | Data Display | `PriceLabel` | Primitive |
+| Product Content | Molecules | Product | `ProductDetail` | Composition |
+| Product Grid Card | Molecules | Product | `ProductCard` | Composition |
+| Product Images | Other | Data Display | — | — |
+| Product Lineup—Single | Molecules | Product | `ProductDetail` | Composition |
+| Radio Button | Inputs & Forms | Data Entry | `RadioButton` | Primitive |
+| Reviews | Atoms | Data Display | `StarRating` | Primitive |
+| Sale Percentage | Other | Data Display | `Badge` | Primitive |
+| Search Field | Inputs & Forms | Data Entry | `Input` | Primitive |
+| Section Headline | Molecules | Content Layout | `SectionLayout` | Builder Block |
+| Section Headline with CTA | Molecules | Content Layout | `SectionLayout` | Builder Block |
+| Simple Menu | Atoms | Navigation | `Menu` | Primitive |
+| Single Select Box | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Slider | Inputs & Forms | Data Entry | `Slider` | Primitive |
+| Slider page selector | Molecules | Selection & Controls | `Pagination` | Primitive |
+| Slider Scroll Bar | Atoms | Selection & Controls | `Pagination` | Primitive |
+| Star | Atoms | Data Display | `StarRating` | Primitive |
+| Stateful Action Button | Atoms | Actions | `Button` | Primitive |
+| Stepper Control | Atoms | Actions | `Stepper` | Primitive |
+| Stepper CTA | Atoms | Actions | `Stepper` | Primitive |
+| Subnav Dropdown | Molecules | Navigation | `SubnavDropdown` | Primitive |
+| Subnav Dropdown Options | Atoms | Navigation | `SubnavDropdown` | Primitive |
+| Switch | Inputs & Forms | Data Entry | `Toggle` | Primitive |
+| Tabbed Selector | Atoms | Navigation | `Tabs` | Primitive |
+| Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
+| Text Button—Icon Left | Atoms | Actions | `Button` | Primitive |
+| Text Button—Icon Right | Atoms | Actions | `Button` | Primitive |
+| Text Input (name, two fields) | Inputs & Forms | Data Entry | `TextInputGroup` | Primitive |
+| Text Input (single line) | Inputs & Forms | Data Entry | `Input` | Primitive |
+| Text Input—Date | Inputs & Forms | Data Entry | `Input` | Primitive |
+| Text Input—Multiline | Inputs & Forms | Data Entry | `Textarea` | Primitive |
+| Text Input—Password | Inputs & Forms | Data Entry | `Input` | Primitive |
+| Text Section | Molecules | Content Layout | `SectionLayout` | Builder Block |
+| Text Section with Button Group | Molecules | Content Layout | `SectionLayout` | Builder Block |
+| Text Toggle Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Text Toggle Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Toast Bar | Molecules | Feedback & Overlays | `Toast` | Primitive |
+| Toggle Switch (text) | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Toggle with Text | Inputs & Forms | Selection & Controls | `Toggle` | Primitive |
+| Upload Image Area | Inputs & Forms | Data Entry | `FileUpload` | Composition |
 
 ## Proposed Code Folder Structure
 
-Based on the functional taxonomy, components should be organized as follows in `CommerceComponents/packages/`:
+Follows the existing `commerce-components` convention: kebab-case directory per component, `component.tsx` / `register.tsx` / `component.test.tsx` / `index.ts`.
 
 ```
-src/
-  actions/
-    Button/
-    TextButtonIconRight/
-    TextButtonIconLeft/
-    CloseButton/
-    FloatingActionButton/
-    FloatingActionButtonLabel/
-    PlayButton/
-    CategoryButton/
-    CtaRow/
-    StatefulButton/
-    StepperCta/
-    StepperControl/
-  navigation/
-    Breadcrumbs/
-    SimpleMenu/
-    ButtonMenu/
-    TabbedSelector/
-    TabbedSelectorTab/
-    SubnavDropdown/
-    SubnavDropdownOption/
-  data-entry/
-    TextInput/
-    TextInputGroup/
-    DateInput/
-    Textarea/
-    PasswordInput/
-    Dropdown/
-    FormDropdown/
-    DropdownOption/
-    Checkbox/
-    RadioButton/
-    Switch/
-    SearchField/
-    EmailCaptureField/
-    FileUpload/
-    Slider/
-    Form/
-  selection/
-    PreviousNextButtons/
-    PreviousNextSelector/
-    QuantityButtons/
-    ExpandCollapseButton/
-    ScrollBar/
-    PageSelector/
-    ButtonGroup/
-    MultiSelect/
-    MultiSelector/
-    ToggleGroup/
-    Toggle/
-    TextToggleSelector/
-    SelectBox/
-  data-display/
-    Badge/
-    PriceLabel/
-    SaleBadge/
-    ReviewRating/
-    StarIcon/
-    ProductImage/
-    ImageContainer/
-    List/
-  feedback/
-    Toast/
-    Modal/
-    ModalButtonGroup/
-  content-layout/
-    SectionHeadline/
-    SectionHeadlineWithCta/
-    TextSection/
-    TextSectionWithButtons/
-    Accordion/
-  product/
-    ProductContent/
-    ProductCard/
-    ProductLineup/
-    FreeTrialCard/
-    ProductCarousel/
-    CtaList/
+packages/commerce-components/src/components/
+  # Primitives
+  button/
+    component.tsx   # React component — no Builder.io imports
+    register.tsx    # Builder.io registration only
+    component.test.tsx
+    index.ts        # barrel re-export
+  input/
+  textarea/
+  text-input-group/
+  select/
+  checkbox/
+  radio-button/
+  toggle/
+  slider/
+  badge/
+  star-rating/
+  price-label/
+  breadcrumbs/
+  menu/
+  tabs/
+  subnav-dropdown/
+  stepper/
+  pagination/
+  toast/
+  # Compositions (React-first, Builder.io optional)
+  modal/
+  accordion/
+  email-capture/
+  file-upload/
+  selection-group/
+  button-group/
+  product-card/
+  product-detail/
+  free-trial-card/
+  # Builder Blocks (require register.tsx with BuilderBlocks)
+  section-layout/
+  product-carousel/
+  cta-list/
+  basic-form/
 ```
 
-## Note on "Other" Reclassification
+## Note on "Other" Figma Section
 
-The 6 components currently in Figma's "Other" section are assigned functional categories as follows:
+The 6 components in Figma's "Other" section are reclassified as follows:
 
-| Component | Proposed Category | Rationale |
-|-----------|------------------|-----------|
-| Badges and Tags | Data Display | Standalone display element — atom-level data display |
-| Product Images | Data Display | Commerce-specific image display atom |
-| Price and Label | Data Display | Commerce-specific display atom showing price info |
-| Image Ratios | Data Display | Layout constraint helper, not a component — consider removing from inventory |
-| Sale Percentage | Data Display | Badge variant for promotional pricing |
-| List | Data Display | Generic layout/text atom used inside content sections |
+| Figma Frame | Functional Category | Code Component | Rationale |
+|-------------|---------------------|----------------|-----------|
+| Badges and Tags | Data Display | `Badge` | Standalone display atom |
+| Product Images | Data Display | — | Commerce display atom |
+| Price and Label | Data Display | `PriceLabel` | Commerce display atom |
+| Image Ratios | Data Display | — | Layout constraint — consider removing from component inventory |
+| Sale Percentage | Data Display | `Badge` | Badge variant for promotional pricing |
+| List | Data Display | — | Generic atom used inside content sections |
 
 ---
 *Generated by `build-inventory.ts`*

@@ -15,6 +15,8 @@ import type {
   Section,
   FunctionalCategory,
   Taxonomy,
+  CodeComponent,
+  ComponentTier,
 } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -54,6 +56,12 @@ const CATEGORY_LABELS: Record<FunctionalCategory, string> = {
   'content-layout': 'Content Layout',
   product: 'Product',
   selection: 'Selection & Controls',
+};
+
+const TIER_LABELS: Record<ComponentTier, string> = {
+  primitive: 'Primitive',
+  composition: 'Composition',
+  'builder-block': 'Builder Block',
 };
 
 // Color swatch using placehold.co image (renders on GitHub as a real colored square)
@@ -747,34 +755,98 @@ function scorePriority(c: FigmaComponent, depWeight: Map<string, number>): Prior
   return { component: c, sectionScore, variantScore, stateScore, responsiveScore, depScore, total, recommendation };
 }
 
-function doc07PriorityDashboard(components: FigmaComponent[]): string {
+interface CodeComponentScore {
+  cc: CodeComponent;
+  maxTotal: number;
+  maxRecommendation: string;
+  figmaFrameCount: number;
+  hasCleanupNeeded: boolean;
+  allDepCount: number;
+}
+
+function scoreCodeComponent(
+  cc: CodeComponent,
+  components: FigmaComponent[],
+  depWeight: Map<string, number>
+): CodeComponentScore {
+  const sourceFrames = components.filter((c) => cc.figmaSources.includes(c.name));
+  if (sourceFrames.length === 0) {
+    return { cc, maxTotal: 0, maxRecommendation: '⏳ No Figma frames found', figmaFrameCount: 0, hasCleanupNeeded: false, allDepCount: 0 };
+  }
+
+  const frameScores = sourceFrames.map((c) => scorePriority(c, depWeight));
+  const best = frameScores.reduce((a, b) => b.total > a.total ? b : a);
+
+  // Aggregate dep count across all Figma sources
+  const allDepCount = sourceFrames.reduce((sum, c) => sum + (depWeight.get(c.name) ?? 0), 0);
+  const hasCleanupNeeded = frameScores.some((s) => s.recommendation.startsWith('⚠️'));
+
+  let recommendation = best.recommendation;
+  if (hasCleanupNeeded && !recommendation.startsWith('⚠️')) {
+    recommendation = `${recommendation} (some frames need Figma cleanup)`;
+  }
+
+  return {
+    cc,
+    maxTotal: best.total,
+    maxRecommendation: recommendation,
+    figmaFrameCount: sourceFrames.length,
+    hasCleanupNeeded,
+    allDepCount,
+  };
+}
+
+function doc07PriorityDashboard(components: FigmaComponent[], taxonomy: Taxonomy): string {
   const depWeight = buildDependencyWeight();
+  const codeComponents = taxonomy.codeComponents;
 
   const lines: string[] = [
     '# 07 · Build Priority Dashboard',
     '',
-    '> **Scoring:** Section (atoms=3, inputs=2, molecules=1) + Variant quality (clean names=2) + State coverage (default+hover+disabled=2) + Responsive (1) + **Dependency weight** (3+ dependents=2, 1-2=1). Max = 10.',
+    '> Scored by **code component** (not Figma frame). Multiple Figma frames may contribute to one code component.',
+    '> Score = max across constituent Figma frames. **Scoring:** Section (atoms=3, inputs=2, molecules=1) + Variant quality (2) + State coverage (2) + Responsive (1) + Dependency weight (2). Max = 10.',
+    '',
+    '## By Code Component',
     '',
   ];
 
-  const scores = components
-    .map((c) => scorePriority(c, depWeight))
-    .sort((a, b) => b.total - a.total || a.component.name.localeCompare(b.component.name));
+  const scores = codeComponents
+    .map((cc) => scoreCodeComponent(cc, components, depWeight))
+    .sort((a, b) => b.maxTotal - a.maxTotal || a.cc.name.localeCompare(b.cc.name));
 
-  lines.push('| Component | Section | Sec | Var | State | Resp | Dep | **Total** | Recommendation |');
-  lines.push('|-----------|---------|-----|-----|-------|------|-----|-----------|----------------|');
+  lines.push('| Code Component | Tier | Category | Figma Frames | Dep | **Score** | Recommendation |');
+  lines.push('|----------------|------|----------|-------------|-----|-----------|----------------|');
   for (const s of scores) {
-    const depCount = depWeight.get(s.component.name) ?? 0;
-    const depLabel = depCount > 0 ? `${s.depScore} (${depCount})` : '0';
+    const depLabel = s.allDepCount > 0 ? `${s.allDepCount}` : '0';
+    const cleanup = s.hasCleanupNeeded ? ' ⚠️' : '';
     lines.push(
-      `| ${s.component.name} | ${SECTION_LABELS[s.component.section]} | ${s.sectionScore} | ${s.variantScore} | ${s.stateScore} | ${s.responsiveScore} | ${depLabel} | **${s.total}** | ${s.recommendation} |`
+      `| \`${s.cc.name}\` | ${TIER_LABELS[s.cc.tier]} | ${CATEGORY_LABELS[s.cc.functionalCategory]} | ${s.figmaFrameCount}${cleanup} | ${depLabel} | **${s.maxTotal}** | ${s.maxRecommendation} |`
     );
   }
 
-  const ready = scores.filter((s) => s.recommendation.startsWith('✅')).length;
-  const minor = scores.filter((s) => s.recommendation.startsWith('🔄')).length;
-  const cleanup = scores.filter((s) => s.recommendation.startsWith('⚠️')).length;
-  const deferred = scores.filter((s) => s.recommendation.startsWith('⏳')).length;
+  // Also keep the full Figma-frame view for reference
+  lines.push('', '## By Figma Frame (full detail)', '');
+  lines.push('> The source data — one row per Figma component frame.', '');
+
+  const frameScores = components
+    .map((c) => scorePriority(c, depWeight))
+    .sort((a, b) => b.total - a.total || a.component.name.localeCompare(b.component.name));
+
+  lines.push('| Figma Frame | Code Component | Section | Sec | Var | State | Resp | Dep | **Total** | Recommendation |');
+  lines.push('|-------------|----------------|---------|-----|-----|-------|------|-----|-----------|----------------|');
+  for (const s of frameScores) {
+    const depCount = depWeight.get(s.component.name) ?? 0;
+    const depLabel = depCount > 0 ? `${s.depScore} (${depCount})` : '0';
+    const codeName = taxonomy.codeComponents.find((cc) => cc.figmaSources.includes(s.component.name))?.name ?? '—';
+    lines.push(
+      `| ${s.component.name} | \`${codeName}\` | ${SECTION_LABELS[s.component.section]} | ${s.sectionScore} | ${s.variantScore} | ${s.stateScore} | ${s.responsiveScore} | ${depLabel} | **${s.total}** | ${s.recommendation} |`
+    );
+  }
+
+  const ready = frameScores.filter((s) => s.recommendation.startsWith('✅')).length;
+  const minor = frameScores.filter((s) => s.recommendation.startsWith('🔄')).length;
+  const cleanup = frameScores.filter((s) => s.recommendation.startsWith('⚠️')).length;
+  const deferred = frameScores.filter((s) => s.recommendation.startsWith('⏳')).length;
 
   lines.push('', '## Summary', '');
   lines.push('| Status | Count |', '|--------|-------|');
@@ -792,68 +864,110 @@ function doc07PriorityDashboard(components: FigmaComponent[]): string {
 // ---------------------------------------------------------------------------
 
 function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string {
+  const codeComponents = taxonomy.codeComponents;
+  const primitives = codeComponents.filter((cc) => cc.tier === 'primitive');
+  const compositions = codeComponents.filter((cc) => cc.tier === 'composition');
+  const builderBlocks = codeComponents.filter((cc) => cc.tier === 'builder-block');
+
   const lines: string[] = [
     '# 08 · Functional Taxonomy',
     '',
-    '> A two-axis classification: **Atomic level** (Atom/Molecule/Input/Other) from Figma section · **Functional category** (what the component does) proposed for code organization.',
+    '> **Three-axis classification:** Atomic level (Figma) · Functional category (purpose) · Component tier (code architecture).',
     '',
-    '## Category Overview',
+    '## Component Tiers',
     '',
-    '```mermaid',
-    'graph TD',
-    '  DesignSystem["Logos Design System"]',
+    '> The tier determines the file structure, Builder.io registration requirement, and how content authors interact with the component.',
+    '',
+    '| Tier | Description | Builder.io | File Structure |',
+    '|------|-------------|------------|----------------|',
+    '| **Primitive** | Standalone React component. No Builder.io dependency in `component.tsx`. | Optional `register.tsx` | `component.tsx`, `register.tsx`, `component.test.tsx`, `index.ts` |',
+    '| **Composition** | Multi-primitive React component, React-first. May use `BuilderBlocks` for editable slots. | `register.tsx` recommended | Same as primitive |',
+    '| **Builder Block** | Page-level composition primarily consumed via Builder.io. `BuilderBlocks` required for content areas. | `register.tsx` required | Same + default block values in `register.tsx` |',
+    '',
   ];
 
+  // Tier overview Mermaid
+  lines.push('## Code Component Architecture', '');
+  lines.push('```mermaid', 'graph TD');
+  lines.push('  subgraph primitives ["Primitives (18)"]');
+  for (const cc of primitives) {
+    lines.push(`    ${cc.name}["${cc.name}"]`);
+  }
+  lines.push('  end');
+  lines.push('  subgraph compositions ["Compositions (9)"]');
+  for (const cc of compositions) {
+    lines.push(`    ${cc.name}["${cc.name}"]`);
+  }
+  lines.push('  end');
+  lines.push('  subgraph builderBlocks ["Builder Blocks (4)"]');
+  for (const cc of builderBlocks) {
+    lines.push(`    ${cc.name}["${cc.name}"]`);
+  }
+  lines.push('  end');
+  lines.push('```');
+
+  // Category overview
+  lines.push('', '## Category Overview', '', '```mermaid', 'graph TD', '  DesignSystem["Logos Design System"]');
   for (const cat of taxonomy.categories) {
     const id = cat.id.replace(/-/g, '_');
-    lines.push(`  DesignSystem --> ${id}["${cat.label}\\n(${cat.components.length} components)"]`);
+    lines.push(`  DesignSystem --> ${id}["${cat.label}\\n(${cat.codeComponents.length} code / ${cat.components.length} Figma)"]`);
   }
   lines.push('```');
 
   lines.push('', '## Category Definitions', '');
   for (const cat of taxonomy.categories) {
-    lines.push(`### ${cat.label} (${cat.components.length})`, '');
+    const catCodeComps = codeComponents.filter((cc) => cc.functionalCategory === cat.id);
+    lines.push(`### ${cat.label}`, '');
     lines.push(`> ${cat.description}`, '');
-    if (cat.components.length > 0) {
-      lines.push(cat.components.map((c) => `- ${c}`).join('\n'));
+    if (catCodeComps.length > 0) {
+      lines.push('**Code components:**', '');
+      lines.push('| Code Component | Tier | Figma Sources |');
+      lines.push('|----------------|------|---------------|');
+      for (const cc of catCodeComps) {
+        lines.push(`| \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | ${cc.figmaSources.join(', ')} |`);
+      }
     }
     lines.push('');
   }
 
-  // Dual-axis table
-  lines.push('## Dual-Axis Classification', '');
-  lines.push('Every component mapped to both its Figma atomic level and proposed functional category.', '');
-  lines.push('| Component | Atomic Level | Functional Category | Proposed Code Name |');
-  lines.push('|-----------|-------------|--------------------|--------------------|');
+  // Triple-axis classification table
+  lines.push('## Triple-Axis Classification', '');
+  lines.push('Every Figma frame mapped to its atomic level, functional category, and code component tier.', '');
+  lines.push('| Figma Frame | Atomic Level | Functional Category | Code Component | Tier |');
+  lines.push('|-------------|-------------|---------------------|----------------|------|');
   for (const c of [...components].sort((a, b) => a.name.localeCompare(b.name))) {
-    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${CATEGORY_LABELS[c.functionalCategory]} | \`${c.proposedCodeName}\` |`);
+    const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
+    const codeName = cc ? `\`${cc.name}\`` : '—';
+    const tier = cc ? TIER_LABELS[cc.tier] : '—';
+    lines.push(`| ${c.name} | ${SECTION_LABELS[c.section]} | ${CATEGORY_LABELS[c.functionalCategory]} | ${codeName} | ${tier} |`);
   }
 
   // Proposed folder structure
   lines.push('', '## Proposed Code Folder Structure', '');
-  lines.push('Based on the functional taxonomy, components should be organized as follows in `CommerceComponents/packages/`:');
-  lines.push('');
+  lines.push('Follows the existing `commerce-components` convention: kebab-case directory per component, `component.tsx` / `register.tsx` / `component.test.tsx` / `index.ts`.', '');
   lines.push('```');
   for (const line of taxonomy.proposedFolderStructure) {
     lines.push(line);
   }
   lines.push('```');
 
-  lines.push('', '## Note on "Other" Reclassification', '');
-  lines.push('The 6 components currently in Figma\'s "Other" section are assigned functional categories as follows:', '');
+  // "Other" reclassification
+  lines.push('', '## Note on "Other" Figma Section', '');
+  lines.push('The 6 components in Figma\'s "Other" section are reclassified as follows:', '');
   const others = components.filter((c) => c.section === 'other');
-  lines.push('| Component | Proposed Category | Rationale |');
-  lines.push('|-----------|------------------|-----------|');
+  lines.push('| Figma Frame | Functional Category | Code Component | Rationale |');
+  lines.push('|-------------|---------------------|----------------|-----------|');
+  const otherRationale: Record<string, string> = {
+    'Badges and Tags': 'Standalone display atom',
+    'Price and Label': 'Commerce display atom',
+    'Sale Percentage': 'Badge variant for promotional pricing',
+    'Image Ratios': 'Layout constraint — consider removing from component inventory',
+    'Product Images': 'Commerce display atom',
+    'List': 'Generic atom used inside content sections',
+  };
   for (const c of others) {
-    const rationale: Record<string, string> = {
-      'Badges and Tags': 'Standalone display element — atom-level data display',
-      'Price and Label': 'Commerce-specific display atom showing price info',
-      'Sale Percentage': 'Badge variant for promotional pricing',
-      'Image Ratios': 'Layout constraint helper, not a component — consider removing from inventory',
-      'Product Images': 'Commerce-specific image display atom',
-      'List': 'Generic layout/text atom used inside content sections',
-    };
-    lines.push(`| ${c.name} | ${CATEGORY_LABELS[c.functionalCategory]} | ${rationale[c.name] ?? '—'} |`);
+    const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
+    lines.push(`| ${c.name} | ${CATEGORY_LABELS[c.functionalCategory]} | ${cc ? `\`${cc.name}\`` : '—'} | ${otherRationale[c.name] ?? '—'} |`);
   }
 
   lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
@@ -861,104 +975,175 @@ function doc08Taxonomy(components: FigmaComponent[], taxonomy: Taxonomy): string
 }
 
 // ---------------------------------------------------------------------------
-// Doc 09: Naming Conventions
+// Doc 09: Component Architecture
 // ---------------------------------------------------------------------------
 
-function doc09NamingConventions(components: FigmaComponent[]): string {
-  return `# 09 · Naming Conventions
+function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxonomy): string {
+  const codeComponents = taxonomy.codeComponents;
+  const primitives = codeComponents.filter((cc) => cc.tier === 'primitive');
+  const compositions = codeComponents.filter((cc) => cc.tier === 'composition');
+  const builderBlocks = codeComponents.filter((cc) => cc.tier === 'builder-block');
 
-> Proposed naming standards for components, tokens, and property axes to create consistent, predictable identifiers across Figma and code.
+  const lines: string[] = [
+    '# 09 · Component Architecture',
+    '',
+    '> React-first component architecture: multiple Figma frames collapse into semantic code components with typed props.',
+    '> Builder.io registration is always in a separate `register.tsx` file — never in `component.tsx`.',
+    '',
+  ];
 
-## Component Naming Rules
+  // ── Section A: Code component list ─────────────────────────────────────────
+  lines.push('## A · Code Components', '');
+  lines.push(`${codeComponents.length} code components derived from ${components.length} Figma frames.`, '');
 
-### In Code (React)
-1. **PascalCase** for all component names: \`Button\`, \`TextInput\`, \`ProductCard\`
-2. **No em-dashes** — replace with nothing or with a word: \`Text Button—Icon Right\` → \`TextButtonIconRight\`
-3. **No parentheses** — replace with a descriptor: \`Text Input (single line)\` → \`TextInput\`, \`Text Input (name, two fields)\` → \`TextInputGroup\`
-4. **Spell out abbreviations** except: \`CTA\` (established in the brand), \`FAB\` (not recommended — prefer \`FloatingActionButton\`)
-5. **No redundant suffixes** — avoid \`Component\`, \`Widget\`, \`Element\` suffixes
-6. **Compound words** for composites: \`SectionHeadlineWithCta\` not \`SectionHeadline_With_CTA\`
+  for (const [label, list] of [
+    ['Primitives', primitives],
+    ['Compositions', compositions],
+    ['Builder Blocks', builderBlocks],
+  ] as [string, CodeComponent[]][]) {
+    lines.push(`### ${label} (${list.length})`, '');
+    lines.push('| Component | Directory | Category | Figma Sources | HTML |');
+    lines.push('|-----------|-----------|----------|---------------|------|');
+    for (const cc of list) {
+      lines.push(
+        `| \`${cc.name}\` | \`${cc.directoryName}/\` | ${CATEGORY_LABELS[cc.functionalCategory]} | ${cc.figmaSources.join(', ')} | \`<${cc.htmlElement}>\` |`
+      );
+    }
+    lines.push('');
+  }
 
-### In Figma
-1. Use the proposed code name as the Figma frame name where possible (enables future auto-generation)
-2. Separate words with spaces in Figma: \`Text Input\`, \`Section Headline\`
-3. Use em-dashes only for directional variants: \`Text Button—Icon Right\`
+  // ── Section B: Prop API conventions ────────────────────────────────────────
+  lines.push('## B · Prop API Conventions', '');
+  lines.push('These conventions come from `CommerceComponents/.github/copilot-instructions.md` and `BuilderIoBestPractices.mdx`.', '');
+  lines.push(`
+### \`variant\` — Visual hierarchy
+Describes **what the variant is**, never how it looks. No color words.
 
-### CSS Class Prefix
-All components use the \`cc-\` prefix (Commerce Components): \`cc-button\`, \`cc-text-input\`, \`cc-product-card\`
+| Value | Meaning |
+|-------|---------|
+| \`primary\` | Highest visual prominence, main CTA |
+| \`secondary\` | Supporting action |
+| \`tertiary\` | Low-emphasis, ghost-style action |
+| \`arrow-link\` | Inline navigational link with arrow |
+| \`icon-only\` | No label, icon carries meaning |
+| \`floating\` | FAB — fixed/absolute positioned |
+
+Surface suffixes append to variant values when needed:
+- \`primary-inverse\` — primary on a dark/inverted surface
+- \`primary-brand\` — primary on the brand blue surface
+
+Semantic variants for status-bearing components:
+- \`success\`, \`warning\`, \`error\`, \`info\`
 
 ---
 
-## Component Name Mapping
+### \`scale\` — Size
+Always a **separate prop** from \`variant\`. Never encode size in the variant name.
 
-| Figma Name | Proposed Code Name | CSS Class | Category |
-|------------|--------------------|-----------|----------|
-${components
-  .sort((a, b) => a.name.localeCompare(b.name))
-  .map((c) => {
-    const cssClass = `cc-${c.proposedCodeName
-      .replace(/([A-Z])/g, '-$1')
-      .toLowerCase()
-      .replace(/^-/, '')}`;
-    return `| ${c.name} | \`${c.proposedCodeName}\` | \`${cssClass}\` | ${CATEGORY_LABELS[c.functionalCategory]} |`;
-  })
-  .join('\n')}
+| Value | Token reference |
+|-------|-----------------|
+| \`sm\` | \`--cc-scale-sm\` |
+| \`md\` | \`--cc-scale-md\` (default) |
+| \`lg\` | \`--cc-scale-lg\` |
 
 ---
 
-## Token Naming Rules
+### \`state\` — Interaction state
+Map Figma \`State=\` axis values to these prop values. States are typically internal (controlled via CSS) but exposed as a prop for Storybook testing.
 
-### Token Name Format
-\`\`\`
-{tier}-{category}-{variant}-{property}
-\`\`\`
+\`default\` | \`hover\` | \`focus\` | \`active\` | \`disabled\` | \`error\` | \`success\` | \`filled\` | \`loading\`
 
-- **Tier prefixes:** none for primitives · \`color-\`, \`spacing-\`, \`shadow-\` for semantic · \`component-{name}-\` for component-scoped
-- **All kebab-case:** \`color-brand-primary\`, \`spacing-h-md\`, \`component-button-padding-horizontal\`
-- **No camelCase in token names**
+---
+
+### CSS class prefix
+All components use the \`cc-\` prefix: \`cc-button\`, \`cc-input\`, \`cc-product-card\`.
+`);
+
+  // ── Section C: Figma axis to prop mapping table ─────────────────────────────
+  lines.push('## C · Figma Axis → Code Prop Mapping', '');
+  lines.push('How Figma property axes translate to React component props.', '');
+  lines.push('| Figma Axis | Figma Values (examples) | Code Prop | Code Values |');
+  lines.push('|------------|------------------------|-----------|-------------|');
+  lines.push('| `Type` | `CTA (Default)`, `Secondary CTA` | `variant` | `primary`, `secondary` |');
+  lines.push('| `Type` | `Solid`, `Outline`, `Ghost` | `variant` | `primary`, `secondary`, `tertiary` (semantic, not appearance) |');
+  lines.push('| `Size` | `Large`, `Medium`, `Small` | `scale` | `lg`, `md`, `sm` |');
+  lines.push('| `State` | `Default`, `Hover`, `Disabled` | `state` (or CSS) | `default`, `hover`, `disabled` |');
+  lines.push('| `State` | `Error`, `Success` | `state` | `error`, `success` |');
+  lines.push('| `Background` | `Light`, `Dark`, `Logos Blue` | `variant` suffix | `primary`, `primary-inverse`, `primary-brand` |');
+  lines.push('| `Direction` | `Left`, `Right`, `Next`, `Previous` | `iconPosition` | `leading`, `trailing` |');
+  lines.push('| `Style` | `Checkbox`, `Radio` | `type` | `checkbox`, `radio` |');
+  lines.push('| `Responsive` | `Desktop`, `Tablet`, `Mobile` | CSS only | handled via CSS breakpoints, not a prop |');
+  lines.push('');
+
+  // ── Section D: Token naming rules ──────────────────────────────────────────
+  lines.push('## D · Token Naming Rules', '');
+  lines.push(`
+### Token format
+\`{tier}-{category}-{variant}-{property}\`
+
+- **Primitive tier:** no prefix — raw values: \`logos-blue-500\`, \`spacing-4\`
+- **Semantic tier:** category prefix — \`color-brand-primary\`, \`spacing-h-md\`, \`shadow-elevation-1\`
+- **Component tier:** \`component-{name}-{property}\` — \`component-button-padding-horizontal\`
+- **All kebab-case.** No camelCase.
 
 ### Examples
 
-| Figma Variable | DTCG Token Name | Tier |
-|----------------|-----------------|------|
-| \`Primary/Logos Blue\` | \`primary-logos-blue\` | Primitive |
-| \`Primary/Logos Blue\` (alias) | \`color-brand-primary\` | Semantic |
-| \`Deep Colors/Green\` | \`color-feedback-success\` | Semantic |
-| \`Spacing \\| Horizontal/MD\` | \`spacing-h-md\` | Semantic |
-| \`Spacing \\| In Component/CTA Button - CTA Button \\| Horizontal\` | \`component-button-padding-horizontal\` | Component |
+| Figma Variable | CSS Variable | DTCG Tier |
+|----------------|-------------|-----------|
+| \`Primary/Logos Blue\` | \`--cc-color-brand-primary\` | Semantic |
+| \`Deep Colors/Green\` | \`--cc-color-feedback-success\` | Semantic |
+| \`Spacing | Horizontal/MD\` | \`--cc-spacing-h-md\` | Semantic |
+| \`Spacing | In Component/CTA Button | Horizontal\` | \`--cc-component-button-padding-horizontal\` | Component |
+`);
 
----
+  // ── Section E: Directory structure ─────────────────────────────────────────
+  lines.push('## E · Directory Structure', '');
+  lines.push('Each code component gets its own directory under `packages/commerce-components/src/components/`.', '');
+  lines.push('```');
+  lines.push('packages/commerce-components/src/components/');
+  lines.push('  button/');
+  lines.push('    component.tsx    # React component — zero Builder.io imports');
+  lines.push('    register.tsx     # Builder.io registration, inputs, defaults');
+  lines.push('    component.test.tsx');
+  lines.push('    index.ts         # barrel: export { Button } from "./component"');
+  lines.push('  input/');
+  lines.push('    component.tsx');
+  lines.push('    register.tsx');
+  lines.push('    component.test.tsx');
+  lines.push('    index.ts');
+  lines.push('  # ... one directory per code component');
+  lines.push('```');
+  lines.push('');
+  lines.push('> **Rule:** `component.tsx` must not import anything from `@builder.io/*`. Builder.io concerns live exclusively in `register.tsx`.');
+  lines.push('');
 
-## Property Axis Naming Rules
+  // ── Full mapping table ──────────────────────────────────────────────────────
+  lines.push('## F · Full Figma → Code Mapping', '');
+  lines.push('Every Figma frame and the code component it maps to.', '');
+  lines.push('| Figma Frame | Code Component | Tier | CSS Class | Key Props |');
+  lines.push('|-------------|----------------|------|-----------|-----------|');
+  for (const c of [...components].sort((a, b) => a.name.localeCompare(b.name))) {
+    const cc = codeComponents.find((x) => x.figmaSources.includes(c.name));
+    if (!cc) {
+      lines.push(`| ${c.name} | — | — | — | — |`);
+      continue;
+    }
+    const cssClass = `cc-${cc.directoryName}`;
+    const keyProps = cc.props.map((p) => `\`${p.name}\``).join(', ') || '—';
+    lines.push(`| ${c.name} | \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | \`${cssClass}\` | ${keyProps} |`);
+  }
 
-### State Axis
-The \`State\` property should only contain **interaction states**:
-
-| ✅ Valid State Values | ❌ Should Move Elsewhere |
-|----------------------|--------------------------|
-| Default, Hover, Focus, Active, Disabled | Desktop, Tablet, Mobile → use \`Size\` axis |
-| Error, Loading, Success, Selected | Checkbox, Radio → use \`Style\` axis |
-| Filled, Expanded, Collapsed | Click → remove or use \`State=Active\` |
-| On, Off, Checked, Unchecked | Variant4, State2 → rename descriptively |
-
-### Other Axis Standards
-- **Size axis:** T-shirt sizes only: \`Small\`, \`Medium\`, \`Large\`, \`X-Large\`. Responsive breakpoints go in \`Size\` too: \`Desktop\`, \`Tablet\`, \`Mobile\`
-- **Style axis:** Visual style variants: \`Solid\`, \`Outline\`, \`Ghost\`, \`Dark\`, \`Light\`
-- **Type axis:** Semantic variants: \`Primary\`, \`Secondary\`, \`Danger\`, \`CTA (Default)\`
-- **Direction axis:** Directional variants: \`Left\`, \`Right\`, \`Next\`, \`Previous\`
-- **Background axis:** Surface context: \`Light\`, \`Dark\`, \`Logos Blue\`
-
----
-
-*Generated by \`build-inventory.ts\`*
-`;
+  lines.push('', '---', `*Generated by \`build-inventory.ts\`*`);
+  return lines.join('\n');
 }
 
 // ---------------------------------------------------------------------------
 // Doc 10: Figma Cleanup Checklist
 // ---------------------------------------------------------------------------
 
-function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis): string {
+function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxonomy: Taxonomy): string {
+  const codeComponents = taxonomy.codeComponents;
+
   const lines: string[] = [
     '# 10 · Figma Cleanup Checklist',
     '',
@@ -966,6 +1151,25 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis): stri
     '> Check items off as you address them and re-run `npm run build` to verify.',
     '',
   ];
+
+  // 0. Figma frames to code component mapping
+  lines.push('## 0. Figma → Code Component Consolidation', '');
+  lines.push('The following table shows which Figma frames will be collapsed into a single React component. Designers can optionally restructure Figma to reflect this hierarchy, but it is not required.', '');
+  lines.push('| Code Component | Tier | Figma Frames |');
+  lines.push('|----------------|------|--------------|');
+  for (const cc of codeComponents) {
+    lines.push(`| \`${cc.name}\` | ${TIER_LABELS[cc.tier]} | ${cc.figmaSources.join(', ')} |`);
+  }
+  lines.push('');
+  const unmappedFrames = components.filter((c) => !codeComponents.some((cc) => cc.figmaSources.includes(c.name)));
+  if (unmappedFrames.length > 0) {
+    lines.push('### Unmapped Figma frames', '');
+    lines.push('These frames are not yet assigned to a code component — review and assign:', '');
+    for (const c of unmappedFrames) {
+      lines.push(`- [ ] **${c.name}** (${CATEGORY_LABELS[c.functionalCategory]})`);
+    }
+    lines.push('');
+  }
 
   // 1. Rename auto-generated state values
   lines.push('## 1. Rename Auto-Generated Property Values', '');
@@ -1110,11 +1314,19 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis): stri
 // README (updated with new docs)
 // ---------------------------------------------------------------------------
 
-function readme(components: FigmaComponent[], tokens: TokenCategory, gap: GapAnalysis): string {
+function readme(components: FigmaComponent[], tokens: TokenCategory, gap: GapAnalysis, taxonomy: Taxonomy): string {
   const totalVariants = components.reduce((s, c) => s + c.variantCount, 0);
   const responsiveCount = components.filter((c) => c.hasResponsive).length;
+  const codeComponents = taxonomy.codeComponents;
+  const primitives = codeComponents.filter((cc) => cc.tier === 'primitive').length;
+  const compositions = codeComponents.filter((cc) => cc.tier === 'composition').length;
+  const builderBlocks = codeComponents.filter((cc) => cc.tier === 'builder-block').length;
   const catCounts = Object.entries(CATEGORY_LABELS)
-    .map(([id, label]) => `| ${label} | ${components.filter((c) => c.functionalCategory === id).length} |`)
+    .map(([id, label]) => {
+      const figmaCount = components.filter((c) => c.functionalCategory === id).length;
+      const codeCount = codeComponents.filter((cc) => cc.functionalCategory === id).length;
+      return `| ${label} | ${figmaCount} | ${codeCount} |`;
+    })
     .join('\n');
 
   return `# Design System Inventory
@@ -1126,27 +1338,27 @@ function readme(components: FigmaComponent[], tokens: TokenCategory, gap: GapAna
 
 | | Count |
 |--|-------|
-| Total components | ${components.length} |
-| Total variants | ${totalVariants} |
-| Responsive components | ${responsiveCount} |
+| Figma component frames | ${components.length} |
+| Code components | ${codeComponents.length} |
+| Total Figma variants | ${totalVariants} |
+| Responsive Figma frames | ${responsiveCount} |
 | Figma color tokens | ${tokens.colors.length} |
 | Colors matched in \`commerce-theme\` | ${gap.colors.matched.length} |
 | Colors Figma-only (need code impl) | ${gap.colors.figmaOnly.length} |
 | Colors code-only (orphaned) | ${gap.colors.codeOnly.length} |
 
-## By Atomic Level
+## Code Component Architecture
 
-| Level | Count |
-|-------|-------|
-| Atoms | ${components.filter((c) => c.section === 'atoms').length} |
-| Molecules | ${components.filter((c) => c.section === 'molecules').length} |
-| Inputs & Forms | ${components.filter((c) => c.section === 'inputs').length} |
-| Other | ${components.filter((c) => c.section === 'other').length} |
+| Tier | Count | Description |
+|------|-------|-------------|
+| Primitives | ${primitives} | Standalone React components |
+| Compositions | ${compositions} | Multi-primitive compositions |
+| Builder Blocks | ${builderBlocks} | Page-level Builder.io blocks |
 
 ## By Functional Category
 
-| Category | Count |
-|----------|-------|
+| Category | Figma Frames | Code Components |
+|----------|-------------|-----------------|
 ${catCounts}
 
 ## Documents
@@ -1154,24 +1366,25 @@ ${catCounts}
 | # | Document | Description |
 |---|----------|-------------|
 | 01 | [Token Map](./01-token-map.md) | All Figma variables with DTCG tiers, swatches, and commerce-theme match status |
-| 02 | [Component Inventory](./02-component-inventory.md) | All 71 components with functional category, variants, axes, and HTML mappings |
+| 02 | [Component Inventory](./02-component-inventory.md) | All ${components.length} Figma frames with functional category, variants, axes, and HTML mappings |
 | 03 | [State Completeness Matrix](./03-state-matrix.md) | Cross-component interaction state coverage |
-| 04 | [Responsive Catalog](./04-responsive-catalog.md) | Components grouped by responsive coverage |
+| 04 | [Responsive Catalog](./04-responsive-catalog.md) | Figma frames grouped by responsive coverage |
 | 05 | [Variant Analysis](./05-variant-analysis.md) | State axis quality, naming consistency, consolidation opportunities |
 | 06 | [Dependency Graph](./06-dependency-graph.md) | HTML → Atom → Molecule relationships (Mermaid) |
-| 07 | [Priority Dashboard](./07-priority-dashboard.md) | Scored build order including dependency weight |
-| 08 | [Functional Taxonomy](./08-taxonomy.md) | Dual-axis classification, Mermaid category tree, proposed folder structure |
-| 09 | [Naming Conventions](./09-naming-conventions.md) | Component/token/axis naming rules with Figma-to-code mapping |
-| 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Actionable checkboxes for every detected issue |
+| 07 | [Priority Dashboard](./07-priority-dashboard.md) | Build order scored by code component (${codeComponents.length} rows) with full Figma-frame detail |
+| 08 | [Functional Taxonomy](./08-taxonomy.md) | Three-axis classification (atomic · category · tier), Mermaid diagram, folder structure |
+| 09 | [Component Architecture](./09-component-architecture.md) | React-first component list, prop API conventions, Figma axis → prop mapping, directory structure |
+| 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
 
 ## Data Files
 
 | File | Description |
 |------|-------------|
 | \`data/tokens.json\` | All Figma variables by category (incl. fontSizes) |
-| \`data/components.json\` | All 71 components with functionalCategory and proposedCodeName |
-| \`data/variant-axes.json\` | Deduplicated property axes across all components |
-| \`data/taxonomy.json\` | Category definitions and proposed folder structure |
+| \`data/components.json\` | All ${components.length} Figma frames with functionalCategory and proposedCodeName |
+| \`data/code-components.json\` | ${codeComponents.length} code components with tier, props, and Figma source mapping |
+| \`data/variant-axes.json\` | Deduplicated property axes across all Figma frames |
+| \`data/taxonomy.json\` | Category definitions, code components, and proposed folder structure |
 | \`data/gap-analysis.json\` | Figma vs. commerce-theme token comparison |
 | \`data/dtcg/primitives.json\` | Tier 1 DTCG tokens (raw values) |
 | \`data/dtcg/semantic.json\` | Tier 2 DTCG tokens (intent-based aliases) |
@@ -1181,7 +1394,7 @@ ${catCounts}
 
 \`\`\`
 raw/figma-metadata.xml     ─┐
-raw/figma-variables.json   ─┤─► parse-figma.ts ──► data/*.json + data/taxonomy.json
+raw/figma-variables.json   ─┤─► parse-figma.ts ──► data/*.json + data/code-components.json
                             │
 commerce-theme/src/*.ts    ─┘─► gap-analysis.ts ──► data/gap-analysis.json
                                 map-dtcg.ts ──────► data/dtcg/*.json
@@ -1211,11 +1424,11 @@ export async function generateDocs() {
   writeDoc(join(docsDir, '04-responsive-catalog.md'), doc04ResponsiveCatalog(components));
   writeDoc(join(docsDir, '05-variant-analysis.md'), doc05VariantAnalysis(components, axes));
   writeDoc(join(docsDir, '06-dependency-graph.md'), doc06DependencyGraph(components));
-  writeDoc(join(docsDir, '07-priority-dashboard.md'), doc07PriorityDashboard(components));
+  writeDoc(join(docsDir, '07-priority-dashboard.md'), doc07PriorityDashboard(components, taxonomy));
   writeDoc(join(docsDir, '08-taxonomy.md'), doc08Taxonomy(components, taxonomy));
-  writeDoc(join(docsDir, '09-naming-conventions.md'), doc09NamingConventions(components));
-  writeDoc(join(docsDir, '10-figma-cleanup.md'), doc10FigmaCleanup(components, gap));
-  writeDoc(join(docsDir, 'README.md'), readme(components, tokens, gap));
+  writeDoc(join(docsDir, '09-component-architecture.md'), doc09ComponentArchitecture(components, taxonomy));
+  writeDoc(join(docsDir, '10-figma-cleanup.md'), doc10FigmaCleanup(components, gap, taxonomy));
+  writeDoc(join(docsDir, 'README.md'), readme(components, tokens, gap, taxonomy));
 
   console.log(`  11 documents written to ./docs/`);
 }

@@ -3,32 +3,79 @@
 > Actionable items to improve Figma consistency before building components in code.
 > Check items off as you address them and re-run `npm run build` to verify.
 
+## 0. Figma → Code Component Consolidation
+
+The following table shows which Figma frames will be collapsed into a single React component. Designers can optionally restructure Figma to reflect this hierarchy, but it is not required.
+
+| Code Component | Tier | Figma Frames |
+|----------------|------|--------------|
+| `Button` | Primitive | Button, Text Button—Icon Right, Text Button—Icon Left, Close Button, Play Button, Category Button, Floating Action Button, Floating Action Button with Text, Stateful Action Button |
+| `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
+| `Textarea` | Primitive | Text Input—Multiline |
+| `TextInputGroup` | Primitive | Text Input (name, two fields) |
+| `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
+| `Checkbox` | Primitive | Checkbox |
+| `RadioButton` | Primitive | Radio Button |
+| `Toggle` | Primitive | Switch, Toggle with Text |
+| `Slider` | Primitive | Slider |
+| `Badge` | Primitive | Badges and Tags, Sale Percentage |
+| `StarRating` | Primitive | Star, Reviews |
+| `PriceLabel` | Primitive | Price and Label |
+| `Breadcrumbs` | Primitive | Breadcrumbs |
+| `Menu` | Primitive | Simple Menu, Button Menu |
+| `Tabs` | Primitive | Tabbed Selector, Tabbed Selector Button |
+| `SubnavDropdown` | Primitive | Subnav Dropdown, Subnav Dropdown Options |
+| `Stepper` | Primitive | Stepper CTA, Stepper Control, Increase-Decrease Buttons |
+| `Pagination` | Primitive | Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `Toast` | Primitive | Toast Bar |
+| `Modal` | Composition | Modal Dialog, Modal Button Group |
+| `Accordion` | Composition | Accordion Section, Expand-Collapse Button |
+| `EmailCapture` | Composition | Email Capture |
+| `FileUpload` | Composition | Upload Image Area |
+| `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
+| `ButtonGroup` | Composition | Button group, CTA Row |
+| `ProductCard` | Composition | Product Grid Card |
+| `ProductDetail` | Composition | Product Content, Product Lineup—Single |
+| `FreeTrialCard` | Composition | Free Trial Card |
+| `SectionLayout` | Builder Block | Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group |
+| `ProductCarousel` | Builder Block | Carousel Product |
+| `CtaList` | Builder Block | Multi-CTA List |
+| `BasicForm` | Builder Block | Basic Form |
+
+### Unmapped Figma frames
+
+These frames are not yet assigned to a code component — review and assign:
+
+- [ ] **Product Images** (Data Display)
+- [ ] **Image Ratios** (Data Display)
+- [ ] **List** (Data Display)
+
 ## 1. Rename Auto-Generated Property Values
 
 These components have Figma auto-names (`State2`, `Variant4`, etc.) that make it impossible to know what state is being represented.
 
-- [ ] **Category Button** — rename `State=Variant4` to a descriptive value
+- [ ] **Text Button—Icon Left** — rename `State=State8` to a descriptive value
 - [ ] **Play Button** — rename `State=State2` to a descriptive value
 - [ ] **Play Button** — rename `State=State3` to a descriptive value
 - [ ] **Play Button** — rename `State=State4` to a descriptive value
-- [ ] **Text Button—Icon Left** — rename `State=State8` to a descriptive value
+- [ ] **Category Button** — rename `State=Variant4` to a descriptive value
+- [ ] **Toggle with Text** — rename `Property 1=Variant6` to a descriptive value
 - [ ] **Text Input—Multiline** — rename `State=State4` to a descriptive value
 - [ ] **Text Input—Multiline** — rename `State=State6` to a descriptive value
-- [ ] **Toggle with Text** — rename `Property 1=Variant6` to a descriptive value
 
 ## 2. Fix State Axis Pollution
 
 Values incorrectly placed in the `State` axis.
 
+- [ ] **Text Button—Icon Left** — rename `State=Disable` to `State=Disabled`
+- [ ] **Stepper CTA** — rename `State=Maxium` to `State=Maximum`
 - [ ] **CTA Row** — rename `State=Focused` to `State=Focus (duplicate of "Focus")`
+- [ ] **Toggle Switch (text)** — rename `State=Focu` to `State=Focus`
 - [ ] **Form Dropdown** — move `State=Desktop` to the `Size` axis
 - [ ] **Form Dropdown** — move `State=Mobile` to the `Size` axis
 - [ ] **Form Dropdown** — move `State=Tablet` to the `Size` axis
 - [ ] **Multi-Selector** — move `State=Checkbox` to the `Style` axis
 - [ ] **Multi-Selector** — move `State=Radio` to the `Style` axis
-- [ ] **Stepper CTA** — rename `State=Maxium` to `State=Maximum`
-- [ ] **Text Button—Icon Left** — rename `State=Disable` to `State=Disabled`
-- [ ] **Toggle Switch (text)** — rename `State=Focu` to `State=Focus`
 
 ## 3. Deduplicate Component Frames
 
@@ -40,31 +87,31 @@ Components with duplicate names that appear twice in Figma:
 
 Components missing Hover, Focus, or Disabled states (minimum viable interactive states).
 
-- [ ] **Accordion Section** — add `Disabled` state variant(s)
-- [ ] **Basic Form** — add `Hover, Disabled` state variant(s)
-- [ ] **Category Button** — add `Disabled` state variant(s)
-- [ ] **Checkbox** — add `Hover, Disabled` state variant(s)
-- [ ] **Form Dropdown** — add `Hover, Disabled` state variant(s)
-- [ ] **Modal Button Group** — add `Hover, Disabled` state variant(s)
-- [ ] **Modal Dialog** — add `Hover, Disabled` state variant(s)
-- [ ] **Multi-Selector** — add `Hover, Disabled` state variant(s)
 - [ ] **Play Button** — add `Hover, Disabled` state variant(s)
-- [ ] **Radio Button** — add `Hover, Disabled` state variant(s)
-- [ ] **Single Select Box** — add `Hover, Disabled` state variant(s)
+- [ ] **Category Button** — add `Disabled` state variant(s)
+- [ ] **Modal Button Group** — add `Hover, Disabled` state variant(s)
+- [ ] **Accordion Section** — add `Disabled` state variant(s)
 - [ ] **Stateful Action Button** — add `Disabled` state variant(s)
+- [ ] **Basic Form** — add `Hover, Disabled` state variant(s)
+- [ ] **Modal Dialog** — add `Hover, Disabled` state variant(s)
+- [ ] **Checkbox** — add `Hover, Disabled` state variant(s)
 - [ ] **Text Input (name, two fields)** — add `Disabled` state variant(s)
+- [ ] **Radio Button** — add `Hover, Disabled` state variant(s)
 - [ ] **Text Input—Multiline** — add `Disabled` state variant(s)
+- [ ] **Form Dropdown** — add `Hover, Disabled` state variant(s)
+- [ ] **Multi-Selector** — add `Hover, Disabled` state variant(s)
+- [ ] **Single Select Box** — add `Hover, Disabled` state variant(s)
 
 ## 5. Reclassify "Other" Section Components
 
 Move components out of the catch-all "Other" Figma section into their proper atomic sections.
 
 - [ ] **Badges and Tags** → move to **Atoms** section
-- [ ] **Image Ratios** → move to **Consider removing — this is a layout constraint, not a component** section
-- [ ] **List** → move to **Atoms** section
-- [ ] **Price and Label** → move to **Atoms** section
 - [ ] **Product Images** → move to **Atoms** section
+- [ ] **Price and Label** → move to **Atoms** section
+- [ ] **Image Ratios** → move to **Consider removing — this is a layout constraint, not a component** section
 - [ ] **Sale Percentage** → move to **Atoms** section
+- [ ] **List** → move to **Atoms** section
 
 ## 6. Add Responsive Variants
 

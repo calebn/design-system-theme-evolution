@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "description": "Verified component dependencies extracted from Figma Desktop MCP get_design_context calls. Keys are Figma frame names matching DEPENDENCY_MAP. Values list Figma frame names of nested component instances found in generated code.",
+    "capturedAt": "2026-03-19",
+    "method": "get_design_context MCP tool — inspected generated TypeScript/React code for component function calls and data-name attributes"
+  },
+  "verified": {
+    "Reviews": {
+      "dependencies": ["Star"],
+      "confidence": "high",
+      "notes": "Star function explicitly called 5× inside Reviews component"
+    },
+    "Button group": {
+      "dependencies": ["Button", "Text Button—Icon Right"],
+      "confidence": "high",
+      "notes": "Button and TextButtonIconRight functions both called explicitly"
+    },
+    "Toast Bar": {
+      "dependencies": ["Button", "Close Button"],
+      "confidence": "high",
+      "notes": "Button function called explicitly; Close Button nested as data-name div (inlined). Previous map was missing Button."
+    },
+    "Product Grid Card": {
+      "dependencies": ["Button", "Badges and Tags", "Price and Label", "Star"],
+      "confidence": "high",
+      "notes": "PriceAndLabel, Star, BadgesAndTags, IconsAction all used as functions. Button inlined. Previous map listed Reviews but Star is used directly, not through Reviews component."
+    },
+    "Product Content": {
+      "dependencies": ["Button", "Stepper Control", "Star", "Badges and Tags", "Price and Label", "Text Button—Icon Right"],
+      "confidence": "high",
+      "notes": "StepperControl, BadgesAndTags, Star, PriceAndLabel, TextButtonIconRight all used as explicit functions. Button inlined. Previous map listed Stepper CTA and Reviews — both incorrect."
+    },
+    "Modal Dialog": {
+      "dependencies": ["Button", "Close Button", "Modal Button Group", "Text Section"],
+      "confidence": "high",
+      "notes": "Button, ModalButtonGroup, CloseButton, TextSection all explicit functions in generated code. Previous map was missing TextSection."
+    },
+    "Free Trial Card": {
+      "dependencies": ["Button", "Badges and Tags"],
+      "confidence": "medium",
+      "notes": "Button and BadgesAndTags inlined (no explicit function calls found in generated code, but structural analysis confirms use). Previous map listed Stepper CTA — not found."
+    },
+    "Carousel Product": {
+      "dependencies": ["Star", "Badges and Tags", "Price and Label", "Button"],
+      "confidence": "high",
+      "notes": "PriceAndLabel, Star, BadgesAndTags used as explicit functions. Button inlined. Previous map listed Next-Previous Buttons and Slider components — none found in design context output."
+    },
+    "Basic Form": {
+      "dependencies": ["Text Input (single line)", "Dropdown", "Checkbox", "Radio Button", "Button"],
+      "confidence": "medium",
+      "notes": "All fields are inlined (no separate function calls), but structural data-name attributes confirm these component types are used. Map unchanged."
+    },
+    "CTA Row": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "No component function calls found. Uses inlined SVG icons and text only. Previous map listed Button — not present as a function call."
+    },
+    "Modal Button Group": {
+      "dependencies": ["Button"],
+      "confidence": "high",
+      "notes": "Button function called explicitly."
+    },
+    "Increase-Decrease Buttons": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "Leaf component — renders SVG icons directly, no other component function calls."
+    },
+    "Next-Previous Buttons": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "Uses IconsAction helper function (inline SVG icon), not a code component. No separate component dependencies."
+    },
+    "Product Images": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "Leaf component — just an <img> with aspect-ratio variants."
+    },
+    "Star": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "Leaf component — renders SVG images."
+    },
+    "Text Section": {
+      "dependencies": [],
+      "confidence": "high",
+      "notes": "Leaf component — text, icons, and list items all inlined."
+    },
+    "Email Capture": {
+      "dependencies": ["Button"],
+      "confidence": "high",
+      "notes": "Button function explicitly called for the submit action."
+    },
+    "Stateful Action Button": {
+      "dependencies": ["Button"],
+      "confidence": "medium",
+      "notes": "Not directly captured; retained from original map as plausible."
+    },
+    "Stepper Control": {
+      "dependencies": ["Increase-Decrease Buttons"],
+      "confidence": "medium",
+      "notes": "Increase-Decrease Buttons appear as data-name children. Not separately verified via get_design_context for this component."
+    },
+    "Stepper CTA": {
+      "dependencies": ["Increase-Decrease Buttons", "Button"],
+      "confidence": "medium",
+      "notes": "Not directly captured; retained from original map as plausible."
+    }
+  },
+  "unverified": [
+    "Accordion Section",
+    "Button Menu",
+    "Expand-Collapse Button",
+    "Floating Action Button",
+    "Floating Action Button with Text",
+    "Multi-CTA List",
+    "Next-Previous Selector",
+    "Play Button",
+    "Product Lineup—Single",
+    "Section Headline",
+    "Section Headline with CTA",
+    "Simple Menu",
+    "Slider page selector",
+    "Slider Scroll Bar",
+    "Stateful Action Button",
+    "Subnav Dropdown",
+    "Subnav Dropdown Options",
+    "Tabbed Selector",
+    "Tabbed Selector Button",
+    "Text Section with Button Group"
+  ]
+}

@@ -2,24 +2,230 @@
 
 ## Property Axes Used Across Components
 
-| Axis | # Components | Values | Components |
-|------|-------------|--------|------------|
-| **State** | 43 | Active, Checkbox, Click, Default, Desktop, Disable, Disabled, Error, Expanded, Filled, Filled—Hide, Filled—Show, First Page, Focu, Focus, Focused, Half-Filled, Hover, Last Page, Loading, Maxium, Minimum, Mobile, Radio, Selected, State2, State3, State4, State6, State8, Success, Success no Button, Tablet, Variant4 | Accordion Section, Basic Form, Breadcrumbs, Button, Button Menu, CTA Row, Category Button, Checkbox, Close Button, Dropdown, Email Capture, Expand-Collapse Button, Floating Action Button, Floating Action Button with Text, Form Dropdown, Form Dropdown Option, Increase-Decrease Buttons, Modal Button Group, Modal Dialog, Multi-Select with Text, Multi-Selector, Next-Previous Buttons, Play Button, Radio Button, Search Field, Simple Menu, Single Select Box, Slider, Slider Scroll Bar, Star, Stateful Action Button, Stepper CTA, Stepper Control, Subnav Dropdown Options, Tabbed Selector Button, Text Button—Icon Left, Text Button—Icon Right, Text Input (name, two fields), Text Input (single line), Text Input—Date, Text Input—Multiline, Text Input—Password, Toggle Switch (text) |
-| **Size** | 32 | 2, 3, Condensed, Default, Desktop, Large, Medium, Mobile, Mobile-CTA, Small, Tablet, X-Large | Accordion Section, Badges and Tags, Basic Form, Button, Button Menu, Button group, Close Button, Expand-Collapse Button, Floating Action Button, Floating Action Button with Text, Increase-Decrease Buttons, Modal Dialog, Multi-CTA List, Multi-Select with Text, Next-Previous Buttons, Next-Previous Selector, Product Grid Card, Product Lineup—Single, Reviews, Sale Percentage, Search Field, Section Headline, Section Headline with CTA, Slider page selector, Star, Stepper Control, Subnav Dropdown, Tabbed Selector Button, Text Button—Icon Left, Text Button—Icon Right, Text Section with Button Group, Toggle Switch (text) |
-| **Style** | 20 | 01, 02, 03, 04, Checkbox, Dark, Default, Horizontal, Icon, Large, Light, Medium, Multi-step, Numbered, Outline, Overlay, Page Number, Paged, Radio, Sale, Sale-Timer, Sale—Vertical, Small, Solid, Solid—Dark, Solid—Light, Subscription, Subscription—Vertical, Transparent, Value, Value—Vertical, Vertical | Badges and Tags, Button, Carousel Product, Close Button, Floating Action Button, Free Trial Card, List, Modal Button Group, Modal Dialog, Multi-Select with Text, Next-Previous Buttons, Next-Previous Selector, Price and Label, Product Content, Product Grid Card, Sale Percentage, Slider page selector, Text Input (name, two fields), Text Input (single line), Toast Bar |
-| **Background** | 8 | Dark, Dark and Logos Blue, Light, Logos Blue | Button, Close Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons, Switch, Text Button—Icon Left, Text Button—Icon Right |
-| **Type** | 6 | Add (Generic), Attention, CTA (Default), Default, Error, External Link, Header-Middle, Header-Top, Info, Primary-Secondary, Primary-Tertiary, Success | Button, Button group, Subnav Dropdown Options, Text Button—Icon Left, Text Button—Icon Right, Toast Bar |
-| **Property 1** | 3 | Default, Disabled, Error, Focus, Hover, Selected, Variant6 | Text Toggle Selector, Toggle with Text, Upload Image Area |
-| **Selection** | 2 | 1, 2, 3, 4, 5, Option 1, Option 2 | Tabbed Selector, Toggle Switch (text) |
-| **Aspect Ratio** | 2 | 1.2:1, 1.33:1, 1.4:1, 1.5:1, 1.6:1, 1.8:1, 16x9, 1:1, 1x1, 2_5x1, 2x1, 3x2, 4x3, 4x5, 5x4 | Image Ratios, Product Images |
-| **Direction** | 1 | Next, Previous | Next-Previous Buttons |
-| **Change** | 1 | Decrease, Increase | Increase-Decrease Buttons |
-| **Toggle** | 1 | Collapse, Expand | Expand-Collapse Button |
-| **Stage** | 1 | Default, Quantity, Selected | Stepper CTA |
-| **Rating** | 1 | .5, 0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 | Reviews |
-| **Headline Size** | 1 | H1, H2, H3, H4, H5 | Text Section |
-| **Background Color** | 1 | Dark, Light | Basic Form |
-| **On-Off** | 1 | Off, On | Switch |
+> Component lists are collapsed below the summary table for readability.
+
+| Axis | # Components | Values |
+|------|-------------|--------|
+| **State** | 43 | Active, Checkbox, Click, Default, Desktop, Disable, Disabled, Error, Expanded, Filled, Filled—Hide, Filled—Show, First Page, Focu, Focus, Focused, Half-Filled, Hover, Last Page, Loading, Maxium, Minimum, Mobile, Radio, Selected, State2, State3, State4, State6, State8, Success, Success no Button, Tablet, Variant4 |
+| **Size** | 32 | 2, 3, Condensed, Default, Desktop, Large, Medium, Mobile, Mobile-CTA, Small, Tablet, X-Large |
+| **Style** | 20 | 01, 02, 03, 04, Checkbox, Dark, Default, Horizontal, Icon, Large, Light, Medium, Multi-step, Numbered, Outline, Overlay, Page Number, Paged, Radio, Sale, Sale-Timer, Sale—Vertical, Small, Solid, Solid—Dark, Solid—Light, Subscription, Subscription—Vertical, Transparent, Value, Value—Vertical, Vertical |
+| **Background** | 8 | Dark, Dark and Logos Blue, Light, Logos Blue |
+| **Type** | 6 | Add (Generic), Attention, CTA (Default), Default, Error, External Link, Header-Middle, Header-Top, Info, Primary-Secondary, Primary-Tertiary, Success |
+| **Property 1** | 3 | Default, Disabled, Error, Focus, Hover, Selected, Variant6 |
+| **Selection** | 2 | 1, 2, 3, 4, 5, Option 1, Option 2 |
+| **Aspect Ratio** | 2 | 1.2:1, 1.33:1, 1.4:1, 1.5:1, 1.6:1, 1.8:1, 16x9, 1:1, 1x1, 2_5x1, 2x1, 3x2, 4x3, 4x5, 5x4 |
+| **Direction** | 1 | Next, Previous |
+| **Change** | 1 | Decrease, Increase |
+| **Toggle** | 1 | Collapse, Expand |
+| **Stage** | 1 | Default, Quantity, Selected |
+| **Rating** | 1 | .5, 0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 |
+| **Headline Size** | 1 | H1, H2, H3, H4, H5 |
+| **Background Color** | 1 | Dark, Light |
+| **On-Off** | 1 | Off, On |
+
+<details><summary><strong>State</strong> — 43 components</summary>
+
+- Accordion Section
+- Basic Form
+- Breadcrumbs
+- Button
+- Button Menu
+- CTA Row
+- Category Button
+- Checkbox
+- Close Button
+- Dropdown
+- Email Capture
+- Expand-Collapse Button
+- Floating Action Button
+- Floating Action Button with Text
+- Form Dropdown
+- Form Dropdown Option
+- Increase-Decrease Buttons
+- Modal Button Group
+- Modal Dialog
+- Multi-Select with Text
+- Multi-Selector
+- Next-Previous Buttons
+- Play Button
+- Radio Button
+- Search Field
+- Simple Menu
+- Single Select Box
+- Slider
+- Slider Scroll Bar
+- Star
+- Stateful Action Button
+- Stepper CTA
+- Stepper Control
+- Subnav Dropdown Options
+- Tabbed Selector Button
+- Text Button—Icon Left
+- Text Button—Icon Right
+- Text Input (name, two fields)
+- Text Input (single line)
+- Text Input—Date
+- Text Input—Multiline
+- Text Input—Password
+- Toggle Switch (text)
+
+</details>
+
+<details><summary><strong>Size</strong> — 32 components</summary>
+
+- Accordion Section
+- Badges and Tags
+- Basic Form
+- Button
+- Button Menu
+- Button group
+- Close Button
+- Expand-Collapse Button
+- Floating Action Button
+- Floating Action Button with Text
+- Increase-Decrease Buttons
+- Modal Dialog
+- Multi-CTA List
+- Multi-Select with Text
+- Next-Previous Buttons
+- Next-Previous Selector
+- Product Grid Card
+- Product Lineup—Single
+- Reviews
+- Sale Percentage
+- Search Field
+- Section Headline
+- Section Headline with CTA
+- Slider page selector
+- Star
+- Stepper Control
+- Subnav Dropdown
+- Tabbed Selector Button
+- Text Button—Icon Left
+- Text Button—Icon Right
+- Text Section with Button Group
+- Toggle Switch (text)
+
+</details>
+
+<details><summary><strong>Style</strong> — 20 components</summary>
+
+- Badges and Tags
+- Button
+- Carousel Product
+- Close Button
+- Floating Action Button
+- Free Trial Card
+- List
+- Modal Button Group
+- Modal Dialog
+- Multi-Select with Text
+- Next-Previous Buttons
+- Next-Previous Selector
+- Price and Label
+- Product Content
+- Product Grid Card
+- Sale Percentage
+- Slider page selector
+- Text Input (name, two fields)
+- Text Input (single line)
+- Toast Bar
+
+</details>
+
+<details><summary><strong>Background</strong> — 8 components</summary>
+
+- Button
+- Close Button
+- Expand-Collapse Button
+- Increase-Decrease Buttons
+- Next-Previous Buttons
+- Switch
+- Text Button—Icon Left
+- Text Button—Icon Right
+
+</details>
+
+<details><summary><strong>Type</strong> — 6 components</summary>
+
+- Button
+- Button group
+- Subnav Dropdown Options
+- Text Button—Icon Left
+- Text Button—Icon Right
+- Toast Bar
+
+</details>
+
+<details><summary><strong>Property 1</strong> — 3 components</summary>
+
+- Text Toggle Selector
+- Toggle with Text
+- Upload Image Area
+
+</details>
+
+<details><summary><strong>Selection</strong> — 2 components</summary>
+
+- Tabbed Selector
+- Toggle Switch (text)
+
+</details>
+
+<details><summary><strong>Aspect Ratio</strong> — 2 components</summary>
+
+- Image Ratios
+- Product Images
+
+</details>
+
+<details><summary><strong>Direction</strong> — 1 components</summary>
+
+- Next-Previous Buttons
+
+</details>
+
+<details><summary><strong>Change</strong> — 1 components</summary>
+
+- Increase-Decrease Buttons
+
+</details>
+
+<details><summary><strong>Toggle</strong> — 1 components</summary>
+
+- Expand-Collapse Button
+
+</details>
+
+<details><summary><strong>Stage</strong> — 1 components</summary>
+
+- Stepper CTA
+
+</details>
+
+<details><summary><strong>Rating</strong> — 1 components</summary>
+
+- Reviews
+
+</details>
+
+<details><summary><strong>Headline Size</strong> — 1 components</summary>
+
+- Text Section
+
+</details>
+
+<details><summary><strong>Background Color</strong> — 1 components</summary>
+
+- Basic Form
+
+</details>
+
+<details><summary><strong>On-Off</strong> — 1 components</summary>
+
+- Switch
+
+</details>
 
 ## ⚠️ State Axis Quality Issues
 
@@ -56,34 +262,86 @@ The `State` property axis contains values that are not interaction states. These
 
 ## 💡 Consolidation Opportunities
 
-Detected algorithmically from shared axes, name stems, and duplicate frames.
+Components ranked by consolidation strength. **Already consolidated** = frames already mapped to the same code component.
 
-| Component A | Component B | Reason |
-|-------------|-------------|--------|
-| Button | Button Menu | Common name stem "Button" — review whether these could share a single component with variant props |
-| Button | Button group | Common name stem "Button" — review whether these could share a single component with variant props |
-| Text Button—Icon Right | Text Button—Icon Left | Same property axes [Type, Size, Background, State] and functional category — consider merging |
-| Floating Action Button | Floating Action Button with Text | Common name stem "Floating" — review whether these could share a single component with variant props |
-| Button Menu | Tabbed Selector Button | Same property axes [Size, State] and functional category — consider merging |
-| Button Menu | Button group | Common name stem "Button" — review whether these could share a single component with variant props |
-| Tabbed Selector Button | Tabbed Selector | Common name stem "Tabbed" — review whether these could share a single component with variant props |
-| Floating Action Button with Text | Stepper Control | Same property axes [Size, State] and functional category — consider merging |
-| Slider Scroll Bar | Slider page selector | Common name stem "Slider" — review whether these could share a single component with variant props |
-| Slider Scroll Bar | Slider | Common name stem "Slider" — review whether these could share a single component with variant props |
-| Next-Previous Selector | Slider page selector | Same property axes [Style, Size] and functional category — consider merging |
-| Stepper Control | Stepper CTA | Common name stem "Stepper" — review whether these could share a single component with variant props |
-| Modal Button Group | Modal Dialog | Common name stem "Modal" — review whether these could share a single component with variant props |
-| Subnav Dropdown Options | Subnav Dropdown | Common name stem "Subnav" — review whether these could share a single component with variant props |
-| Slider page selector | Slider | Common name stem "Slider" — review whether these could share a single component with variant props |
-| Multi-CTA List | Multi-Select with Text | Common name stem "Multi" — review whether these could share a single component with variant props |
-| Multi-CTA List | Multi-Selector | Common name stem "Multi" — review whether these could share a single component with variant props |
-| Text Input (single line) | Text Input (name, two fields) | Same property axes [Style, State] and functional category — consider merging |
-| Multi-Select with Text | Multi-Selector | Common name stem "Multi" — review whether these could share a single component with variant props |
-| Toggle with Text | Toggle Switch (text) | Common name stem "Toggle" — review whether these could share a single component with variant props |
-| Text Toggle Selector (Figma ID: 1623:5649) | Text Toggle Selector (Figma ID: 1623:5653) | Duplicate frame name — deduplicate in Figma |
-| Badges and Tags | Sale Percentage | Same property axes [Style, Size] and functional category — consider merging |
+### ✅ Already Consolidated (mapped to same code component)
 
-## 💥 Variant Count Overview (Top 20)
+| Figma Frame A | Figma Frame B | Code Component |
+|---------------|---------------|----------------|
+| Text Section with Button Group | Section Headline | `SectionLayout` |
+| Text Toggle Selector (Figma ID: 1623:5649) | Text Toggle Selector (Figma ID: 1623:5653) | `—` |
+| Text Button—Icon Right | Text Button—Icon Left | `LinkButton` |
+| Text Section with Button Group | Section Headline with CTA | `SectionLayout` |
+| Section Headline with CTA | Section Headline | `SectionLayout` |
+| Text Input—Date | Text Input—Password | `Input` |
+| Dropdown | Form Dropdown Option | `Select` |
+| Increase-Decrease Buttons | Stepper Control | `Stepper` |
+| Simple Menu | Button Menu | `Menu` |
+| Star | Reviews | `StarRating` |
+| Text Input (single line) | Text Input—Date | `Input` |
+| Category Button | Stateful Action Button | `Button` |
+| Next-Previous Selector | Slider page selector | `Pagination` |
+| Close Button | Floating Action Button | `IconButton` |
+| Text Input (single line) | Search Field | `Input` |
+| Text Input—Date | Search Field | `Input` |
+| Badges and Tags | Sale Percentage | `Badge` |
+| Multi-Selector | Single Select Box | `SelectionGroup` |
+| Stepper Control | Stepper CTA | `Stepper` |
+| Button | Floating Action Button with Text | `Button` |
+| Text Input (single line) | Text Input—Password | `Input` |
+| Multi-Select with Text | Toggle Switch (text) | `SelectionGroup` |
+| Floating Action Button with Text | Category Button | `Button` |
+| Dropdown | Form Dropdown | `Select` |
+| Form Dropdown | Form Dropdown Option | `Select` |
+| Text Input—Password | Search Field | `Input` |
+| Modal Button Group | Modal Dialog | `Modal` |
+| Increase-Decrease Buttons | Stepper CTA | `Stepper` |
+| Next-Previous Buttons | Next-Previous Selector | `Pagination` |
+| Floating Action Button with Text | Stateful Action Button | `Button` |
+| Next-Previous Buttons | Slider Scroll Bar | `Pagination` |
+| Expand-Collapse Button | Accordion Section | `Accordion` |
+| Next-Previous Buttons | Slider page selector | `Pagination` |
+| Multi-Select with Text | Single Select Box | `SelectionGroup` |
+| Button | Category Button | `Button` |
+| Floating Action Button | Play Button | `IconButton` |
+| Toggle Switch (text) | Single Select Box | `SelectionGroup` |
+| Multi-Select with Text | Multi-Selector | `SelectionGroup` |
+| Button | Stateful Action Button | `Button` |
+| Close Button | Play Button | `IconButton` |
+| Toggle Switch (text) | Multi-Selector | `SelectionGroup` |
+| Tabbed Selector Button | Tabbed Selector | `Tabs` |
+| Slider Scroll Bar | Next-Previous Selector | `Pagination` |
+| Slider Scroll Bar | Slider page selector | `Pagination` |
+| CTA Row | Button group | `ButtonGroup` |
+| Subnav Dropdown Options | Subnav Dropdown | `SubnavDropdown` |
+| Text Section with Button Group | Text Section | `SectionLayout` |
+| Text Section | Section Headline with CTA | `SectionLayout` |
+| Text Section | Section Headline | `SectionLayout` |
+| Product Content | Product Lineup—Single | `ProductDetail` |
+| Switch | Toggle with Text | `Toggle` |
+| Multi-Select with Text | Text Toggle Selector | `SelectionGroup` |
+| Toggle Switch (text) | Text Toggle Selector | `SelectionGroup` |
+| Multi-Selector | Text Toggle Selector | `SelectionGroup` |
+| Text Toggle Selector | Single Select Box | `SelectionGroup` |
+
+### 🔍 Candidates for Review
+
+| Component A | Component B | Shared Axes | Value Overlap | Recommendation |
+|-------------|-------------|-------------|---------------|----------------|
+| Button Menu | Tabbed Selector Button | Size, State | 100% | Same axes [Size, State] · 100% value overlap — strong merge candidate |
+| Floating Action Button with Text | Stepper Control | Size, State | 86% | Same axes [Size, State] · 86% value overlap — strong merge candidate |
+| Text Input (single line) | Text Input (name, two fields) | Style, State | 63% | Text Input (name, two fields) is a composition of two Text Input fields with a specific two-column layout. Map to TextInputGroup (a thin wrapper), not to the base Input primitive. |
+| Slider Scroll Bar | Slider | State | 43% | Merge into a single Slider component. Slider Scroll Bar is a visual variant (appears inside a carousel), not a distinct interaction pattern. Use a variant prop to differentiate. |
+| Floating Action Button | Floating Action Button with Text | Size, State | 75% | Merge into a single IconButton or Button component using a variant='floating' prop. The text-label variant is additive (children prop), not a separate component. |
+| Button | Button Menu | State, Size | 75% | Common stem "Button" · shares [State, Size] axes — review for variant prop consolidation |
+| Multi-CTA List | Multi-Select with Text | Size | 50% | Unrelated despite the 'Multi' stem. Multi-CTA List is a content layout block; Multi-Select with Text is a form control. Keep separate. |
+| Button Menu | Button group | Size | — | Different components despite the 'Button' stem. Button Menu is a navigation dropdown (nav element); ButtonGroup is a layout wrapper for action buttons. Keep separate. |
+| Button | Button group | Size, Type | — | Common stem "Button" · shares [Size, Type] axes — review for variant prop consolidation |
+| Slider page selector | Slider | — | — | Common stem "Slider" · no shared axes — review for variant prop consolidation |
+| Multi-CTA List | Multi-Selector | — | — | Different purposes despite the 'Multi' stem. Multi-CTA List is a layout component (list of CTAs), Multi-Selector is a form control (multi-select). Keep separate. |
+| Toggle with Text | Toggle Switch (text) | — | — | Merge into a single Toggle component. 'With Text' describes the label presence — make it a children prop, not a separate component. |
+
+## 💥 Variant Count Overview
 
 | Component | Section | Variant Count | Axes |
 |-----------|---------|---------------|------|
@@ -107,6 +365,57 @@ Detected algorithmically from shared axes, name stems, and duplicate frames.
 | Floating Action Button with Text | Atoms | 10 | 2 |
 | Toggle Switch (text) | Inputs & Forms | 10 | 3 |
 | Search Field | Inputs & Forms | 10 | 2 |
+| Stepper Control | Atoms | 8 | 2 |
+| Toast Bar | Molecules | 8 | 2 |
+| Image Ratios | Other | 8 | 1 |
+| Sale Percentage | Other | 8 | 2 |
+| Subnav Dropdown Options | Atoms | 7 | 2 |
+| Basic Form | Molecules | 7 | 3 |
+| Dropdown | Inputs & Forms | 7 | 1 |
+| Text Input—Password | Inputs & Forms | 7 | 1 |
+| Product Images | Other | 7 | 1 |
+| Price and Label | Other | 7 | 1 |
+| Stateful Action Button | Atoms | 6 | 1 |
+| Button group | Molecules | 6 | 2 |
+| Modal Dialog | Molecules | 6 | 3 |
+| Text Input (name, two fields) | Inputs & Forms | 6 | 2 |
+| Toggle with Text | Inputs & Forms | 6 | 1 |
+| Text Input—Multiline | Inputs & Forms | 6 | 1 |
+| Text Input—Date | Inputs & Forms | 6 | 1 |
+| Slider | Inputs & Forms | 6 | 1 |
+| Email Capture | Inputs & Forms | 6 | 1 |
+| Simple Menu | Atoms | 5 | 1 |
+| Tabbed Selector | Atoms | 5 | 1 |
+| Modal Button Group | Atoms | 5 | 2 |
+| Text Section | Molecules | 5 | 1 |
+| Form Dropdown Option | Inputs & Forms | 5 | 1 |
+| Play Button | Atoms | 4 | 1 |
+| Breadcrumbs | Atoms | 4 | 1 |
+| Slider Scroll Bar | Atoms | 4 | 1 |
+| Next-Previous Selector | Atoms | 4 | 2 |
+| CTA Row | Atoms | 4 | 1 |
+| Category Button | Atoms | 4 | 1 |
+| Section Headline with CTA | Molecules | 4 | 1 |
+| Upload Image Area | Inputs & Forms | 4 | 1 |
+| Multi-Selector | Inputs & Forms | 4 | 1 |
+| List | Other | 4 | 1 |
+| Text Section with Button Group | Molecules | 3 | 1 |
+| Product Content | Molecules | 3 | 1 |
+| Section Headline | Molecules | 3 | 1 |
+| Product Grid Card | Molecules | 3 | 2 |
+| Product Lineup—Single | Molecules | 3 | 1 |
+| Subnav Dropdown | Molecules | 3 | 1 |
+| Form Dropdown | Inputs & Forms | 3 | 1 |
+| Slider page selector | Molecules | 2 | 2 |
+| Checkbox | Inputs & Forms | 2 | 1 |
+| Switch | Inputs & Forms | 2 | 2 |
+| Radio Button | Inputs & Forms | 2 | 1 |
+| Single Select Box | Inputs & Forms | 2 | 1 |
+| Free Trial Card | Molecules | 1 | 1 |
+| Carousel Product | Molecules | 1 | 1 |
+| Multi-CTA List | Molecules | 1 | 1 |
+| Text Toggle Selector | Inputs & Forms | 1 | 1 |
+| Text Toggle Selector | Inputs & Forms | 1 | 1 |
 
 ---
 *Generated by `build-inventory.ts`*

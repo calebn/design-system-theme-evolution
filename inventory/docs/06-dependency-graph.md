@@ -5,7 +5,7 @@
 ## Full Hierarchy
 
 ```mermaid
-graph TD
+graph LR
   subgraph htmlElements ["HTML Elements"]
     button["&lt;button&gt;"]
     nav["&lt;nav&gt;"]
@@ -193,7 +193,7 @@ graph TD
 ## Atoms with Internal Dependencies
 
 ```mermaid
-graph TD
+graph LR
   subgraph atomDeps ["Atom Internal Dependencies"]
     Tabbed_Selector_Button["Tabbed Selector Button"] --> Tabbed_Selector["Tabbed Selector"]
     Expand_Collapse_Button["Expand-Collapse Button"] --> Accordion_Section["Accordion Section"]

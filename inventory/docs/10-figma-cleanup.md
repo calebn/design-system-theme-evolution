@@ -9,7 +9,9 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 | Code Component | Tier | Figma Frames |
 |----------------|------|--------------|
-| `Button` | Primitive | Button, Text Button—Icon Right, Text Button—Icon Left, Close Button, Play Button, Category Button, Floating Action Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
+| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button |
+| `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
 | `TextInputGroup` | Primitive | Text Input (name, two fields) |

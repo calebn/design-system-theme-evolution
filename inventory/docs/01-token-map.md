@@ -9,7 +9,7 @@
 | | Figma Name | Hex | Group | DTCG | Code Match | Code Key |
 |--|------------|-----|-------|------|------------|----------|
 | ![](https://placehold.co/12x12/00042F/00042F.png)  | `Primary/Subscription Blue` | `#00042f` | Primary | P | ✅ Matched | `primary.c500` |
-| ![](https://placehold.co/12x12/FFFFFF/FFFFFF.png)  | `Secondary/White` | `#ffffff` | Secondary | P | — | `—` |
+| ![](https://placehold.co/12x12/FFFFFF/FFFFFF.png)  | `Secondary/White` | `#ffffff` | Secondary | P | ✅ Matched | `grey.c100, pureWhite` |
 | ![](https://placehold.co/12x12/1E6AFE/1E6AFE.png)  | `Primary/Logos Blue` | `#1e6afe` | Primary | P | ✅ Matched | `primary.c300` |
 | ![](https://placehold.co/12x12/F5FBFF/F5FBFF.png)  | `Secondary/Light Blue 3` | `#f5fbff` | Secondary | P | ✅ Matched | `secondary.c100` |
 | ![](https://placehold.co/12x12/4885FE/4885FE.png)  | `Secondary/Alt Blue` | `#4885fe` | Secondary | P | ✅ Matched | `secondary.c200` |
@@ -29,34 +29,34 @@
 
 These exist in code but have no matching Figma variable. Candidates for removal or addition to Figma.
 
-| | Code Key | Hex |
-|--|----------|-----|
-| ![](https://placehold.co/12x12/9BCDFF/9BCDFF.png)  | `secondary.c150` | `#9bcdff` |
-| ![](https://placehold.co/12x12/3640B8/3640B8.png)  | `secondary.c300` | `#3640b8` |
-| ![](https://placehold.co/12x12/54EB54/54EB54.png)  | `success.vivid` | `#54eb54` |
-| ![](https://placehold.co/12x12/F2EBBD/F2EBBD.png)  | `yellow.c100` | `#f2ebbd` |
-| ![](https://placehold.co/12x12/EFDF79/EFDF79.png)  | `yellow.c200` | `#efdf79` |
-| ![](https://placehold.co/12x12/DEC62B/DEC62B.png)  | `yellow.c300` | `#dec62b` |
-| ![](https://placehold.co/12x12/ECD1C1/ECD1C1.png)  | `orange.c100` | `#ecd1c1` |
-| ![](https://placehold.co/12x12/D87C44/D87C44.png)  | `orange.c200` | `#d87c44` |
-| ![](https://placehold.co/12x12/AD4100/AD4100.png)  | `orange.c300` | `#ad4100` |
-| ![](https://placehold.co/12x12/EDCBCB/EDCBCB.png)  | `red.c100` | `#edcbcb` |
-| ![](https://placehold.co/12x12/DA6969/DA6969.png)  | `red.c200` | `#da6969` |
-| ![](https://placehold.co/12x12/B31E31/B31E31.png)  | `red.c300` | `#b31e31` |
-| ![](https://placehold.co/12x12/DEBBDA/DEBBDA.png)  | `purple.c100` | `#debbda` |
-| ![](https://placehold.co/12x12/A4619C/A4619C.png)  | `purple.c200` | `#a4619c` |
-| ![](https://placehold.co/12x12/502D4C/502D4C.png)  | `purple.c300` | `#502d4c` |
-| ![](https://placehold.co/12x12/C8E4C8/C8E4C8.png)  | `green.c100` | `#c8e4c8` |
-| ![](https://placehold.co/12x12/88CE88/88CE88.png)  | `green.c200` | `#88ce88` |
-| ![](https://placehold.co/12x12/227421/227421.png)  | `green.c300` | `#227421` |
-| ![](https://placehold.co/12x12/F5F5F5/F5F5F5.png)  | `grey.c200` | `#f5f5f5` |
-| ![](https://placehold.co/12x12/EBEBEB/EBEBEB.png)  | `grey.c300` | `#ebebeb` |
-| ![](https://placehold.co/12x12/DBDBDB/DBDBDB.png)  | `grey.c400` | `#dbdbdb` |
-| ![](https://placehold.co/12x12/C7C7C7/C7C7C7.png)  | `grey.c500` | `#c7c7c7` |
-| ![](https://placehold.co/12x12/7E7E7E/7E7E7E.png)  | `black.c100` | `#7e7e7e` |
-| ![](https://placehold.co/12x12/3D3D3D/3D3D3D.png)  | `black.c200` | `#3d3d3d` |
-| ![](https://placehold.co/12x12/1F1D20/1F1D20.png)  | `black.c400` | `#1f1d20` |
-| ![](https://placehold.co/12x12/000000/000000.png)  | `pureBlack` | `#000000` |
+| | Code Key | Hex | Brand Styles? |
+|--|----------|-----|---------------|
+| ![](https://placehold.co/12x12/9BCDFF/9BCDFF.png)  | `secondary.c150` | `#9bcdff` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/3640B8/3640B8.png)  | `secondary.c300` | `#3640b8` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/54EB54/54EB54.png)  | `success.vivid` | `#54eb54` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/F2EBBD/F2EBBD.png)  | `yellow.c100` | `#f2ebbd` | — |
+| ![](https://placehold.co/12x12/EFDF79/EFDF79.png)  | `yellow.c200` | `#efdf79` | — |
+| ![](https://placehold.co/12x12/DEC62B/DEC62B.png)  | `yellow.c300` | `#dec62b` | — |
+| ![](https://placehold.co/12x12/ECD1C1/ECD1C1.png)  | `orange.c100` | `#ecd1c1` | — |
+| ![](https://placehold.co/12x12/D87C44/D87C44.png)  | `orange.c200` | `#d87c44` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/AD4100/AD4100.png)  | `orange.c300` | `#ad4100` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/EDCBCB/EDCBCB.png)  | `red.c100` | `#edcbcb` | — |
+| ![](https://placehold.co/12x12/DA6969/DA6969.png)  | `red.c200` | `#da6969` | — |
+| ![](https://placehold.co/12x12/B31E31/B31E31.png)  | `red.c300` | `#b31e31` | — |
+| ![](https://placehold.co/12x12/DEBBDA/DEBBDA.png)  | `purple.c100` | `#debbda` | — |
+| ![](https://placehold.co/12x12/A4619C/A4619C.png)  | `purple.c200` | `#a4619c` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/502D4C/502D4C.png)  | `purple.c300` | `#502d4c` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/C8E4C8/C8E4C8.png)  | `green.c100` | `#c8e4c8` | — |
+| ![](https://placehold.co/12x12/88CE88/88CE88.png)  | `green.c200` | `#88ce88` | — |
+| ![](https://placehold.co/12x12/227421/227421.png)  | `green.c300` | `#227421` | — |
+| ![](https://placehold.co/12x12/F5F5F5/F5F5F5.png)  | `grey.c200` | `#f5f5f5` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/EBEBEB/EBEBEB.png)  | `grey.c300` | `#ebebeb` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/DBDBDB/DBDBDB.png)  | `grey.c400` | `#dbdbdb` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/C7C7C7/C7C7C7.png)  | `grey.c500` | `#c7c7c7` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/7E7E7E/7E7E7E.png)  | `black.c100` | `#7e7e7e` | — |
+| ![](https://placehold.co/12x12/3D3D3D/3D3D3D.png)  | `black.c200` | `#3d3d3d` | ⚠️ Local style |
+| ![](https://placehold.co/12x12/1F1D20/1F1D20.png)  | `black.c400` | `#1f1d20` | — |
+| ![](https://placehold.co/12x12/000000/000000.png)  | `pureBlack` | `#000000` | ⚠️ Local style |
 
 ## Typography
 
@@ -98,31 +98,31 @@ These exist in code but have no matching Figma variable. Candidates for removal 
 
 | Figma Name | Value | Group | DTCG | Code Match | Code Key |
 |------------|-------|-------|------|------------|----------|
-| `Spacing | Horizontal/MD` | `12px` | Spacing | Horizontal | S | ✅ Matched | `sp12` |
-| `Spacing | Horizontal/SM` | `8px` | Spacing | Horizontal | S | ✅ Matched | `sp8` |
-| `Spacing | Horizontal/LG` | `18px` | Spacing | Horizontal | S | ⚠️ Figma-only | `—` |
-| `Spacing | Horizontal/XS` | `6px` | Spacing | Horizontal | S | ✅ Matched | `sp6` |
-| `Spacing | In Component/CTA Button - CTA Button | Horizontal` | `16px` | Spacing | In Component | C | ✅ Matched | `sp16` |
+| `Spacing \| Horizontal/MD` | `12px` | Spacing \| Horizontal | S | ✅ Matched | `sp12` |
+| `Spacing \| Horizontal/SM` | `8px` | Spacing \| Horizontal | S | ✅ Matched | `sp8` |
+| `Spacing \| Horizontal/LG` | `18px` | Spacing \| Horizontal | S | ⚠️ Figma-only | `—` |
+| `Spacing \| Horizontal/XS` | `6px` | Spacing \| Horizontal | S | ✅ Matched | `sp6` |
+| `Spacing \| In Component/CTA Button - CTA Button \| Horizontal` | `16px` | Spacing \| In Component | C | ✅ Matched | `sp16` |
 | `Padding/MD` | `24px` | Padding | S | ✅ Matched | `sp24` |
-| `Spacing | Horizontal/XXL` | `30px` | Spacing | Horizontal | S | ✅ Matched | `sp30` |
-| `Spacing | In Component/Accordion Padding | Vertical` | `24px` | Spacing | In Component | C | ✅ Matched | `sp24` |
-| `Spacing | Vertical/XXS` | `24px` | Spacing | Vertical | S | ✅ Matched | `sp24` |
-| `Spacing | In Component/Text - Image` | `48px` | Spacing | In Component | C | ✅ Matched | `sp48` |
+| `Spacing \| Horizontal/XXL` | `30px` | Spacing \| Horizontal | S | ✅ Matched | `sp30` |
+| `Spacing \| In Component/Accordion Padding \| Vertical` | `24px` | Spacing \| In Component | C | ✅ Matched | `sp24` |
+| `Spacing \| Vertical/XXS` | `24px` | Spacing \| Vertical | S | ✅ Matched | `sp24` |
+| `Spacing \| In Component/Text - Image` | `48px` | Spacing \| In Component | C | ✅ Matched | `sp48` |
 | `Padding/XL` | `48px` | Padding | S | ✅ Matched | `sp48` |
 | `Padding/XS` | `12px` | Padding | S | ✅ Matched | `sp12` |
-| `Spacing | In Component/CTA - Disclaimer` | `16px` | Spacing | In Component | C | ✅ Matched | `sp16` |
-| `Spacing | In Component/CTA Button - CTA text link | Horizontal` | `32px` | Spacing | In Component | C | ⚠️ Figma-only | `—` |
-| `Spacing | In Component/CTA Button - CTA Button | Vertical` | `16px` | Spacing | In Component | C | ✅ Matched | `sp16` |
-| `Spacing | In Component/Body CTA` | `36px` | Spacing | In Component | C | ✅ Matched | `sp36` |
-| `Spacing | In Component/Headline - Note` | `6px` | Spacing | In Component | C | ✅ Matched | `sp6` |
+| `Spacing \| In Component/CTA - Disclaimer` | `16px` | Spacing \| In Component | C | ✅ Matched | `sp16` |
+| `Spacing \| In Component/CTA Button - CTA text link \| Horizontal` | `32px` | Spacing \| In Component | C | ⚠️ Figma-only | `—` |
+| `Spacing \| In Component/CTA Button - CTA Button \| Vertical` | `16px` | Spacing \| In Component | C | ✅ Matched | `sp16` |
+| `Spacing \| In Component/Body CTA` | `36px` | Spacing \| In Component | C | ✅ Matched | `sp36` |
+| `Spacing \| In Component/Headline - Note` | `6px` | Spacing \| In Component | C | ✅ Matched | `sp6` |
 | `Padding/LG` | `32px` | Padding | S | ⚠️ Figma-only | `—` |
-| `Spacing | In Component/Kicker - Headline` | `12px` | Spacing | In Component | C | ✅ Matched | `sp12` |
-| `Spacing | Vertical/XS` | `36px` | Spacing | Vertical | S | ✅ Matched | `sp36` |
-| `Spacing | Vertical/SM` | `60px` | Spacing | Vertical | S | ✅ Matched | `sp60` |
+| `Spacing \| In Component/Kicker - Headline` | `12px` | Spacing \| In Component | C | ✅ Matched | `sp12` |
+| `Spacing \| Vertical/XS` | `36px` | Spacing \| Vertical | S | ✅ Matched | `sp36` |
+| `Spacing \| Vertical/SM` | `60px` | Spacing \| Vertical | S | ✅ Matched | `sp60` |
 | `Padding/XXL` | `60px` | Padding | S | ✅ Matched | `sp60` |
 | `Padding/SM` | `16px` | Padding | S | ✅ Matched | `sp16` |
 | `Vertical/Small` | `48px` | Vertical | S | ✅ Matched | `sp48` |
-| `Spacing | Horizontal/XL` | `24px` | Spacing | Horizontal | S | ✅ Matched | `sp24` |
+| `Spacing \| Horizontal/XL` | `24px` | Spacing \| Horizontal | S | ✅ Matched | `sp24` |
 
 ### Spacing in `commerce-theme` not in Figma
 

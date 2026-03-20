@@ -5,13 +5,15 @@
 
 ## A · Code Components
 
-32 code components derived from 71 Figma frames.
+34 code components derived from 71 Figma frames.
 
-### Primitives (19)
+### Primitives (21)
 
 | Component | Directory | Category | Figma Sources | HTML |
 |-----------|-----------|----------|---------------|------|
-| `Button` | `button/` | Actions | Button, Text Button—Icon Right, Text Button—Icon Left, Close Button, Play Button, Category Button, Floating Action Button, Floating Action Button with Text, Stateful Action Button | `<button>` |
+| `Button` | `button/` | Actions | Button, Category Button, Floating Action Button with Text, Stateful Action Button | `<button>` |
+| `IconButton` | `icon-button/` | Actions | Close Button, Play Button, Floating Action Button | `<button>` |
+| `LinkButton` | `link-button/` | Actions | Text Button—Icon Left, Text Button—Icon Right | `<button>` |
 | `Input` | `input/` | Data Entry | Text Input (single line), Text Input—Date, Text Input—Password, Search Field | `<input>` |
 | `Textarea` | `textarea/` | Data Entry | Text Input—Multiline | `<textarea>` |
 | `TextInputGroup` | `text-input-group/` | Data Entry | Text Input (name, two fields) | `<div>` |
@@ -168,19 +170,19 @@ Every Figma frame and the code component it maps to.
 | Badges and Tags | `Badge` | Primitive | `cc-badge` | `variant`, `scale` |
 | Basic Form | `BasicForm` | Builder Block | `cc-basic-form` | — |
 | Breadcrumbs | `Breadcrumbs` | Primitive | `cc-breadcrumbs` | `scale` |
-| Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
 | Button group | `ButtonGroup` | Composition | `cc-button-group` | `layout`, `align` |
 | Button Menu | `Menu` | Primitive | `cc-menu` | `variant`, `state` |
 | Carousel Product | `ProductCarousel` | Builder Block | `cc-product-carousel` | `scale` |
-| Category Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Category Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
 | Checkbox | `Checkbox` | Primitive | `cc-checkbox` | `state` |
-| Close Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Close Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
 | CTA Row | `ButtonGroup` | Composition | `cc-button-group` | `layout`, `align` |
 | Dropdown | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
 | Email Capture | `EmailCapture` | Composition | `cc-email-capture` | `scale`, `state` |
 | Expand-Collapse Button | `Accordion` | Composition | `cc-accordion` | `state`, `variant` |
-| Floating Action Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
-| Floating Action Button with Text | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Floating Action Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
+| Floating Action Button with Text | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
 | Form Dropdown | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
 | Form Dropdown Option | `Select` | Primitive | `cc-select` | `variant`, `scale`, `state` |
 | Free Trial Card | `FreeTrialCard` | Composition | `cc-free-trial-card` | — |
@@ -194,7 +196,7 @@ Every Figma frame and the code component it maps to.
 | Multi-Selector | `SelectionGroup` | Composition | `cc-selection-group` | `type`, `layout` |
 | Next-Previous Buttons | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
 | Next-Previous Selector | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
-| Play Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Play Button | `IconButton` | Primitive | `cc-icon-button` | `variant`, `scale`, `state` |
 | Price and Label | `PriceLabel` | Primitive | `cc-price-label` | `variant`, `scale` |
 | Product Content | `ProductDetail` | Composition | `cc-product-detail` | `variant` |
 | Product Grid Card | `ProductCard` | Composition | `cc-product-card` | `scale` |
@@ -212,7 +214,7 @@ Every Figma frame and the code component it maps to.
 | Slider page selector | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
 | Slider Scroll Bar | `Pagination` | Primitive | `cc-pagination` | `variant`, `scale`, `state` |
 | Star | `StarRating` | Primitive | `cc-star-rating` | `variant`, `scale` |
-| Stateful Action Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Stateful Action Button | `Button` | Primitive | `cc-button` | `variant`, `scale`, `state` |
 | Stepper Control | `Stepper` | Primitive | `cc-stepper` | `variant`, `scale`, `state` |
 | Stepper CTA | `Stepper` | Primitive | `cc-stepper` | `variant`, `scale`, `state` |
 | Subnav Dropdown | `SubnavDropdown` | Primitive | `cc-subnav-dropdown` | `variant`, `state` |
@@ -220,8 +222,8 @@ Every Figma frame and the code component it maps to.
 | Switch | `Toggle` | Primitive | `cc-toggle` | `variant`, `state` |
 | Tabbed Selector | `Tabs` | Primitive | `cc-tabs` | `variant`, `scale`, `state` |
 | Tabbed Selector Button | `Tabs` | Primitive | `cc-tabs` | `variant`, `scale`, `state` |
-| Text Button—Icon Left | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
-| Text Button—Icon Right | `Button` | Primitive | `cc-button` | `variant`, `scale`, `iconPosition` |
+| Text Button—Icon Left | `LinkButton` | Primitive | `cc-link-button` | `variant`, `iconPosition`, `scale`, `state` |
+| Text Button—Icon Right | `LinkButton` | Primitive | `cc-link-button` | `variant`, `iconPosition`, `scale`, `state` |
 | Text Input (name, two fields) | `TextInputGroup` | Primitive | `cc-text-input-group` | `scale` |
 | Text Input (single line) | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |
 | Text Input—Date | `Input` | Primitive | `cc-input` | `type`, `scale`, `state` |

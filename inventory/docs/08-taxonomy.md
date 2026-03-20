@@ -16,8 +16,10 @@
 
 ```mermaid
 graph TD
-  subgraph primitives ["Primitives (18)"]
+  subgraph primitives ["Primitives (21)"]
     Button["Button"]
+    IconButton["IconButton"]
+    LinkButton["LinkButton"]
     Input["Input"]
     Textarea["Textarea"]
     TextInputGroup["TextInputGroup"]
@@ -61,7 +63,7 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(2 code / 12 Figma)"]
+  DesignSystem --> actions["Actions\n(4 code / 12 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
   DesignSystem --> data_entry["Data Entry\n(10 code / 16 Figma)"]
   DesignSystem --> selection["Selection & Controls\n(4 code / 14 Figma)"]
@@ -81,7 +83,9 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Button` | Primitive | Button, Text Button—Icon Right, Text Button—Icon Left, Close Button, Play Button, Category Button, Floating Action Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
+| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button |
+| `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `ButtonGroup` | Composition | Button group, CTA Row |
 
 ### Navigation
@@ -193,12 +197,12 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Carousel Product | Molecules | Product | `ProductCarousel` | Builder Block |
 | Category Button | Atoms | Actions | `Button` | Primitive |
 | Checkbox | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
-| Close Button | Atoms | Actions | `Button` | Primitive |
+| Close Button | Atoms | Actions | `IconButton` | Primitive |
 | CTA Row | Atoms | Actions | `ButtonGroup` | Composition |
 | Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Email Capture | Inputs & Forms | Data Entry | `EmailCapture` | Composition |
 | Expand-Collapse Button | Atoms | Selection & Controls | `Accordion` | Composition |
-| Floating Action Button | Atoms | Actions | `Button` | Primitive |
+| Floating Action Button | Atoms | Actions | `IconButton` | Primitive |
 | Floating Action Button with Text | Atoms | Actions | `Button` | Primitive |
 | Form Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Form Dropdown Option | Inputs & Forms | Data Entry | `Select` | Primitive |
@@ -213,7 +217,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Multi-Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
 | Next-Previous Buttons | Atoms | Selection & Controls | `Pagination` | Primitive |
 | Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
-| Play Button | Atoms | Actions | `Button` | Primitive |
+| Play Button | Atoms | Actions | `IconButton` | Primitive |
 | Price and Label | Other | Data Display | `PriceLabel` | Primitive |
 | Product Content | Molecules | Product | `ProductDetail` | Composition |
 | Product Grid Card | Molecules | Product | `ProductCard` | Composition |
@@ -239,8 +243,8 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Switch | Inputs & Forms | Data Entry | `Toggle` | Primitive |
 | Tabbed Selector | Atoms | Navigation | `Tabs` | Primitive |
 | Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
-| Text Button—Icon Left | Atoms | Actions | `Button` | Primitive |
-| Text Button—Icon Right | Atoms | Actions | `Button` | Primitive |
+| Text Button—Icon Left | Atoms | Actions | `LinkButton` | Primitive |
+| Text Button—Icon Right | Atoms | Actions | `LinkButton` | Primitive |
 | Text Input (name, two fields) | Inputs & Forms | Data Entry | `TextInputGroup` | Primitive |
 | Text Input (single line) | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Date | Inputs & Forms | Data Entry | `Input` | Primitive |

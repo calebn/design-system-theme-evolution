@@ -1,16 +1,38 @@
 # 07 · Build Priority Dashboard
 
-> Scored by **code component** (not Figma frame). Multiple Figma frames may contribute to one code component.
-> Score = max across constituent Figma frames. **Scoring:** Section (atoms=3, inputs=2, molecules=1) + Variant quality (2) + State coverage (2) + Responsive (1) + Dependency weight (2). Max = 10.
+> Scored by **code component** (not Figma frame). The "By Code Component" table uses the **max** score across all constituent Figma frames.
+
+## Scoring Methodology
+
+| Dimension | Max Points | How Points Are Earned |
+|-----------|------------|----------------------|
+| **Section** | 3 | Atoms = 3 · Inputs & Forms = 2 · Molecules = 1 · Other = 0 |
+| **Variant Quality** | 2 | 2 if no auto-generated/inconsistent state names · −1 per issue (min 0) |
+| **State Coverage** | 2 | 2 if Default + Hover + Disabled all present · 1 if any states exist · 0 otherwise |
+| **Responsive** | 1 | 1 if Figma frame has Desktop/Tablet/Mobile variants |
+| **Dependency Weight** | 2 | 2 if 3+ components depend on this · 1 if 1–2 · 0 if none |
+| **Total** | **10** | |
+
+**Recommendation thresholds:**
+
+| Score | Label | Meaning |
+|-------|-------|---------|
+| 7–10 | ✅ Build first | High-value, well-specified, many dependents |
+| 5–6 | ✅ Ready to build | Well-specified, few or no dependents |
+| 3–4 | 🔄 Build with minor caveats | Missing some Figma specs; build is unblocked but gaps exist |
+| 0–2 | ⏳ Address coverage gaps first | Significant Figma gaps; resolve before building |
+| any | ⚠️ Needs Figma cleanup | Auto-generated state names present — resolve regardless of score |
 
 ## By Code Component
 
 | Code Component | Tier | Category | Figma Frames | Dep | **Score** | Recommendation |
 |----------------|------|----------|-------------|-----|-----------|----------------|
-| `Button` | Primitive | Actions | 9 ⚠️ | 18 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
+| `Button` | Primitive | Actions | 4 ⚠️ | 13 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
+| `LinkButton` | Primitive | Actions | 2 ⚠️ | 3 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `Stepper` | Primitive | Selection & Controls | 3 | 5 | **9** | ✅ Build first — high dependency weight |
 | `Accordion` | Composition | Content Layout | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `ButtonGroup` | Composition | Actions | 2 | 1 | **8** | ✅ Build first — high dependency weight |
+| `IconButton` | Primitive | Actions | 3 ⚠️ | 2 | **8** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `Pagination` | Primitive | Selection & Controls | 4 | 5 | **8** | ✅ Build first — high dependency weight |
 | `StarRating` | Primitive | Data Display | 2 | 4 | **8** | ✅ Build first — high dependency weight |
 | `SubnavDropdown` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
@@ -28,17 +50,17 @@
 | `Slider` | Primitive | Data Entry | 1 | 0 | **6** | ✅ Ready to build |
 | `BasicForm` | Builder Block | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
 | `TextInputGroup` | Primitive | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
-| `Badge` | Primitive | Data Display | 2 | 3 | **4** | 🔄 Build with minor caveats |
-| `PriceLabel` | Primitive | Data Display | 1 | 3 | **4** | 🔄 Build with minor caveats |
-| `ProductCard` | Composition | Product | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| `ProductDetail` | Composition | Product | 2 | 0 | **4** | 🔄 Build with minor caveats |
-| `SectionLayout` | Builder Block | Content Layout | 4 | 0 | **4** | 🔄 Build with minor caveats |
-| `Toggle` | Primitive | Selection & Controls | 2 ⚠️ | 0 | **4** | 🔄 Build with minor caveats (some frames need Figma cleanup) |
-| `CtaList` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats |
-| `FreeTrialCard` | Composition | Product | 1 | 0 | **3** | 🔄 Build with minor caveats |
-| `ProductCarousel` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats |
-| `Textarea` | Primitive | Data Entry | 1 ⚠️ | 0 | **3** | ⚠️ Needs Figma cleanup (inconsistent state names) |
-| `Toast` | Primitive | Feedback & Overlays | 1 | 0 | **3** | 🔄 Build with minor caveats |
+| `Badge` | Primitive | Data Display | 2 | 3 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
+| `PriceLabel` | Primitive | Data Display | 1 | 3 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
+| `ProductCard` | Composition | Product | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| `ProductDetail` | Composition | Product | 2 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| `SectionLayout` | Builder Block | Content Layout | 4 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| `Toggle` | Primitive | Selection & Controls | 2 ⚠️ | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) (some frames need Figma cleanup) |
+| `CtaList` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| `FreeTrialCard` | Composition | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| `ProductCarousel` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| `Textarea` | Primitive | Data Entry | 1 ⚠️ | 0 | **3** | ⚠️ Needs Figma cleanup (2 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
+| `Toast` | Primitive | Feedback & Overlays | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 
 ## By Figma Frame (full detail)
 
@@ -48,8 +70,8 @@
 |-------------|----------------|---------|-----|-----|-------|------|-----|-----------|----------------|
 | Button | `Button` | Atoms | 3 | 2 | 2 | 0 | 2 (13) | **9** | ✅ Build first — high dependency weight |
 | Stepper CTA | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 2 (3) | **9** | ✅ Build first — high dependency weight |
-| Text Button—Icon Right | `Button` | Atoms | 3 | 2 | 2 | 0 | 2 (3) | **9** | ✅ Build first — high dependency weight |
-| Close Button | `Button` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
+| Text Button—Icon Right | `LinkButton` | Atoms | 3 | 2 | 2 | 0 | 2 (3) | **9** | ✅ Build first — high dependency weight |
+| Close Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
 | CTA Row | `ButtonGroup` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Expand-Collapse Button | `Accordion` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Increase-Decrease Buttons | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
@@ -62,7 +84,7 @@
 | Breadcrumbs | `Breadcrumbs` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Button Menu | `Menu` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Dropdown | `Select` | Inputs & Forms | 2 | 2 | 2 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
-| Floating Action Button | `Button` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
+| Floating Action Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Floating Action Button with Text | `Button` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Modal Button Group | `Modal` | Atoms | 3 | 2 | 1 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
 | Reviews | `StarRating` | Atoms | 3 | 2 | 0 | 0 | 2 (3) | **7** | ✅ Build first — high dependency weight |
@@ -79,13 +101,13 @@
 | Search Field | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Slider | `Slider` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Stateful Action Button | `Button` | Atoms | 3 | 2 | 1 | 0 | 0 | **6** | ✅ Ready to build |
-| Text Button—Icon Left | `Button` | Atoms | 3 | 1 | 2 | 0 | 0 | **6** | ⚠️ Needs Figma cleanup (inconsistent state names) |
+| Text Button—Icon Left | `LinkButton` | Atoms | 3 | 1 | 2 | 0 | 0 | **6** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; no responsive variants; no downstream dependents) |
 | Text Input—Date | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Text Input—Password | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Toggle Switch (text) | `SelectionGroup` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Upload Image Area | `FileUpload` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Basic Form | `BasicForm` | Molecules | 1 | 2 | 1 | 1 | 0 | **5** | ✅ Ready to build |
-| Category Button | `Button` | Atoms | 3 | 1 | 1 | 0 | 0 | **5** | ⚠️ Needs Figma cleanup (inconsistent state names) |
+| Category Button | `Button` | Atoms | 3 | 1 | 1 | 0 | 0 | **5** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
 | Modal Dialog | `Modal` | Molecules | 1 | 2 | 1 | 1 | 0 | **5** | ✅ Ready to build |
 | Multi-Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Single Select Box | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
@@ -93,30 +115,30 @@
 | Text Input (name, two fields) | `TextInputGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Text Toggle Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Text Toggle Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
-| Badges and Tags | `Badge` | Other | 0 | 2 | 0 | 0 | 2 (3) | **4** | 🔄 Build with minor caveats |
-| Button group | `ButtonGroup` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Play Button | `Button` | Atoms | 3 | 0 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (inconsistent state names) |
-| Price and Label | `PriceLabel` | Other | 0 | 2 | 0 | 0 | 2 (3) | **4** | 🔄 Build with minor caveats |
-| Product Grid Card | `ProductCard` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Product Lineup—Single | `ProductDetail` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Section Headline | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Section Headline with CTA | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Slider page selector | `Pagination` | Molecules | 1 | 2 | 0 | 0 | 1 (1) | **4** | 🔄 Build with minor caveats |
-| Subnav Dropdown | `SubnavDropdown` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Switch | `Toggle` | Inputs & Forms | 2 | 2 | 0 | 0 | 0 | **4** | 🔄 Build with minor caveats |
-| Text Section with Button Group | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats |
-| Toggle with Text | `Toggle` | Inputs & Forms | 2 | 1 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (inconsistent state names) |
-| Carousel Product | `ProductCarousel` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Free Trial Card | `FreeTrialCard` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Multi-CTA List | `CtaList` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Product Content | `ProductDetail` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Text Input—Multiline | `Textarea` | Inputs & Forms | 2 | 0 | 1 | 0 | 0 | **3** | ⚠️ Needs Figma cleanup (inconsistent state names) |
-| Text Section | `SectionLayout` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Toast Bar | `Toast` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats |
-| Image Ratios | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first |
-| List | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first |
-| Product Images | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first |
-| Sale Percentage | `Badge` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first |
+| Badges and Tags | `Badge` | Other | 0 | 2 | 0 | 0 | 2 (3) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
+| Button group | `ButtonGroup` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Play Button | `IconButton` | Atoms | 3 | 0 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (3 inconsistent state name(s) in Figma; missing state(s): Hover, Disabled; no responsive variants; no downstream dependents) |
+| Price and Label | `PriceLabel` | Other | 0 | 2 | 0 | 0 | 2 (3) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
+| Product Grid Card | `ProductCard` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Product Lineup—Single | `ProductDetail` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Section Headline | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Section Headline with CTA | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Slider page selector | `Pagination` | Molecules | 1 | 2 | 0 | 0 | 1 (1) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
+| Subnav Dropdown | `SubnavDropdown` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Switch | `Toggle` | Inputs & Forms | 2 | 2 | 0 | 0 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Text Section with Button Group | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
+| Toggle with Text | `Toggle` | Inputs & Forms | 2 | 1 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
+| Carousel Product | `ProductCarousel` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Free Trial Card | `FreeTrialCard` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Multi-CTA List | `CtaList` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Product Content | `ProductDetail` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Text Input—Multiline | `Textarea` | Inputs & Forms | 2 | 0 | 1 | 0 | 0 | **3** | ⚠️ Needs Figma cleanup (2 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
+| Text Section | `SectionLayout` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Toast Bar | `Toast` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Image Ratios | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first (no state variants in Figma; no responsive variants; no downstream dependents) |
+| List | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Product Images | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Sale Percentage | `Badge` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first (no state variants in Figma; no responsive variants; no downstream dependents) |
 
 ## Summary
 

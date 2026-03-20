@@ -53,6 +53,7 @@
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
 | 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
 | 12 | [Component Surface Area](./12-component-surface-area.md) | Proposed prop API, CSS custom properties, slots, and accessibility requirements per component |
+| 13 | [Design Token Pipeline](./13-token-pipeline.md) | End-to-end pipeline specification: Figma → DTCG → CSS vars → Tailwind → CommerceWeb, with inter-stage contracts, tool comparisons, breaking-change detection, and implementation phases |
 
 ## Data Files
 

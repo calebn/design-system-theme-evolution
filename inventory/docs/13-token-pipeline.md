@@ -35,12 +35,16 @@ flowchart TD
     TWC["JS config objects — colors, spacing, shadows…"]
   end
 
-  subgraph s56 [Stages 5-6 · Consumers]
+  subgraph s5 [Stage 5 · Component Library]
     CC["@faithlife/commerce-components"]
-    CW[CommerceWeb]
-    CWNJ[CommerceWebNextJs]
-    Native["Future consumers — iOS, Android, etc."]
   end
+
+  subgraph s6 [Stage 6 · Final Consumers]
+    CW[CommerceWeb]
+    Builder[Builder.io]
+  end
+
+  Native["Future consumers — iOS, Android, etc."]
 
   FigmaExport --> DTCG
   DTCG --> Transform
@@ -50,7 +54,8 @@ flowchart TD
   TW --> TWC
   TWC --> CC
   TWC --> CW
-  TWC --> CWNJ
+  CC --> CW
+  CC --> Builder
 ```
 
 Dashed arrows represent optional fan-out paths that bypass one or more intermediate stages. Any stage reading only its declared contract input remains unaffected when the implementation behind an upstream stage changes.
@@ -119,7 +124,7 @@ Each stage that can introduce breaking changes runs an automated diff against it
 | Location | `@faithlife/commerce-theme/tailwind-helper` entry point |
 | Shape | `tailwindColorConfig`, `tailwindSpacingConfig`, `tailwindFontSizeConfig`, `tailwindShadowConfig`, `tailwindTransitionDurationConfig`, `tailwindSafelistConfig`, `tailwindExtendedConfig` |
 | Versioning | semver via `@faithlife/commerce-theme` — removing an export or changing a key is a major bump |
-| Consumers | CommerceWeb `tailwind.config.js`, CommerceWebNextJs `tailwind.config.js`, CommerceComponents `tailwind.config.js` |
+| Consumers | CommerceWeb `tailwind.config.js`, CommerceComponents `tailwind.config.js` |
 
 ---
 
@@ -193,7 +198,7 @@ Any tool or script that reads Figma variables (via REST API, plugin API, or MCP)
 | Dedicated `design-tokens` repo | Clean separation; independent release cycle; non-JS consumers can depend on it without pulling in JS tooling | Another repo to manage; Figma export PRs and theme transform PRs are decoupled |
 | `tokens/` directory inside `CommerceComponents` | Co-located with Stage 3 transform code; single PR updates tokens and generated output together | Less separation; `@faithlife/commerce-theme` release cycle entangled with token changes |
 
-**Recommendation**: Dedicated `design-tokens` repository. The token package is a dependency of multiple downstream consumers (`CommerceWeb`, `CommerceWebNextJs`, `CommerceComponents`). Keeping it independent gives each consumer control over when to adopt a new token version, and makes the contract boundary explicit.
+**Recommendation**: Dedicated `design-tokens` repository. The token package is a dependency of multiple downstream consumers (`CommerceWeb`, `CommerceComponents`). Keeping it independent gives each consumer control over when to adopt a new token version, and makes the contract boundary explicit.
 
 ### Versioning
 
@@ -265,7 +270,7 @@ Future
   → theme-variables.css (same --theme-* naming, same ~565 properties)
 ```
 
-The critical constraint is **naming stability**: all downstream consumers (CommerceWeb, CommerceWebNextJs, Builder.io design tokens registration, component CSS) depend on `--theme-colors-primary-c300-hex`, `--theme-spacing-sp16`, etc. The transform configuration must map DTCG token paths to the existing `--theme-*` scheme rather than generating new names.
+The critical constraint is **naming stability**: all downstream consumers (CommerceWeb, CommerceComponents, Builder.io design tokens registration) depend on `--theme-colors-primary-c300-hex`, `--theme-spacing-sp16`, etc. The transform configuration must map DTCG token paths to the existing `--theme-*` scheme rather than generating new names.
 
 ### Tool options
 
@@ -345,7 +350,7 @@ Any tool that reads DTCG JSON and writes a CSS file containing a `:root {}` bloc
 `tailwind-helper.ts` in `@faithlife/commerce-theme` reads the TypeScript theme object (which mirrors the CSS variable values) and exports Tailwind-compatible config maps:
 
 ```ts
-// tailwind.config.js in CommerceWeb, CommerceWebNextJs, CommerceComponents
+// tailwind.config.js in CommerceWeb and CommerceComponents
 import { tailwindExtendedConfig, tailwindSafelistConfig } from '@faithlife/commerce-theme/tailwind-helper';
 
 export default {
@@ -385,10 +390,10 @@ Any module that reads CSS custom property values and exports named Tailwind conf
 
 ## Stage 5 · Component Library (CommerceComponents)
 
-**Responsibility**: Provide tested, typed React components that consume Tailwind utilities backed by Contract C. Publish as `@faithlife/commerce-components` for use by all application consumers.
+**Responsibility**: Provide tested, typed React components that consume Tailwind utilities backed by Contract C. Publish as `@faithlife/commerce-components` for use by CommerceWeb and Builder.io.
 
 **Contract input**: Contract C (via `@faithlife/commerce-theme`)
-**Contract output**: `@faithlife/commerce-components` npm package
+**Contract output**: `@faithlife/commerce-components` npm package (consumed by CommerceWeb directly and by Builder.io for custom components)
 
 ### Current CI (already in place)
 

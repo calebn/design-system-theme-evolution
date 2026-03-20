@@ -1,0 +1,58 @@
+{
+  "component-button-padding-horizontal": {
+    "$value": "{spacing-in-component-cta-button-cta-text-link-horizontal}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/CTA Button - CTA text link | Horizontal",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/CTA Button - CTA text link | Horizontal"
+  },
+  "component-accordion-padding-vertical": {
+    "$value": "{spacing-in-component-accordion-padding-vertical}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/Accordion Padding | Vertical",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/Accordion Padding | Vertical"
+  },
+  "component-text-image-gap": {
+    "$value": "{spacing-in-component-text-image}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/Text - Image",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/Text - Image"
+  },
+  "component-cta-disclaimer-gap": {
+    "$value": "{spacing-in-component-cta-disclaimer}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/CTA - Disclaimer",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/CTA - Disclaimer"
+  },
+  "component-button-padding-vertical": {
+    "$value": "{spacing-in-component-cta-button-cta-button-vertical}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/CTA Button - CTA Button | Vertical",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/CTA Button - CTA Button | Vertical"
+  },
+  "component-body-cta-gap": {
+    "$value": "{spacing-in-component-body-cta}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/Body CTA",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/Body CTA"
+  },
+  "component-headline-note-gap": {
+    "$value": "{spacing-in-component-headline-note}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/Headline - Note",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/Headline - Note"
+  },
+  "component-kicker-headline-gap": {
+    "$value": "{spacing-in-component-kicker-headline}",
+    "$type": "dimension",
+    "$description": "Component-scoped: Spacing | In Component/Kicker - Headline",
+    "tier": "component",
+    "figmaKey": "Spacing | In Component/Kicker - Headline"
+  }
+}

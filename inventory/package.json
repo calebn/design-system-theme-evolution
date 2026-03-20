@@ -1,0 +1,18 @@
+{
+  "name": "design-system-inventory",
+  "version": "1.0.0",
+  "description": "Figma-to-code design system inventory pipeline",
+  "type": "module",
+  "scripts": {
+    "build": "tsx build-inventory.ts",
+    "parse": "tsx src/parse-figma.ts",
+    "dtcg": "tsx src/map-dtcg.ts",
+    "gap": "tsx src/gap-analysis.ts",
+    "docs": "tsx src/generate-docs.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "style-dictionary": "^4.3.3"
+  }
+}

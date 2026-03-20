@@ -1,0 +1,409 @@
+{
+  "colors": {
+    "matched": [
+      {
+        "figmaKey": "Primary/Subscription Blue",
+        "figmaValue": "#00042f",
+        "codeKey": "c500",
+        "codeValue": "#00042f"
+      },
+      {
+        "figmaKey": "white",
+        "figmaValue": "#ffffff",
+        "codeKey": "pureWhite",
+        "codeValue": "#ffffff"
+      },
+      {
+        "figmaKey": "Primary/Logos Blue",
+        "figmaValue": "#1e6afe",
+        "codeKey": "c300",
+        "codeValue": "#1e6afe"
+      },
+      {
+        "figmaKey": "Secondary/Alt Blue",
+        "figmaValue": "#4885fe",
+        "codeKey": "c200",
+        "codeValue": "#4885fe"
+      },
+      {
+        "figmaKey": "Secondary/Deep Blue 2",
+        "figmaValue": "#040f8b",
+        "codeKey": "c400",
+        "codeValue": "#040f8b"
+      },
+      {
+        "figmaKey": "Primary/Deep Blue",
+        "figmaValue": "#030b60",
+        "codeKey": "c400",
+        "codeValue": "#030b60"
+      },
+      {
+        "figmaKey": "Bright Colors/Bright Yellow",
+        "figmaValue": "#fff369",
+        "codeKey": "vivid",
+        "codeValue": "#fff369"
+      },
+      {
+        "figmaKey": "Bright Colors/Bright Red",
+        "figmaValue": "#ff6d6d",
+        "codeKey": "vivid",
+        "codeValue": "#ff6d6d"
+      },
+      {
+        "figmaKey": "Secondary/Very Deep Gray",
+        "figmaValue": "#303030",
+        "codeKey": "c300",
+        "codeValue": "#303030"
+      }
+    ],
+    "figmaOnly": [
+      {
+        "figmaKey": "Secondary/Light Blue 3",
+        "figmaValue": "#f5fbff"
+      },
+      {
+        "figmaKey": "Secondary/Light Blue 2",
+        "figmaValue": "#e9f5ff"
+      },
+      {
+        "figmaKey": "Deep Colors/Green",
+        "figmaValue": "#5ba224"
+      },
+      {
+        "figmaKey": "Deep Colors/Yellow",
+        "figmaValue": "#dba910"
+      },
+      {
+        "figmaKey": "Deep Colors/Red",
+        "figmaValue": "#cc3333"
+      },
+      {
+        "figmaKey": "Secondary/Light Blue 1",
+        "figmaValue": "#c1e4ff"
+      }
+    ],
+    "codeOnly": [
+      {
+        "codeKey": "c150",
+        "codeValue": "#9bcdff"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#3640b8"
+      },
+      {
+        "codeKey": "vivid",
+        "codeValue": "#54eb54"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#efdf79"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#ad4100"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#da6969"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#b31e31"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#a4619c"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#502d4c"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#88ce88"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#227421"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#f5f5f5"
+      },
+      {
+        "codeKey": "c300",
+        "codeValue": "#ebebeb"
+      },
+      {
+        "codeKey": "c400",
+        "codeValue": "#dbdbdb"
+      },
+      {
+        "codeKey": "c200",
+        "codeValue": "#3d3d3d"
+      },
+      {
+        "codeKey": "c400",
+        "codeValue": "#1f1d20"
+      },
+      {
+        "codeKey": "pureBlack",
+        "codeValue": "#000000"
+      }
+    ]
+  },
+  "spacing": {
+    "matched": [
+      {
+        "figmaKey": "Spacing | In Component/Kicker - Headline",
+        "figmaValue": "12px",
+        "codeKey": "sp12",
+        "codeValue": "12px"
+      },
+      {
+        "figmaKey": "Spacing | Horizontal/SM",
+        "figmaValue": "8px",
+        "codeKey": "sp8",
+        "codeValue": "8px"
+      },
+      {
+        "figmaKey": "Spacing | In Component/Headline - Note",
+        "figmaValue": "6px",
+        "codeKey": "sp6",
+        "codeValue": "6px"
+      },
+      {
+        "figmaKey": "Padding/SM",
+        "figmaValue": "16px",
+        "codeKey": "sp16",
+        "codeValue": "16px"
+      },
+      {
+        "figmaKey": "Spacing | Horizontal/XL",
+        "figmaValue": "24px",
+        "codeKey": "sp24",
+        "codeValue": "24px"
+      },
+      {
+        "figmaKey": "Spacing | Horizontal/XXL",
+        "figmaValue": "30px",
+        "codeKey": "sp30",
+        "codeValue": "30px"
+      },
+      {
+        "figmaKey": "Vertical/Small",
+        "figmaValue": "48px",
+        "codeKey": "sp48",
+        "codeValue": "48px"
+      },
+      {
+        "figmaKey": "Spacing | Vertical/XS",
+        "figmaValue": "36px",
+        "codeKey": "sp36",
+        "codeValue": "36px"
+      },
+      {
+        "figmaKey": "Padding/XXL",
+        "figmaValue": "60px",
+        "codeKey": "sp60",
+        "codeValue": "60px"
+      }
+    ],
+    "figmaOnly": [
+      {
+        "figmaKey": "Spacing | Horizontal/LG",
+        "figmaValue": "18px"
+      },
+      {
+        "figmaKey": "Padding/LG",
+        "figmaValue": "32px"
+      }
+    ],
+    "codeOnly": [
+      {
+        "codeKey": "sp0",
+        "codeValue": "0px"
+      },
+      {
+        "codeKey": "sp2",
+        "codeValue": "2px"
+      },
+      {
+        "codeKey": "sp4",
+        "codeValue": "4px"
+      },
+      {
+        "codeKey": "sp10",
+        "codeValue": "10px"
+      },
+      {
+        "codeKey": "sp14",
+        "codeValue": "14px"
+      },
+      {
+        "codeKey": "sp20",
+        "codeValue": "20px"
+      },
+      {
+        "codeKey": "sp45",
+        "codeValue": "45px"
+      },
+      {
+        "codeKey": "sp90",
+        "codeValue": "90px"
+      },
+      {
+        "codeKey": "sp120",
+        "codeValue": "120px"
+      },
+      {
+        "codeKey": "sp144",
+        "codeValue": "144px"
+      },
+      {
+        "codeKey": "sp180",
+        "codeValue": "180px"
+      }
+    ]
+  },
+  "typography": {
+    "matched": [
+      {
+        "figmaKey": "Headings/H1 Large",
+        "figmaValue": "120px",
+        "codeKey": "fs120",
+        "codeValue": "120px"
+      },
+      {
+        "figmaKey": "Body/Body Regular",
+        "figmaValue": "18px",
+        "codeKey": "fs18",
+        "codeValue": "18px"
+      },
+      {
+        "figmaKey": "Body/Body Small",
+        "figmaValue": "16px",
+        "codeKey": "fs16",
+        "codeValue": "16px"
+      },
+      {
+        "figmaKey": "Body/Fine Print",
+        "figmaValue": "12px",
+        "codeKey": "fs12",
+        "codeValue": "12px"
+      },
+      {
+        "figmaKey": "UI/3",
+        "figmaValue": "14px",
+        "codeKey": "fs14",
+        "codeValue": "14px"
+      },
+      {
+        "figmaKey": "Body/Body Large",
+        "figmaValue": "24px",
+        "codeKey": "fs24",
+        "codeValue": "24px"
+      }
+    ],
+    "figmaOnly": [],
+    "codeOnly": [
+      {
+        "codeKey": "fs80",
+        "codeValue": "80px"
+      },
+      {
+        "codeKey": "fs66",
+        "codeValue": "66px"
+      },
+      {
+        "codeKey": "fs64",
+        "codeValue": "64px"
+      },
+      {
+        "codeKey": "fs48",
+        "codeValue": "48px"
+      },
+      {
+        "codeKey": "fs40",
+        "codeValue": "40px"
+      },
+      {
+        "codeKey": "fs32",
+        "codeValue": "32px"
+      },
+      {
+        "codeKey": "fs13",
+        "codeValue": "13px"
+      },
+      {
+        "codeKey": "fs10",
+        "codeValue": "10px"
+      },
+      {
+        "codeKey": "fs8",
+        "codeValue": "8px"
+      }
+    ]
+  },
+  "shadows": {
+    "matched": [
+      {
+        "figmaKey": "Shadows/6dp",
+        "figmaValue": "Effect(type: DROP_SHADOW, color: #6E83B733, offset: (0, 3), ...",
+        "codeKey": "dp6",
+        "codeValue": "0px 5px 5px -3px #6e83b733, 0px 3px 14px 2px #6e83b71f, 0px ..."
+      },
+      {
+        "figmaKey": "Shadows/4dp",
+        "figmaValue": "Effect(type: DROP_SHADOW, color: #6E83B733, offset: (0, 2), ...",
+        "codeKey": "dp4",
+        "codeValue": "0px 3px 5px -1px #6e83b733, 0px 1px 18px 0px #6e83b71f, 0px ..."
+      }
+    ],
+    "figmaOnly": [
+      {
+        "figmaKey": "Product Shadows/Large",
+        "figmaValue": "Effect(type: DROP_SHADOW, color: #4556761A, offset: (-36, 0), radius: 24, spread..."
+      },
+      {
+        "figmaKey": "Product Shadows/Small",
+        "figmaValue": "Effect(type: DROP_SHADOW, color: #4556761A, offset: (-18, 0), radius: 24, spread..."
+      }
+    ],
+    "codeOnly": [
+      {
+        "codeKey": "dp1",
+        "codeValue": "0px 1px 3px 0px #6e83b733, 0px 2px 1px -1px #6e83b71f, 0px 1..."
+      },
+      {
+        "codeKey": "dp2",
+        "codeValue": "0px 1px 5px 0px #6e83b733, 0px 3px 1px -2px #6e83b71f, 0px 2..."
+      },
+      {
+        "codeKey": "dp3",
+        "codeValue": "0px 1px 8px 0px #6e83b733, 0px 3px 3px -2px #6e83b71f, 0px 3..."
+      },
+      {
+        "codeKey": "dp8",
+        "codeValue": "0px 5px 6px -3px #6e83b733, 0px 3px 16px 2px #6e83b71f, 0px ..."
+      },
+      {
+        "codeKey": "dp9",
+        "codeValue": "0px 7px 8px -4px #6e83b733, 0px 5px 22px 4px #6e83b71f, 0px ..."
+      },
+      {
+        "codeKey": "dp12",
+        "codeValue": "0px 7px 8px -4px #6e83b733, 0px 5px 22px 4px #6e83b71f, 0px ..."
+      },
+      {
+        "codeKey": "dp16",
+        "codeValue": "0px 8px 10px -5px #6e83b733, 0px 6px 30px 5px #6e83b71f, 0px..."
+      },
+      {
+        "codeKey": "dp24",
+        "codeValue": "0px 8px 10px -5px #6e83b733, 0px 6px 30px 5px #6e83b71f, 0px..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,390 @@
+[
+  {
+    "axis": "State",
+    "values": [
+      "Active",
+      "Checkbox",
+      "Click",
+      "Default",
+      "Desktop",
+      "Disable",
+      "Disabled",
+      "Error",
+      "Expanded",
+      "Filled",
+      "Filled—Hide",
+      "Filled—Show",
+      "First Page",
+      "Focu",
+      "Focus",
+      "Focused",
+      "Half-Filled",
+      "Hover",
+      "Last Page",
+      "Loading",
+      "Maxium",
+      "Minimum",
+      "Mobile",
+      "Radio",
+      "Selected",
+      "State2",
+      "State3",
+      "State4",
+      "State6",
+      "State8",
+      "Success",
+      "Success no Button",
+      "Tablet",
+      "Variant4"
+    ],
+    "components": [
+      "Accordion Section",
+      "Basic Form",
+      "Breadcrumbs",
+      "Button",
+      "Button Menu",
+      "CTA Row",
+      "Category Button",
+      "Checkbox",
+      "Close Button",
+      "Dropdown",
+      "Email Capture",
+      "Expand-Collapse Button",
+      "Floating Action Button",
+      "Floating Action Button with Text",
+      "Form Dropdown",
+      "Form Dropdown Option",
+      "Increase-Decrease Buttons",
+      "Modal Button Group",
+      "Modal Dialog",
+      "Multi-Select with Text",
+      "Multi-Selector",
+      "Next-Previous Buttons",
+      "Play Button",
+      "Radio Button",
+      "Search Field",
+      "Simple Menu",
+      "Single Select Box",
+      "Slider",
+      "Slider Scroll Bar",
+      "Star",
+      "Stateful Action Button",
+      "Stepper CTA",
+      "Stepper Control",
+      "Subnav Dropdown Options",
+      "Tabbed Selector Button",
+      "Text Button—Icon Left",
+      "Text Button—Icon Right",
+      "Text Input (name, two fields)",
+      "Text Input (single line)",
+      "Text Input—Date",
+      "Text Input—Multiline",
+      "Text Input—Password",
+      "Toggle Switch (text)"
+    ]
+  },
+  {
+    "axis": "Size",
+    "values": [
+      "2",
+      "3",
+      "Condensed",
+      "Default",
+      "Desktop",
+      "Large",
+      "Medium",
+      "Mobile",
+      "Mobile-CTA",
+      "Small",
+      "Tablet",
+      "X-Large"
+    ],
+    "components": [
+      "Accordion Section",
+      "Badges and Tags",
+      "Basic Form",
+      "Button",
+      "Button Menu",
+      "Button group",
+      "Close Button",
+      "Expand-Collapse Button",
+      "Floating Action Button",
+      "Floating Action Button with Text",
+      "Increase-Decrease Buttons",
+      "Modal Dialog",
+      "Multi-CTA List",
+      "Multi-Select with Text",
+      "Next-Previous Buttons",
+      "Next-Previous Selector",
+      "Product Grid Card",
+      "Product Lineup—Single",
+      "Reviews",
+      "Sale Percentage",
+      "Search Field",
+      "Section Headline",
+      "Section Headline with CTA",
+      "Slider page selector",
+      "Star",
+      "Stepper Control",
+      "Subnav Dropdown",
+      "Tabbed Selector Button",
+      "Text Button—Icon Left",
+      "Text Button—Icon Right",
+      "Text Section with Button Group",
+      "Toggle Switch (text)"
+    ]
+  },
+  {
+    "axis": "Style",
+    "values": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "Checkbox",
+      "Dark",
+      "Default",
+      "Horizontal",
+      "Icon",
+      "Large",
+      "Light",
+      "Medium",
+      "Multi-step",
+      "Numbered",
+      "Outline",
+      "Overlay",
+      "Page Number",
+      "Paged",
+      "Radio",
+      "Sale",
+      "Sale-Timer",
+      "Sale—Vertical",
+      "Small",
+      "Solid",
+      "Solid—Dark",
+      "Solid—Light",
+      "Subscription",
+      "Subscription—Vertical",
+      "Transparent",
+      "Value",
+      "Value—Vertical",
+      "Vertical"
+    ],
+    "components": [
+      "Badges and Tags",
+      "Button",
+      "Carousel Product",
+      "Close Button",
+      "Floating Action Button",
+      "Free Trial Card",
+      "List",
+      "Modal Button Group",
+      "Modal Dialog",
+      "Multi-Select with Text",
+      "Next-Previous Buttons",
+      "Next-Previous Selector",
+      "Price and Label",
+      "Product Content",
+      "Product Grid Card",
+      "Sale Percentage",
+      "Slider page selector",
+      "Text Input (name, two fields)",
+      "Text Input (single line)",
+      "Toast Bar"
+    ]
+  },
+  {
+    "axis": "Background",
+    "values": [
+      "Dark",
+      "Dark and Logos Blue",
+      "Light",
+      "Logos Blue"
+    ],
+    "components": [
+      "Button",
+      "Close Button",
+      "Expand-Collapse Button",
+      "Increase-Decrease Buttons",
+      "Next-Previous Buttons",
+      "Switch",
+      "Text Button—Icon Left",
+      "Text Button—Icon Right"
+    ]
+  },
+  {
+    "axis": "Type",
+    "values": [
+      "Add (Generic)",
+      "Attention",
+      "CTA (Default)",
+      "Default",
+      "Error",
+      "External Link",
+      "Header-Middle",
+      "Header-Top",
+      "Info",
+      "Primary-Secondary",
+      "Primary-Tertiary",
+      "Success"
+    ],
+    "components": [
+      "Button",
+      "Button group",
+      "Subnav Dropdown Options",
+      "Text Button—Icon Left",
+      "Text Button—Icon Right",
+      "Toast Bar"
+    ]
+  },
+  {
+    "axis": "Property 1",
+    "values": [
+      "Default",
+      "Disabled",
+      "Error",
+      "Focus",
+      "Hover",
+      "Selected",
+      "Variant6"
+    ],
+    "components": [
+      "Text Toggle Selector",
+      "Toggle with Text",
+      "Upload Image Area"
+    ]
+  },
+  {
+    "axis": "Selection",
+    "values": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "Option 1",
+      "Option 2"
+    ],
+    "components": [
+      "Tabbed Selector",
+      "Toggle Switch (text)"
+    ]
+  },
+  {
+    "axis": "Aspect Ratio",
+    "values": [
+      "1.2:1",
+      "1.33:1",
+      "1.4:1",
+      "1.5:1",
+      "1.6:1",
+      "1.8:1",
+      "16x9",
+      "1:1",
+      "1x1",
+      "2_5x1",
+      "2x1",
+      "3x2",
+      "4x3",
+      "4x5",
+      "5x4"
+    ],
+    "components": [
+      "Image Ratios",
+      "Product Images"
+    ]
+  },
+  {
+    "axis": "Direction",
+    "values": [
+      "Next",
+      "Previous"
+    ],
+    "components": [
+      "Next-Previous Buttons"
+    ]
+  },
+  {
+    "axis": "Change",
+    "values": [
+      "Decrease",
+      "Increase"
+    ],
+    "components": [
+      "Increase-Decrease Buttons"
+    ]
+  },
+  {
+    "axis": "Toggle",
+    "values": [
+      "Collapse",
+      "Expand"
+    ],
+    "components": [
+      "Expand-Collapse Button"
+    ]
+  },
+  {
+    "axis": "Stage",
+    "values": [
+      "Default",
+      "Quantity",
+      "Selected"
+    ],
+    "components": [
+      "Stepper CTA"
+    ]
+  },
+  {
+    "axis": "Rating",
+    "values": [
+      ".5",
+      "0",
+      "1",
+      "1.5",
+      "2",
+      "2.5",
+      "3",
+      "3.5",
+      "4",
+      "4.5",
+      "5"
+    ],
+    "components": [
+      "Reviews"
+    ]
+  },
+  {
+    "axis": "Headline Size",
+    "values": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "components": [
+      "Text Section"
+    ]
+  },
+  {
+    "axis": "Background Color",
+    "values": [
+      "Dark",
+      "Light"
+    ],
+    "components": [
+      "Basic Form"
+    ]
+  },
+  {
+    "axis": "On-Off",
+    "values": [
+      "Off",
+      "On"
+    ],
+    "components": [
+      "Switch"
+    ]
+  }
+]

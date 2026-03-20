@@ -1,0 +1,660 @@
+{
+  "primary-subscription-blue": {
+    "$value": "#00042f",
+    "$type": "color",
+    "$description": "Figma: Primary/Subscription Blue",
+    "tier": "primitive",
+    "figmaKey": "Primary/Subscription Blue"
+  },
+  "secondary-white": {
+    "$value": "#ffffff",
+    "$type": "color",
+    "$description": "Figma: Secondary/White",
+    "tier": "primitive",
+    "figmaKey": "Secondary/White"
+  },
+  "primary-logos-blue": {
+    "$value": "#1e6afe",
+    "$type": "color",
+    "$description": "Figma: Primary/Logos Blue",
+    "tier": "primitive",
+    "figmaKey": "Primary/Logos Blue"
+  },
+  "secondary-light-blue-3": {
+    "$value": "#f5fbff",
+    "$type": "color",
+    "$description": "Figma: Secondary/Light Blue 3",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Light Blue 3"
+  },
+  "secondary-alt-blue": {
+    "$value": "#4885fe",
+    "$type": "color",
+    "$description": "Figma: Secondary/Alt Blue",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Alt Blue"
+  },
+  "secondary-light-blue-2": {
+    "$value": "#e9f5ff",
+    "$type": "color",
+    "$description": "Figma: Secondary/Light Blue 2",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Light Blue 2"
+  },
+  "secondary-deep-blue-2": {
+    "$value": "#040f8b",
+    "$type": "color",
+    "$description": "Figma: Secondary/Deep Blue 2",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Deep Blue 2"
+  },
+  "primary-deep-blue": {
+    "$value": "#030b60",
+    "$type": "color",
+    "$description": "Figma: Primary/Deep Blue",
+    "tier": "primitive",
+    "figmaKey": "Primary/Deep Blue"
+  },
+  "deep-colors-green": {
+    "$value": "#5ba224",
+    "$type": "color",
+    "$description": "Figma: Deep Colors/Green",
+    "tier": "primitive",
+    "figmaKey": "Deep Colors/Green"
+  },
+  "bright-colors-bright-yellow": {
+    "$value": "#fff369",
+    "$type": "color",
+    "$description": "Figma: Bright Colors/Bright Yellow",
+    "tier": "primitive",
+    "figmaKey": "Bright Colors/Bright Yellow"
+  },
+  "bright-colors-bright-red": {
+    "$value": "#ff6d6d",
+    "$type": "color",
+    "$description": "Figma: Bright Colors/Bright Red",
+    "tier": "primitive",
+    "figmaKey": "Bright Colors/Bright Red"
+  },
+  "deep-colors-yellow": {
+    "$value": "#dba910",
+    "$type": "color",
+    "$description": "Figma: Deep Colors/Yellow",
+    "tier": "primitive",
+    "figmaKey": "Deep Colors/Yellow"
+  },
+  "deep-colors-red": {
+    "$value": "#cc3333",
+    "$type": "color",
+    "$description": "Figma: Deep Colors/Red",
+    "tier": "primitive",
+    "figmaKey": "Deep Colors/Red"
+  },
+  "white": {
+    "$value": "#ffffff",
+    "$type": "color",
+    "$description": "Figma: white",
+    "tier": "primitive",
+    "figmaKey": "white"
+  },
+  "secondary-light-blue-1": {
+    "$value": "#c1e4ff",
+    "$type": "color",
+    "$description": "Figma: Secondary/Light Blue 1",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Light Blue 1"
+  },
+  "secondary-very-deep-gray": {
+    "$value": "#303030",
+    "$type": "color",
+    "$description": "Figma: Secondary/Very Deep Gray",
+    "tier": "primitive",
+    "figmaKey": "Secondary/Very Deep Gray"
+  },
+  "spacing-horizontal-md": {
+    "$value": "12px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/MD",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/MD"
+  },
+  "spacing-horizontal-sm": {
+    "$value": "8px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/SM",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/SM"
+  },
+  "spacing-horizontal-lg": {
+    "$value": "18px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/LG",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/LG"
+  },
+  "spacing-horizontal-xs": {
+    "$value": "6px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/XS",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/XS"
+  },
+  "spacing-in-component-cta-button-cta-button-horizontal": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/CTA Button - CTA Button | Horizontal",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/CTA Button - CTA Button | Horizontal"
+  },
+  "padding-md": {
+    "$value": "24px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/MD",
+    "tier": "primitive",
+    "figmaKey": "Padding/MD"
+  },
+  "spacing-horizontal-xxl": {
+    "$value": "30px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/XXL",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/XXL"
+  },
+  "spacing-in-component-accordion-padding-vertical": {
+    "$value": "24px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/Accordion Padding | Vertical",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/Accordion Padding | Vertical"
+  },
+  "spacing-vertical-xxs": {
+    "$value": "24px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Vertical/XXS",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Vertical/XXS"
+  },
+  "spacing-in-component-text-image": {
+    "$value": "48px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/Text - Image",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/Text - Image"
+  },
+  "padding-xl": {
+    "$value": "48px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/XL",
+    "tier": "primitive",
+    "figmaKey": "Padding/XL"
+  },
+  "padding-xs": {
+    "$value": "12px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/XS",
+    "tier": "primitive",
+    "figmaKey": "Padding/XS"
+  },
+  "spacing-in-component-cta-disclaimer": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/CTA - Disclaimer",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/CTA - Disclaimer"
+  },
+  "spacing-in-component-cta-button-cta-text-link-horizontal": {
+    "$value": "32px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/CTA Button - CTA text link | Horizontal",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/CTA Button - CTA text link | Horizontal"
+  },
+  "spacing-in-component-cta-button-cta-button-vertical": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/CTA Button - CTA Button | Vertical",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/CTA Button - CTA Button | Vertical"
+  },
+  "spacing-in-component-body-cta": {
+    "$value": "36px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/Body CTA",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/Body CTA"
+  },
+  "spacing-in-component-headline-note": {
+    "$value": "6px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/Headline - Note",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/Headline - Note"
+  },
+  "padding-lg": {
+    "$value": "32px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/LG",
+    "tier": "primitive",
+    "figmaKey": "Padding/LG"
+  },
+  "spacing-in-component-kicker-headline": {
+    "$value": "12px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | In Component/Kicker - Headline",
+    "tier": "primitive",
+    "figmaKey": "Spacing | In Component/Kicker - Headline"
+  },
+  "spacing-vertical-xs": {
+    "$value": "36px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Vertical/XS",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Vertical/XS"
+  },
+  "spacing-vertical-sm": {
+    "$value": "60px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Vertical/SM",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Vertical/SM"
+  },
+  "padding-xxl": {
+    "$value": "60px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/XXL",
+    "tier": "primitive",
+    "figmaKey": "Padding/XXL"
+  },
+  "padding-sm": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Padding/SM",
+    "tier": "primitive",
+    "figmaKey": "Padding/SM"
+  },
+  "vertical-small": {
+    "$value": "48px",
+    "$type": "dimension",
+    "$description": "Figma: Vertical/Small",
+    "tier": "primitive",
+    "figmaKey": "Vertical/Small"
+  },
+  "spacing-horizontal-xl": {
+    "$value": "24px",
+    "$type": "dimension",
+    "$description": "Figma: Spacing | Horizontal/XL",
+    "tier": "primitive",
+    "figmaKey": "Spacing | Horizontal/XL"
+  },
+  "headings-h1-large": {
+    "$value": "120px",
+    "$type": "dimension",
+    "$description": "Figma: Headings/H1 Large",
+    "tier": "primitive",
+    "figmaKey": "Headings/H1 Large"
+  },
+  "ui-1": {
+    "$value": "18px",
+    "$type": "dimension",
+    "$description": "Figma: UI/1",
+    "tier": "primitive",
+    "figmaKey": "UI/1"
+  },
+  "ui-2": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: UI/2",
+    "tier": "primitive",
+    "figmaKey": "UI/2"
+  },
+  "columns-2": {
+    "$value": "480px",
+    "$type": "dimension",
+    "$description": "Figma: Columns/2",
+    "tier": "primitive",
+    "figmaKey": "Columns/2"
+  },
+  "ui-4": {
+    "$value": "12px",
+    "$type": "dimension",
+    "$description": "Figma: UI/4",
+    "tier": "primitive",
+    "figmaKey": "UI/4"
+  },
+  "body-fine-print": {
+    "$value": "12px",
+    "$type": "dimension",
+    "$description": "Figma: Body/Fine Print",
+    "tier": "primitive",
+    "figmaKey": "Body/Fine Print"
+  },
+  "gutter-large": {
+    "$value": "32px",
+    "$type": "dimension",
+    "$description": "Figma: Gutter/Large",
+    "tier": "primitive",
+    "figmaKey": "Gutter/Large"
+  },
+  "viewport-container-width": {
+    "$value": "1440px",
+    "$type": "dimension",
+    "$description": "Figma: Viewport/Container Width",
+    "tier": "primitive",
+    "figmaKey": "Viewport/Container Width"
+  },
+  "body-body-regular": {
+    "$value": "18px",
+    "$type": "dimension",
+    "$description": "Figma: Body/Body Regular",
+    "tier": "primitive",
+    "figmaKey": "Body/Body Regular"
+  },
+  "ui-3": {
+    "$value": "14px",
+    "$type": "dimension",
+    "$description": "Figma: UI/3",
+    "tier": "primitive",
+    "figmaKey": "UI/3"
+  },
+  "body-body-small": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Body/Body Small",
+    "tier": "primitive",
+    "figmaKey": "Body/Body Small"
+  },
+  "columns-4": {
+    "$value": "960px",
+    "$type": "dimension",
+    "$description": "Figma: Columns/4",
+    "tier": "primitive",
+    "figmaKey": "Columns/4"
+  },
+  "columns-3": {
+    "$value": "720px",
+    "$type": "dimension",
+    "$description": "Figma: Columns/3",
+    "tier": "primitive",
+    "figmaKey": "Columns/3"
+  },
+  "columns-5": {
+    "$value": "1200px",
+    "$type": "dimension",
+    "$description": "Figma: Columns/5",
+    "tier": "primitive",
+    "figmaKey": "Columns/5"
+  },
+  "body-body-large": {
+    "$value": "24px",
+    "$type": "dimension",
+    "$description": "Figma: Body/Body Large",
+    "tier": "primitive",
+    "figmaKey": "Body/Body Large"
+  },
+  "gutter-default": {
+    "$value": "16px",
+    "$type": "dimension",
+    "$description": "Figma: Gutter/Default",
+    "tier": "primitive",
+    "figmaKey": "Gutter/Default"
+  },
+  "strokes-hr-stroke": {
+    "$value": "0.5px",
+    "$type": "dimension",
+    "$description": "Figma: Strokes/HR Stroke",
+    "tier": "primitive",
+    "figmaKey": "Strokes/HR Stroke"
+  },
+  "strokes-icon-stroke-lg": {
+    "$value": "1px",
+    "$type": "dimension",
+    "$description": "Figma: Strokes/Icon Stroke LG",
+    "tier": "primitive",
+    "figmaKey": "Strokes/Icon Stroke LG"
+  },
+  "strokes-cta-icon-stroke": {
+    "$value": "2px",
+    "$type": "dimension",
+    "$description": "Figma: Strokes/CTA Icon Stroke",
+    "tier": "primitive",
+    "figmaKey": "Strokes/CTA Icon Stroke"
+  },
+  "headings-alt-h1l-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/Alt/H1L (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/Alt/H1L"
+  },
+  "headings-alt-h1l-weight": {
+    "$value": 600,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/Alt/H1L (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/Alt/H1L"
+  },
+  "ui-ui-1-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: UI/UI 1 (family)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 1"
+  },
+  "ui-ui-1-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: UI/UI 1 (weight)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 1"
+  },
+  "ui-ui-2-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: UI/UI 2 (family)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 2"
+  },
+  "ui-ui-2-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: UI/UI 2 (weight)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 2"
+  },
+  "ui-ui-4-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: UI/UI 4 (family)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 4"
+  },
+  "ui-ui-4-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: UI/UI 4 (weight)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 4"
+  },
+  "content-b3-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: Content/B3 (family)",
+    "tier": "primitive",
+    "figmaKey": "Content/B3"
+  },
+  "content-b3-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: Content/B3 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Content/B3"
+  },
+  "headings-h4-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/H4 (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H4"
+  },
+  "headings-h4-weight": {
+    "$value": 500,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/H4 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H4"
+  },
+  "content-b1-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: Content/B1 (family)",
+    "tier": "primitive",
+    "figmaKey": "Content/B1"
+  },
+  "content-b1-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: Content/B1 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Content/B1"
+  },
+  "headings-h2-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/H2 (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H2"
+  },
+  "headings-h2-weight": {
+    "$value": 600,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/H2 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H2"
+  },
+  "content-b2-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: Content/B2 (family)",
+    "tier": "primitive",
+    "figmaKey": "Content/B2"
+  },
+  "content-b2-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: Content/B2 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Content/B2"
+  },
+  "headings-h1-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/H1 (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H1"
+  },
+  "headings-h1-weight": {
+    "$value": 600,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/H1 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H1"
+  },
+  "headings-h5-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/H5 (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H5"
+  },
+  "headings-h5-weight": {
+    "$value": 500,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/H5 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H5"
+  },
+  "headings-h3-family": {
+    "$value": "Alaska VAR",
+    "$type": "fontFamily",
+    "$description": "Figma: Headings/H3 (family)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H3"
+  },
+  "headings-h3-weight": {
+    "$value": 600,
+    "$type": "fontWeight",
+    "$description": "Figma: Headings/H3 (weight)",
+    "tier": "primitive",
+    "figmaKey": "Headings/H3"
+  },
+  "ui-ui-3-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: UI/UI 3 (family)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 3"
+  },
+  "ui-ui-3-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: UI/UI 3 (weight)",
+    "tier": "primitive",
+    "figmaKey": "UI/UI 3"
+  },
+  "ui-16px-normal-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: UI/16px Normal (family)",
+    "tier": "primitive",
+    "figmaKey": "UI/16px Normal"
+  },
+  "ui-16px-normal-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: UI/16px Normal (weight)",
+    "tier": "primitive",
+    "figmaKey": "UI/16px Normal"
+  },
+  "content-bl-family": {
+    "$value": "Source Sans Pro",
+    "$type": "fontFamily",
+    "$description": "Figma: Content/BL (family)",
+    "tier": "primitive",
+    "figmaKey": "Content/BL"
+  },
+  "content-bl-weight": {
+    "$value": 400,
+    "$type": "fontWeight",
+    "$description": "Figma: Content/BL (weight)",
+    "tier": "primitive",
+    "figmaKey": "Content/BL"
+  },
+  "product-shadows-large": {
+    "$value": "Effect(type: DROP_SHADOW, color: #4556761A, offset: (-36, 0), radius: 24, spread: -4); Effect(type: DROP_SHADOW, color: #45567614, offset: (-22, 0), radius: 40, spread: -4); Effect(type: DROP_SHADOW, color: #4556761F, offset: (-12, 0), radius: 24, spread: 0); Effect(type: DROP_SHADOW, color: #4556762E, offset: (-4, 0), radius: 12, spread: 2)",
+    "$type": "shadow",
+    "$description": "Figma: Product Shadows/Large",
+    "tier": "primitive",
+    "figmaKey": "Product Shadows/Large"
+  },
+  "shadows-6dp": {
+    "$value": "Effect(type: DROP_SHADOW, color: #6E83B733, offset: (0, 3), radius: 5, spread: -1); Effect(type: DROP_SHADOW, color: #6E83B71F, offset: (0, 1), radius: 18, spread: 0); Effect(type: DROP_SHADOW, color: #6E83B724, offset: (0, 6), radius: 10, spread: 0)",
+    "$type": "shadow",
+    "$description": "Figma: Shadows/6dp",
+    "tier": "primitive",
+    "figmaKey": "Shadows/6dp"
+  },
+  "product-shadows-small": {
+    "$value": "Effect(type: DROP_SHADOW, color: #4556761A, offset: (-18, 0), radius: 24, spread: -4); Effect(type: DROP_SHADOW, color: #45567614, offset: (-10, 0), radius: 40, spread: -4); Effect(type: DROP_SHADOW, color: #4556761F, offset: (-6, 0), radius: 24, spread: 0); Effect(type: DROP_SHADOW, color: #4556762E, offset: (-2, 0), radius: 12, spread: 2)",
+    "$type": "shadow",
+    "$description": "Figma: Product Shadows/Small",
+    "tier": "primitive",
+    "figmaKey": "Product Shadows/Small"
+  },
+  "shadows-4dp": {
+    "$value": "Effect(type: DROP_SHADOW, color: #6E83B733, offset: (0, 2), radius: 4, spread: -1); Effect(type: DROP_SHADOW, color: #6E83B71F, offset: (0, 1), radius: 10, spread: 0); Effect(type: DROP_SHADOW, color: #6E83B724, offset: (0, 4), radius: 5, spread: 0)",
+    "$type": "shadow",
+    "$description": "Figma: Shadows/4dp",
+    "tier": "primitive",
+    "figmaKey": "Shadows/4dp"
+  }
+}

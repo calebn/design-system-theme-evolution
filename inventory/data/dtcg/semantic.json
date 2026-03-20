@@ -1,0 +1,406 @@
+{
+  "color-brand-subscription": {
+    "$value": "{primary-subscription-blue}",
+    "$type": "color",
+    "$description": "Semantic alias for Primary/Subscription Blue",
+    "tier": "semantic",
+    "figmaKey": "Primary/Subscription Blue"
+  },
+  "color-surface-default": {
+    "$value": "{secondary-white}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/White",
+    "tier": "semantic",
+    "figmaKey": "Secondary/White"
+  },
+  "color-brand-primary": {
+    "$value": "{primary-logos-blue}",
+    "$type": "color",
+    "$description": "Semantic alias for Primary/Logos Blue",
+    "tier": "semantic",
+    "figmaKey": "Primary/Logos Blue"
+  },
+  "color-surface-subtle": {
+    "$value": "{secondary-light-blue-3}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Light Blue 3",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Light Blue 3"
+  },
+  "color-brand-secondary": {
+    "$value": "{secondary-alt-blue}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Alt Blue",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Alt Blue"
+  },
+  "color-surface-tint": {
+    "$value": "{secondary-light-blue-2}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Light Blue 2",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Light Blue 2"
+  },
+  "color-brand-deep-secondary": {
+    "$value": "{secondary-deep-blue-2}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Deep Blue 2",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Deep Blue 2"
+  },
+  "color-brand-deep": {
+    "$value": "{primary-deep-blue}",
+    "$type": "color",
+    "$description": "Semantic alias for Primary/Deep Blue",
+    "tier": "semantic",
+    "figmaKey": "Primary/Deep Blue"
+  },
+  "color-feedback-success": {
+    "$value": "{deep-colors-green}",
+    "$type": "color",
+    "$description": "Semantic alias for Deep Colors/Green",
+    "tier": "semantic",
+    "figmaKey": "Deep Colors/Green"
+  },
+  "color-accent-yellow": {
+    "$value": "{bright-colors-bright-yellow}",
+    "$type": "color",
+    "$description": "Semantic alias for Bright Colors/Bright Yellow",
+    "tier": "semantic",
+    "figmaKey": "Bright Colors/Bright Yellow"
+  },
+  "color-accent-red": {
+    "$value": "{bright-colors-bright-red}",
+    "$type": "color",
+    "$description": "Semantic alias for Bright Colors/Bright Red",
+    "tier": "semantic",
+    "figmaKey": "Bright Colors/Bright Red"
+  },
+  "color-feedback-warning": {
+    "$value": "{deep-colors-yellow}",
+    "$type": "color",
+    "$description": "Semantic alias for Deep Colors/Yellow",
+    "tier": "semantic",
+    "figmaKey": "Deep Colors/Yellow"
+  },
+  "color-feedback-danger": {
+    "$value": "{deep-colors-red}",
+    "$type": "color",
+    "$description": "Semantic alias for Deep Colors/Red",
+    "tier": "semantic",
+    "figmaKey": "Deep Colors/Red"
+  },
+  "color-white": {
+    "$value": "{white}",
+    "$type": "color",
+    "$description": "Semantic alias for white",
+    "tier": "semantic",
+    "figmaKey": "white"
+  },
+  "color-border-light": {
+    "$value": "{secondary-light-blue-1}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Light Blue 1",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Light Blue 1"
+  },
+  "color-text-inverse": {
+    "$value": "{secondary-very-deep-gray}",
+    "$type": "color",
+    "$description": "Semantic alias for Secondary/Very Deep Gray",
+    "tier": "semantic",
+    "figmaKey": "Secondary/Very Deep Gray"
+  },
+  "spacing-h-md": {
+    "$value": "{spacing-horizontal-md}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/MD",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/MD"
+  },
+  "spacing-h-sm": {
+    "$value": "{spacing-horizontal-sm}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/SM",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/SM"
+  },
+  "spacing-h-lg": {
+    "$value": "{spacing-horizontal-lg}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/LG",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/LG"
+  },
+  "spacing-h-xs": {
+    "$value": "{spacing-horizontal-xs}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/XS",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/XS"
+  },
+  "padding-md": {
+    "$value": "{padding-md}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/MD",
+    "tier": "semantic",
+    "figmaKey": "Padding/MD"
+  },
+  "spacing-h-xxl": {
+    "$value": "{spacing-horizontal-xxl}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/XXL",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/XXL"
+  },
+  "spacing-v-xxs": {
+    "$value": "{spacing-vertical-xxs}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Vertical/XXS",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Vertical/XXS"
+  },
+  "padding-xl": {
+    "$value": "{padding-xl}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/XL",
+    "tier": "semantic",
+    "figmaKey": "Padding/XL"
+  },
+  "padding-xs": {
+    "$value": "{padding-xs}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/XS",
+    "tier": "semantic",
+    "figmaKey": "Padding/XS"
+  },
+  "padding-lg": {
+    "$value": "{padding-lg}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/LG",
+    "tier": "semantic",
+    "figmaKey": "Padding/LG"
+  },
+  "spacing-v-xs": {
+    "$value": "{spacing-vertical-xs}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Vertical/XS",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Vertical/XS"
+  },
+  "spacing-v-sm": {
+    "$value": "{spacing-vertical-sm}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Vertical/SM",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Vertical/SM"
+  },
+  "padding-xxl": {
+    "$value": "{padding-xxl}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/XXL",
+    "tier": "semantic",
+    "figmaKey": "Padding/XXL"
+  },
+  "padding-sm": {
+    "$value": "{padding-sm}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Padding/SM",
+    "tier": "semantic",
+    "figmaKey": "Padding/SM"
+  },
+  "spacing-v-small": {
+    "$value": "{vertical-small}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Vertical/Small",
+    "tier": "semantic",
+    "figmaKey": "Vertical/Small"
+  },
+  "spacing-h-xl": {
+    "$value": "{spacing-horizontal-xl}",
+    "$type": "dimension",
+    "$description": "Semantic alias for Spacing | Horizontal/XL",
+    "tier": "semantic",
+    "figmaKey": "Spacing | Horizontal/XL"
+  },
+  "headings-alt-h1l": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 600,
+      "lineHeight": 1,
+      "letterSpacing": -3
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/Alt/H1L",
+    "tier": "semantic",
+    "figmaKey": "Headings/Alt/H1L"
+  },
+  "ui-ui-1": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 18,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: UI/UI 1",
+    "tier": "semantic",
+    "figmaKey": "UI/UI 1"
+  },
+  "ui-ui-2": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 16,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: UI/UI 2",
+    "tier": "semantic",
+    "figmaKey": "UI/UI 2"
+  },
+  "ui-ui-4": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: UI/UI 4",
+    "tier": "semantic",
+    "figmaKey": "UI/UI 4"
+  },
+  "content-b3": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1.25,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Content/B3",
+    "tier": "semantic",
+    "figmaKey": "Content/B3"
+  },
+  "headings-h4": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 500,
+      "lineHeight": 1.149999976158142,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/H4",
+    "tier": "semantic",
+    "figmaKey": "Headings/H4"
+  },
+  "content-b1": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1.350000023841858,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Content/B1",
+    "tier": "semantic",
+    "figmaKey": "Content/B1"
+  },
+  "headings-h2": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 600,
+      "lineHeight": 1,
+      "letterSpacing": -3
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/H2",
+    "tier": "semantic",
+    "figmaKey": "Headings/H2"
+  },
+  "content-b2": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1.350000023841858,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Content/B2",
+    "tier": "semantic",
+    "figmaKey": "Content/B2"
+  },
+  "headings-h1": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 600,
+      "lineHeight": 1,
+      "letterSpacing": -3
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/H1",
+    "tier": "semantic",
+    "figmaKey": "Headings/H1"
+  },
+  "headings-h5": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 500,
+      "lineHeight": 1.25,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/H5",
+    "tier": "semantic",
+    "figmaKey": "Headings/H5"
+  },
+  "headings-h3": {
+    "$value": {
+      "fontFamily": "Alaska VAR",
+      "fontWeight": 600,
+      "lineHeight": 1,
+      "letterSpacing": -3
+    },
+    "$type": "typography",
+    "$description": "Figma: Headings/H3",
+    "tier": "semantic",
+    "figmaKey": "Headings/H3"
+  },
+  "ui-ui-3": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 14,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: UI/UI 3",
+    "tier": "semantic",
+    "figmaKey": "UI/UI 3"
+  },
+  "ui-16px-normal": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: UI/16px Normal",
+    "tier": "semantic",
+    "figmaKey": "UI/16px Normal"
+  },
+  "content-bl": {
+    "$value": {
+      "fontFamily": "Source Sans Pro",
+      "fontWeight": 400,
+      "lineHeight": 1.25,
+      "letterSpacing": 0
+    },
+    "$type": "typography",
+    "$description": "Figma: Content/BL",
+    "tier": "semantic",
+    "figmaKey": "Content/BL"
+  }
+}

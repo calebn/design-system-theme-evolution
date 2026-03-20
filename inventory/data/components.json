@@ -1,0 +1,1379 @@
+[
+  {
+    "name": "Button",
+    "figmaId": "1623:3480",
+    "section": "atoms",
+    "variantCount": 216,
+    "properties": {
+      "Type": [
+        "Add (Generic)",
+        "CTA (Default)",
+        "External Link"
+      ],
+      "Size": [
+        "Large",
+        "Medium",
+        "Small"
+      ],
+      "Style": [
+        "Outline",
+        "Solid"
+      ],
+      "Background": [
+        "Dark",
+        "Light",
+        "Logos Blue"
+      ],
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Next-Previous Buttons",
+    "figmaId": "1623:4561",
+    "section": "atoms",
+    "variantCount": 144,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Style": [
+        "Overlay",
+        "Solid",
+        "Transparent"
+      ],
+      "Direction": [
+        "Next",
+        "Previous"
+      ],
+      "Background": [
+        "Dark",
+        "Light",
+        "Logos Blue"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Increase-Decrease Buttons",
+    "figmaId": "1623:4610",
+    "section": "atoms",
+    "variantCount": 48,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Change": [
+        "Decrease",
+        "Increase"
+      ],
+      "Background": [
+        "Dark",
+        "Light",
+        "Logos Blue"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Expand-Collapse Button",
+    "figmaId": "1623:4708",
+    "section": "atoms",
+    "variantCount": 48,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Toggle": [
+        "Collapse",
+        "Expand"
+      ],
+      "Background": [
+        "Dark",
+        "Light",
+        "Logos Blue"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Close Button",
+    "figmaId": "1623:4757",
+    "section": "atoms",
+    "variantCount": 48,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Style": [
+        "Solid",
+        "Transparent"
+      ],
+      "Background": [
+        "Dark",
+        "Light",
+        "Logos Blue"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Text Button—Icon Right",
+    "figmaId": "1623:4782",
+    "section": "atoms",
+    "variantCount": 32,
+    "properties": {
+      "Type": [
+        "CTA (Default)",
+        "External Link"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Background": [
+        "Dark and Logos Blue",
+        "Light"
+      ],
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Text Button—Icon Left",
+    "figmaId": "5762:102995",
+    "section": "atoms",
+    "variantCount": 16,
+    "properties": {
+      "Type": [
+        "CTA (Default)"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Background": [
+        "Dark and Logos Blue",
+        "Light"
+      ],
+      "State": [
+        "Active",
+        "Default",
+        "Disable",
+        "Disabled",
+        "Hover",
+        "State8"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Floating Action Button",
+    "figmaId": "1623:4908",
+    "section": "atoms",
+    "variantCount": 36,
+    "properties": {
+      "Size": [
+        "Large",
+        "Medium",
+        "Small"
+      ],
+      "Style": [
+        "Solid—Dark",
+        "Solid—Light",
+        "Transparent"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Play Button",
+    "figmaId": "1864:94164",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Default",
+        "State2",
+        "State3",
+        "State4"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Breadcrumbs",
+    "figmaId": "1623:4917",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "nav"
+  },
+  {
+    "name": "Simple Menu",
+    "figmaId": "1623:4958",
+    "section": "atoms",
+    "variantCount": 5,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "nav"
+  },
+  {
+    "name": "Button Menu",
+    "figmaId": "1623:5096",
+    "section": "atoms",
+    "variantCount": 10,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "nav"
+  },
+  {
+    "name": "Tabbed Selector Button",
+    "figmaId": "2532:76553",
+    "section": "atoms",
+    "variantCount": 10,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Floating Action Button with Text",
+    "figmaId": "5650:121531",
+    "section": "atoms",
+    "variantCount": 10,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Slider Scroll Bar",
+    "figmaId": "2245:93685",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=range]"
+  },
+  {
+    "name": "Next-Previous Selector",
+    "figmaId": "1758:5088",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "Style": [
+        "Numbered",
+        "Solid"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Stepper Control",
+    "figmaId": "1623:5401",
+    "section": "atoms",
+    "variantCount": 8,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Stepper CTA",
+    "figmaId": "5773:64162",
+    "section": "atoms",
+    "variantCount": 12,
+    "properties": {
+      "Stage": [
+        "Default",
+        "Quantity",
+        "Selected"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover",
+        "Maxium",
+        "Minimum"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Star",
+    "figmaId": "1770:9407",
+    "section": "atoms",
+    "variantCount": 12,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Filled",
+        "Focus",
+        "Half-Filled",
+        "Hover"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Tabbed Selector",
+    "figmaId": "2529:76540",
+    "section": "atoms",
+    "variantCount": 5,
+    "properties": {
+      "Selection": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Reviews",
+    "figmaId": "1770:9371",
+    "section": "atoms",
+    "variantCount": 22,
+    "properties": {
+      "Rating": [
+        ".5",
+        "0",
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "div"
+  },
+  {
+    "name": "CTA Row",
+    "figmaId": "2769:25152",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Focused",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Category Button",
+    "figmaId": "1935:4111",
+    "section": "atoms",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Default",
+        "Focus",
+        "Hover",
+        "Variant4"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Modal Button Group",
+    "figmaId": "5762:105611",
+    "section": "atoms",
+    "variantCount": 5,
+    "properties": {
+      "Style": [
+        "Default",
+        "Paged"
+      ],
+      "State": [
+        "Default",
+        "Error",
+        "First Page",
+        "Last Page"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "dialog"
+  },
+  {
+    "name": "Accordion Section",
+    "figmaId": "1859:51731",
+    "section": "atoms",
+    "variantCount": 12,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "State": [
+        "Default",
+        "Expanded",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "details"
+  },
+  {
+    "name": "Subnav Dropdown Options",
+    "figmaId": "6331:34528",
+    "section": "atoms",
+    "variantCount": 7,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ],
+      "Type": [
+        "Default",
+        "Header-Middle",
+        "Header-Top"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Stateful Action Button",
+    "figmaId": "7538:45104",
+    "section": "atoms",
+    "variantCount": 6,
+    "properties": {
+      "State": [
+        "Default",
+        "Focus",
+        "Hover",
+        "Loading",
+        "Success",
+        "Success no Button"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Toast Bar",
+    "figmaId": "1770:8729",
+    "section": "molecules",
+    "variantCount": 8,
+    "properties": {
+      "Type": [
+        "Attention",
+        "Error",
+        "Info",
+        "Success"
+      ],
+      "Style": [
+        "Dark",
+        "Light"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "output"
+  },
+  {
+    "name": "Button group",
+    "figmaId": "1623:5083",
+    "section": "molecules",
+    "variantCount": 6,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "Type": [
+        "Primary-Secondary",
+        "Primary-Tertiary"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Text Section with Button Group",
+    "figmaId": "1770:9202",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Text Section",
+    "figmaId": "2529:76369",
+    "section": "molecules",
+    "variantCount": 5,
+    "properties": {
+      "Headline Size": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "section"
+  },
+  {
+    "name": "Free Trial Card",
+    "figmaId": "1880:108955",
+    "section": "molecules",
+    "variantCount": 1,
+    "properties": {
+      "Style": [
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "article"
+  },
+  {
+    "name": "Product Content",
+    "figmaId": "1949:59922",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Style": [
+        "Large",
+        "Medium",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "article"
+  },
+  {
+    "name": "Slider page selector",
+    "figmaId": "1756:2384",
+    "section": "molecules",
+    "variantCount": 2,
+    "properties": {
+      "Style": [
+        "Page Number"
+      ],
+      "Size": [
+        "Large",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Carousel Product",
+    "figmaId": "2262:261677",
+    "section": "molecules",
+    "variantCount": 1,
+    "properties": {
+      "Style": [
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "article"
+  },
+  {
+    "name": "Section Headline with CTA",
+    "figmaId": "2457:71522",
+    "section": "molecules",
+    "variantCount": 4,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Mobile-CTA",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Section Headline",
+    "figmaId": "2529:76419",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "section"
+  },
+  {
+    "name": "Basic Form",
+    "figmaId": "2761:34608",
+    "section": "molecules",
+    "variantCount": 7,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "Background Color": [
+        "Dark",
+        "Light"
+      ],
+      "State": [
+        "Default",
+        "Success"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "form"
+  },
+  {
+    "name": "Multi-CTA List",
+    "figmaId": "2769:25078",
+    "section": "molecules",
+    "variantCount": 1,
+    "properties": {
+      "Size": [
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "button"
+  },
+  {
+    "name": "Product Grid Card",
+    "figmaId": "1982:24943",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "Style": [
+        "Default"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "article"
+  },
+  {
+    "name": "Modal Dialog",
+    "figmaId": "5787:116045",
+    "section": "molecules",
+    "variantCount": 6,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "Style": [
+        "Default",
+        "Multi-step"
+      ],
+      "State": [
+        "Default"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "dialog"
+  },
+  {
+    "name": "Product Lineup—Single",
+    "figmaId": "1949:49395",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "article"
+  },
+  {
+    "name": "Subnav Dropdown",
+    "figmaId": "6331:34404",
+    "section": "molecules",
+    "variantCount": 3,
+    "properties": {
+      "Size": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Checkbox",
+    "figmaId": "1623:5118",
+    "section": "inputs",
+    "variantCount": 2,
+    "properties": {
+      "State": [
+        "Active",
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=checkbox]"
+  },
+  {
+    "name": "Switch",
+    "figmaId": "1623:5125",
+    "section": "inputs",
+    "variantCount": 2,
+    "properties": {
+      "On-Off": [
+        "Off",
+        "On"
+      ],
+      "Background": [
+        "Light"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=checkbox]"
+  },
+  {
+    "name": "Text Input (single line)",
+    "figmaId": "1623:5130",
+    "section": "inputs",
+    "variantCount": 12,
+    "properties": {
+      "Style": [
+        "Default",
+        "Icon"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Error",
+        "Filled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Text Input (name, two fields)",
+    "figmaId": "2758:3449",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "Style": [
+        "Default"
+      ],
+      "State": [
+        "Default",
+        "Filled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Radio Button",
+    "figmaId": "1623:5243",
+    "section": "inputs",
+    "variantCount": 2,
+    "properties": {
+      "State": [
+        "Active",
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=radio]"
+  },
+  {
+    "name": "Multi-Select with Text",
+    "figmaId": "1623:5250",
+    "section": "inputs",
+    "variantCount": 24,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Error",
+        "Focus",
+        "Hover",
+        "Selected"
+      ],
+      "Style": [
+        "Checkbox",
+        "Radio"
+      ],
+      "Size": [
+        "Condensed",
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Toggle with Text",
+    "figmaId": "1623:5311",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "Property 1": [
+        "Default",
+        "Error",
+        "Focus",
+        "Hover",
+        "Selected",
+        "Variant6"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=checkbox]"
+  },
+  {
+    "name": "Upload Image Area",
+    "figmaId": "1623:5327",
+    "section": "inputs",
+    "variantCount": 4,
+    "properties": {
+      "Property 1": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=file]"
+  },
+  {
+    "name": "Toggle Switch (text)",
+    "figmaId": "1623:5340",
+    "section": "inputs",
+    "variantCount": 10,
+    "properties": {
+      "Selection": [
+        "Option 1",
+        "Option 2"
+      ],
+      "Size": [
+        "2",
+        "3"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Focu",
+        "Focus",
+        "Hover",
+        "Selected"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=checkbox]"
+  },
+  {
+    "name": "Text Input—Multiline",
+    "figmaId": "1623:5422",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Error",
+        "Hover",
+        "State4",
+        "State6"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Dropdown",
+    "figmaId": "1623:5473",
+    "section": "inputs",
+    "variantCount": 7,
+    "properties": {
+      "State": [
+        "Active",
+        "Default",
+        "Disabled",
+        "Error",
+        "Hover",
+        "Selected"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Form Dropdown",
+    "figmaId": "1623:5532",
+    "section": "inputs",
+    "variantCount": 3,
+    "properties": {
+      "State": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ]
+    },
+    "hasResponsive": true,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Multi-Selector",
+    "figmaId": "1623:5614",
+    "section": "inputs",
+    "variantCount": 4,
+    "properties": {
+      "State": [
+        "Checkbox",
+        "Error",
+        "Radio"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Text Toggle Selector",
+    "figmaId": "1623:5649",
+    "section": "inputs",
+    "variantCount": 1,
+    "properties": {
+      "Property 1": [
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Text Toggle Selector",
+    "figmaId": "1623:5653",
+    "section": "inputs",
+    "variantCount": 1,
+    "properties": {
+      "Property 1": [
+        "Default"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Text Input—Date",
+    "figmaId": "1623:5660",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Error",
+        "Filled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Text Input—Password",
+    "figmaId": "1623:5741",
+    "section": "inputs",
+    "variantCount": 7,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Error",
+        "Filled—Hide",
+        "Filled—Show",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Slider",
+    "figmaId": "1623:5807",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "State": [
+        "Click",
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover",
+        "Selected"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input[type=range]"
+  },
+  {
+    "name": "Search Field",
+    "figmaId": "1623:5874",
+    "section": "inputs",
+    "variantCount": 10,
+    "properties": {
+      "Size": [
+        "Large",
+        "Small"
+      ],
+      "State": [
+        "Default",
+        "Disabled",
+        "Filled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Email Capture",
+    "figmaId": "1623:5925",
+    "section": "inputs",
+    "variantCount": 6,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Error",
+        "Filled",
+        "Focus",
+        "Hover"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "input"
+  },
+  {
+    "name": "Form Dropdown Option",
+    "figmaId": "2015:39220",
+    "section": "inputs",
+    "variantCount": 5,
+    "properties": {
+      "State": [
+        "Default",
+        "Disabled",
+        "Focus",
+        "Hover",
+        "Selected"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Single Select Box",
+    "figmaId": "4543:14867",
+    "section": "inputs",
+    "variantCount": 2,
+    "properties": {
+      "State": [
+        "Default",
+        "Error"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "select"
+  },
+  {
+    "name": "Badges and Tags",
+    "figmaId": "1773:12115",
+    "section": "other",
+    "variantCount": 12,
+    "properties": {
+      "Style": [
+        "Dark",
+        "Light",
+        "Sale",
+        "Sale-Timer"
+      ],
+      "Size": [
+        "Large",
+        "Medium",
+        "Small"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "span"
+  },
+  {
+    "name": "Product Images",
+    "figmaId": "1946:5555",
+    "section": "other",
+    "variantCount": 7,
+    "properties": {
+      "Aspect Ratio": [
+        "1.2:1",
+        "1.33:1",
+        "1.4:1",
+        "1.5:1",
+        "1.6:1",
+        "1.8:1",
+        "1:1"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "img"
+  },
+  {
+    "name": "Price and Label",
+    "figmaId": "3707:42767",
+    "section": "other",
+    "variantCount": 7,
+    "properties": {
+      "Style": [
+        "Default",
+        "Sale",
+        "Sale—Vertical",
+        "Subscription",
+        "Subscription—Vertical",
+        "Value",
+        "Value—Vertical"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "span"
+  },
+  {
+    "name": "Image Ratios",
+    "figmaId": "4450:79904",
+    "section": "other",
+    "variantCount": 8,
+    "properties": {
+      "Aspect Ratio": [
+        "16x9",
+        "1x1",
+        "2_5x1",
+        "2x1",
+        "3x2",
+        "4x3",
+        "4x5",
+        "5x4"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "img"
+  },
+  {
+    "name": "Sale Percentage",
+    "figmaId": "5173:41321",
+    "section": "other",
+    "variantCount": 8,
+    "properties": {
+      "Style": [
+        "Horizontal",
+        "Vertical"
+      ],
+      "Size": [
+        "Large",
+        "Medium",
+        "Small",
+        "X-Large"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "span"
+  },
+  {
+    "name": "List",
+    "figmaId": "1874:101886",
+    "section": "other",
+    "variantCount": 4,
+    "properties": {
+      "Style": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ]
+    },
+    "hasResponsive": false,
+    "suggestedHtmlElement": "ul"
+  }
+]

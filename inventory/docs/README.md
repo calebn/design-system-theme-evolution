@@ -54,6 +54,7 @@
 | 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
 | 12 | [Component Surface Area](./12-component-surface-area.md) | Proposed prop API, CSS custom properties, slots, and accessibility requirements per component |
 | 13 | [Design Token Pipeline](./13-token-pipeline.md) | End-to-end pipeline specification: Figma → DTCG → CSS vars → Tailwind → CommerceWeb, with inter-stage contracts, tool comparisons, breaking-change detection, and implementation phases |
+| 14 | [Designer-Developer Handoff](./14-designer-developer-handoff.md) | Designer-facing workflow: in-Figma change preview, GitFig push trigger, Slack-first migration briefs for breaking changes, and team notification patterns |
 
 ## Data Files
 

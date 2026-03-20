@@ -134,49 +134,48 @@ Each stage that can introduce breaking changes runs an automated diff against it
 
 **Contract output**: Contract A
 
-### Recommended approach: Figma REST API + GitHub Actions
+### Primary trigger: GitFig (designer-controlled push)
 
-Figma Enterprise (already licensed) provides REST API access to variables. Figma's official reference implementation covers the full workflow:
+**[GitFig](https://gitfig.com/)** (free Figma plugin) is the recommended primary trigger. It gives designers explicit control over when changes are pushed — there is no automatic push on every save. The workflow:
+
+1. Designer finishes a batch of token changes in Figma
+2. Opens the GitFig panel, reviews the list of changed variables
+3. Stages changes (individually or "Stage All"), writes a commit message
+4. Pushes to the token repository branch
+5. Optionally opens a PR from within Figma, or pushes multiple batches before opening one
+
+This solves the batching problem: a PR represents a deliberate, cohesive set of changes rather than every auto-save.
+
+### Backup trigger: `workflow_dispatch`
+
+A GitHub Actions `workflow_dispatch` workflow lets a developer or design system lead manually pull the current Figma variable state on demand. Useful for:
+
+- Initial setup and testing
+- Cases where the designer isn't using GitFig
+- Verifying the pipeline is in sync after a gap in changes
+
+The GitHub Action calls Figma's REST API directly:
 
 - **Reference**: [figma/variables-github-action-example](https://github.com/figma/variables-github-action-example)
-- The GitHub Action calls `GET /v1/files/:file_key/variables/local`
+- Calls `GET /v1/files/:file_key/variables/local`
 - Writes one DTCG JSON file per variable collection and mode into `tokens/`
-- Opens a PR against the token repository for team review before merge
-- Requires a Figma personal access token stored as a GitHub Actions secret
+- Opens a PR for team review
 
-### Trigger options
+Requires a Figma personal access token stored as a GitHub Actions secret.
 
-| Option | Complexity | Latency | Best for |
-|--------|-----------|---------|---------|
-| Manual `workflow_dispatch` | Low | On demand | Getting started; controlled cadence |
-| Figma webhook → relay → GitHub | Medium | ~seconds after Figma save | Fully automated sync |
+### Future option: automated webhook
 
-**Webhook setup** (for the automated option):
-
-1. Register a `FILE_VERSION_UPDATE` webhook on the Figma file via Figma's API (no UI — API call only)
-2. Deploy a lightweight relay endpoint (Cloudflare Worker or AWS Lambda) that validates the webhook payload and calls the GitHub API to trigger `repository_dispatch`
-3. The GitHub Actions workflow listens for `repository_dispatch` and runs the export
-
-### In-Figma feedback
-
-**GitFig** (free Figma plugin) provides bi-directional sync between Figma Variables and GitHub:
-
-- Designers see whether their local variables match the committed token state
-- Create branches, open PRs, and get conflict warnings without leaving Figma
-- Monitors for changes every 3 seconds; alerts when GitHub has newer commits
-- Satisfies the "in-Figma feedback for proposed changes" requirement
+The `LIBRARY_PUBLISH` Figma webhook fires when a designer explicitly publishes their library, which is a more intentional trigger than per-save events. However, it has known reliability issues (inconsistent firing, 50-item payload limit for large files) and requires a relay endpoint ([Cloudflare Workers](https://workers.cloudflare.com/) or AWS Lambda) to bridge Figma webhooks to GitHub `repository_dispatch`. Not recommended until Figma's webhook reliability improves.
 
 ### Tool comparison
 
-| Tool | Cost | DTCG | GitHub Sync | In-Figma Feedback | Breaking Change Detection |
-|------|------|------|-------------|-------------------|--------------------------|
-| Figma REST API + GH Action | Free (Enterprise included) | Native | GitHub Actions | None | Add downstream |
-| GitFig | Free | Auto-detect (W3C, SD, TS) | Branches + PRs from Figma | Conflict warnings | None |
-| TokensBrücke | Free (MIT) | Native | Push to GitHub/GitLab | None | None |
-| Tokens Studio (free tier) | Free | Yes | GitHub sync | Basic | None |
-| Tokens Studio Pro | EUR 39/user/mo | Yes | Multi-file sync | Token flow view | Token flow |
-
-**Recommended combination**: Figma REST API + GH Action for the automated export pipeline, plus the GitFig plugin installed for any designer who wants in-Figma visibility into the current committed state.
+| Tool | Cost | DTCG | Designer Trigger | Batching Control |
+|------|------|------|-----------------|-----------------|
+| [GitFig](https://gitfig.com/) | Free | Auto-detect (W3C, SD, TS) | Explicit push from Figma | Full — designer decides when |
+| [Figma REST API + GH Action](https://github.com/figma/variables-github-action-example) | Free (Enterprise included) | Native | `workflow_dispatch` button | Manual cadence |
+| [TokensBrücke](https://github.com/tokens-bruecke/figma-plugin) | Free (MIT) | Native | Push from Figma | Full — designer decides when |
+| [Tokens Studio](https://docs.tokens.studio/sync/github) (free tier) | Free | Yes | Push from Figma | Full — designer decides when |
+| [Tokens Studio Pro](https://tokens.studio/pricing) | EUR 39/user/mo | Yes | Push from Figma | Full + multi-file sync |
 
 ### Swappability
 
@@ -208,24 +207,9 @@ Uses `semantic-release` with conventional commits — the same pattern already i
 - **Minor** (`feat:`): new tokens added
 - **Major** (`feat!:` or `BREAKING CHANGE:`): tokens removed, renamed, or restructured
 
-The PR that introduces breaking changes must also include a `migration.json` at the package root:
+### Breaking-change detection: [`@dtifx/diff`](https://dtifx.lapidist.net/diff/)
 
-```json
-{
-  "removed": {
-    "color.brand.subscription-blue": "color.primary.brand-blue"
-  },
-  "renamed": {
-    "spacing.sm": "spacing.sp8"
-  }
-}
-```
-
-Downstream Stage 3 transforms can read this file to automatically apply renames before failing the build.
-
-### Breaking-change detection: `@dtifx/diff`
-
-`@dtifx/diff` (free, npm) compares DTCG token snapshots and enforces failure policies:
+`@dtifx/diff` (free, npm) compares DTCG token snapshots and classifies every change:
 
 ```yaml
 # .github/workflows/token-diff.yml (runs on every PR)
@@ -235,12 +219,16 @@ Downstream Stage 3 transforms can read this file to automatically apply renames 
 
 - Loads the last published `@faithlife/design-tokens` version as the baseline
 - Classifies every change: added / value-changed / removed / renamed
-- `--fail-on-breaking` exits with code 1 if removals or renames are detected, blocking merge
-- Outputs a human-readable markdown table as a PR comment and GitHub Step Summary
+- `--fail-on-breaking` exits with code 1 if removals or renames are detected, opening the PR as a **draft**
+- Outputs a human-readable Impact Report as a PR comment and GitHub Step Summary
 
-**Policy**: A PR with breaking changes can only merge after:
-1. Adding `migration.json` with all rename/removal mappings
-2. Bumping the commit type to `feat!:` to trigger a major version
+**Migration context — Slack-first workflow**: When breaking changes are detected, the GitHub Action posts an Impact Report as a draft PR comment and triggers a Slack bot message to the designer. The designer replies in Slack with a brief plain-language explanation; the bot posts the reply as a PR comment. The CI check passes once the comment exists, and the PR is promoted from draft to ready for review.
+
+This approach requires no code or GitHub access from the designer. See [14 — Designer-Developer Handoff](./14-designer-developer-handoff.md) for the full designer-facing workflow.
+
+**Policy**: A breaking-change PR can only merge after:
+1. A Slack migration brief has been posted to the PR (verified by CI check)
+2. The commit type is bumped to `feat!:` to trigger a major version
 
 ### Swappability
 
@@ -274,7 +262,7 @@ The critical constraint is **naming stability**: all downstream consumers (Comme
 
 ### Tool options
 
-#### Style Dictionary v4 (recommended to evaluate first)
+#### [Style Dictionary v4](https://styledictionary.com/) (recommended to evaluate first)
 
 - **Cost**: Free, MIT license
 - **Already a dependency** in `design_system_research/inventory/` (v4.3.3)
@@ -300,7 +288,7 @@ export default {
 };
 ```
 
-#### Cobalt UI (`@cobalt-ui/cli`)
+#### [Cobalt UI](https://cobalt-ui.pages.dev/) (`@cobalt-ui/cli`)
 
 - **Cost**: Free, MIT license
 - DTCG-native — reads DTCG JSON directly with no conversion step
@@ -421,8 +409,8 @@ Visual regression options:
 | Tool | Cost | Integration | Self-hosted | Notes |
 |------|------|-------------|-------------|-------|
 | Playwright `toHaveScreenshot()` | Free | Storybook test runner | Yes | Fully self-contained; screenshots stored in repo |
-| Lost Pixel OSS | Free (7k shots/mo) | Native Storybook support | Yes | Open-source engine; SaaS optional |
-| Chromatic | $500+/mo | Richest Storybook support | No | Recurring cost; last resort |
+| [Lost Pixel OSS](https://lost-pixel.com/) | Free (7k shots/mo) | Native Storybook support | Yes | Open-source engine; SaaS optional |
+| [Chromatic](https://www.chromatic.com/) | $500+/mo | Richest Storybook support | No | Recurring cost; last resort |
 
 **Recommendation**: Start with Playwright `toHaveScreenshot()`. It requires no external service, runs in GitHub Actions alongside existing tests, and stores baseline screenshots in the repository for Git-tracked history. Upgrade to Lost Pixel or Chromatic if the team needs richer diffing UI or parallel execution at scale.
 
@@ -508,20 +496,23 @@ The preview mechanism depends only on the ability to install a specific npm vers
 
 | Stage | Tool | Cost Category | Notes |
 |-------|------|---------------|-------|
-| 1 | Figma REST API + GitHub Actions | Free | Figma Enterprise already licensed |
-| 1 | GitFig (in-Figma plugin) | Free | Companion designer tool |
-| 1 | TokensBrücke | Free (MIT) | Alternative export plugin |
-| 1 | Tokens Studio (free tier) | Free | Alternative with GitHub sync |
-| 1 | Tokens Studio Pro | Recurring (EUR 39/user/mo) | Only if token flow features needed |
-| 1 | Webhook relay (Cloudflare Worker) | Free (100k req/day free tier) | For automated trigger option |
-| 2 | `@dtifx/diff` | Free (npm) | Breaking-change detection |
+| 1 | [Figma REST API + GitHub Actions](https://github.com/figma/variables-github-action-example) | Free | Figma Enterprise already licensed |
+| 1 | [GitFig](https://gitfig.com/) | Free | Primary designer-controlled push trigger |
+| 1 | [Variable Mode Injector](https://www.figma.com/community/plugin/1581328658919282285) | Free | In-Figma token change preview |
+| 1 | [TokenOps](https://www.figma.com/community/plugin/1588136910586914696) | Free | In-Figma token usage audit |
+| 1 | [TokensBrücke](https://github.com/tokens-bruecke/figma-plugin) | Free (MIT) | Alternative export plugin |
+| 1 | [Tokens Studio](https://docs.tokens.studio/sync/github) (free tier) | Free | Alternative with GitHub sync |
+| 1 | [Tokens Studio Pro](https://tokens.studio/pricing) | Recurring (EUR 39/user/mo) | Only if token flow features needed |
+| 1 | Webhook relay ([Cloudflare Workers](https://workers.cloudflare.com/)) | Free (100k req/day free tier) | For future automated webhook option |
+| 2 | [`@dtifx/diff`](https://dtifx.lapidist.net/diff/) | Free (npm) | Breaking-change detection |
 | 2 | `semantic-release` | Free (MIT) | Already used in CommerceComponents |
-| 3 | Style Dictionary v4 | Free (MIT) | Already a dev dependency |
-| 3 | Cobalt UI | Free (MIT) | Alternative DTCG-native transformer |
+| 2 | Slack bot | Free (self-hosted) | Collects migration briefs from designers |
+| 3 | [Style Dictionary v4](https://styledictionary.com/) | Free (MIT) | Already a dev dependency |
+| 3 | [Cobalt UI](https://cobalt-ui.pages.dev/) | Free (MIT) | Alternative DTCG-native transformer |
 | 4 | `tailwind-helper.ts` | Free (in-house) | Already exists |
 | 5 | Playwright visual regression | Free | Self-hosted in GitHub Actions |
-| 5 | Lost Pixel OSS | Free (7k shots/mo) | Step up from Playwright if needed |
-| 5 | Chromatic | Recurring ($500+/mo) | Last resort — richest Storybook UI |
+| 5 | [Lost Pixel OSS](https://lost-pixel.com/) | Free (7k shots/mo) | Step up from Playwright if needed |
+| 5 | [Chromatic](https://www.chromatic.com/) | Recurring ($500+/mo) | Last resort — richest Storybook UI |
 | 6 | Existing preview infrastructure | Free (already paid) | No new infra needed |
 
 **Summary**: The fully functional pipeline can be built at zero additional recurring cost. Tokens Studio Pro and Chromatic are the only recurring-cost items, and both are optional enhancements rather than required components.

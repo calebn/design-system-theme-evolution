@@ -1,0 +1,1195 @@
+{
+  "_generated": "2026-03-20T04:02:54.469Z",
+  "summary": {
+    "counts": {
+      "variable": 19,
+      "local-style-only": 98,
+      "duplicate": 9,
+      "missing": 0
+    },
+    "byPriority": {
+      "critical": 0,
+      "high": 34,
+      "medium": 58,
+      "low": 34
+    },
+    "total": 126
+  },
+  "bySummaryType": {
+    "colors": {
+      "counts": {
+        "variable": 15,
+        "local-style-only": 34,
+        "duplicate": 4,
+        "missing": 0
+      },
+      "byPriority": {
+        "critical": 0,
+        "high": 10,
+        "medium": 19,
+        "low": 24
+      },
+      "total": 53
+    },
+    "gradients": {
+      "counts": {
+        "variable": 0,
+        "local-style-only": 5,
+        "duplicate": 0,
+        "missing": 0
+      },
+      "byPriority": {
+        "critical": 0,
+        "high": 0,
+        "medium": 4,
+        "low": 1
+      },
+      "total": 5
+    },
+    "shadows": {
+      "counts": {
+        "variable": 4,
+        "local-style-only": 19,
+        "duplicate": 0,
+        "missing": 0
+      },
+      "byPriority": {
+        "critical": 0,
+        "high": 9,
+        "medium": 10,
+        "low": 4
+      },
+      "total": 23
+    },
+    "typography": {
+      "counts": {
+        "variable": 0,
+        "local-style-only": 40,
+        "duplicate": 5,
+        "missing": 0
+      },
+      "byPriority": {
+        "critical": 0,
+        "high": 15,
+        "medium": 25,
+        "low": 5
+      },
+      "total": 45
+    }
+  },
+  "items": [
+    {
+      "styleName": "Core Swatches/White",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "duplicate",
+      "extractedValue": "#FFFFFF",
+      "existingVariableKey": "Secondary/White",
+      "priority": "medium",
+      "notes": "Same value as Secondary/White — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Gray 1",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#F5F5F5",
+      "existingVariableKey": "Neutral/Gray 1",
+      "priority": "medium",
+      "notes": "Same value as Neutral/Gray 1 — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Gray 2",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#EBEBEB",
+      "existingVariableKey": "Neutral/Gray 2",
+      "priority": "medium",
+      "notes": "Same value as Neutral/Gray 2 — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Gray 3",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#DBDBDB",
+      "existingVariableKey": "Neutral/Gray 3",
+      "priority": "medium",
+      "notes": "Same value as Neutral/Gray 3 — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Gray 4",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#C7C7C7",
+      "existingVariableKey": "Neutral/Gray 4",
+      "priority": "medium",
+      "notes": "Same value as Neutral/Gray 4 — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Dark Gray",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#3D3D3D",
+      "priority": "medium",
+      "notes": "Different from Secondary/Very Deep Gray (#303030)"
+    },
+    {
+      "styleName": "Core Swatches/Black",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#000000",
+      "existingVariableKey": "Neutral/Black",
+      "priority": "medium",
+      "notes": "Same value as Neutral/Black — consolidate"
+    },
+    {
+      "styleName": "Core Swatches/Dark Blue",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#06296C",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Core Swatches/Logos Blue",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#005EC3",
+      "priority": "medium",
+      "notes": "DIFFERENT from Primary/Logos Blue (#1E6AFE) - legacy value"
+    },
+    {
+      "styleName": "Core Swatches/Logos Top Blue",
+      "group": "Core Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#509EE5",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Logos Swatches/Faithlife Blue",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#1E91D6",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Logos Swatches/Very Dark Gray",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "duplicate",
+      "extractedValue": "#303030",
+      "existingVariableKey": "Secondary/Very Deep Gray",
+      "priority": "medium",
+      "notes": "Same value as Secondary/Very Deep Gray — consolidate"
+    },
+    {
+      "styleName": "Logos Swatches/Light Blue",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#D8EFFC",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Logos Swatches/Lightest Blue",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "duplicate",
+      "extractedValue": "#F5FBFF",
+      "existingVariableKey": "Secondary/Light Blue 3",
+      "priority": "medium",
+      "notes": "Same value as Secondary/Light Blue 3 — consolidate"
+    },
+    {
+      "styleName": "Logos Swatches/Faithlife Green",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#62BB46",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Logos Swatches/Red",
+      "group": "Logos Swatches",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#970101",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Primary/Logos Blue",
+      "group": "Primary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#1E6AFE",
+      "existingVariableKey": "Primary/Logos Blue",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Primary/Subscription Blue",
+      "group": "Primary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#00042F",
+      "existingVariableKey": "Primary/Subscription Blue",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Primary/Deep Blue",
+      "group": "Primary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#030B60",
+      "existingVariableKey": "Primary/Deep Blue",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Alt Blue",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#4885FE",
+      "existingVariableKey": "Secondary/Alt Blue",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Very Deep Gray",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#303030",
+      "existingVariableKey": "Secondary/Very Deep Gray",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/White",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#FFFFFF",
+      "existingVariableKey": "Secondary/White",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Light Blue 1",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#C1E4FF",
+      "existingVariableKey": "Secondary/Light Blue 1",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Light Blue 2",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#E9F5FF",
+      "existingVariableKey": "Secondary/Light Blue 2",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Light Blue 3",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#F5FBFF",
+      "existingVariableKey": "Secondary/Light Blue 3",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Deep Blue 2",
+      "group": "Secondary",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#040F8B",
+      "existingVariableKey": "Secondary/Deep Blue 2",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Deep Blue 3",
+      "group": "Secondary",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#3640B8",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Secondary/Light Blue 0",
+      "group": "Secondary",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#9BCDFF",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Deep Colors/Yellow",
+      "group": "Deep Colors",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#DBA910",
+      "existingVariableKey": "Deep Colors/Yellow",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Deep Colors/Deep Orange",
+      "group": "Deep Colors",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#AD4100",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Deep Colors/Red",
+      "group": "Deep Colors",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#CC3333",
+      "existingVariableKey": "Deep Colors/Red",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Deep Colors/Deep Purple",
+      "group": "Deep Colors",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#502D4C",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Deep Colors/Green",
+      "group": "Deep Colors",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#5BA224",
+      "existingVariableKey": "Deep Colors/Green",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Bright Colors/Bright Yellow",
+      "group": "Bright Colors",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#FFF369",
+      "existingVariableKey": "Bright Colors/Bright Yellow",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Bright Colors/Alt Orange",
+      "group": "Bright Colors",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#D87C44",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Bright Colors/Bright Red",
+      "group": "Bright Colors",
+      "type": "color",
+      "status": "variable",
+      "extractedValue": "#FF6D6D",
+      "existingVariableKey": "Bright Colors/Bright Red",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Bright Colors/Alt Purple",
+      "group": "Bright Colors",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#A4619C",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Bright Colors/Bright Green",
+      "group": "Bright Colors",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#54EB54",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Neutral/Gray 1",
+      "group": "Neutral",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#F5F5F5",
+      "priority": "high",
+      "notes": "Same as Core Swatches/Gray 1 - consolidate into one variable"
+    },
+    {
+      "styleName": "Neutral/Gray 2",
+      "group": "Neutral",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#EBEBEB",
+      "priority": "high",
+      "notes": "Same as Core Swatches/Gray 2 - consolidate"
+    },
+    {
+      "styleName": "Neutral/Gray 3",
+      "group": "Neutral",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#DBDBDB",
+      "priority": "high",
+      "notes": "Same as Core Swatches/Gray 3 - consolidate"
+    },
+    {
+      "styleName": "Neutral/Gray 4",
+      "group": "Neutral",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#C7C7C7",
+      "priority": "high",
+      "notes": "Same as Core Swatches/Gray 4 - consolidate"
+    },
+    {
+      "styleName": "Neutral/Deep Gray",
+      "group": "Neutral",
+      "type": "color",
+      "status": "duplicate",
+      "extractedValue": "#303030",
+      "existingVariableKey": "Secondary/Very Deep Gray",
+      "priority": "high",
+      "notes": "Same value as Secondary/Very Deep Gray — consolidate"
+    },
+    {
+      "styleName": "Neutral/Black",
+      "group": "Neutral",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#000000",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Verbum/Verbum White",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#FFFFFF",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Dk Blue",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#003C71",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Lt Blue",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#61B5E4",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Blue",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#0072CE",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Pale Blue",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#DBF1FC",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Dk Grey",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#666666",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Grey",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#CCCCCC",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Dark Grey",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#3D3D3D",
+      "existingVariableKey": "Core Swatches/Dark Gray",
+      "priority": "low",
+      "notes": "Same value as Core Swatches/Dark Gray — consolidate",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Verbum/Verbum Soft Black",
+      "group": "Verbum",
+      "type": "color",
+      "status": "local-style-only",
+      "extractedValue": "#121212",
+      "priority": "low",
+      "notes": "",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Gradient/One",
+      "group": "Gradient",
+      "type": "gradient",
+      "status": "local-style-only",
+      "extractedValue": "linear-gradient(90deg, #F6FCFF 0.5%, #FFFFFF 100.75%)",
+      "priority": "medium",
+      "notes": "Page-level gradient — no variable today"
+    },
+    {
+      "styleName": "Gradient/Two",
+      "group": "Gradient",
+      "type": "gradient",
+      "status": "local-style-only",
+      "extractedValue": "linear-gradient(90deg, #E7F5FF 0.5%, #F5FBFF 99.625%)",
+      "priority": "medium",
+      "notes": "Page-level gradient — no variable today"
+    },
+    {
+      "styleName": "Gradient/Three",
+      "group": "Gradient",
+      "type": "gradient",
+      "status": "local-style-only",
+      "extractedValue": "linear-gradient(90deg, #C1E4FF 0.5%, #E9F5FF 99.625%)",
+      "priority": "medium",
+      "notes": "Page-level gradient — no variable today"
+    },
+    {
+      "styleName": "Gradient/Four",
+      "group": "Gradient",
+      "type": "gradient",
+      "status": "local-style-only",
+      "extractedValue": "linear-gradient(-90deg, #C1E4FF 0%, #ACD7FF 100%)",
+      "priority": "medium",
+      "notes": "Page-level gradient — no variable today"
+    },
+    {
+      "styleName": "Verbum/Verbum Gradient 1",
+      "group": "Verbum",
+      "type": "gradient",
+      "status": "local-style-only",
+      "extractedValue": "linear-gradient(138.6deg, #003C71 13.6%, #62B5E5 92.6%)",
+      "priority": "low",
+      "notes": "Sub-brand gradient (Verbum)",
+      "scope": "sub-brand"
+    },
+    {
+      "styleName": "Shadows/1dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "extractedValue": "0px 1px 1px 0px rgba(110,131,183,0.14), 0px 2px 1px -1px rgba(110,131,183,0.12), 0px 1px 3px 0px rgba(110,131,183,0.2)",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/2dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/3dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/4dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "variable",
+      "existingVariableKey": "Shadows/4dp",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/6dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "variable",
+      "existingVariableKey": "Shadows/6dp",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/8dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/9dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/12dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/16dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows/24dp",
+      "group": "Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/1dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "Alternate shadow scale"
+    },
+    {
+      "styleName": "Shadows - L9/2dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/3dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/4dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/6dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/8dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/9dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/12dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/16dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Shadows - L9/24dp",
+      "group": "Shadows - L9",
+      "type": "shadow",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": ""
+    },
+    {
+      "styleName": "Product Shadows/Small",
+      "group": "Product Shadows",
+      "type": "shadow",
+      "status": "variable",
+      "existingVariableKey": "Product Shadows/Small",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Product Shadows/Medium",
+      "group": "Product Shadows",
+      "type": "shadow",
+      "status": "local-style-only",
+      "extractedValue": "-3px 0px 12px 2px rgba(69,86,118,0.18), -9px 0px 24px 0px rgba(69,86,118,0.12), -16px 0px 40px -4px rgba(69,86,118,0.08), -28px 0px 24px -4px rgba(69,86,118,0.1)",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "styleName": "Product Shadows/Large",
+      "group": "Product Shadows",
+      "type": "shadow",
+      "status": "variable",
+      "existingVariableKey": "Product Shadows/Large",
+      "priority": "low",
+      "notes": ""
+    },
+    {
+      "styleName": "Headings/H1",
+      "group": "Headings",
+      "type": "typography",
+      "status": "duplicate",
+      "existingVariableKey": "Headings/H1",
+      "priority": "low",
+      "notes": "Variable Headings/H1 exists — this local style should reference it"
+    },
+    {
+      "styleName": "Headings/H2",
+      "group": "Headings",
+      "type": "typography",
+      "status": "duplicate",
+      "existingVariableKey": "Headings/H2",
+      "priority": "low",
+      "notes": "Variable Headings/H2 exists — this local style should reference it"
+    },
+    {
+      "styleName": "Headings/H3",
+      "group": "Headings",
+      "type": "typography",
+      "status": "duplicate",
+      "existingVariableKey": "Headings/H3",
+      "priority": "low",
+      "notes": "Variable Headings/H3 exists — this local style should reference it"
+    },
+    {
+      "styleName": "Headings/H4",
+      "group": "Headings",
+      "type": "typography",
+      "status": "duplicate",
+      "existingVariableKey": "Headings/H4",
+      "priority": "low",
+      "notes": "Variable Headings/H4 exists — this local style should reference it"
+    },
+    {
+      "styleName": "Headings/H5",
+      "group": "Headings",
+      "type": "typography",
+      "status": "duplicate",
+      "existingVariableKey": "Headings/H5",
+      "priority": "low",
+      "notes": "Variable Headings/H5 exists — this local style should reference it"
+    },
+    {
+      "styleName": "Headings/H6",
+      "group": "Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "existingVariableKey": "Headings/H6",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Headings/H1.lg",
+      "group": "Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Headings/H2.lg",
+      "group": "Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Headings/Kicker",
+      "group": "Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H1",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H2",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H3",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H4",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H1.lg",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special Headings/H2.lg",
+      "group": "Special Headings",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H1",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "Updated 2023 heading style - should replace legacy or become variable"
+    },
+    {
+      "styleName": "2023/Headings/H2",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H3",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H4",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H5",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H6",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/Kicker",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H1.lg",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Headings/H1.xl",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H1",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H2",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H3",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H4",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H1.lg",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "2023/Special Headings/H2.lg",
+      "group": "2023",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "high",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H1/Desktop",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "Responsive variant - no variable counterpart"
+    },
+    {
+      "styleName": "Content/H1/Tablet",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H1/Mobile",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H2/Desktop",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H2/Tablet",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H2/Mobile",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H3/Desktop",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H3/Mobile+Tablet",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H4/Desktop",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Content/H4/Mobile+Tablet",
+      "group": "Content",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special/H1/Desktop",
+      "group": "Special",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special/H1/Mobile+Tablet",
+      "group": "Special",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special/H2/Desktop",
+      "group": "Special",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Special/H2/Mobile+Tablet",
+      "group": "Special",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    },
+    {
+      "styleName": "Components/Body/Large",
+      "group": "Components",
+      "type": "typography",
+      "status": "local-style-only",
+      "priority": "medium",
+      "notes": "No variable counterpart — needs variable definition"
+    }
+  ]
+}

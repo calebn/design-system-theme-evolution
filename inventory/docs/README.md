@@ -51,6 +51,7 @@
 | 08 | [Functional Taxonomy](./08-taxonomy.md) | Three-axis classification (atomic · category · tier), Mermaid diagram, folder structure |
 | 09 | [Component Architecture](./09-component-architecture.md) | React-first component list, prop API conventions, Figma axis → prop mapping, directory structure |
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
+| 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
 
 ## Data Files
 
@@ -62,6 +63,7 @@
 | `data/variant-axes.json` | Deduplicated property axes across all Figma frames |
 | `data/taxonomy.json` | Category definitions, code components, and proposed folder structure |
 | `data/gap-analysis.json` | Figma vs. commerce-theme token comparison |
+| `data/brand-styles-audit.json` | Brand Styles local styles vs. variables audit |
 | `data/dtcg/primitives.json` | Tier 1 DTCG tokens (raw values) |
 | `data/dtcg/semantic.json` | Tier 2 DTCG tokens (intent-based aliases) |
 | `data/dtcg/component.json` | Tier 3 DTCG tokens (component-scoped) |
@@ -69,10 +71,10 @@
 ## Pipeline
 
 ```
-raw/figma-metadata.xml     ─┐
-raw/figma-variables.json   ─┤─► parse-figma.ts ──► data/*.json + data/code-components.json
-                            │
-commerce-theme/src/*.ts    ─┘─► gap-analysis.ts ──► data/gap-analysis.json
-                                map-dtcg.ts ──────► data/dtcg/*.json
-                                generate-docs.ts ──► docs/*.md (10 docs + README)
+raw/figma-metadata.xml                 ─┐
+raw/figma-variables.json               ─┤─► parse-figma.ts ──► data/*.json + code-components.json
+                                        │
+commerce-theme/src/*.ts                ─┤─► gap-analysis.ts + map-dtcg.ts ──► data/*.json
+raw/figma-brand-styles-extracted.json  ─┘─► audit-brand-styles.ts ──► brand-styles-audit.json
+                                            generate-docs.ts ──► docs/*.md (11 docs + README)
 ```

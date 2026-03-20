@@ -8,22 +8,22 @@
 
 | | Figma Name | Hex | Group | DTCG | Code Match | Code Key |
 |--|------------|-----|-------|------|------------|----------|
-| ![](https://placehold.co/12x12/00042f/00042f.png) | `Primary/Subscription Blue` | `#00042f` | Primary | P | ✅ Matched | `primary.c500` |
-| ![](https://placehold.co/12x12/ffffff/ffffff.png) | `Secondary/White` | `#ffffff` | Secondary | P | — | `—` |
-| ![](https://placehold.co/12x12/1e6afe/1e6afe.png) | `Primary/Logos Blue` | `#1e6afe` | Primary | P | ✅ Matched | `primary.c300` |
-| ![](https://placehold.co/12x12/f5fbff/f5fbff.png) | `Secondary/Light Blue 3` | `#f5fbff` | Secondary | P | ✅ Matched | `secondary.c100` |
-| ![](https://placehold.co/12x12/4885fe/4885fe.png) | `Secondary/Alt Blue` | `#4885fe` | Secondary | P | ✅ Matched | `secondary.c200` |
-| ![](https://placehold.co/12x12/e9f5ff/e9f5ff.png) | `Secondary/Light Blue 2` | `#e9f5ff` | Secondary | P | ✅ Matched | `primary.c100` |
-| ![](https://placehold.co/12x12/040f8b/040f8b.png) | `Secondary/Deep Blue 2` | `#040f8b` | Secondary | P | ✅ Matched | `secondary.c400` |
-| ![](https://placehold.co/12x12/030b60/030b60.png) | `Primary/Deep Blue` | `#030b60` | Primary | P | ✅ Matched | `primary.c400` |
-| ![](https://placehold.co/12x12/5ba224/5ba224.png) | `Deep Colors/Green` | `#5ba224` | Deep Colors | P | ✅ Matched | `success.base` |
-| ![](https://placehold.co/12x12/fff369/fff369.png) | `Bright Colors/Bright Yellow` | `#fff369` | Bright Colors | P | ✅ Matched | `warning.vivid` |
-| ![](https://placehold.co/12x12/ff6d6d/ff6d6d.png) | `Bright Colors/Bright Red` | `#ff6d6d` | Bright Colors | P | ✅ Matched | `danger.vivid` |
-| ![](https://placehold.co/12x12/dba910/dba910.png) | `Deep Colors/Yellow` | `#dba910` | Deep Colors | P | ✅ Matched | `warning.base` |
-| ![](https://placehold.co/12x12/cc3333/cc3333.png) | `Deep Colors/Red` | `#cc3333` | Deep Colors | P | ✅ Matched | `danger.base` |
-| ![](https://placehold.co/12x12/ffffff/ffffff.png) | `white` | `#ffffff` | misc | S | ✅ Matched | `grey.c100, pureWhite` |
-| ![](https://placehold.co/12x12/c1e4ff/c1e4ff.png) | `Secondary/Light Blue 1` | `#c1e4ff` | Secondary | P | ✅ Matched | `primary.c200` |
-| ![](https://placehold.co/12x12/303030/303030.png) | `Secondary/Very Deep Gray` | `#303030` | Secondary | P | ✅ Matched | `black.c300` |
+| ![](https://placehold.co/12x12/00042F/00042F.png)  | `Primary/Subscription Blue` | `#00042f` | Primary | P | ✅ Matched | `primary.c500` |
+| ![](https://placehold.co/12x12/FFFFFF/FFFFFF.png)  | `Secondary/White` | `#ffffff` | Secondary | P | — | `—` |
+| ![](https://placehold.co/12x12/1E6AFE/1E6AFE.png)  | `Primary/Logos Blue` | `#1e6afe` | Primary | P | ✅ Matched | `primary.c300` |
+| ![](https://placehold.co/12x12/F5FBFF/F5FBFF.png)  | `Secondary/Light Blue 3` | `#f5fbff` | Secondary | P | ✅ Matched | `secondary.c100` |
+| ![](https://placehold.co/12x12/4885FE/4885FE.png)  | `Secondary/Alt Blue` | `#4885fe` | Secondary | P | ✅ Matched | `secondary.c200` |
+| ![](https://placehold.co/12x12/E9F5FF/E9F5FF.png)  | `Secondary/Light Blue 2` | `#e9f5ff` | Secondary | P | ✅ Matched | `primary.c100` |
+| ![](https://placehold.co/12x12/040F8B/040F8B.png)  | `Secondary/Deep Blue 2` | `#040f8b` | Secondary | P | ✅ Matched | `secondary.c400` |
+| ![](https://placehold.co/12x12/030B60/030B60.png)  | `Primary/Deep Blue` | `#030b60` | Primary | P | ✅ Matched | `primary.c400` |
+| ![](https://placehold.co/12x12/5BA224/5BA224.png)  | `Deep Colors/Green` | `#5ba224` | Deep Colors | P | ✅ Matched | `success.base` |
+| ![](https://placehold.co/12x12/FFF369/FFF369.png)  | `Bright Colors/Bright Yellow` | `#fff369` | Bright Colors | P | ✅ Matched | `warning.vivid` |
+| ![](https://placehold.co/12x12/FF6D6D/FF6D6D.png)  | `Bright Colors/Bright Red` | `#ff6d6d` | Bright Colors | P | ✅ Matched | `danger.vivid` |
+| ![](https://placehold.co/12x12/DBA910/DBA910.png)  | `Deep Colors/Yellow` | `#dba910` | Deep Colors | P | ✅ Matched | `warning.base` |
+| ![](https://placehold.co/12x12/CC3333/CC3333.png)  | `Deep Colors/Red` | `#cc3333` | Deep Colors | P | ✅ Matched | `danger.base` |
+| ![](https://placehold.co/12x12/FFFFFF/FFFFFF.png)  | `white` | `#ffffff` | misc | S | ✅ Matched | `grey.c100, pureWhite` |
+| ![](https://placehold.co/12x12/C1E4FF/C1E4FF.png)  | `Secondary/Light Blue 1` | `#c1e4ff` | Secondary | P | ✅ Matched | `primary.c200` |
+| ![](https://placehold.co/12x12/303030/303030.png)  | `Secondary/Very Deep Gray` | `#303030` | Secondary | P | ✅ Matched | `black.c300` |
 
 ### Colors in `commerce-theme` not referenced in Figma
 
@@ -31,32 +31,32 @@ These exist in code but have no matching Figma variable. Candidates for removal 
 
 | | Code Key | Hex |
 |--|----------|-----|
-| ![](https://placehold.co/12x12/9bcdff/9bcdff.png) | `secondary.c150` | `#9bcdff` |
-| ![](https://placehold.co/12x12/3640b8/3640b8.png) | `secondary.c300` | `#3640b8` |
-| ![](https://placehold.co/12x12/54eb54/54eb54.png) | `success.vivid` | `#54eb54` |
-| ![](https://placehold.co/12x12/f2ebbd/f2ebbd.png) | `yellow.c100` | `#f2ebbd` |
-| ![](https://placehold.co/12x12/efdf79/efdf79.png) | `yellow.c200` | `#efdf79` |
-| ![](https://placehold.co/12x12/dec62b/dec62b.png) | `yellow.c300` | `#dec62b` |
-| ![](https://placehold.co/12x12/ecd1c1/ecd1c1.png) | `orange.c100` | `#ecd1c1` |
-| ![](https://placehold.co/12x12/d87c44/d87c44.png) | `orange.c200` | `#d87c44` |
-| ![](https://placehold.co/12x12/ad4100/ad4100.png) | `orange.c300` | `#ad4100` |
-| ![](https://placehold.co/12x12/edcbcb/edcbcb.png) | `red.c100` | `#edcbcb` |
-| ![](https://placehold.co/12x12/da6969/da6969.png) | `red.c200` | `#da6969` |
-| ![](https://placehold.co/12x12/b31e31/b31e31.png) | `red.c300` | `#b31e31` |
-| ![](https://placehold.co/12x12/debbda/debbda.png) | `purple.c100` | `#debbda` |
-| ![](https://placehold.co/12x12/a4619c/a4619c.png) | `purple.c200` | `#a4619c` |
-| ![](https://placehold.co/12x12/502d4c/502d4c.png) | `purple.c300` | `#502d4c` |
-| ![](https://placehold.co/12x12/c8e4c8/c8e4c8.png) | `green.c100` | `#c8e4c8` |
-| ![](https://placehold.co/12x12/88ce88/88ce88.png) | `green.c200` | `#88ce88` |
-| ![](https://placehold.co/12x12/227421/227421.png) | `green.c300` | `#227421` |
-| ![](https://placehold.co/12x12/f5f5f5/f5f5f5.png) | `grey.c200` | `#f5f5f5` |
-| ![](https://placehold.co/12x12/ebebeb/ebebeb.png) | `grey.c300` | `#ebebeb` |
-| ![](https://placehold.co/12x12/dbdbdb/dbdbdb.png) | `grey.c400` | `#dbdbdb` |
-| ![](https://placehold.co/12x12/c7c7c7/c7c7c7.png) | `grey.c500` | `#c7c7c7` |
-| ![](https://placehold.co/12x12/7e7e7e/7e7e7e.png) | `black.c100` | `#7e7e7e` |
-| ![](https://placehold.co/12x12/3d3d3d/3d3d3d.png) | `black.c200` | `#3d3d3d` |
-| ![](https://placehold.co/12x12/1f1d20/1f1d20.png) | `black.c400` | `#1f1d20` |
-| ![](https://placehold.co/12x12/000000/000000.png) | `pureBlack` | `#000000` |
+| ![](https://placehold.co/12x12/9BCDFF/9BCDFF.png)  | `secondary.c150` | `#9bcdff` |
+| ![](https://placehold.co/12x12/3640B8/3640B8.png)  | `secondary.c300` | `#3640b8` |
+| ![](https://placehold.co/12x12/54EB54/54EB54.png)  | `success.vivid` | `#54eb54` |
+| ![](https://placehold.co/12x12/F2EBBD/F2EBBD.png)  | `yellow.c100` | `#f2ebbd` |
+| ![](https://placehold.co/12x12/EFDF79/EFDF79.png)  | `yellow.c200` | `#efdf79` |
+| ![](https://placehold.co/12x12/DEC62B/DEC62B.png)  | `yellow.c300` | `#dec62b` |
+| ![](https://placehold.co/12x12/ECD1C1/ECD1C1.png)  | `orange.c100` | `#ecd1c1` |
+| ![](https://placehold.co/12x12/D87C44/D87C44.png)  | `orange.c200` | `#d87c44` |
+| ![](https://placehold.co/12x12/AD4100/AD4100.png)  | `orange.c300` | `#ad4100` |
+| ![](https://placehold.co/12x12/EDCBCB/EDCBCB.png)  | `red.c100` | `#edcbcb` |
+| ![](https://placehold.co/12x12/DA6969/DA6969.png)  | `red.c200` | `#da6969` |
+| ![](https://placehold.co/12x12/B31E31/B31E31.png)  | `red.c300` | `#b31e31` |
+| ![](https://placehold.co/12x12/DEBBDA/DEBBDA.png)  | `purple.c100` | `#debbda` |
+| ![](https://placehold.co/12x12/A4619C/A4619C.png)  | `purple.c200` | `#a4619c` |
+| ![](https://placehold.co/12x12/502D4C/502D4C.png)  | `purple.c300` | `#502d4c` |
+| ![](https://placehold.co/12x12/C8E4C8/C8E4C8.png)  | `green.c100` | `#c8e4c8` |
+| ![](https://placehold.co/12x12/88CE88/88CE88.png)  | `green.c200` | `#88ce88` |
+| ![](https://placehold.co/12x12/227421/227421.png)  | `green.c300` | `#227421` |
+| ![](https://placehold.co/12x12/F5F5F5/F5F5F5.png)  | `grey.c200` | `#f5f5f5` |
+| ![](https://placehold.co/12x12/EBEBEB/EBEBEB.png)  | `grey.c300` | `#ebebeb` |
+| ![](https://placehold.co/12x12/DBDBDB/DBDBDB.png)  | `grey.c400` | `#dbdbdb` |
+| ![](https://placehold.co/12x12/C7C7C7/C7C7C7.png)  | `grey.c500` | `#c7c7c7` |
+| ![](https://placehold.co/12x12/7E7E7E/7E7E7E.png)  | `black.c100` | `#7e7e7e` |
+| ![](https://placehold.co/12x12/3D3D3D/3D3D3D.png)  | `black.c200` | `#3d3d3d` |
+| ![](https://placehold.co/12x12/1F1D20/1F1D20.png)  | `black.c400` | `#1f1d20` |
+| ![](https://placehold.co/12x12/000000/000000.png)  | `pureBlack` | `#000000` |
 
 ## Typography
 

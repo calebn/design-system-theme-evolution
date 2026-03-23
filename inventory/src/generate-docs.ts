@@ -1548,7 +1548,7 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
 // Accessibility requirements per component category
 const ARIA_REQUIREMENTS: Record<string, string[]> = {
   button: ['`role="button"` (implicit on `<button>`)', '`aria-label` when icon-only', '`aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)', '`aria-pressed` for toggle-style buttons'],
-  'icon-button': ['`aria-label` required (no visible text)', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled'],
+  'icon-button': ['`aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', '`aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)'],
   'link-button': ['`aria-label` or visible text required', 'If rendered as `<a>`, must have `href`', '`aria-current="page"` when marking active link'],
   input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
   textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],

@@ -40,7 +40,7 @@
     "name": "Next-Previous Buttons",
     "figmaId": "1623:4561",
     "section": "atoms",
-    "functionalCategory": "selection",
+    "functionalCategory": "actions",
     "proposedCodeName": "PreviousNextButtons",
     "variantCount": 144,
     "properties": {
@@ -76,7 +76,7 @@
     "name": "Increase-Decrease Buttons",
     "figmaId": "1623:4610",
     "section": "atoms",
-    "functionalCategory": "selection",
+    "functionalCategory": "actions",
     "proposedCodeName": "QuantityButtons",
     "variantCount": 48,
     "properties": {
@@ -107,7 +107,7 @@
     "name": "Expand-Collapse Button",
     "figmaId": "1623:4708",
     "section": "atoms",
-    "functionalCategory": "selection",
+    "functionalCategory": "actions",
     "proposedCodeName": "ExpandCollapseButton",
     "variantCount": 48,
     "properties": {

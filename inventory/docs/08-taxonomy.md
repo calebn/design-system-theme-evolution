@@ -63,10 +63,10 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(4 code / 12 Figma)"]
+  DesignSystem --> actions["Actions\n(4 code / 15 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
   DesignSystem --> data_entry["Data Entry\n(10 code / 16 Figma)"]
-  DesignSystem --> selection["Selection & Controls\n(4 code / 14 Figma)"]
+  DesignSystem --> selection["Selection & Controls\n(4 code / 11 Figma)"]
   DesignSystem --> data_display["Data Display\n(3 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
   DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
@@ -84,7 +84,7 @@ graph TD
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
 | `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
-| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button |
+| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `ButtonGroup` | Composition | Button group, CTA Row |
 
@@ -129,8 +129,8 @@ graph TD
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
 | `Toggle` | Primitive | Switch, Toggle with Text |
-| `Stepper` | Primitive | Stepper CTA, Stepper Control, Increase-Decrease Buttons |
-| `Pagination` | Primitive | Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `Stepper` | Primitive | Stepper CTA, Stepper Control |
+| `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
 | `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
 
 ### Data Display
@@ -164,7 +164,7 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Accordion` | Composition | Accordion Section, Expand-Collapse Button |
+| `Accordion` | Composition | Accordion Section |
 | `SectionLayout` | Builder Block | Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group |
 
 ### Product
@@ -201,21 +201,21 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | CTA Row | Atoms | Actions | `ButtonGroup` | Composition |
 | Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Email Capture | Inputs & Forms | Data Entry | `EmailCapture` | Composition |
-| Expand-Collapse Button | Atoms | Selection & Controls | `Accordion` | Composition |
+| Expand-Collapse Button | Atoms | Actions | `IconButton` | Primitive |
 | Floating Action Button | Atoms | Actions | `IconButton` | Primitive |
 | Floating Action Button with Text | Atoms | Actions | `Button` | Primitive |
 | Form Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Form Dropdown Option | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Free Trial Card | Molecules | Product | `FreeTrialCard` | Composition |
 | Image Ratios | Other | Data Display | — | — |
-| Increase-Decrease Buttons | Atoms | Selection & Controls | `Stepper` | Primitive |
+| Increase-Decrease Buttons | Atoms | Actions | `IconButton` | Primitive |
 | List | Other | Data Display | — | — |
 | Modal Button Group | Atoms | Feedback & Overlays | `Modal` | Composition |
 | Modal Dialog | Molecules | Feedback & Overlays | `Modal` | Composition |
 | Multi-CTA List | Molecules | Product | `CtaList` | Builder Block |
 | Multi-Select with Text | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
 | Multi-Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
-| Next-Previous Buttons | Atoms | Selection & Controls | `Pagination` | Primitive |
+| Next-Previous Buttons | Atoms | Actions | `IconButton` | Primitive |
 | Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
 | Play Button | Atoms | Actions | `IconButton` | Primitive |
 | Price and Label | Other | Data Display | `PriceLabel` | Primitive |

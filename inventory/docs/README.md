@@ -28,14 +28,14 @@
 
 | Category | Figma Frames | Code Components |
 |----------|-------------|-----------------|
-| Actions | 12 | 4 |
+| Actions | 15 | 4 |
 | Navigation | 7 | 4 |
 | Data Entry | 16 | 10 |
 | Data Display | 8 | 3 |
 | Feedback & Overlays | 3 | 2 |
 | Content Layout | 5 | 2 |
 | Product | 6 | 5 |
-| Selection & Controls | 14 | 4 |
+| Selection & Controls | 11 | 4 |
 
 ## Documents
 
@@ -53,8 +53,6 @@
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
 | 11 | [Design Token Migration Guide](./11-design-token-migration.md) | Brand Styles audit — which local styles need to become Figma variables |
 | 12 | [Component Surface Area](./12-component-surface-area.md) | Proposed prop API, CSS custom properties, slots, and accessibility requirements per component |
-| 13 | [Design Token Pipeline](./13-token-pipeline.md) | End-to-end pipeline specification: Figma → DTCG → CSS vars → Tailwind → CommerceWeb, with inter-stage contracts, tool comparisons, breaking-change detection, and implementation phases |
-| 14 | [Designer-Developer Handoff](./14-designer-developer-handoff.md) | Designer-facing workflow: in-Figma change preview, GitFig push trigger, Slack-first migration briefs for breaking changes, and team notification patterns |
 
 ## Data Files
 
@@ -67,14 +65,11 @@
 | `data/taxonomy.json` | Category definitions, code components, and proposed folder structure |
 | `data/gap-analysis.json` | Figma vs. commerce-theme token comparison |
 | `data/brand-styles-audit.json` | Brand Styles local styles vs. variables audit |
-| `data/verified-dependencies.json` | Component dependencies verified via `get_design_context` MCP calls — confidence levels and notes per entry |
 | `data/dtcg/primitives.json` | Tier 1 DTCG tokens (raw values) |
 | `data/dtcg/semantic.json` | Tier 2 DTCG tokens (intent-based aliases) |
 | `data/dtcg/component.json` | Tier 3 DTCG tokens (component-scoped) |
-| `raw/figma-brand-styles-metadata.xml` | Logos Brand Styles Figma canvas structure (manually fetched via MCP) |
-| `raw/figma-brand-styles-extracted.json` | Extracted color/gradient/shadow values from Brand Styles local styles |
-| `raw/design-context/` | Full `get_design_context` MCP responses per component — layer hierarchy, auto-layout, generated code. See README inside. |
-| `screenshots/` | Component screenshots downloaded via Figma REST API. See README inside for capture instructions. |
+|| `raw/figma-brand-styles-metadata.xml` | Logos Brand Styles Figma canvas structure (manually fetched via MCP) |
+|| `raw/figma-brand-styles-extracted.json` | Extracted color/gradient/shadow values from Brand Styles local styles |
 
 ## Pipeline
 
@@ -85,9 +80,4 @@ raw/figma-variables.json               ─┤─► parse-figma.ts ──► dat
 commerce-theme/src/*.ts                ─┤─► gap-analysis.ts + map-dtcg.ts ──► data/*.json
 raw/figma-brand-styles-extracted.json  ─┘─► audit-brand-styles.ts ──► brand-styles-audit.json
                                             generate-docs.ts ──► docs/*.md (12 docs + README)
-
-One-time capture (not part of regular build):
-raw/design-context/   ◄── get_design_context MCP (run manually per component)
-screenshots/          ◄── src/capture-screenshots.ts (Figma REST API, requires FIGMA_TOKEN env var)
-data/verified-dependencies.json ◄── analysed from raw/design-context/ output
 ```

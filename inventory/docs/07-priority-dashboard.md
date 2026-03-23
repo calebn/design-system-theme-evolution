@@ -30,13 +30,13 @@
 | `Button` | Primitive | Actions | 4 ⚠️ | 15 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `LinkButton` | Primitive | Actions | 2 ⚠️ | 4 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `StarRating` | Primitive | Data Display | 2 | 5 | **9** | ✅ Build first — high dependency weight |
-| `Accordion` | Composition | Content Layout | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `ButtonGroup` | Composition | Actions | 2 | 1 | **8** | ✅ Build first — high dependency weight |
-| `IconButton` | Primitive | Actions | 3 ⚠️ | 2 | **8** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
-| `Pagination` | Primitive | Selection & Controls | 4 | 2 | **8** | ✅ Build first — high dependency weight |
-| `Stepper` | Primitive | Selection & Controls | 3 | 4 | **8** | ✅ Build first — high dependency weight |
+| `IconButton` | Primitive | Actions | 6 ⚠️ | 5 | **8** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
+| `Pagination` | Primitive | Selection & Controls | 3 | 2 | **8** | ✅ Build first — high dependency weight |
+| `Stepper` | Primitive | Selection & Controls | 2 | 2 | **8** | ✅ Build first — high dependency weight |
 | `SubnavDropdown` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `Tabs` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
+| `Accordion` | Composition | Content Layout | 1 | 0 | **7** | ✅ Build first — high dependency weight |
 | `Breadcrumbs` | Primitive | Navigation | 1 | 0 | **7** | ✅ Build first — high dependency weight |
 | `Input` | Primitive | Data Entry | 4 | 1 | **7** | ✅ Build first — high dependency weight |
 | `Menu` | Primitive | Navigation | 2 | 0 | **7** | ✅ Build first — high dependency weight |
@@ -73,8 +73,8 @@
 | Text Button—Icon Right | `LinkButton` | Atoms | 3 | 2 | 2 | 0 | 2 (4) | **9** | ✅ Build first — high dependency weight |
 | Close Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
 | CTA Row | `ButtonGroup` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
-| Expand-Collapse Button | `Accordion` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
-| Increase-Decrease Buttons | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
+| Expand-Collapse Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
+| Increase-Decrease Buttons | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
 | Slider Scroll Bar | `Pagination` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Stepper Control | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Stepper CTA | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
@@ -87,7 +87,7 @@
 | Floating Action Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Floating Action Button with Text | `Button` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Modal Button Group | `Modal` | Atoms | 3 | 2 | 1 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
-| Next-Previous Buttons | `Pagination` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
+| Next-Previous Buttons | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Simple Menu | `Menu` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Text Input (single line) | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
 | Checkbox | `Checkbox` | Inputs & Forms | 2 | 2 | 1 | 0 | 1 (1) | **6** | ✅ Ready to build |

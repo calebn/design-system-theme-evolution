@@ -13,12 +13,12 @@
 | Category Button | Actions | 4 | State | — | `<button>` | [1935:4111](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111) |
 | Close Button | Actions | 48 | Size, Style, Background, State | — | `<button>` | [1623:4757](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757) |
 | CTA Row | Actions | 4 | State | — | `<button>` | [2769:25152](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152) |
-| Expand-Collapse Button | Selection & Controls | 48 | Size, Toggle, Background, State | — | `<button>` | [1623:4708](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) |
+| Expand-Collapse Button | Actions | 48 | Size, Toggle, Background, State | — | `<button>` | [1623:4708](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) |
 | Floating Action Button | Actions | 36 | Size, Style, State | — | `<button>` | [1623:4908](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) |
 | Floating Action Button with Text | Actions | 10 | Size, State | — | `<button>` | [5650:121531](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) |
-| Increase-Decrease Buttons | Selection & Controls | 48 | Size, Change, Background, State | — | `<button>` | [1623:4610](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) |
+| Increase-Decrease Buttons | Actions | 48 | Size, Change, Background, State | — | `<button>` | [1623:4610](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) |
 | Modal Button Group | Feedback & Overlays | 5 | Style, State | — | `<dialog>` | [5762:105611](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-105611) |
-| Next-Previous Buttons | Selection & Controls | 144 | Size, Style, Direction, Background, State | — | `<button>` | [1623:4561](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) |
+| Next-Previous Buttons | Actions | 144 | Size, Style, Direction, Background, State | — | `<button>` | [1623:4561](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) |
 | Next-Previous Selector | Selection & Controls | 4 | Size, Style | — | `<select>` | [1758:5088](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088) |
 | Play Button | Actions | 4 | State | — | `<button>` | [1864:94164](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) |
 | Reviews | Data Display | 22 | Rating, Size | — | `<div>` | [1770:9371](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9371) |

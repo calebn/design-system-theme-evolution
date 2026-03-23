@@ -41,20 +41,23 @@
     "directoryName": "icon-button",
     "tier": "primitive",
     "functionalCategory": "actions",
-    "description": "Icon-only button with no visible label. Requires an aria-label. Covers close, play, and floating action variants.",
+    "description": "Icon-only button with no visible label. Requires an aria-label. Covers close, play, floating action, expand-collapse, increment/decrement, and navigation variants.",
     "htmlElement": "button",
     "figmaSources": [
       "Close Button",
       "Play Button",
-      "Floating Action Button"
+      "Floating Action Button",
+      "Expand-Collapse Button",
+      "Increase-Decrease Buttons",
+      "Next-Previous Buttons"
     ],
     "props": [
       {
         "name": "variant",
-        "type": "'default' | 'floating' | 'close' | 'play'",
+        "type": "'default' | 'floating' | 'close' | 'play' | 'expand-collapse' | 'increment' | 'navigate'",
         "figmaAxis": "Style",
         "default": "default",
-        "description": "Distinguishes Close Button, Play Button, and Floating Action Button Figma frames within one component. Values are proposed — derived from Figma frame names, not a Figma axis.",
+        "description": "Distinguishes the Figma source frame within one component. Values are proposed — derived from Figma frame names, not a Figma axis.",
         "proposed": true
       },
       {
@@ -498,8 +501,7 @@
     "htmlElement": "div",
     "figmaSources": [
       "Stepper CTA",
-      "Stepper Control",
-      "Increase-Decrease Buttons"
+      "Stepper Control"
     ],
     "props": [
       {
@@ -531,7 +533,6 @@
     "description": "Navigation controls for paging through content.",
     "htmlElement": "nav",
     "figmaSources": [
-      "Next-Previous Buttons",
       "Next-Previous Selector",
       "Slider page selector",
       "Slider Scroll Bar"
@@ -605,8 +606,7 @@
     "description": "Expandable/collapsible section with header and body content.",
     "htmlElement": "details",
     "figmaSources": [
-      "Accordion Section",
-      "Expand-Collapse Button"
+      "Accordion Section"
     ],
     "props": [
       {

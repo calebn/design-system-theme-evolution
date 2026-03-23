@@ -128,16 +128,16 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 **HTML element:** `<button>` · **Directory:** `icon-button/` · **Category:** Actions
 
-**Figma sources:** [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908)
+**Figma sources:** [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610), [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561)
 
 
-> Icon-only button with no visible label. Requires an aria-label. Covers close, play, and floating action variants.
+> Icon-only button with no visible label. Requires an aria-label. Covers close, play, floating action, expand-collapse, increment/decrement, and navigation variants.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' \| 'floating' \| 'close' \| 'play'` _(proposed)_ | `default` | Style | Distinguishes Close Button, Play Button, and Floating Action Button Figma frames within one component. Values are proposed — derived from Figma frame names, not a Figma axis. |
+| `variant` | `'default' \| 'floating' \| 'close' \| 'play' \| 'expand-collapse' \| 'increment' \| 'navigate'` _(proposed)_ | `default` | Style | Distinguishes the Figma source frame within one component. Values are proposed — derived from Figma frame names, not a Figma axis. |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
 | `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
@@ -154,9 +154,10 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 **Accessibility requirements:**
 
-- `aria-label` required (no visible text)
+- `aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")
 - `role="button"` (implicit on `<button>`)
 - `aria-disabled` when disabled
+- `aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)
 
 <details><summary>Consumer usage</summary>
 
@@ -1145,7 +1146,7 @@ export function SubnavDropdown({ variant = 'trigger', className, children, ...pr
 
 **HTML element:** `<div>` · **Directory:** `stepper/` · **Category:** Selection & Controls
 
-**Figma sources:** [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162), [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610)
+**Figma sources:** [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162), [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401)
 
 
 > Quantity control with increment/decrement. Covers standalone controls and CTA-embedded variants.
@@ -1200,7 +1201,7 @@ export function Stepper({ variant = 'control', className, children, ...props }: 
 
 **HTML element:** `<nav>` · **Directory:** `pagination/` · **Category:** Selection & Controls
 
-**Figma sources:** [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561), [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088), [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
+**Figma sources:** [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088), [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
 
 
 > Navigation controls for paging through content.
@@ -1405,7 +1406,7 @@ export function Modal({ title, content, ...props }: ModalProps) {
 
 **HTML element:** `<details>` · **Directory:** `accordion/` · **Category:** Content Layout
 
-**Figma sources:** [Accordion Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1859-51731), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708)
+**Figma sources:** [Accordion Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1859-51731)
 
 
 > Expandable/collapsible section with header and body content.

@@ -270,22 +270,30 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 |---------------|---------------|----------------|
 | Text Section with Button Group | Section Headline | `SectionLayout` |
 | Text Toggle Selector (Figma ID: 1623:5649) | Text Toggle Selector (Figma ID: 1623:5653) | `—` |
+| Increase-Decrease Buttons | Expand-Collapse Button | `IconButton` |
+| Increase-Decrease Buttons | Close Button | `IconButton` |
+| Expand-Collapse Button | Close Button | `IconButton` |
 | Text Button—Icon Right | Text Button—Icon Left | `LinkButton` |
 | Text Section with Button Group | Section Headline with CTA | `SectionLayout` |
 | Section Headline with CTA | Section Headline | `SectionLayout` |
+| Next-Previous Buttons | Close Button | `IconButton` |
 | Text Input—Date | Text Input—Password | `Input` |
+| Next-Previous Buttons | Increase-Decrease Buttons | `IconButton` |
+| Next-Previous Buttons | Expand-Collapse Button | `IconButton` |
 | Dropdown | Form Dropdown Option | `Select` |
-| Increase-Decrease Buttons | Stepper Control | `Stepper` |
 | Simple Menu | Button Menu | `Menu` |
 | Star | Reviews | `StarRating` |
 | Text Input (single line) | Text Input—Date | `Input` |
 | Category Button | Stateful Action Button | `Button` |
 | Next-Previous Selector | Slider page selector | `Pagination` |
 | Close Button | Floating Action Button | `IconButton` |
+| Increase-Decrease Buttons | Floating Action Button | `IconButton` |
+| Expand-Collapse Button | Floating Action Button | `IconButton` |
 | Text Input (single line) | Search Field | `Input` |
 | Text Input—Date | Search Field | `Input` |
 | Badges and Tags | Sale Percentage | `Badge` |
 | Multi-Selector | Single Select Box | `SelectionGroup` |
+| Next-Previous Buttons | Floating Action Button | `IconButton` |
 | Stepper Control | Stepper CTA | `Stepper` |
 | Button | Floating Action Button with Text | `Button` |
 | Text Input (single line) | Text Input—Password | `Input` |
@@ -295,19 +303,17 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Form Dropdown | Form Dropdown Option | `Select` |
 | Text Input—Password | Search Field | `Input` |
 | Modal Button Group | Modal Dialog | `Modal` |
-| Increase-Decrease Buttons | Stepper CTA | `Stepper` |
-| Next-Previous Buttons | Next-Previous Selector | `Pagination` |
 | Floating Action Button with Text | Stateful Action Button | `Button` |
-| Next-Previous Buttons | Slider Scroll Bar | `Pagination` |
-| Expand-Collapse Button | Accordion Section | `Accordion` |
-| Next-Previous Buttons | Slider page selector | `Pagination` |
 | Multi-Select with Text | Single Select Box | `SelectionGroup` |
 | Button | Category Button | `Button` |
 | Floating Action Button | Play Button | `IconButton` |
 | Toggle Switch (text) | Single Select Box | `SelectionGroup` |
 | Multi-Select with Text | Multi-Selector | `SelectionGroup` |
 | Button | Stateful Action Button | `Button` |
+| Increase-Decrease Buttons | Play Button | `IconButton` |
+| Expand-Collapse Button | Play Button | `IconButton` |
 | Close Button | Play Button | `IconButton` |
+| Next-Previous Buttons | Play Button | `IconButton` |
 | Toggle Switch (text) | Multi-Selector | `SelectionGroup` |
 | Tabbed Selector Button | Tabbed Selector | `Tabs` |
 | Slider Scroll Bar | Next-Previous Selector | `Pagination` |

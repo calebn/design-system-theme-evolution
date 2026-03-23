@@ -10,7 +10,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | Code Component | Tier | Figma Frames |
 |----------------|------|--------------|
 | `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
-| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button |
+| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
@@ -27,11 +27,11 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `Menu` | Primitive | Simple Menu, Button Menu |
 | `Tabs` | Primitive | Tabbed Selector, Tabbed Selector Button |
 | `SubnavDropdown` | Primitive | Subnav Dropdown, Subnav Dropdown Options |
-| `Stepper` | Primitive | Stepper CTA, Stepper Control, Increase-Decrease Buttons |
-| `Pagination` | Primitive | Next-Previous Buttons, Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `Stepper` | Primitive | Stepper CTA, Stepper Control |
+| `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
 | `Toast` | Primitive | Toast Bar |
 | `Modal` | Composition | Modal Dialog, Modal Button Group |
-| `Accordion` | Composition | Accordion Section, Expand-Collapse Button |
+| `Accordion` | Composition | Accordion Section |
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
 | `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |

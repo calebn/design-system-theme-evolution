@@ -16,7 +16,7 @@
 
 ```mermaid
 graph TD
-  subgraph primitives ["Primitives (22)"]
+  subgraph primitives ["Primitives (23)"]
     Button["Button"]
     IconButton["IconButton"]
     LinkButton["LinkButton"]
@@ -38,10 +38,10 @@ graph TD
     SubnavDropdown["SubnavDropdown"]
     QuantityInput["QuantityInput"]
     Pagination["Pagination"]
+    SliderProgress["SliderProgress"]
     Toast["Toast"]
   end
   subgraph compositions ["Compositions (9)"]
-    FieldGroup["FieldGroup"]
     AddToCart["AddToCart"]
     Modal["Modal"]
     Accordion["Accordion"]
@@ -50,7 +50,10 @@ graph TD
     RadioGroup["RadioGroup"]
     CheckboxGroup["CheckboxGroup"]
     ButtonGroup["ButtonGroup"]
+    CtaRow["CtaRow"]
     Chip["Chip"]
+    FloatingActionButton["FloatingActionButton"]
+    StatefulButton["StatefulButton"]
     ProductCard["ProductCard"]
     ProductDetail["ProductDetail"]
     ProductLineup["ProductLineup"]
@@ -69,10 +72,10 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(6 code / 14 Figma)"]
+  DesignSystem --> actions["Actions\n(9 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
-  DesignSystem --> data_entry["Data Entry\n(13 code / 22 Figma)"]
-  DesignSystem --> selection["Selection & Controls\n(3 code / 6 Figma)"]
+  DesignSystem --> data_entry["Data Entry\n(12 code / 22 Figma)"]
+  DesignSystem --> selection["Selection & Controls\n(4 code / 6 Figma)"]
   DesignSystem --> data_display["Data Display\n(4 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
   DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
@@ -89,12 +92,15 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Button` | Primitive | Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button |
 | `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `AddToCart` | Composition | Stepper CTA |
-| `ButtonGroup` | Composition | Button group, CTA Row |
+| `ButtonGroup` | Composition | Button group |
+| `CtaRow` | Composition | CTA Row |
 | `Chip` | Composition | Category Button |
+| `FloatingActionButton` | Composition | Floating Action Button with Text |
+| `StatefulButton` | Composition | Stateful Action Button |
 
 ### Navigation
 
@@ -119,7 +125,6 @@ graph TD
 |----------------|------|---------------|
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `FieldGroup` | Composition | Text Input (name, two fields), Text Toggle Selector |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
 | `Checkbox` | Primitive | Checkbox, Single Select Box |
 | `RadioButton` | Primitive | Radio Button |
@@ -128,7 +133,7 @@ graph TD
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
 | `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
-| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text, Single Select Box |
+| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text |
 | `BasicForm` | Builder Block | Basic Form |
 
 ### Selection & Controls
@@ -141,7 +146,8 @@ graph TD
 |----------------|------|---------------|
 | `Switch` | Primitive | Switch, Toggle with Text |
 | `ToggleGroup` | Primitive | Toggle Switch (text) |
-| `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `Pagination` | Primitive | Next-Previous Selector |
+| `SliderProgress` | Primitive | Slider page selector, Slider Scroll Bar |
 
 ### Data Display
 
@@ -210,12 +216,12 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Category Button | Atoms | Actions | `Chip` | Composition |
 | Checkbox | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
 | Close Button | Atoms | Actions | `IconButton` | Primitive |
-| CTA Row | Atoms | Actions | `ButtonGroup` | Composition |
+| CTA Row | Atoms | Actions | `CtaRow` | Composition |
 | Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Email Capture | Inputs & Forms | Data Entry | `EmailCapture` | Composition |
 | Expand-Collapse Button | Atoms | Actions | `IconButton` | Primitive |
 | Floating Action Button | Atoms | Actions | `IconButton` | Primitive |
-| Floating Action Button with Text | Atoms | Actions | `Button` | Primitive |
+| Floating Action Button with Text | Atoms | Actions | `FloatingActionButton` | Composition |
 | Form Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Form Dropdown Option | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Free Trial Card | Molecules | Product | `FreeTrialCard` | Composition |
@@ -244,10 +250,10 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Simple Menu | Atoms | Navigation | `Menu` | Primitive |
 | Single Select Box | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
 | Slider | Inputs & Forms | Data Entry | `Slider` | Primitive |
-| Slider page selector | Molecules | Selection & Controls | `Pagination` | Primitive |
-| Slider Scroll Bar | Atoms | Selection & Controls | `Pagination` | Primitive |
+| Slider page selector | Molecules | Selection & Controls | `SliderProgress` | Primitive |
+| Slider Scroll Bar | Atoms | Selection & Controls | `SliderProgress` | Primitive |
 | Star | Atoms | Data Display | `StarRating` | Primitive |
-| Stateful Action Button | Atoms | Actions | `Button` | Primitive |
+| Stateful Action Button | Atoms | Actions | `StatefulButton` | Composition |
 | Stepper Control | Atoms | Data Entry | `QuantityInput` | Primitive |
 | Stepper CTA | Atoms | Actions | `AddToCart` | Composition |
 | Subnav Dropdown | Molecules | Navigation | `SubnavDropdown` | Primitive |
@@ -257,15 +263,15 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
 | Text Button—Icon Left | Atoms | Actions | `LinkButton` | Primitive |
 | Text Button—Icon Right | Atoms | Actions | `LinkButton` | Primitive |
-| Text Input (name, two fields) | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
+| Text Input (name, two fields) | Inputs & Forms | Data Entry | — | — |
 | Text Input (single line) | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Date | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Multiline | Inputs & Forms | Data Entry | `Textarea` | Primitive |
 | Text Input—Password | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Section | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Text Section with Button Group | Molecules | Content Layout | `SectionLayout` | Builder Block |
-| Text Toggle Selector | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
-| Text Toggle Selector | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
+| Text Toggle Selector | Inputs & Forms | Data Entry | — | — |
+| Text Toggle Selector | Inputs & Forms | Data Entry | — | — |
 | Toast Bar | Molecules | Feedback & Overlays | `Toast` | Primitive |
 | Toggle Switch (text) | Inputs & Forms | Selection & Controls | `ToggleGroup` | Primitive |
 | Toggle with Text | Inputs & Forms | Selection & Controls | `Switch` | Primitive |
@@ -301,9 +307,11 @@ packages/commerce-components/src/components/
   subnav-dropdown/
   quantity-input/
   pagination/
+  slider-progress/
   toast/
   # Compositions (React-first, Builder.io optional)
-  field-group/
+  floating-action-button/
+  stateful-button/
   modal/
   accordion/
   email-capture/
@@ -311,6 +319,7 @@ packages/commerce-components/src/components/
   radio-group/
   checkbox-group/
   button-group/
+  cta-row/
   chip/
   product-card/
   product-detail/

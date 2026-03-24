@@ -38,7 +38,7 @@ These rules apply to **every** component. They are sourced from
 | Backend data | Components requiring backend data **must** receive it via `CommerceComponentsContext` or an explicit prop callback — never by calling APIs directly. Storybook stories **must** provide stub implementations. | **Code review** |
 | Variant naming | `variant` describes visual hierarchy (`primary`, `secondary`, `tertiary`); `scale` is always a separate prop for size (`sm`, `md`, `lg`). Surface context: `-inverse` (dark surface), `-brand` (brand surface). No color or appearance words in variant names. | **Code review** |
 
-## Primitives (22)
+## Primitives (23)
 
 ---
 
@@ -46,18 +46,18 @@ These rules apply to **every** component. They are sourced from
 
 **HTML element:** `<button>` · **Directory:** `button/` · **Category:** Actions
 
-**Figma sources:** [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480), [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531), [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104)
+**Figma sources:** [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480)
 
 
-> Standard labelled action button covering primary, secondary, tertiary, and stateful variants.
+> Standard labelled action button covering primary, secondary, and tertiary visual hierarchy.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'stateful'` _(proposed)_ | `primary` | Type | Visual hierarchy — never use color/appearance words. primary/secondary are implemented; tertiary and stateful are proposed. |
+| `variant` | `'primary' \| 'secondary' \| 'tertiary'` | `primary` | Type | Visual hierarchy — never use color/appearance words. |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | Size — always a separate prop, never encoded in variant |
-| `state` | `'default' \| 'hover' \| 'active' \| 'disabled' \| 'loading' \| 'success'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -1261,16 +1261,16 @@ export function QuantityInput({ variant = 'md', className, children, ...props }:
 
 **HTML element:** `<nav>` · **Directory:** `pagination/` · **Category:** Selection & Controls
 
-**Figma sources:** [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088), [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
+**Figma sources:** [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088)
 
 
-> Navigation controls for paging through content.
+> Numbered or dot-style page selector with previous/next buttons.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'buttons' \| 'selector' \| 'page' \| 'scroll'` | `buttons` | Type | — |
+| `variant` | `'numbered' \| 'solid'` | `numbered` | Style | — |
 | `scale` | `'sm' \| 'md'` | `md` | Size | — |
 | `state` | `'default' \| 'first-page' \| 'last-page' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
@@ -1296,7 +1296,7 @@ export function QuantityInput({ variant = 'md', className, children, ...props }:
 ```tsx
 import { Pagination } from '@faithlife/commerce-components';
 
-<Pagination variant="buttons">{/* content */}</Pagination>
+<Pagination variant="numbered">{/* content */}</Pagination>
 ```
 
 </details>
@@ -1309,11 +1309,65 @@ import { Pagination } from '@faithlife/commerce-components';
 import { cn } from '../../utils';
 import { Typography } from '../typography/component';
 
-export function Pagination({ variant = 'buttons', className, children, ...props }: PaginationProps) {
+export function Pagination({ variant = 'numbered', className, children, ...props }: PaginationProps) {
   return (
     <nav className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
     </nav>
+  );
+}
+```
+
+</details>
+
+---
+
+### `SliderProgress`
+
+**HTML element:** `<div>` · **Directory:** `slider-progress/` · **Category:** Selection & Controls
+
+**Figma sources:** [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
+
+
+> Progress indicator for carousels and media sliders. Covers a progress bar with slide counter and a scroll bar indicator.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `variant` | `'progress' \| 'scroll'` | `progress` | Type | progress = bar + counter + prev/next, scroll = thin scroll position indicator |
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` on the container (e.g. "Slide 1 of 4")
+- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the progress indicator
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { SliderProgress } from '@faithlife/commerce-components';
+
+<SliderProgress variant="progress">{/* content */}</SliderProgress>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// slider-progress/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function SliderProgress({ variant = 'progress', className, children, ...props }: SliderProgressProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
   );
 }
 ```
@@ -1384,69 +1438,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (14)
-
----
-
-### `FieldGroup`
-
-**HTML element:** `<fieldset>` · **Directory:** `field-group/` · **Category:** Data Entry
-
-**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449), [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653)
-
-
-> Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.
-
-**Props:**
-
-| Prop | Type | Default | Figma Axis | Description |
-|------|------|---------|------------|-------------|
-| `columns` | `'2' \| '3' \| '4'` _(proposed)_ | `2` |  | Number of equal-width columns. Figma shows the 2-column pattern. |
-| `className` | `string` | — | — | Additional CSS class |
-| `data-testid` | `string` | — | — | Test selector hook |
-
-**Accessibility requirements:**
-
-- `<fieldset>` + `<legend>` required — this is the semantic grouping pattern
-- `<legend>` text should describe the group (e.g. "Full name", "Shipping address")
-- `aria-describedby` on the fieldset for group-level error messages
-
-**Slots / children:**
-
-- `children` — primary content area
-
-<details><summary>Consumer usage</summary>
-
-```tsx
-import { FieldGroup } from '@faithlife/commerce-components';
-
-<FieldGroup columns="2">
-  {/* BuilderBlocks renders editable content here */}
-</FieldGroup>
-```
-
-</details>
-
-<details><summary>Implementation sketch (component.tsx)</summary>
-
-```tsx
-// field-group/component.tsx
-// No @builder.io/* imports allowed here — those go in register.tsx
-import { cn } from '../../utils';
-import { BuilderBlocks } from '@builder.io/react';
-import { Typography } from '../typography/component';
-
-export function FieldGroup({ title, content, ...props }: FieldGroupProps) {
-  return (
-    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
-      {title && <Typography variant="h3">{title}</Typography>}
-      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
-    </section>
-  );
-}
-```
-
-</details>
+## Compositions (16)
 
 ---
 
@@ -1840,7 +1832,7 @@ export function RadioGroup({ title, content, ...props }: RadioGroupProps) {
 
 **HTML element:** `<fieldset>` · **Directory:** `checkbox-group/` · **Category:** Data Entry
 
-**Figma sources:** [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867)
+**Figma sources:** [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250)
 
 
 > Group of multi-select checkbox options with field label and error state.
@@ -1903,7 +1895,7 @@ export function CheckboxGroup({ title, content, ...props }: CheckboxGroupProps) 
 
 **HTML element:** `<div>` · **Directory:** `button-group/` · **Category:** Actions
 
-**Figma sources:** [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083), [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152)
+**Figma sources:** [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083)
 
 
 > Horizontal or vertical group of Button components for related actions.
@@ -1944,6 +1936,68 @@ import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
 export function ButtonGroup({ title, content, ...props }: ButtonGroupProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `CtaRow`
+
+**HTML element:** `<a>` · **Directory:** `cta-row/` · **Category:** Actions
+
+**Figma sources:** [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152)
+
+
+> Full-width navigational link row with text and trailing arrow icon. Used in lists of navigation links.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `state` | `'default' \| 'hover' \| 'focus' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `href` required — renders as an anchor link
+- `aria-label` if the visible text is not descriptive enough
+- `aria-current="page"` when marking an active link
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { CtaRow } from '@faithlife/commerce-components';
+
+<CtaRow state="default">
+  {/* BuilderBlocks renders editable content here */}
+</CtaRow>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// cta-row/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function CtaRow({ title, content, ...props }: CtaRowProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}
@@ -2007,6 +2061,129 @@ import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
 export function Chip({ title, content, ...props }: ChipProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `FloatingActionButton`
+
+**HTML element:** `<button>` · **Directory:** `floating-action-button/` · **Category:** Actions
+
+**Figma sources:** [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531)
+
+
+> Rounded pill button with text label and plus icon. Wraps Button with a constrained pill-shape API.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `scale` | `'sm' \| 'md'` | `md` | Size | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'active' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- Same requirements as `button`
+- `aria-label` if icon conveys the action
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { FloatingActionButton } from '@faithlife/commerce-components';
+
+<FloatingActionButton scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</FloatingActionButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// floating-action-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FloatingActionButton({ title, content, ...props }: FloatingActionButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `StatefulButton`
+
+**HTML element:** `<button>` · **Directory:** `stateful-button/` · **Category:** Actions
+
+**Figma sources:** [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104)
+
+
+> Button with built-in loading and success transition states (CTA → loading spinner → success checkmark). Wraps Button with async state management.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `state` | `'default' \| 'hover' \| 'focus' \| 'loading' \| 'success' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-busy="true"` while in loading state
+- `aria-live="polite"` region to announce success/error transitions
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { StatefulButton } from '@faithlife/commerce-components';
+
+<StatefulButton state="default">
+  {/* BuilderBlocks renders editable content here */}
+</StatefulButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// stateful-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function StatefulButton({ title, content, ...props }: StatefulButtonProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}

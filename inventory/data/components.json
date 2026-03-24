@@ -360,7 +360,7 @@
     "figmaId": "5650:121531",
     "section": "atoms",
     "functionalCategory": "actions",
-    "proposedCodeName": "FloatingActionButtonLabel",
+    "proposedCodeName": "FloatingActionButton",
     "variantCount": 10,
     "properties": {
       "Size": [
@@ -383,7 +383,7 @@
     "figmaId": "2245:93685",
     "section": "atoms",
     "functionalCategory": "selection",
-    "proposedCodeName": "ScrollBar",
+    "proposedCodeName": "SliderProgress",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -776,7 +776,7 @@
     "figmaId": "1756:2384",
     "section": "molecules",
     "functionalCategory": "selection",
-    "proposedCodeName": "PageSelector",
+    "proposedCodeName": "SliderProgress",
     "variantCount": 2,
     "properties": {
       "Style": [
@@ -1022,7 +1022,7 @@
     "figmaId": "2758:3449",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "FieldGroup",
+    "proposedCodeName": "Input",
     "variantCount": 6,
     "properties": {
       "Style": [
@@ -1227,7 +1227,7 @@
     "figmaId": "1623:5649",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "FieldGroup",
+    "proposedCodeName": "Switch",
     "variantCount": 1,
     "properties": {
       "Property 1": [
@@ -1242,7 +1242,7 @@
     "figmaId": "1623:5653",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "FieldGroup",
+    "proposedCodeName": "Switch",
     "variantCount": 1,
     "properties": {
       "Property 1": [

@@ -284,39 +284,31 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Simple Menu | Button Menu | `Menu` |
 | Star | Reviews | `StarRating` |
 | Text Input (single line) | Text Input—Date | `Input` |
-| Next-Previous Selector | Slider page selector | `Pagination` |
 | Close Button | Floating Action Button | `IconButton` |
 | Increase-Decrease Buttons | Floating Action Button | `IconButton` |
 | Expand-Collapse Button | Floating Action Button | `IconButton` |
 | Text Input (single line) | Search Field | `Input` |
 | Text Input—Date | Search Field | `Input` |
-| Multi-Selector | Single Select Box | `CheckboxGroup` |
+| Checkbox | Single Select Box | `Checkbox` |
 | Next-Previous Buttons | Floating Action Button | `IconButton` |
-| Button | Floating Action Button with Text | `Button` |
 | Text Input (single line) | Text Input—Password | `Input` |
 | Dropdown | Form Dropdown | `Select` |
 | Form Dropdown | Form Dropdown Option | `Select` |
 | Text Input—Password | Search Field | `Input` |
 | Modal Button Group | Modal Dialog | `Modal` |
-| Floating Action Button with Text | Stateful Action Button | `Button` |
-| Multi-Select with Text | Single Select Box | `CheckboxGroup` |
 | Floating Action Button | Play Button | `IconButton` |
 | Multi-Select with Text | Multi-Selector | `CheckboxGroup` |
-| Button | Stateful Action Button | `Button` |
 | Increase-Decrease Buttons | Play Button | `IconButton` |
 | Expand-Collapse Button | Play Button | `IconButton` |
 | Close Button | Play Button | `IconButton` |
 | Next-Previous Buttons | Play Button | `IconButton` |
 | Tabbed Selector Button | Tabbed Selector | `Tabs` |
-| Slider Scroll Bar | Next-Previous Selector | `Pagination` |
-| Slider Scroll Bar | Slider page selector | `Pagination` |
-| CTA Row | Button group | `ButtonGroup` |
+| Slider Scroll Bar | Slider page selector | `SliderProgress` |
 | Subnav Dropdown Options | Subnav Dropdown | `SubnavDropdown` |
 | Text Section with Button Group | Text Section | `SectionLayout` |
 | Text Section | Section Headline with CTA | `SectionLayout` |
 | Text Section | Section Headline | `SectionLayout` |
 | Switch | Toggle with Text | `Switch` |
-| Text Input (name, two fields) | Text Toggle Selector | `FieldGroup` |
 
 ### 🔍 Candidates for Review
 

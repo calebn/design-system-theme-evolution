@@ -145,7 +145,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Text Button—Icon Left': 'TextButtonIconLeft',
   'Close Button': 'CloseButton',
   'Floating Action Button': 'FloatingActionButton',
-  'Floating Action Button with Text': 'FloatingActionButtonLabel',
+  'Floating Action Button with Text': 'FloatingActionButton',
   'Play Button': 'PlayButton',
   'Category Button': 'Chip',
   'CTA Row': 'CtaRow',
@@ -166,8 +166,8 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Next-Previous Selector': 'PreviousNextSelector',
   'Increase-Decrease Buttons': 'QuantityButtons',
   'Expand-Collapse Button': 'ExpandCollapseButton',
-  'Slider Scroll Bar': 'ScrollBar',
-  'Slider page selector': 'PageSelector',
+  'Slider Scroll Bar': 'SliderProgress',
+  'Slider page selector': 'SliderProgress',
   'Reviews': 'ReviewRating',
   'Star': 'StarIcon',
   'Badges and Tags': 'Badge',
@@ -190,7 +190,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Multi-CTA List': 'CtaList',
   'Basic Form': 'Form',
   'Text Input (single line)': 'TextInput',
-  'Text Input (name, two fields)': 'FieldGroup',
+  'Text Input (name, two fields)': 'Input',
   'Text Input—Date': 'DateInput',
   'Text Input—Multiline': 'Textarea',
   'Text Input—Password': 'PasswordInput',
@@ -203,7 +203,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Toggle with Text': 'Switch',
   'Toggle Switch (text)': 'ToggleGroup',
   'Multi-Select with Text': 'RadioGroup',
-  'Text Toggle Selector': 'FieldGroup',
+  'Text Toggle Selector': 'Switch',
   'Single Select Box': 'Checkbox',
   'Category Button': 'Chip',
   'Product Lineup—Single': 'ProductLineup',
@@ -422,19 +422,17 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'button',
     tier: 'primitive',
     functionalCategory: 'actions',
-    description: 'Standard labelled action button covering primary, secondary, tertiary, and stateful variants.',
+    description: 'Standard labelled action button covering primary, secondary, and tertiary visual hierarchy.',
     htmlElement: 'button',
     figmaSources: [
       'Button',
-      'Floating Action Button with Text',
-      'Stateful Action Button',
     ],
     props: [
-      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'stateful'", figmaAxis: 'Type', default: 'primary', description: 'Visual hierarchy — never use color/appearance words. primary/secondary are implemented; tertiary and stateful are proposed.', proposed: true },
+      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary'", figmaAxis: 'Type', default: 'primary', description: 'Visual hierarchy — never use color/appearance words.' },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md', description: 'Size — always a separate prop, never encoded in variant' },
-      { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'", figmaAxis: 'State', default: 'default' },
+      { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All labelled button elements; variant prop handles visual hierarchy (primary → secondary → tertiary)',
+    justification: 'Core labelled button — primary, secondary, tertiary hierarchy. FloatingActionButton and StatefulButton are separate compositions with distinct APIs.',
   },
 
   {
@@ -515,20 +513,6 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
     justification: 'Single multi-line text input; no grouping needed',
-  },
-
-  {
-    name: 'FieldGroup',
-    directoryName: 'field-group',
-    tier: 'composition',
-    functionalCategory: 'data-entry',
-    description: 'Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.',
-    htmlElement: 'fieldset',
-    figmaSources: ['Text Input (name, two fields)', 'Text Toggle Selector'],
-    props: [
-      { name: 'columns', type: "'2' | '3' | '4'", figmaAxis: '', default: '2', description: 'Number of equal-width columns. Figma shows the 2-column pattern.', proposed: true },
-    ],
-    justification: 'Both are fieldset wrappers grouping related form fields (WCAG 1.3.1 info and relationships)',
   },
 
   {
@@ -773,19 +757,30 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'pagination',
     tier: 'primitive',
     functionalCategory: 'selection',
-    description: 'Navigation controls for paging through content.',
+    description: 'Numbered or dot-style page selector with previous/next buttons.',
     htmlElement: 'nav',
-    figmaSources: [
-      'Next-Previous Selector',
-      'Slider page selector',
-      'Slider Scroll Bar',
-    ],
+    figmaSources: ['Next-Previous Selector'],
     props: [
-      { name: 'variant', type: "'buttons' | 'selector' | 'page' | 'scroll'", figmaAxis: 'Type', default: 'buttons' },
+      { name: 'variant', type: "'numbered' | 'solid'", figmaAxis: 'Style', default: 'numbered' },
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'first-page' | 'last-page' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All three are content navigation controls; arrow buttons, dot selector, and scroll bar are layout variants of the same nav element',
+    justification: 'Single numbered/dot page selector with prev/next controls; distinct from SliderProgress which is a carousel progress indicator',
+  },
+
+  {
+    name: 'SliderProgress',
+    directoryName: 'slider-progress',
+    tier: 'primitive',
+    functionalCategory: 'selection',
+    description: 'Progress indicator for carousels and media sliders. Covers a progress bar with slide counter and a scroll bar indicator.',
+    htmlElement: 'div',
+    figmaSources: ['Slider page selector', 'Slider Scroll Bar'],
+    props: [
+      { name: 'variant', type: "'progress' | 'scroll'", figmaAxis: 'Type', default: 'progress', description: 'progress = bar + counter + prev/next, scroll = thin scroll position indicator' },
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+    ],
+    justification: 'Both are carousel/slider progress indicators; neither is page-based navigation like Pagination',
   },
 
   {
@@ -884,12 +879,12 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     functionalCategory: 'data-entry',
     description: 'Group of multi-select checkbox options with field label and error state.',
     htmlElement: 'fieldset',
-    figmaSources: ['Multi-Selector', 'Multi-Select with Text', 'Single Select Box'],
+    figmaSources: ['Multi-Selector', 'Multi-Select with Text'],
     props: [
       { name: 'variant', type: "'list' | 'inline'", figmaAxis: 'Size', default: 'list', description: 'list = vertical with field label, inline = compact horizontal pills' },
       { name: 'state', type: "'default' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All show grouped checkbox options in a fieldset; Single Select Box is a single-item consent group',
+    justification: 'Both show grouped checkbox options in a fieldset; list vs inline are layout variants of the same control',
   },
 
   {
@@ -899,12 +894,26 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     functionalCategory: 'actions',
     description: 'Horizontal or vertical group of Button components for related actions.',
     htmlElement: 'div',
-    figmaSources: ['Button group', 'CTA Row'],
+    figmaSources: ['Button group'],
     props: [
       { name: 'layout', type: "'horizontal' | 'vertical'", figmaAxis: undefined, default: 'horizontal' },
       { name: 'align', type: "'start' | 'center' | 'end'", figmaAxis: undefined, default: 'start' },
     ],
-    justification: 'Both group related action buttons; CTA Row is the full-width stacked variant',
+    justification: 'Groups 2-4 side-by-side action buttons; horizontal alignment with optional description text below',
+  },
+
+  {
+    name: 'CtaRow',
+    directoryName: 'cta-row',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Full-width navigational link row with text and trailing arrow icon. Used in lists of navigation links.',
+    htmlElement: 'a',
+    figmaSources: ['CTA Row'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+    justification: 'Full-width link row with arrow icon; structurally a navigational link, not a button group',
   },
 
   {
@@ -920,6 +929,35 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
     justification: 'Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention)',
+  },
+
+  {
+    name: 'FloatingActionButton',
+    directoryName: 'floating-action-button',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Rounded pill button with text label and plus icon. Wraps Button with a constrained pill-shape API.',
+    htmlElement: 'button',
+    figmaSources: ['Floating Action Button with Text'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+    justification: 'Pill-shaped variant of Button with mandatory icon; distinct visual treatment not shared with rectangular Button',
+  },
+
+  {
+    name: 'StatefulButton',
+    directoryName: 'stateful-button',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Button with built-in loading and success transition states (CTA → loading spinner → success checkmark). Wraps Button with async state management.',
+    htmlElement: 'button',
+    figmaSources: ['Stateful Action Button'],
+    props: [
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'loading' | 'success' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+    justification: 'Loading and success state transitions require internal state management not present in base Button',
   },
 
   {
@@ -1082,9 +1120,11 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  subnav-dropdown/',
   '  quantity-input/',
   '  pagination/',
+  '  slider-progress/',
   '  toast/',
   '  # Compositions (React-first, Builder.io optional)',
-  '  field-group/',
+  '  floating-action-button/',
+  '  stateful-button/',
   '  modal/',
   '  accordion/',
   '  email-capture/',
@@ -1092,6 +1132,7 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  radio-group/',
   '  checkbox-group/',
   '  button-group/',
+  '  cta-row/',
   '  chip/',
   '  product-card/',
   '  product-detail/',

@@ -9,12 +9,11 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 | Code Component | Tier | Figma Frames |
 |----------------|------|--------------|
-| `Button` | Primitive | Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button |
 | `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `FieldGroup` | Composition | Text Input (name, two fields), Text Toggle Selector |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
 | `Checkbox` | Primitive | Checkbox, Single Select Box |
 | `RadioButton` | Primitive | Radio Button |
@@ -31,16 +30,20 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `SubnavDropdown` | Primitive | Subnav Dropdown, Subnav Dropdown Options |
 | `QuantityInput` | Primitive | Stepper Control |
 | `AddToCart` | Composition | Stepper CTA |
-| `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
+| `Pagination` | Primitive | Next-Previous Selector |
+| `SliderProgress` | Primitive | Slider page selector, Slider Scroll Bar |
 | `Toast` | Primitive | Toast Bar |
 | `Modal` | Composition | Modal Dialog, Modal Button Group |
 | `Accordion` | Composition | Accordion Section |
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
 | `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
-| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text, Single Select Box |
-| `ButtonGroup` | Composition | Button group, CTA Row |
+| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text |
+| `ButtonGroup` | Composition | Button group |
+| `CtaRow` | Composition | CTA Row |
 | `Chip` | Composition | Category Button |
+| `FloatingActionButton` | Composition | Floating Action Button with Text |
+| `StatefulButton` | Composition | Stateful Action Button |
 | `ProductCard` | Composition | Product Grid Card |
 | `ProductDetail` | Composition | Product Content |
 | `ProductLineup` | Composition | Product Lineup—Single |
@@ -54,6 +57,9 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 These frames are not yet assigned to a code component — review and assign:
 
+- [ ] **Text Input (name, two fields)** (Data Entry)
+- [ ] **Text Toggle Selector** (Data Entry)
+- [ ] **Text Toggle Selector** (Data Entry)
 - [ ] **Product Images** (Data Display)
 - [ ] **Image Ratios** (Data Display)
 - [ ] **List** (Data Display)

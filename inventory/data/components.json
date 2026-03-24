@@ -420,7 +420,7 @@
     "name": "Stepper Control",
     "figmaId": "1623:5401",
     "section": "atoms",
-    "functionalCategory": "actions",
+    "functionalCategory": "data-entry",
     "proposedCodeName": "StepperControl",
     "variantCount": 8,
     "properties": {

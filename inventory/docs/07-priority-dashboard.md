@@ -30,10 +30,11 @@
 | `Button` | Primitive | Actions | 4 ⚠️ | 15 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `LinkButton` | Primitive | Actions | 2 ⚠️ | 4 | **9** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `StarRating` | Primitive | Data Display | 2 | 5 | **9** | ✅ Build first — high dependency weight |
+| `AddToCart` | Composition | Actions | 1 | 1 | **8** | ✅ Build first — high dependency weight |
 | `ButtonGroup` | Composition | Actions | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `IconButton` | Primitive | Actions | 6 ⚠️ | 5 | **8** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `Pagination` | Primitive | Selection & Controls | 3 | 2 | **8** | ✅ Build first — high dependency weight |
-| `Stepper` | Primitive | Selection & Controls | 2 | 2 | **8** | ✅ Build first — high dependency weight |
+| `QuantityInput` | Primitive | Data Entry | 1 | 1 | **8** | ✅ Build first — high dependency weight |
 | `SubnavDropdown` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `Tabs` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `Accordion` | Composition | Content Layout | 1 | 0 | **7** | ✅ Build first — high dependency weight |
@@ -55,7 +56,7 @@
 | `ProductCard` | Composition | Product | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | `ProductDetail` | Composition | Product | 2 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | `SectionLayout` | Builder Block | Content Layout | 4 | 1 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
-| `Toggle` | Primitive | Selection & Controls | 2 ⚠️ | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) (some frames need Figma cleanup) |
+| `Switch` | Primitive | Selection & Controls | 2 ⚠️ | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) (some frames need Figma cleanup) |
 | `CtaList` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | `FreeTrialCard` | Composition | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | `ProductCarousel` | Builder Block | Product | 1 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
@@ -76,8 +77,8 @@
 | Expand-Collapse Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Increase-Decrease Buttons | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
 | Slider Scroll Bar | `Pagination` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
-| Stepper Control | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
-| Stepper CTA | `Stepper` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
+| Stepper Control | `QuantityInput` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
+| Stepper CTA | `AddToCart` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Subnav Dropdown Options | `SubnavDropdown` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Tabbed Selector Button | `Tabs` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Accordion Section | `Accordion` | Atoms | 3 | 2 | 1 | 1 | 0 | **7** | ✅ Build first — high dependency weight |
@@ -124,10 +125,10 @@
 | Section Headline | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | Section Headline with CTA | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | Subnav Dropdown | `SubnavDropdown` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
-| Switch | `Toggle` | Inputs & Forms | 2 | 2 | 0 | 0 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Switch | `Switch` | Inputs & Forms | 2 | 2 | 0 | 0 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Text Section | `SectionLayout` | Molecules | 1 | 2 | 0 | 0 | 1 (1) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | Text Section with Button Group | `SectionLayout` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
-| Toggle with Text | `Toggle` | Inputs & Forms | 2 | 1 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
+| Toggle with Text | `Switch` | Inputs & Forms | 2 | 1 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
 | Carousel Product | `ProductCarousel` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Free Trial Card | `FreeTrialCard` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Multi-CTA List | `CtaList` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |

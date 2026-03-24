@@ -71,7 +71,7 @@ const FUNCTIONAL_CATEGORY_MAP: Record<string, FunctionalCategory> = {
   'CTA Row': 'actions',
   'Stateful Action Button': 'actions',
   'Stepper CTA': 'actions',
-  'Stepper Control': 'actions',
+  'Stepper Control': 'data-entry',
   // Feedback
   'Toast Bar': 'feedback',
   'Modal Dialog': 'feedback',
@@ -462,13 +462,14 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'link-button',
     tier: 'primitive',
     functionalCategory: 'actions',
-    description: 'Inline text link with an optional leading or trailing icon. Renders as an anchor or button depending on context.',
-    htmlElement: 'button',
+    description: 'Inline anchor link with an optional leading or trailing icon. Always renders as an <a> element and requires an href.',
+    htmlElement: 'a',
     figmaSources: [
       'Text Button—Icon Left',
       'Text Button—Icon Right',
     ],
     props: [
+      { name: 'href', type: 'string', figmaAxis: '', default: '', description: 'Required. The URL the link points to.' },
       { name: 'variant', type: "'default' | 'arrow-link'", figmaAxis: 'Type', default: 'default', description: 'Distinguishes a plain text link from a directional/arrow-style link. Values are proposed — not derived from a Figma axis.', proposed: true },
       { name: 'iconPosition', type: "'leading' | 'trailing'", figmaAxis: 'Type', default: 'trailing', description: 'Leading = icon left, trailing = icon right' },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
@@ -565,11 +566,11 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
   },
 
   {
-    name: 'Toggle',
-    directoryName: 'toggle',
+    name: 'Switch',
+    directoryName: 'switch',
     tier: 'primitive',
     functionalCategory: 'selection',
-    description: 'On/off toggle switch, optionally with a text label.',
+    description: 'On/off switch control, optionally with a text label.',
     htmlElement: 'input[type=checkbox]',
     figmaSources: ['Switch', 'Toggle with Text'],
     props: [
@@ -690,17 +691,30 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
   },
 
   {
-    name: 'Stepper',
-    directoryName: 'stepper',
+    name: 'QuantityInput',
+    directoryName: 'quantity-input',
     tier: 'primitive',
-    functionalCategory: 'selection',
-    description: 'Quantity control with increment/decrement. Covers standalone controls and CTA-embedded variants.',
+    functionalCategory: 'data-entry',
+    description: 'Numeric quantity picker with increment and decrement buttons.',
     htmlElement: 'div',
-    figmaSources: ['Stepper CTA', 'Stepper Control'],
+    figmaSources: ['Stepper Control'],
     props: [
-      { name: 'variant', type: "'cta' | 'control' | 'quantity'", figmaAxis: 'Type', default: 'control', description: 'cta = with add-to-cart button, control = inline control, quantity = bare +/- buttons' },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
-      { name: 'state', type: "'default' | 'minimum' | 'maximum' | 'disabled'", figmaAxis: 'State', default: 'default' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+  },
+
+  {
+    name: 'AddToCart',
+    directoryName: 'add-to-cart',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Multi-stage add-to-cart widget: CTA button → quantity picker → in-cart confirmation. Deferred — not planned for initial implementation.',
+    htmlElement: 'div',
+    figmaSources: ['Stepper CTA'],
+    props: [
+      { name: 'stage', type: "'default' | 'quantity' | 'selected'", figmaAxis: 'Stage', default: 'default' },
+      { name: 'state', type: "'default' | 'hover' | 'focus' | 'minimum' | 'maximum' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
   },
 

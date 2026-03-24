@@ -1549,13 +1549,13 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
 const ARIA_REQUIREMENTS: Record<string, string[]> = {
   button: ['`role="button"` (implicit on `<button>`)', '`aria-label` when icon-only', '`aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)', '`aria-pressed` for toggle-style buttons'],
   'icon-button': ['`aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', '`aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)'],
-  'link-button': ['`aria-label` or visible text required', 'If rendered as `<a>`, must have `href`', '`aria-current="page"` when marking active link'],
+  'link-button': ['`href` required — always renders as `<a>`', '`aria-label` or visible text required', '`aria-current="page"` when marking active link'],
   input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
   textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],
   select: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-expanded` when open'],
   checkbox: ['`<label>` associated', '`aria-checked` for indeterminate state', '`aria-required` when required'],
   'radio-button': ['`<fieldset>` + `<legend>` wrapping radio groups', '`aria-required` on group'],
-  toggle: ['`role="switch"` with `aria-checked`', '`aria-label` describing what is toggled'],
+  switch: ['`role="switch"` with `aria-checked`', '`aria-label` describing what is toggled'],
   slider: ['`role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`', '`aria-label` or `<label>`'],
   badge: ['`role="status"` if dynamic', '`aria-label` for icon-only badges'],
   'star-rating': ['`role="img"` with `aria-label` for display-only', '`role="radiogroup"` for interactive rating'],
@@ -1566,7 +1566,8 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   accordion: ['`role="region"` on panel', '`aria-expanded` on trigger button', '`aria-controls` linking trigger to panel'],
   pagination: ['`<nav aria-label="Pagination">`', '`aria-current="page"` on current page', '`aria-label` on prev/next buttons'],
   toast: ['`role="status"` or `role="alert"` depending on urgency', '`aria-live="polite"` for non-urgent', '`aria-live="assertive"` for urgent'],
-  stepper: ['`aria-label` on increment/decrement buttons', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display'],
+  'quantity-input': ['`aria-label` on increment/decrement buttons (e.g. "Increase quantity", "Decrease quantity")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display'],
+  'add-to-cart': ['`aria-label` describing current stage (e.g. "Add to cart", "Quantity picker", "In cart")', '`aria-live="polite"` on the container so stage transitions are announced to screen readers'],
 };
 
 // Tailwind token categories per component (sourced from @faithlife/commerce-theme).
@@ -1628,7 +1629,7 @@ const COMPONENT_TOKENS: Record<string, {
     shadows: [],
     transitions: ['duration-short'],
   },
-  toggle: {
+  switch: {
     colors: ['bg-secondary-200', 'bg-primary', 'text-white'],
     spacing: ['gap-sp8'],
     typography: [],

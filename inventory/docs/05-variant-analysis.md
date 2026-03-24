@@ -294,7 +294,6 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Badges and Tags | Sale Percentage | `Badge` |
 | Multi-Selector | Single Select Box | `SelectionGroup` |
 | Next-Previous Buttons | Floating Action Button | `IconButton` |
-| Stepper Control | Stepper CTA | `Stepper` |
 | Button | Floating Action Button with Text | `Button` |
 | Text Input (single line) | Text Input—Password | `Input` |
 | Multi-Select with Text | Toggle Switch (text) | `SelectionGroup` |
@@ -324,7 +323,7 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Text Section | Section Headline with CTA | `SectionLayout` |
 | Text Section | Section Headline | `SectionLayout` |
 | Product Content | Product Lineup—Single | `ProductDetail` |
-| Switch | Toggle with Text | `Toggle` |
+| Switch | Toggle with Text | `Switch` |
 | Multi-Select with Text | Text Toggle Selector | `SelectionGroup` |
 | Toggle Switch (text) | Text Toggle Selector | `SelectionGroup` |
 | Multi-Selector | Text Toggle Selector | `SelectionGroup` |
@@ -335,10 +334,11 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Component A | Component B | Shared Axes | Value Overlap | Recommendation |
 |-------------|-------------|-------------|---------------|----------------|
 | Button Menu | Tabbed Selector Button | Size, State | 100% | Same axes [Size, State] · 100% value overlap — strong merge candidate |
-| Floating Action Button with Text | Stepper Control | Size, State | 86% | Same axes [Size, State] · 86% value overlap — strong merge candidate |
+| Stepper Control | Search Field | Size, State | 86% | Same axes [Size, State] · 86% value overlap — strong merge candidate |
 | Text Input (single line) | Text Input (name, two fields) | Style, State | 63% | Text Input (name, two fields) is a composition of two Text Input fields with a specific two-column layout. Map to TextInputGroup (a thin wrapper), not to the base Input primitive. |
 | Slider Scroll Bar | Slider | State | 43% | Merge into a single Slider component. Slider Scroll Bar is a visual variant (appears inside a carousel), not a distinct interaction pattern. Use a variant prop to differentiate. |
 | Floating Action Button | Floating Action Button with Text | Size, State | 75% | Merge into a single IconButton or Button component using a variant='floating' prop. The text-label variant is additive (children prop), not a separate component. |
+| Stepper Control | Stepper CTA | State | 67% | Both map to the Stepper code component. Stepper CTA is the full quantity-selector (increment/decrement + display), Stepper Control is the bare control. Use a variant='cta' \| 'control' prop. |
 | Button | Button Menu | State, Size | 75% | Common stem "Button" · shares [State, Size] axes — review for variant prop consolidation |
 | Multi-CTA List | Multi-Select with Text | Size | 50% | Unrelated despite the 'Multi' stem. Multi-CTA List is a content layout block; Multi-Select with Text is a form control. Keep separate. |
 | Button Menu | Button group | Size | — | Different components despite the 'Button' stem. Button Menu is a navigation dropdown (nav element); ButtonGroup is a layout wrapper for action buttons. Keep separate. |

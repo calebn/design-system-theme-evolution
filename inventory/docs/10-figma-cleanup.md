@@ -18,7 +18,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
 | `Checkbox` | Primitive | Checkbox |
 | `RadioButton` | Primitive | Radio Button |
-| `Toggle` | Primitive | Switch, Toggle with Text |
+| `Switch` | Primitive | Switch, Toggle with Text |
 | `Slider` | Primitive | Slider |
 | `Badge` | Primitive | Badges and Tags, Sale Percentage |
 | `StarRating` | Primitive | Star, Reviews |
@@ -27,7 +27,8 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `Menu` | Primitive | Simple Menu, Button Menu |
 | `Tabs` | Primitive | Tabbed Selector, Tabbed Selector Button |
 | `SubnavDropdown` | Primitive | Subnav Dropdown, Subnav Dropdown Options |
-| `Stepper` | Primitive | Stepper CTA, Stepper Control |
+| `QuantityInput` | Primitive | Stepper Control |
+| `AddToCart` | Composition | Stepper CTA |
 | `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
 | `Toast` | Primitive | Toast Bar |
 | `Modal` | Composition | Modal Dialog, Modal Button Group |

@@ -204,17 +204,18 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 
 ### `LinkButton`
 
-**HTML element:** `<button>` · **Directory:** `link-button/` · **Category:** Actions
+**HTML element:** `<a>` · **Directory:** `link-button/` · **Category:** Actions
 
 **Figma sources:** [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995), [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782)
 
 
-> Inline text link with an optional leading or trailing icon. Renders as an anchor or button depending on context.
+> Inline anchor link with an optional leading or trailing icon. Always renders as an <a> element and requires an href.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
+| `href` | `string` | `` |  | Required. The URL the link points to. |
 | `variant` | `'default' \| 'arrow-link'` _(proposed)_ | `default` | Type | Distinguishes a plain text link from a directional/arrow-style link. Values are proposed — not derived from a Figma axis. |
 | `iconPosition` | `'leading' \| 'trailing'` | `trailing` | Type | Leading = icon left, trailing = icon right |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
@@ -233,8 +234,8 @@ export function IconButton({ variant = 'default', scale = 'medium', className, c
 
 **Accessibility requirements:**
 
+- `href` required — always renders as `<a>`
 - `aria-label` or visible text required
-- If rendered as `<a>`, must have `href`
 - `aria-current="page"` when marking active link
 
 <details><summary>Consumer usage</summary>
@@ -256,9 +257,9 @@ import { LinkButton } from '@faithlife/commerce-components';
 import { cn } from '../../utils';
 import { Typography } from '../typography/component';
 
-export function LinkButton({ variant = 'default', scale = 'medium', className, children, ...props }: LinkButtonProps) {
+export function LinkButton({ variant = '', scale = 'medium', className, children, ...props }: LinkButtonProps) {
   return (
-    <button
+    <a
       className={cn(
         'tw-preflight',
         'inline-flex items-center justify-center gap-sp12 rounded-[2px]',
@@ -271,7 +272,7 @@ export function LinkButton({ variant = 'default', scale = 'medium', className, c
       {...props}
     >
       <Typography variant="buttonTextLg" tag="span">{children}</Typography>
-    </button>
+    </a>
   );
 }
 ```
@@ -640,14 +641,14 @@ export function RadioButton({ variant = 'default', className, children, ...props
 
 ---
 
-### `Toggle`
+### `Switch`
 
-**HTML element:** `<input[type=checkbox]>` · **Directory:** `toggle/` · **Category:** Selection & Controls
+**HTML element:** `<input[type=checkbox]>` · **Directory:** `switch/` · **Category:** Selection & Controls
 
 **Figma sources:** [Switch](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5125), [Toggle with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311)
 
 
-> On/off toggle switch, optionally with a text label.
+> On/off switch control, optionally with a text label.
 
 **Props:**
 
@@ -674,9 +675,9 @@ export function RadioButton({ variant = 'default', className, children, ...props
 <details><summary>Consumer usage</summary>
 
 ```tsx
-import { Toggle } from '@faithlife/commerce-components';
+import { Switch } from '@faithlife/commerce-components';
 
-<Toggle variant="default">{/* content */}</Toggle>
+<Switch variant="default">{/* content */}</Switch>
 ```
 
 </details>
@@ -684,12 +685,12 @@ import { Toggle } from '@faithlife/commerce-components';
 <details><summary>Implementation sketch (component.tsx)</summary>
 
 ```tsx
-// toggle/component.tsx
+// switch/component.tsx
 // No @builder.io/* imports allowed here — those go in register.tsx
 import { cn } from '../../utils';
 import { Typography } from '../typography/component';
 
-export function Toggle({ variant = 'default', className, children, ...props }: ToggleProps) {
+export function Switch({ variant = 'default', className, children, ...props }: SwitchProps) {
   return (
     <input[type=checkbox] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
@@ -1142,36 +1143,35 @@ export function SubnavDropdown({ variant = 'trigger', className, children, ...pr
 
 ---
 
-### `Stepper`
+### `QuantityInput`
 
-**HTML element:** `<div>` · **Directory:** `stepper/` · **Category:** Selection & Controls
+**HTML element:** `<div>` · **Directory:** `quantity-input/` · **Category:** Data Entry
 
-**Figma sources:** [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162), [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401)
+**Figma sources:** [Stepper Control](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401)
 
 
-> Quantity control with increment/decrement. Covers standalone controls and CTA-embedded variants.
+> Numeric quantity picker with increment and decrement buttons.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'cta' \| 'control' \| 'quantity'` | `control` | Type | cta = with add-to-cart button, control = inline control, quantity = bare +/- buttons |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
-| `state` | `'default' \| 'minimum' \| 'maximum' \| 'disabled'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
 **Accessibility requirements:**
 
-- `aria-label` on increment/decrement buttons
+- `aria-label` on increment/decrement buttons (e.g. "Increase quantity", "Decrease quantity")
 - `aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display
 
 <details><summary>Consumer usage</summary>
 
 ```tsx
-import { Stepper } from '@faithlife/commerce-components';
+import { QuantityInput } from '@faithlife/commerce-components';
 
-<Stepper variant="control">{/* content */}</Stepper>
+<QuantityInput scale="md">{/* content */}</QuantityInput>
 ```
 
 </details>
@@ -1179,12 +1179,12 @@ import { Stepper } from '@faithlife/commerce-components';
 <details><summary>Implementation sketch (component.tsx)</summary>
 
 ```tsx
-// stepper/component.tsx
+// quantity-input/component.tsx
 // No @builder.io/* imports allowed here — those go in register.tsx
 import { cn } from '../../utils';
 import { Typography } from '../typography/component';
 
-export function Stepper({ variant = 'control', className, children, ...props }: StepperProps) {
+export function QuantityInput({ variant = 'md', className, children, ...props }: QuantityInputProps) {
   return (
     <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
@@ -1324,7 +1324,69 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (9)
+## Compositions (10)
+
+---
+
+### `AddToCart`
+
+**HTML element:** `<div>` · **Directory:** `add-to-cart/` · **Category:** Actions
+
+**Figma sources:** [Stepper CTA](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162)
+
+
+> Multi-stage add-to-cart widget: CTA button → quantity picker → in-cart confirmation. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `stage` | `'default' \| 'quantity' \| 'selected'` | `default` | Stage | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'minimum' \| 'maximum' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` describing current stage (e.g. "Add to cart", "Quantity picker", "In cart")
+- `aria-live="polite"` on the container so stage transitions are announced to screen readers
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { AddToCart } from '@faithlife/commerce-components';
+
+<AddToCart stage="default">
+  {/* BuilderBlocks renders editable content here */}
+</AddToCart>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// add-to-cart/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function AddToCart({ title, content, ...props }: AddToCartProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
 
 ---
 

@@ -26,7 +26,7 @@
 | Slider Scroll Bar | Selection & Controls | 4 | State | — | `<input[type=range]>` | [2245:93685](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) |
 | Star | Data Display | 12 | State, Size | — | `<button>` | [1770:9407](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9407) |
 | Stateful Action Button | Actions | 6 | State | — | `<button>` | [7538:45104](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) |
-| Stepper Control | Actions | 8 | Size, State | — | `<button>` | [1623:5401](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401) |
+| Stepper Control | Data Entry | 8 | Size, State | — | `<button>` | [1623:5401](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5401) |
 | Stepper CTA | Actions | 12 | Stage, State | — | `<button>` | [5773:64162](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5773-64162) |
 | Subnav Dropdown Options | Navigation | 7 | State, Type | — | `<select>` | [6331:34528](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=6331-34528) |
 | Tabbed Selector | Navigation | 5 | Selection | — | `<select>` | [2529:76540](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76540) |

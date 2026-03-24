@@ -26,7 +26,7 @@ graph TD
     Select["Select"]
     Checkbox["Checkbox"]
     RadioButton["RadioButton"]
-    Toggle["Toggle"]
+    Switch["Switch"]
     Slider["Slider"]
     Badge["Badge"]
     StarRating["StarRating"]
@@ -35,11 +35,12 @@ graph TD
     Menu["Menu"]
     Tabs["Tabs"]
     SubnavDropdown["SubnavDropdown"]
-    Stepper["Stepper"]
+    QuantityInput["QuantityInput"]
     Pagination["Pagination"]
     Toast["Toast"]
   end
   subgraph compositions ["Compositions (9)"]
+    AddToCart["AddToCart"]
     Modal["Modal"]
     Accordion["Accordion"]
     EmailCapture["EmailCapture"]
@@ -63,10 +64,10 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(4 code / 15 Figma)"]
+  DesignSystem --> actions["Actions\n(5 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
-  DesignSystem --> data_entry["Data Entry\n(10 code / 16 Figma)"]
-  DesignSystem --> selection["Selection & Controls\n(4 code / 11 Figma)"]
+  DesignSystem --> data_entry["Data Entry\n(11 code / 17 Figma)"]
+  DesignSystem --> selection["Selection & Controls\n(3 code / 11 Figma)"]
   DesignSystem --> data_display["Data Display\n(3 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
   DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
@@ -86,6 +87,7 @@ graph TD
 | `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
 | `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
+| `AddToCart` | Composition | Stepper CTA |
 | `ButtonGroup` | Composition | Button group, CTA Row |
 
 ### Navigation
@@ -116,6 +118,7 @@ graph TD
 | `Checkbox` | Primitive | Checkbox |
 | `RadioButton` | Primitive | Radio Button |
 | `Slider` | Primitive | Slider |
+| `QuantityInput` | Primitive | Stepper Control |
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
 | `BasicForm` | Builder Block | Basic Form |
@@ -128,8 +131,7 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Toggle` | Primitive | Switch, Toggle with Text |
-| `Stepper` | Primitive | Stepper CTA, Stepper Control |
+| `Switch` | Primitive | Switch, Toggle with Text |
 | `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
 | `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
 
@@ -236,11 +238,11 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Slider Scroll Bar | Atoms | Selection & Controls | `Pagination` | Primitive |
 | Star | Atoms | Data Display | `StarRating` | Primitive |
 | Stateful Action Button | Atoms | Actions | `Button` | Primitive |
-| Stepper Control | Atoms | Actions | `Stepper` | Primitive |
-| Stepper CTA | Atoms | Actions | `Stepper` | Primitive |
+| Stepper Control | Atoms | Data Entry | `QuantityInput` | Primitive |
+| Stepper CTA | Atoms | Actions | `AddToCart` | Composition |
 | Subnav Dropdown | Molecules | Navigation | `SubnavDropdown` | Primitive |
 | Subnav Dropdown Options | Atoms | Navigation | `SubnavDropdown` | Primitive |
-| Switch | Inputs & Forms | Data Entry | `Toggle` | Primitive |
+| Switch | Inputs & Forms | Data Entry | `Switch` | Primitive |
 | Tabbed Selector | Atoms | Navigation | `Tabs` | Primitive |
 | Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
 | Text Button—Icon Left | Atoms | Actions | `LinkButton` | Primitive |
@@ -256,7 +258,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Text Toggle Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
 | Toast Bar | Molecules | Feedback & Overlays | `Toast` | Primitive |
 | Toggle Switch (text) | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
-| Toggle with Text | Inputs & Forms | Selection & Controls | `Toggle` | Primitive |
+| Toggle with Text | Inputs & Forms | Selection & Controls | `Switch` | Primitive |
 | Upload Image Area | Inputs & Forms | Data Entry | `FileUpload` | Composition |
 
 ## Proposed Code Folder Structure

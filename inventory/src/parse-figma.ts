@@ -434,7 +434,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md', description: 'Size — always a separate prop, never encoded in variant' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All <button> elements with text labels; variant prop handles visual hierarchy',
+    justification: 'All labelled button elements; variant prop handles visual hierarchy (primary → secondary → tertiary)',
   },
 
   {
@@ -457,7 +457,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All icon-only <button> elements; unified by absence of text label (MUI/Radix convention)',
+    justification: 'All icon-only buttons; unified by absence of text label (MUI/Radix IconButton convention)',
   },
 
   {
@@ -499,7 +499,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All single-line <input> elements; HTML type attribute distinguishes text, date, password, and search variants',
+    justification: 'All single-line text inputs; HTML type attribute distinguishes text, date, password, and search variants',
   },
 
   {
@@ -514,7 +514,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'Single <textarea> element; no grouping needed',
+    justification: 'Single multi-line text input; no grouping needed',
   },
 
   {
@@ -528,7 +528,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'columns', type: "'2' | '3' | '4'", figmaAxis: '', default: '2', description: 'Number of equal-width columns. Figma shows the 2-column pattern.', proposed: true },
     ],
-    justification: 'Both are <fieldset> wrappers grouping related form fields (WCAG 1.3.1 info and relationships)',
+    justification: 'Both are fieldset wrappers grouping related form fields (WCAG 1.3.1 info and relationships)',
   },
 
   {
@@ -544,7 +544,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'open' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All <select> dropdown elements; Form Dropdown adds label + border for form context',
+    justification: 'All select dropdown elements; Form Dropdown adds label + border for form context',
   },
 
   {
@@ -631,7 +631,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'default' | 'sale' | 'tag' | 'info' | 'success' | 'warning' | 'error'", figmaAxis: 'Type', default: 'default', description: 'Use semantic variants (success/warning/error) not color words' },
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
     ],
-    justification: 'Inline promotional pills and countdown timers share the same compact <span> display pattern',
+    justification: 'Inline promotional pills and countdown timers share the same compact inline display pattern',
   },
 
   {
@@ -689,7 +689,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
     ],
-    justification: 'Single <nav> breadcrumb trail',
+    justification: 'Single breadcrumb navigation trail',
   },
 
   {
@@ -785,7 +785,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'first-page' | 'last-page' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'All three provide content navigation controls; arrow buttons, dot selector, and scroll bar are layout variants of the same <nav>',
+    justification: 'All three are content navigation controls; arrow buttons, dot selector, and scroll bar are layout variants of the same nav element',
   },
 
   {
@@ -815,7 +815,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'variant', type: "'default' | 'confirmation' | 'fullscreen'", figmaAxis: 'Type', default: 'default' },
     ],
-    justification: 'Dialog content and footer button row are inseparable parts of one <dialog> element (Radix Dialog)',
+    justification: 'Dialog content and footer button row are inseparable parts of one dialog element (Radix Dialog)',
   },
 
   {
@@ -830,7 +830,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'state', type: "'expanded' | 'collapsed'", figmaAxis: 'State', default: 'collapsed' },
       { name: 'variant', type: "'standalone' | 'section'", figmaAxis: 'Type', default: 'section' },
     ],
-    justification: 'Single expandable <details> section with title trigger and body content (Radix Accordion)',
+    justification: 'Single expandable section with title trigger and body content (Radix Accordion)',
   },
 
   {
@@ -845,7 +845,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'focus' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'Single inline email <form> with embedded submit action; too coupled to split',
+    justification: 'Single inline email form with embedded submit action; input and button are too coupled to split',
   },
 
   {
@@ -994,7 +994,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'variant', type: "'headline-only' | 'headline-cta' | 'text' | 'text-buttons'", figmaAxis: 'Type', default: 'headline-only' },
     ],
-    justification: 'All are <section> content blocks with a headline; variants progressively add CTA link, body copy, and button group',
+    justification: 'All are full-width section blocks with a headline; variants progressively add CTA link, body copy, and button group',
   },
 
   {
@@ -1032,7 +1032,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     htmlElement: 'form',
     figmaSources: ['Basic Form'],
     props: [],
-    justification: 'Generic <form> shell with field layout managed entirely via Builder.io slot content',
+    justification: 'Generic form shell with field layout managed entirely via Builder.io slot content',
   },
 ];
 

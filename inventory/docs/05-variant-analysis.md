@@ -303,7 +303,6 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Close Button | Play Button | `IconButton` |
 | Next-Previous Buttons | Play Button | `IconButton` |
 | Tabbed Selector Button | Tabbed Selector | `Tabs` |
-| Slider Scroll Bar | Slider page selector | `SliderProgress` |
 | Subnav Dropdown Options | Subnav Dropdown | `SubnavDropdown` |
 | Text Section with Button Group | Text Section | `SectionLayout` |
 | Text Section | Section Headline with CTA | `SectionLayout` |
@@ -324,6 +323,7 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Multi-CTA List | Multi-Select with Text | Size | 50% | Unrelated despite the 'Multi' stem. Multi-CTA List is a content layout block; Multi-Select with Text is a form control. Keep separate. |
 | Button Menu | Button group | Size | — | Different components despite the 'Button' stem. Button Menu is a navigation dropdown (nav element); ButtonGroup is a layout wrapper for action buttons. Keep separate. |
 | Button | Button group | Size, Type | — | Common stem "Button" · shares [Size, Type] axes — review for variant prop consolidation |
+| Slider Scroll Bar | Slider page selector | — | — | Common stem "Slider" · no shared axes — review for variant prop consolidation |
 | Slider page selector | Slider | — | — | Common stem "Slider" · no shared axes — review for variant prop consolidation |
 | Multi-CTA List | Multi-Selector | — | — | Different purposes despite the 'Multi' stem. Multi-CTA List is a layout component (list of CTAs), Multi-Selector is a form control (multi-select). Keep separate. |
 | Toggle with Text | Toggle Switch (text) | — | — | Merge into a single Toggle component. 'With Text' describes the label presence — make it a children prop, not a separate component. |

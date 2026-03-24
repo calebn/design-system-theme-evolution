@@ -1556,7 +1556,7 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
   'floating-action-button': ['Same requirements as `button`', '`aria-label` if icon conveys the action'],
   'stateful-button': ['`aria-busy="true"` while in loading state', '`aria-live="polite"` region to announce success/error transitions'],
-  'slider-progress': ['`aria-label` on the container (e.g. "Slide 1 of 4")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the progress indicator'],
+  'scroll-bar': ['`aria-label` on the container (e.g. "Scroll position")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the scroll indicator'],
   'cta-row': ['`href` required — renders as an anchor link', '`aria-label` if the visible text is not descriptive enough', '`aria-current="page"` when marking an active link'],
   textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],
   select: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-expanded` when open'],

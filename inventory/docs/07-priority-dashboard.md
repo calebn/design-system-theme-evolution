@@ -34,7 +34,7 @@
 | `CtaRow` | Composition | Actions | 1 | 1 | **8** | ✅ Build first — high dependency weight |
 | `IconButton` | Primitive | Actions | 6 ⚠️ | 5 | **8** | ✅ Build first — high dependency weight (some frames need Figma cleanup) |
 | `QuantityInput` | Primitive | Data Entry | 1 | 1 | **8** | ✅ Build first — high dependency weight |
-| `SliderProgress` | Primitive | Selection & Controls | 2 | 1 | **8** | ✅ Build first — high dependency weight |
+| `ScrollBar` | Primitive | Selection & Controls | 1 | 1 | **8** | ✅ Build first — high dependency weight |
 | `SubnavDropdown` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `Tabs` | Primitive | Navigation | 2 | 1 | **8** | ✅ Build first — high dependency weight |
 | `Accordion` | Composition | Content Layout | 1 | 0 | **7** | ✅ Build first — high dependency weight |
@@ -84,7 +84,7 @@
 | CTA Row | `CtaRow` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Expand-Collapse Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Increase-Decrease Buttons | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 1 (2) | **8** | ✅ Build first — high dependency weight |
-| Slider Scroll Bar | `SliderProgress` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
+| Slider Scroll Bar | `ScrollBar` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Stepper Control | `QuantityInput` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Stepper CTA | `AddToCart` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
 | Subnav Dropdown Options | `SubnavDropdown` | Atoms | 3 | 2 | 2 | 0 | 1 (1) | **8** | ✅ Build first — high dependency weight |
@@ -141,7 +141,7 @@
 | Free Trial Card | `FreeTrialCard` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Multi-CTA List | `CtaList` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Product Content | `ProductDetail` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
-| Slider page selector | `SliderProgress` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
+| Slider page selector | `—` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Text Input—Multiline | `Textarea` | Inputs & Forms | 2 | 0 | 1 | 0 | 0 | **3** | ⚠️ Needs Figma cleanup (2 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
 | Toast Bar | `Toast` | Molecules | 1 | 2 | 0 | 0 | 0 | **3** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants; no downstream dependents) |
 | Image Ratios | `—` | Other | 0 | 2 | 0 | 0 | 0 | **2** | ⏳ Address coverage gaps first (no state variants in Figma; no responsive variants; no downstream dependents) |

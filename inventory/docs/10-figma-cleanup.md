@@ -31,7 +31,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `QuantityInput` | Primitive | Stepper Control |
 | `AddToCart` | Composition | Stepper CTA |
 | `Pagination` | Primitive | Next-Previous Selector |
-| `SliderProgress` | Primitive | Slider page selector, Slider Scroll Bar |
+| `ScrollBar` | Primitive | Slider Scroll Bar |
 | `Toast` | Primitive | Toast Bar |
 | `Modal` | Composition | Modal Dialog, Modal Button Group |
 | `Accordion` | Composition | Accordion Section |
@@ -57,6 +57,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 These frames are not yet assigned to a code component — review and assign:
 
+- [ ] **Slider page selector** (Selection & Controls)
 - [ ] **Text Input (name, two fields)** (Data Entry)
 - [ ] **Text Toggle Selector** (Data Entry)
 - [ ] **Text Toggle Selector** (Data Entry)

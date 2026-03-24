@@ -383,7 +383,7 @@
     "figmaId": "2245:93685",
     "section": "atoms",
     "functionalCategory": "selection",
-    "proposedCodeName": "SliderProgress",
+    "proposedCodeName": "ScrollBar",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -776,7 +776,7 @@
     "figmaId": "1756:2384",
     "section": "molecules",
     "functionalCategory": "selection",
-    "proposedCodeName": "SliderProgress",
+    "proposedCodeName": "ScrollBar",
     "variantCount": 2,
     "properties": {
       "Style": [

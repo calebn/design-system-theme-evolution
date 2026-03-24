@@ -109,7 +109,7 @@
       ],
       "codeComponents": [
         "Pagination",
-        "SliderProgress",
+        "ScrollBar",
         "Switch",
         "ToggleGroup"
       ]
@@ -810,27 +810,19 @@
           "default": "default"
         }
       ],
-      "justification": "Single numbered/dot page selector with prev/next controls; distinct from SliderProgress which is a carousel progress indicator"
+      "justification": "Single numbered/dot page selector with prev/next controls; distinct from ScrollBar which is a raw scroll position indicator"
     },
     {
-      "name": "SliderProgress",
-      "directoryName": "slider-progress",
+      "name": "ScrollBar",
+      "directoryName": "scroll-bar",
       "tier": "primitive",
       "functionalCategory": "selection",
-      "description": "Progress indicator for carousels and media sliders. Covers a progress bar with slide counter and a scroll bar indicator.",
+      "description": "Horizontal scroll position indicator for carousels and media sliders. Shows current scroll offset as a dark line on a light track.",
       "htmlElement": "div",
       "figmaSources": [
-        "Slider page selector",
         "Slider Scroll Bar"
       ],
       "props": [
-        {
-          "name": "variant",
-          "type": "'progress' | 'scroll'",
-          "figmaAxis": "Type",
-          "default": "progress",
-          "description": "progress = bar + counter + prev/next, scroll = thin scroll position indicator"
-        },
         {
           "name": "scale",
           "type": "'sm' | 'md'",
@@ -838,7 +830,7 @@
           "default": "md"
         }
       ],
-      "justification": "Both are carousel/slider progress indicators; neither is page-based navigation like Pagination"
+      "justification": "Single scroll position indicator; Slider page selector is a layout composition of ScrollBar + Pagination and is unmapped"
     },
     {
       "name": "Toast",
@@ -1295,7 +1287,7 @@
     "  subnav-dropdown/",
     "  quantity-input/",
     "  pagination/",
-    "  slider-progress/",
+    "  scroll-bar/",
     "  toast/",
     "  # Compositions (React-first, Builder.io optional)",
     "  floating-action-button/",

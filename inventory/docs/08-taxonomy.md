@@ -38,7 +38,7 @@ graph TD
     SubnavDropdown["SubnavDropdown"]
     QuantityInput["QuantityInput"]
     Pagination["Pagination"]
-    SliderProgress["SliderProgress"]
+    ScrollBar["ScrollBar"]
     Toast["Toast"]
   end
   subgraph compositions ["Compositions (9)"]
@@ -147,7 +147,7 @@ graph TD
 | `Switch` | Primitive | Switch, Toggle with Text |
 | `ToggleGroup` | Primitive | Toggle Switch (text) |
 | `Pagination` | Primitive | Next-Previous Selector |
-| `SliderProgress` | Primitive | Slider page selector, Slider Scroll Bar |
+| `ScrollBar` | Primitive | Slider Scroll Bar |
 
 ### Data Display
 
@@ -250,8 +250,8 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Simple Menu | Atoms | Navigation | `Menu` | Primitive |
 | Single Select Box | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
 | Slider | Inputs & Forms | Data Entry | `Slider` | Primitive |
-| Slider page selector | Molecules | Selection & Controls | `SliderProgress` | Primitive |
-| Slider Scroll Bar | Atoms | Selection & Controls | `SliderProgress` | Primitive |
+| Slider page selector | Molecules | Selection & Controls | — | — |
+| Slider Scroll Bar | Atoms | Selection & Controls | `ScrollBar` | Primitive |
 | Star | Atoms | Data Display | `StarRating` | Primitive |
 | Stateful Action Button | Atoms | Actions | `StatefulButton` | Composition |
 | Stepper Control | Atoms | Data Entry | `QuantityInput` | Primitive |
@@ -307,7 +307,7 @@ packages/commerce-components/src/components/
   subnav-dropdown/
   quantity-input/
   pagination/
-  slider-progress/
+  scroll-bar/
   toast/
   # Compositions (React-first, Builder.io optional)
   floating-action-button/

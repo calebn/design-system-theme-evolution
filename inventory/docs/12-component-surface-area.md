@@ -1322,35 +1322,34 @@ export function Pagination({ variant = 'numbered', className, children, ...props
 
 ---
 
-### `SliderProgress`
+### `ScrollBar`
 
-**HTML element:** `<div>` · **Directory:** `slider-progress/` · **Category:** Selection & Controls
+**HTML element:** `<div>` · **Directory:** `scroll-bar/` · **Category:** Selection & Controls
 
-**Figma sources:** [Slider page selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1756-2384), [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
+**Figma sources:** [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685)
 
 
-> Progress indicator for carousels and media sliders. Covers a progress bar with slide counter and a scroll bar indicator.
+> Horizontal scroll position indicator for carousels and media sliders. Shows current scroll offset as a dark line on a light track.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'progress' \| 'scroll'` | `progress` | Type | progress = bar + counter + prev/next, scroll = thin scroll position indicator |
 | `scale` | `'sm' \| 'md'` | `md` | Size | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
 **Accessibility requirements:**
 
-- `aria-label` on the container (e.g. "Slide 1 of 4")
-- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the progress indicator
+- `aria-label` on the container (e.g. "Scroll position")
+- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the scroll indicator
 
 <details><summary>Consumer usage</summary>
 
 ```tsx
-import { SliderProgress } from '@faithlife/commerce-components';
+import { ScrollBar } from '@faithlife/commerce-components';
 
-<SliderProgress variant="progress">{/* content */}</SliderProgress>
+<ScrollBar scale="md">{/* content */}</ScrollBar>
 ```
 
 </details>
@@ -1358,12 +1357,12 @@ import { SliderProgress } from '@faithlife/commerce-components';
 <details><summary>Implementation sketch (component.tsx)</summary>
 
 ```tsx
-// slider-progress/component.tsx
+// scroll-bar/component.tsx
 // No @builder.io/* imports allowed here — those go in register.tsx
 import { cn } from '../../utils';
 import { Typography } from '../typography/component';
 
-export function SliderProgress({ variant = 'progress', className, children, ...props }: SliderProgressProps) {
+export function ScrollBar({ variant = 'md', className, children, ...props }: ScrollBarProps) {
   return (
     <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}

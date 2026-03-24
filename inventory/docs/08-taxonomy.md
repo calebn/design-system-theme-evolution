@@ -51,6 +51,8 @@ graph TD
     CheckboxGroup["CheckboxGroup"]
     ButtonGroup["ButtonGroup"]
     CtaRow["CtaRow"]
+    FormField["FormField"]
+    FormRow["FormRow"]
     Chip["Chip"]
     FloatingActionButton["FloatingActionButton"]
     StatefulButton["StatefulButton"]
@@ -74,7 +76,7 @@ graph TD
   DesignSystem["Logos Design System"]
   DesignSystem --> actions["Actions\n(9 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
-  DesignSystem --> data_entry["Data Entry\n(12 code / 22 Figma)"]
+  DesignSystem --> data_entry["Data Entry\n(14 code / 22 Figma)"]
   DesignSystem --> selection["Selection & Controls\n(4 code / 6 Figma)"]
   DesignSystem --> data_display["Data Display\n(4 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
@@ -134,6 +136,8 @@ graph TD
 | `FileUpload` | Composition | Upload Image Area |
 | `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
 | `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text |
+| `FormField` | Composition | Text Toggle Selector |
+| `FormRow` | Composition | Text Input (name, two fields) |
 | `BasicForm` | Builder Block | Basic Form |
 
 ### Selection & Controls
@@ -263,15 +267,15 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
 | Text Button—Icon Left | Atoms | Actions | `LinkButton` | Primitive |
 | Text Button—Icon Right | Atoms | Actions | `LinkButton` | Primitive |
-| Text Input (name, two fields) | Inputs & Forms | Data Entry | — | — |
+| Text Input (name, two fields) | Inputs & Forms | Data Entry | `FormRow` | Composition |
 | Text Input (single line) | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Date | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Multiline | Inputs & Forms | Data Entry | `Textarea` | Primitive |
 | Text Input—Password | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Section | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Text Section with Button Group | Molecules | Content Layout | `SectionLayout` | Builder Block |
-| Text Toggle Selector | Inputs & Forms | Data Entry | — | — |
-| Text Toggle Selector | Inputs & Forms | Data Entry | — | — |
+| Text Toggle Selector | Inputs & Forms | Data Entry | `FormField` | Composition |
+| Text Toggle Selector | Inputs & Forms | Data Entry | `FormField` | Composition |
 | Toast Bar | Molecules | Feedback & Overlays | `Toast` | Primitive |
 | Toggle Switch (text) | Inputs & Forms | Selection & Controls | `ToggleGroup` | Primitive |
 | Toggle with Text | Inputs & Forms | Selection & Controls | `Switch` | Primitive |
@@ -310,6 +314,8 @@ packages/commerce-components/src/components/
   scroll-bar/
   toast/
   # Compositions (React-first, Builder.io optional)
+  form-field/
+  form-row/
   floating-action-button/
   stateful-button/
   modal/

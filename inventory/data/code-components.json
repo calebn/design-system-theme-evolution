@@ -858,6 +858,66 @@
     "justification": "Full-width link row with arrow icon; structurally a navigational link, not a button group"
   },
   {
+    "name": "FormField",
+    "directoryName": "form-field",
+    "tier": "composition",
+    "functionalCategory": "data-entry",
+    "description": "Generic field wrapper providing label, required indicator, description, and error message for any child form control.",
+    "htmlElement": "div",
+    "figmaSources": [
+      "Text Toggle Selector"
+    ],
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "figmaAxis": "",
+        "default": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "figmaAxis": "",
+        "default": "false"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "figmaAxis": "",
+        "default": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "figmaAxis": "",
+        "default": ""
+      }
+    ],
+    "justification": "Generic label + error wrapper for any child control (Chakra FormControl / shadcn FormField pattern); Text Toggle Selector frames are usage examples"
+  },
+  {
+    "name": "FormRow",
+    "directoryName": "form-row",
+    "tier": "composition",
+    "functionalCategory": "data-entry",
+    "description": "Multi-column row of form fields. Starts with 2-column layout (first/last name pattern); extensible to more columns when additional Figma patterns exist.",
+    "htmlElement": "div",
+    "figmaSources": [
+      "Text Input (name, two fields)"
+    ],
+    "props": [
+      {
+        "name": "columns",
+        "type": "'2'",
+        "figmaAxis": "",
+        "default": "2",
+        "description": "Number of equal-width columns. Only 2-column is defined from Figma; extend when more patterns emerge.",
+        "proposed": true
+      }
+    ],
+    "justification": "Multi-column form field row; 2-column is the only Figma-evidenced layout — extensible to 3-4 columns when more patterns emerge"
+  },
+  {
     "name": "Chip",
     "directoryName": "chip",
     "tier": "composition",

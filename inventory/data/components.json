@@ -1022,7 +1022,7 @@
     "figmaId": "2758:3449",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "Input",
+    "proposedCodeName": "FormRow",
     "variantCount": 6,
     "properties": {
       "Style": [
@@ -1227,7 +1227,7 @@
     "figmaId": "1623:5649",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "Switch",
+    "proposedCodeName": "FormField",
     "variantCount": 1,
     "properties": {
       "Property 1": [
@@ -1242,7 +1242,7 @@
     "figmaId": "1623:5653",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "Switch",
+    "proposedCodeName": "FormField",
     "variantCount": 1,
     "properties": {
       "Property 1": [

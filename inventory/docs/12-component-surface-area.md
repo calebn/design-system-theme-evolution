@@ -1437,7 +1437,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (16)
+## Compositions (18)
 
 ---
 
@@ -1997,6 +1997,133 @@ import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
 export function CtaRow({ title, content, ...props }: CtaRowProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `FormField`
+
+**HTML element:** `<div>` · **Directory:** `form-field/` · **Category:** Data Entry
+
+**Figma sources:** [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653)
+
+
+> Generic field wrapper providing label, required indicator, description, and error message for any child form control.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `label` | `string` | `` |  | — |
+| `required` | `boolean` | `false` |  | — |
+| `error` | `string` | `` |  | — |
+| `description` | `string` | `` |  | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `for` attribute on the label linked to the child control's `id`
+- `aria-required` on child control when required
+- `aria-describedby` on child control pointing to description and error elements
+- `aria-invalid` on child control when error is present
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { FormField } from '@faithlife/commerce-components';
+
+<FormField label="">
+  {/* BuilderBlocks renders editable content here */}
+</FormField>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// form-field/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FormField({ title, content, ...props }: FormFieldProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `FormRow`
+
+**HTML element:** `<div>` · **Directory:** `form-row/` · **Category:** Data Entry
+
+**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449)
+
+
+> Multi-column row of form fields. Starts with 2-column layout (first/last name pattern); extensible to more columns when additional Figma patterns exist.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `columns` | `'2'` _(proposed)_ | `2` |  | Number of equal-width columns. Only 2-column is defined from Figma; extend when more patterns emerge. |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` or `aria-labelledby` on the row if it has a group-level heading
+- Each child FormField maintains its own accessible label independently
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { FormRow } from '@faithlife/commerce-components';
+
+<FormRow columns="2">
+  {/* BuilderBlocks renders editable content here */}
+</FormRow>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// form-row/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FormRow({ title, content, ...props }: FormRowProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}

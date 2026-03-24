@@ -41,6 +41,8 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text |
 | `ButtonGroup` | Composition | Button group |
 | `CtaRow` | Composition | CTA Row |
+| `FormField` | Composition | Text Toggle Selector |
+| `FormRow` | Composition | Text Input (name, two fields) |
 | `Chip` | Composition | Category Button |
 | `FloatingActionButton` | Composition | Floating Action Button with Text |
 | `StatefulButton` | Composition | Stateful Action Button |
@@ -58,9 +60,6 @@ The following table shows which Figma frames will be collapsed into a single Rea
 These frames are not yet assigned to a code component — review and assign:
 
 - [ ] **Slider page selector** (Selection & Controls)
-- [ ] **Text Input (name, two fields)** (Data Entry)
-- [ ] **Text Toggle Selector** (Data Entry)
-- [ ] **Text Toggle Selector** (Data Entry)
 - [ ] **Product Images** (Data Display)
 - [ ] **Image Ratios** (Data Display)
 - [ ] **List** (Data Display)

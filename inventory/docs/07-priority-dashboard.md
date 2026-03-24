@@ -56,6 +56,8 @@
 | `ToggleGroup` | Primitive | Selection & Controls | 1 | 0 | **6** | ✅ Ready to build |
 | `BasicForm` | Builder Block | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
 | `Chip` | Composition | Actions | 1 ⚠️ | 0 | **5** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
+| `FormField` | Composition | Data Entry | 2 | 0 | **5** | ✅ Ready to build |
+| `FormRow` | Composition | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
 | `Badge` | Primitive | Data Display | 1 | 5 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | `ButtonGroup` | Composition | Actions | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | `PriceLabel` | Primitive | Data Display | 1 | 4 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
@@ -121,9 +123,9 @@
 | Reviews | `StarRating` | Atoms | 3 | 2 | 0 | 0 | 0 | **5** | ✅ Ready to build |
 | Single Select Box | `Checkbox` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Tabbed Selector | `Tabs` | Atoms | 3 | 2 | 0 | 0 | 0 | **5** | ✅ Ready to build |
-| Text Input (name, two fields) | `—` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
-| Text Toggle Selector | `—` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
-| Text Toggle Selector | `—` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Text Input (name, two fields) | `FormRow` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Text Toggle Selector | `FormField` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Text Toggle Selector | `FormField` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Badges and Tags | `Badge` | Other | 0 | 2 | 0 | 0 | 2 (5) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | Button group | `ButtonGroup` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | Play Button | `IconButton` | Atoms | 3 | 0 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (3 inconsistent state name(s) in Figma; missing state(s): Hover, Disabled; no responsive variants; no downstream dependents) |

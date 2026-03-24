@@ -5,7 +5,7 @@
 
 ## A · Code Components
 
-43 code components derived from 71 Figma frames.
+45 code components derived from 71 Figma frames.
 
 ### Primitives (23)
 
@@ -35,7 +35,7 @@
 | `ScrollBar` | `scroll-bar/` | Selection & Controls | [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) | `<div>` | Single scroll position indicator; Slider page selector is a layout composition of ScrollBar + Pagination and is unmapped |
 | `Toast` | `toast/` | Feedback & Overlays | [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `<div>` | Single notification bar; dynamic ARIA role per severity (Radix Toast) |
 
-### Compositions (16)
+### Compositions (18)
 
 | Component | Directory | Category | Figma Sources | HTML | Justification |
 |-----------|-----------|----------|---------------|------|---------------|
@@ -48,6 +48,8 @@
 | `CheckboxGroup` | `checkbox-group/` | Data Entry | [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) | `<fieldset>` | Both show grouped checkbox options in a fieldset; list vs inline are layout variants of the same control |
 | `ButtonGroup` | `button-group/` | Actions | [Button group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5083) | `<div>` | Groups 2-4 side-by-side action buttons; horizontal alignment with optional description text below |
 | `CtaRow` | `cta-row/` | Actions | [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152) | `<a>` | Full-width link row with arrow icon; structurally a navigational link, not a button group |
+| `FormField` | `form-field/` | Data Entry | [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) | `<div>` | Generic label + error wrapper for any child control (Chakra FormControl / shadcn FormField pattern); Text Toggle Selector frames are usage examples |
+| `FormRow` | `form-row/` | Data Entry | [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | `<div>` | Multi-column form field row; 2-column is the only Figma-evidenced layout — extensible to 3-4 columns when more patterns emerge |
 | `Chip` | `chip/` | Actions | [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111) | `<button>` | Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention) |
 | `FloatingActionButton` | `floating-action-button/` | Actions | [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) | `<button>` | Pill-shaped variant of Button with mandatory icon; distinct visual treatment not shared with rectangular Button |
 | `StatefulButton` | `stateful-button/` | Actions | [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) | `<button>` | Loading and success state transitions require internal state management not present in base Button |
@@ -233,15 +235,15 @@ Every Figma frame and the code component it maps to.
 | [Tabbed Selector Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2532-76553) | `Tabs` | Primitive | `tabs/` | `variant`, `scale`, `state` |
 | [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995) | `LinkButton` | Primitive | `link-button/` | `href`, `variant`, `iconPosition`, `scale`, `state` |
 | [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782) | `LinkButton` | Primitive | `link-button/` | `href`, `variant`, `iconPosition`, `scale`, `state` |
-| [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | — | — | — | — |
+| [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | `FormRow` | Composition | `form-row/` | `columns` |
 | [Text Input (single line)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5130) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
 | [Text Input—Date](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
 | [Text Input—Multiline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422) | `Textarea` | Primitive | `textarea/` | `scale`, `state` |
 | [Text Input—Password](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741) | `Input` | Primitive | `input/` | `type`, `scale`, `state` |
 | [Text Section](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2529-76369) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
 | [Text Section with Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-9202) | `SectionLayout` | Builder Block | `section-layout/` | `variant` |
-| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5649) | — | — | — | — |
-| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) | — | — | — | — |
+| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5649) | `FormField` | Composition | `form-field/` | `label`, `required`, `error`, `description` |
+| [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) | `FormField` | Composition | `form-field/` | `label`, `required`, `error`, `description` |
 | [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `Toast` | Primitive | `toast/` | `variant` |
 | [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340) | `ToggleGroup` | Primitive | `toggle-group/` | `size`, `state` |
 | [Toggle with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311) | `Switch` | Primitive | `switch/` | `variant`, `state` |

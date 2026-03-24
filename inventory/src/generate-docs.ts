@@ -1558,6 +1558,8 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   'stateful-button': ['`aria-busy="true"` while in loading state', '`aria-live="polite"` region to announce success/error transitions'],
   'scroll-bar': ['`aria-label` on the container (e.g. "Scroll position")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the scroll indicator'],
   'cta-row': ['`href` required — renders as an anchor link', '`aria-label` if the visible text is not descriptive enough', '`aria-current="page"` when marking an active link'],
+  'form-field': ['`for` attribute on the label linked to the child control\'s `id`', '`aria-required` on child control when required', '`aria-describedby` on child control pointing to description and error elements', '`aria-invalid` on child control when error is present'],
+  'form-row': ['`aria-label` or `aria-labelledby` on the row if it has a group-level heading', 'Each child FormField maintains its own accessible label independently'],
   textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],
   select: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-expanded` when open'],
   checkbox: ['`<label>` associated', '`aria-checked` for indeterminate state', '`aria-required` when required'],

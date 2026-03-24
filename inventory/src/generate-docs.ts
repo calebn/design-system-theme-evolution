@@ -1545,7 +1545,10 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
 // Doc 12: Component Surface Area
 // ---------------------------------------------------------------------------
 
-// Accessibility requirements per component category
+// Error state strategy:
+// - Standalone inputs (Input, Textarea, Select) own their error state via state: 'error'
+// - Individual selection primitives (Checkbox, RadioButton, Switch) do NOT have error states
+// - Group wrappers (RadioGroup, CheckboxGroup, FieldGroup) own the group-level error state and message display
 const ARIA_REQUIREMENTS: Record<string, string[]> = {
   button: ['`role="button"` (implicit on `<button>`)', '`aria-label` when icon-only', '`aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)', '`aria-pressed` for toggle-style buttons'],
   'icon-button': ['`aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', '`aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)'],
@@ -1557,6 +1560,7 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   checkbox: ['`<label>` associated', '`aria-checked` for indeterminate state', '`aria-required` when required'],
   'radio-button': ['`<fieldset>` + `<legend>` wrapping radio groups', '`aria-required` on group'],
   switch: ['`role="switch"` with `aria-checked`', '`aria-label` describing what is toggled'],
+  'toggle-group': ['`role="radiogroup"` on container (Radix ToggleGroup handles this)', '`role="radio"` + `aria-checked` on each option', 'Arrow key navigation between options (provided by Radix)'],
   slider: ['`role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`', '`aria-label` or `<label>`'],
   badge: ['`role="status"` if dynamic', '`aria-label` for icon-only badges'],
   'star-rating': ['`role="img"` with `aria-label` for display-only', '`role="radiogroup"` for interactive rating'],
@@ -1567,6 +1571,8 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   accordion: ['`role="region"` on panel', '`aria-expanded` on trigger button', '`aria-controls` linking trigger to panel'],
   pagination: ['`<nav aria-label="Pagination">`', '`aria-current="page"` on current page', '`aria-label` on prev/next buttons'],
   toast: ['`role="status"` or `role="alert"` depending on urgency', '`aria-live="polite"` for non-urgent', '`aria-live="assertive"` for urgent'],
+  'radio-group': ['`<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)', '`role="radiogroup"` on fieldset (Radix RadioGroup handles this)', '`aria-invalid` + `aria-describedby` on fieldset for error messages'],
+  'checkbox-group': ['`<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)', '`role="group"` on fieldset', '`aria-invalid` + `aria-describedby` on fieldset for error messages'],
   'quantity-input': ['`aria-label` on increment/decrement buttons (e.g. "Increase quantity", "Decrease quantity")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display'],
   'add-to-cart': ['`aria-label` describing current stage (e.g. "Add to cart", "Quantity picker", "In cart")', '`aria-live="polite"` on the container so stage transitions are announced to screen readers'],
 };

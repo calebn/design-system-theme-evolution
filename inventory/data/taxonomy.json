@@ -59,8 +59,11 @@
         "Email Capture",
         "Form Dropdown",
         "Form Dropdown Option",
+        "Multi-Select with Text",
+        "Multi-Selector",
         "Radio Button",
         "Search Field",
+        "Single Select Box",
         "Slider",
         "Stepper Control",
         "Switch",
@@ -69,17 +72,21 @@
         "Text Input—Date",
         "Text Input—Multiline",
         "Text Input—Password",
+        "Text Toggle Selector",
+        "Text Toggle Selector",
         "Upload Image Area"
       ],
       "codeComponents": [
         "BasicForm",
         "Checkbox",
+        "CheckboxGroup",
         "EmailCapture",
         "FieldGroup",
         "FileUpload",
         "Input",
         "QuantityInput",
         "RadioButton",
+        "RadioGroup",
         "Select",
         "Slider",
         "Textarea"
@@ -91,21 +98,16 @@
       "description": "Controls for choosing values, navigating ranges, or toggling options.",
       "components": [
         "Button group",
-        "Multi-Select with Text",
-        "Multi-Selector",
         "Next-Previous Selector",
-        "Single Select Box",
         "Slider Scroll Bar",
         "Slider page selector",
-        "Text Toggle Selector",
-        "Text Toggle Selector",
         "Toggle Switch (text)",
         "Toggle with Text"
       ],
       "codeComponents": [
         "Pagination",
-        "SelectionGroup",
-        "Switch"
+        "Switch",
+        "ToggleGroup"
       ]
     },
     {
@@ -370,7 +372,8 @@
       "description": "Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.",
       "htmlElement": "fieldset",
       "figmaSources": [
-        "Text Input (name, two fields)"
+        "Text Input (name, two fields)",
+        "Text Toggle Selector"
       ],
       "props": [
         {
@@ -422,10 +425,11 @@
       "directoryName": "checkbox",
       "tier": "primitive",
       "functionalCategory": "data-entry",
-      "description": "Boolean checkbox input with label.",
+      "description": "Boolean checkbox input with label. Also covers the single-consent / long-text checkbox pattern.",
       "htmlElement": "input[type=checkbox]",
       "figmaSources": [
-        "Checkbox"
+        "Checkbox",
+        "Single Select Box"
       ],
       "props": [
         {
@@ -478,6 +482,31 @@
           "type": "'on' | 'off' | 'disabled'",
           "figmaAxis": "State",
           "default": "off"
+        }
+      ]
+    },
+    {
+      "name": "ToggleGroup",
+      "directoryName": "toggle-group",
+      "tier": "primitive",
+      "functionalCategory": "selection",
+      "description": "Segmented control for mutually exclusive selection between 2-3 options. Implement with @radix-ui/react-toggle-group.",
+      "htmlElement": "div",
+      "figmaSources": [
+        "Toggle Switch (text)"
+      ],
+      "props": [
+        {
+          "name": "size",
+          "type": "'2' | '3'",
+          "figmaAxis": "Size",
+          "default": "2"
+        },
+        {
+          "name": "state",
+          "type": "'default' | 'hover' | 'focus' | 'disabled'",
+          "figmaAxis": "State",
+          "default": "default"
         }
       ]
     },
@@ -875,31 +904,57 @@
       ]
     },
     {
-      "name": "SelectionGroup",
-      "directoryName": "selection-group",
+      "name": "RadioGroup",
+      "directoryName": "radio-group",
       "tier": "composition",
-      "functionalCategory": "selection",
-      "description": "Group of mutually exclusive or multi-select options (toggles, checkboxes, radio buttons, or text tabs).",
-      "htmlElement": "div",
+      "functionalCategory": "data-entry",
+      "description": "Group of mutually exclusive radio options with field label and error state. Implement with @radix-ui/react-radio-group.",
+      "htmlElement": "fieldset",
       "figmaSources": [
-        "Toggle Switch (text)",
-        "Multi-Select with Text",
         "Multi-Selector",
-        "Text Toggle Selector",
+        "Multi-Select with Text"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "'list' | 'inline'",
+          "figmaAxis": "Size",
+          "default": "list",
+          "description": "list = vertical with field label (Multi-Selector), inline = compact horizontal pills (Multi-Select with Text)"
+        },
+        {
+          "name": "state",
+          "type": "'default' | 'error'",
+          "figmaAxis": "State",
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "name": "CheckboxGroup",
+      "directoryName": "checkbox-group",
+      "tier": "composition",
+      "functionalCategory": "data-entry",
+      "description": "Group of multi-select checkbox options with field label and error state.",
+      "htmlElement": "fieldset",
+      "figmaSources": [
+        "Multi-Selector",
+        "Multi-Select with Text",
         "Single Select Box"
       ],
       "props": [
         {
-          "name": "type",
-          "type": "'toggle' | 'checkbox' | 'radio' | 'single-select'",
-          "figmaAxis": "Style",
-          "default": "toggle",
-          "description": "Selection mode — drives the underlying input semantics"
+          "name": "variant",
+          "type": "'list' | 'inline'",
+          "figmaAxis": "Size",
+          "default": "list",
+          "description": "list = vertical with field label, inline = compact horizontal pills"
         },
         {
-          "name": "layout",
-          "type": "'horizontal' | 'vertical'",
-          "default": "horizontal"
+          "name": "state",
+          "type": "'default' | 'error'",
+          "figmaAxis": "State",
+          "default": "default"
         }
       ]
     },
@@ -1057,7 +1112,8 @@
     "  select/",
     "  checkbox/",
     "  radio-button/",
-    "  toggle/",
+    "  switch/",
+    "  toggle-group/",
     "  slider/",
     "  badge/",
     "  star-rating/",
@@ -1075,7 +1131,8 @@
     "  accordion/",
     "  email-capture/",
     "  file-upload/",
-    "  selection-group/",
+    "  radio-group/",
+    "  checkbox-group/",
     "  button-group/",
     "  product-card/",
     "  product-detail/",

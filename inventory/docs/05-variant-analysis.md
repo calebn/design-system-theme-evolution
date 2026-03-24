@@ -292,28 +292,25 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Text Input (single line) | Search Field | `Input` |
 | Text Input—Date | Search Field | `Input` |
 | Badges and Tags | Sale Percentage | `Badge` |
-| Multi-Selector | Single Select Box | `SelectionGroup` |
+| Multi-Selector | Single Select Box | `CheckboxGroup` |
 | Next-Previous Buttons | Floating Action Button | `IconButton` |
 | Button | Floating Action Button with Text | `Button` |
 | Text Input (single line) | Text Input—Password | `Input` |
-| Multi-Select with Text | Toggle Switch (text) | `SelectionGroup` |
 | Floating Action Button with Text | Category Button | `Button` |
 | Dropdown | Form Dropdown | `Select` |
 | Form Dropdown | Form Dropdown Option | `Select` |
 | Text Input—Password | Search Field | `Input` |
 | Modal Button Group | Modal Dialog | `Modal` |
 | Floating Action Button with Text | Stateful Action Button | `Button` |
-| Multi-Select with Text | Single Select Box | `SelectionGroup` |
+| Multi-Select with Text | Single Select Box | `CheckboxGroup` |
 | Button | Category Button | `Button` |
 | Floating Action Button | Play Button | `IconButton` |
-| Toggle Switch (text) | Single Select Box | `SelectionGroup` |
-| Multi-Select with Text | Multi-Selector | `SelectionGroup` |
+| Multi-Select with Text | Multi-Selector | `CheckboxGroup` |
 | Button | Stateful Action Button | `Button` |
 | Increase-Decrease Buttons | Play Button | `IconButton` |
 | Expand-Collapse Button | Play Button | `IconButton` |
 | Close Button | Play Button | `IconButton` |
 | Next-Previous Buttons | Play Button | `IconButton` |
-| Toggle Switch (text) | Multi-Selector | `SelectionGroup` |
 | Tabbed Selector Button | Tabbed Selector | `Tabs` |
 | Slider Scroll Bar | Next-Previous Selector | `Pagination` |
 | Slider Scroll Bar | Slider page selector | `Pagination` |
@@ -324,10 +321,7 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Text Section | Section Headline | `SectionLayout` |
 | Product Content | Product Lineup—Single | `ProductDetail` |
 | Switch | Toggle with Text | `Switch` |
-| Multi-Select with Text | Text Toggle Selector | `SelectionGroup` |
-| Toggle Switch (text) | Text Toggle Selector | `SelectionGroup` |
-| Multi-Selector | Text Toggle Selector | `SelectionGroup` |
-| Text Toggle Selector | Single Select Box | `SelectionGroup` |
+| Text Input (name, two fields) | Text Toggle Selector | `FieldGroup` |
 
 ### 🔍 Candidates for Review
 

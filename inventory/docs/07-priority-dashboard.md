@@ -43,14 +43,16 @@
 | `Menu` | Primitive | Navigation | 2 | 0 | **7** | ✅ Build first — high dependency weight |
 | `Modal` | Composition | Feedback & Overlays | 2 | 1 | **7** | ✅ Build first — high dependency weight |
 | `Select` | Primitive | Data Entry | 3 | 1 | **7** | ✅ Build first — high dependency weight |
-| `Checkbox` | Primitive | Data Entry | 1 | 1 | **6** | ✅ Ready to build |
+| `Checkbox` | Primitive | Data Entry | 2 | 1 | **6** | ✅ Ready to build |
+| `CheckboxGroup` | Composition | Data Entry | 3 | 0 | **6** | ✅ Ready to build |
 | `EmailCapture` | Composition | Data Entry | 1 | 0 | **6** | ✅ Ready to build |
 | `FileUpload` | Composition | Data Entry | 1 | 0 | **6** | ✅ Ready to build |
 | `RadioButton` | Primitive | Data Entry | 1 | 1 | **6** | ✅ Ready to build |
-| `SelectionGroup` | Composition | Selection & Controls | 6 | 0 | **6** | ✅ Ready to build |
+| `RadioGroup` | Composition | Data Entry | 2 | 0 | **6** | ✅ Ready to build |
 | `Slider` | Primitive | Data Entry | 1 | 0 | **6** | ✅ Ready to build |
+| `ToggleGroup` | Primitive | Selection & Controls | 1 | 0 | **6** | ✅ Ready to build |
 | `BasicForm` | Builder Block | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
-| `FieldGroup` | Composition | Data Entry | 1 | 0 | **5** | ✅ Ready to build |
+| `FieldGroup` | Composition | Data Entry | 3 | 0 | **5** | ✅ Ready to build |
 | `Badge` | Primitive | Data Display | 2 | 5 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | `PriceLabel` | Primitive | Data Display | 1 | 4 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | `ProductCard` | Composition | Product | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
@@ -95,7 +97,7 @@
 | Email Capture | `EmailCapture` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Form Dropdown | `Select` | Inputs & Forms | 2 | 2 | 1 | 1 | 0 | **6** | ✅ Ready to build |
 | Form Dropdown Option | `Select` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
-| Multi-Select with Text | `SelectionGroup` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
+| Multi-Select with Text | `RadioGroup` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Next-Previous Selector | `Pagination` | Atoms | 3 | 2 | 0 | 0 | 1 (1) | **6** | ✅ Ready to build |
 | Radio Button | `RadioButton` | Inputs & Forms | 2 | 2 | 1 | 0 | 1 (1) | **6** | ✅ Ready to build |
 | Search Field | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
@@ -104,18 +106,18 @@
 | Text Button—Icon Left | `LinkButton` | Atoms | 3 | 1 | 2 | 0 | 0 | **6** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; no responsive variants; no downstream dependents) |
 | Text Input—Date | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Text Input—Password | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
-| Toggle Switch (text) | `SelectionGroup` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
+| Toggle Switch (text) | `ToggleGroup` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Upload Image Area | `FileUpload` | Inputs & Forms | 2 | 2 | 2 | 0 | 0 | **6** | ✅ Ready to build |
 | Basic Form | `BasicForm` | Molecules | 1 | 2 | 1 | 1 | 0 | **5** | ✅ Ready to build |
 | Category Button | `Button` | Atoms | 3 | 1 | 1 | 0 | 0 | **5** | ⚠️ Needs Figma cleanup (1 inconsistent state name(s) in Figma; missing state(s): Disabled; no responsive variants; no downstream dependents) |
 | Modal Dialog | `Modal` | Molecules | 1 | 2 | 1 | 1 | 0 | **5** | ✅ Ready to build |
-| Multi-Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Multi-Selector | `RadioGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Reviews | `StarRating` | Atoms | 3 | 2 | 0 | 0 | 0 | **5** | ✅ Ready to build |
-| Single Select Box | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Single Select Box | `Checkbox` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Tabbed Selector | `Tabs` | Atoms | 3 | 2 | 0 | 0 | 0 | **5** | ✅ Ready to build |
 | Text Input (name, two fields) | `FieldGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
-| Text Toggle Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
-| Text Toggle Selector | `SelectionGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Text Toggle Selector | `FieldGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
+| Text Toggle Selector | `FieldGroup` | Inputs & Forms | 2 | 2 | 1 | 0 | 0 | **5** | ✅ Ready to build |
 | Badges and Tags | `Badge` | Other | 0 | 2 | 0 | 0 | 2 (5) | **4** | 🔄 Build with minor caveats (no state variants in Figma; no responsive variants) |
 | Button group | `ButtonGroup` | Molecules | 1 | 2 | 0 | 1 | 0 | **4** | 🔄 Build with minor caveats (no state variants in Figma; no downstream dependents) |
 | Play Button | `IconButton` | Atoms | 3 | 0 | 1 | 0 | 0 | **4** | ⚠️ Needs Figma cleanup (3 inconsistent state name(s) in Figma; missing state(s): Hover, Disabled; no responsive variants; no downstream dependents) |

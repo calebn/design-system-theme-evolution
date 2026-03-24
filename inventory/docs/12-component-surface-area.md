@@ -38,7 +38,7 @@ These rules apply to **every** component. They are sourced from
 | Backend data | Components requiring backend data **must** receive it via `CommerceComponentsContext` or an explicit prop callback — never by calling APIs directly. Storybook stories **must** provide stub implementations. | **Code review** |
 | Variant naming | `variant` describes visual hierarchy (`primary`, `secondary`, `tertiary`); `scale` is always a separate prop for size (`sm`, `md`, `lg`). Surface context: `-inverse` (dark surface), `-brand` (brand surface). No color or appearance words in variant names. | **Code review** |
 
-## Primitives (20)
+## Primitives (21)
 
 ---
 
@@ -472,10 +472,10 @@ export function Select({ variant = 'default', className, children, ...props }: S
 
 **HTML element:** `<input[type=checkbox]>` · **Directory:** `checkbox/` · **Category:** Data Entry
 
-**Figma sources:** [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118)
+**Figma sources:** [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867)
 
 
-> Boolean checkbox input with label.
+> Boolean checkbox input with label. Also covers the single-consent / long-text checkbox pattern.
 
 **Props:**
 
@@ -647,6 +647,61 @@ export function Switch({ variant = 'default', className, children, ...props }: S
     <input[type=checkbox] className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
     </input[type=checkbox]>
+  );
+}
+```
+
+</details>
+
+---
+
+### `ToggleGroup`
+
+**HTML element:** `<div>` · **Directory:** `toggle-group/` · **Category:** Selection & Controls
+
+**Figma sources:** [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340)
+
+
+> Segmented control for mutually exclusive selection between 2-3 options. Implement with @radix-ui/react-toggle-group.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `size` | `'2' \| '3'` | `2` | Size | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `role="radiogroup"` on container (Radix ToggleGroup handles this)
+- `role="radio"` + `aria-checked` on each option
+- Arrow key navigation between options (provided by Radix)
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { ToggleGroup } from '@faithlife/commerce-components';
+
+<ToggleGroup size="2">{/* content */}</ToggleGroup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// toggle-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function ToggleGroup({ variant = '2', className, children, ...props }: ToggleGroupProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
   );
 }
 ```
@@ -1276,7 +1331,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (11)
+## Compositions (12)
 
 ---
 
@@ -1284,7 +1339,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 **HTML element:** `<fieldset>` · **Directory:** `field-group/` · **Category:** Data Entry
 
-**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449)
+**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449), [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653)
 
 
 > Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.
@@ -1665,37 +1720,42 @@ export function FileUpload({ title, content, ...props }: FileUploadProps) {
 
 ---
 
-### `SelectionGroup`
+### `RadioGroup`
 
-**HTML element:** `<div>` · **Directory:** `selection-group/` · **Category:** Selection & Controls
+**HTML element:** `<fieldset>` · **Directory:** `radio-group/` · **Category:** Data Entry
 
-**Figma sources:** [Toggle Switch (text)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250), [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867)
+**Figma sources:** [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250)
 
 
-> Group of mutually exclusive or multi-select options (toggles, checkboxes, radio buttons, or text tabs).
+> Group of mutually exclusive radio options with field label and error state. Implement with @radix-ui/react-radio-group.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `type` | `'toggle' \| 'checkbox' \| 'radio' \| 'single-select'` | `toggle` | Style | Selection mode — drives the underlying input semantics |
-| `layout` | `'horizontal' \| 'vertical'` | `horizontal` | — | — |
+| `variant` | `'list' \| 'inline'` | `list` | Size | list = vertical with field label (Multi-Selector), inline = compact horizontal pills (Multi-Select with Text) |
+| `state` | `'default' \| 'error'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)
+- `role="radiogroup"` on fieldset (Radix RadioGroup handles this)
+- `aria-invalid` + `aria-describedby` on fieldset for error messages
 
 **Slots / children:**
 
 - `children` — primary content area
-- `children` — `Checkbox`, `RadioButton`, or `Toggle` elements
 
 <details><summary>Consumer usage</summary>
 
 ```tsx
-import { SelectionGroup } from '@faithlife/commerce-components';
+import { RadioGroup } from '@faithlife/commerce-components';
 
-<SelectionGroup type="toggle">
+<RadioGroup variant="list">
   {/* BuilderBlocks renders editable content here */}
-</SelectionGroup>
+</RadioGroup>
 ```
 
 </details>
@@ -1703,13 +1763,76 @@ import { SelectionGroup } from '@faithlife/commerce-components';
 <details><summary>Implementation sketch (component.tsx)</summary>
 
 ```tsx
-// selection-group/component.tsx
+// radio-group/component.tsx
 // No @builder.io/* imports allowed here — those go in register.tsx
 import { cn } from '../../utils';
 import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
-export function SelectionGroup({ title, content, ...props }: SelectionGroupProps) {
+export function RadioGroup({ title, content, ...props }: RadioGroupProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `CheckboxGroup`
+
+**HTML element:** `<fieldset>` · **Directory:** `checkbox-group/` · **Category:** Data Entry
+
+**Figma sources:** [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614), [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250), [Single Select Box](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867)
+
+
+> Group of multi-select checkbox options with field label and error state.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `variant` | `'list' \| 'inline'` | `list` | Size | list = vertical with field label, inline = compact horizontal pills |
+| `state` | `'default' \| 'error'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)
+- `role="group"` on fieldset
+- `aria-invalid` + `aria-describedby` on fieldset for error messages
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { CheckboxGroup } from '@faithlife/commerce-components';
+
+<CheckboxGroup variant="list">
+  {/* BuilderBlocks renders editable content here */}
+</CheckboxGroup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// checkbox-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function CheckboxGroup({ title, content, ...props }: CheckboxGroupProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}

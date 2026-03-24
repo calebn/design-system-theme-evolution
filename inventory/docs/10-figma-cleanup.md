@@ -14,11 +14,12 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `FieldGroup` | Composition | Text Input (name, two fields) |
+| `FieldGroup` | Composition | Text Input (name, two fields), Text Toggle Selector |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
-| `Checkbox` | Primitive | Checkbox |
+| `Checkbox` | Primitive | Checkbox, Single Select Box |
 | `RadioButton` | Primitive | Radio Button |
 | `Switch` | Primitive | Switch, Toggle with Text |
+| `ToggleGroup` | Primitive | Toggle Switch (text) |
 | `Slider` | Primitive | Slider |
 | `Badge` | Primitive | Badges and Tags, Sale Percentage |
 | `StarRating` | Primitive | Star, Reviews |
@@ -35,7 +36,8 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `Accordion` | Composition | Accordion Section |
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
-| `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
+| `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
+| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text, Single Select Box |
 | `ButtonGroup` | Composition | Button group, CTA Row |
 | `ProductCard` | Composition | Product Grid Card |
 | `ProductDetail` | Composition | Product Content, Product Lineup—Single |

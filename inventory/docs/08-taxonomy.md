@@ -16,7 +16,7 @@
 
 ```mermaid
 graph TD
-  subgraph primitives ["Primitives (20)"]
+  subgraph primitives ["Primitives (21)"]
     Button["Button"]
     IconButton["IconButton"]
     LinkButton["LinkButton"]
@@ -26,6 +26,7 @@ graph TD
     Checkbox["Checkbox"]
     RadioButton["RadioButton"]
     Switch["Switch"]
+    ToggleGroup["ToggleGroup"]
     Slider["Slider"]
     Badge["Badge"]
     StarRating["StarRating"]
@@ -45,7 +46,8 @@ graph TD
     Accordion["Accordion"]
     EmailCapture["EmailCapture"]
     FileUpload["FileUpload"]
-    SelectionGroup["SelectionGroup"]
+    RadioGroup["RadioGroup"]
+    CheckboxGroup["CheckboxGroup"]
     ButtonGroup["ButtonGroup"]
     ProductCard["ProductCard"]
     ProductDetail["ProductDetail"]
@@ -66,8 +68,8 @@ graph TD
   DesignSystem["Logos Design System"]
   DesignSystem --> actions["Actions\n(5 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
-  DesignSystem --> data_entry["Data Entry\n(11 code / 17 Figma)"]
-  DesignSystem --> selection["Selection & Controls\n(3 code / 11 Figma)"]
+  DesignSystem --> data_entry["Data Entry\n(13 code / 22 Figma)"]
+  DesignSystem --> selection["Selection & Controls\n(3 code / 6 Figma)"]
   DesignSystem --> data_display["Data Display\n(3 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
   DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
@@ -113,14 +115,16 @@ graph TD
 |----------------|------|---------------|
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `FieldGroup` | Composition | Text Input (name, two fields) |
+| `FieldGroup` | Composition | Text Input (name, two fields), Text Toggle Selector |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
-| `Checkbox` | Primitive | Checkbox |
+| `Checkbox` | Primitive | Checkbox, Single Select Box |
 | `RadioButton` | Primitive | Radio Button |
 | `Slider` | Primitive | Slider |
 | `QuantityInput` | Primitive | Stepper Control |
 | `EmailCapture` | Composition | Email Capture |
 | `FileUpload` | Composition | Upload Image Area |
+| `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
+| `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text, Single Select Box |
 | `BasicForm` | Builder Block | Basic Form |
 
 ### Selection & Controls
@@ -132,8 +136,8 @@ graph TD
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
 | `Switch` | Primitive | Switch, Toggle with Text |
+| `ToggleGroup` | Primitive | Toggle Switch (text) |
 | `Pagination` | Primitive | Next-Previous Selector, Slider page selector, Slider Scroll Bar |
-| `SelectionGroup` | Composition | Toggle Switch (text), Multi-Select with Text, Multi-Selector, Text Toggle Selector, Single Select Box |
 
 ### Data Display
 
@@ -215,8 +219,8 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Modal Button Group | Atoms | Feedback & Overlays | `Modal` | Composition |
 | Modal Dialog | Molecules | Feedback & Overlays | `Modal` | Composition |
 | Multi-CTA List | Molecules | Product | `CtaList` | Builder Block |
-| Multi-Select with Text | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
-| Multi-Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Multi-Select with Text | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
+| Multi-Selector | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
 | Next-Previous Buttons | Atoms | Actions | `IconButton` | Primitive |
 | Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
 | Play Button | Atoms | Actions | `IconButton` | Primitive |
@@ -232,7 +236,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Section Headline | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Section Headline with CTA | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Simple Menu | Atoms | Navigation | `Menu` | Primitive |
-| Single Select Box | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Single Select Box | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
 | Slider | Inputs & Forms | Data Entry | `Slider` | Primitive |
 | Slider page selector | Molecules | Selection & Controls | `Pagination` | Primitive |
 | Slider Scroll Bar | Atoms | Selection & Controls | `Pagination` | Primitive |
@@ -254,10 +258,10 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Text Input—Password | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Section | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Text Section with Button Group | Molecules | Content Layout | `SectionLayout` | Builder Block |
-| Text Toggle Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
-| Text Toggle Selector | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Text Toggle Selector | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
+| Text Toggle Selector | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
 | Toast Bar | Molecules | Feedback & Overlays | `Toast` | Primitive |
-| Toggle Switch (text) | Inputs & Forms | Selection & Controls | `SelectionGroup` | Composition |
+| Toggle Switch (text) | Inputs & Forms | Selection & Controls | `ToggleGroup` | Primitive |
 | Toggle with Text | Inputs & Forms | Selection & Controls | `Switch` | Primitive |
 | Upload Image Area | Inputs & Forms | Data Entry | `FileUpload` | Composition |
 
@@ -278,7 +282,8 @@ packages/commerce-components/src/components/
   select/
   checkbox/
   radio-button/
-  toggle/
+  switch/
+  toggle-group/
   slider/
   badge/
   star-rating/
@@ -296,7 +301,8 @@ packages/commerce-components/src/components/
   accordion/
   email-capture/
   file-upload/
-  selection-group/
+  radio-group/
+  checkbox-group/
   button-group/
   product-card/
   product-detail/

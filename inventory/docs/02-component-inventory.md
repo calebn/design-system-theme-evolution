@@ -64,11 +64,11 @@
 | Email Capture | Data Entry | 6 | State | — | `<input>` | [1623:5925](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5925) |
 | Form Dropdown | Data Entry | 3 | State | ✅ | `<select>` | [1623:5532](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5532) |
 | Form Dropdown Option | Data Entry | 5 | State | — | `<select>` | [2015:39220](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2015-39220) |
-| Multi-Select with Text | Selection & Controls | 24 | State, Style, Size | — | `<select>` | [1623:5250](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) |
-| Multi-Selector | Selection & Controls | 4 | State | — | `<select>` | [1623:5614](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614) |
+| Multi-Select with Text | Data Entry | 24 | State, Style, Size | — | `<select>` | [1623:5250](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) |
+| Multi-Selector | Data Entry | 4 | State | — | `<select>` | [1623:5614](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614) |
 | Radio Button | Data Entry | 2 | State | — | `<input[type=radio]>` | [1623:5243](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5243) |
 | Search Field | Data Entry | 10 | Size, State | — | `<input>` | [1623:5874](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5874) |
-| Single Select Box | Selection & Controls | 2 | State | — | `<select>` | [4543:14867](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867) |
+| Single Select Box | Data Entry | 2 | State | — | `<select>` | [4543:14867](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4543-14867) |
 | Slider | Data Entry | 6 | State | — | `<input[type=range]>` | [1623:5807](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5807) |
 | Switch | Data Entry | 2 | On-Off, Background | — | `<input[type=checkbox]>` | [1623:5125](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5125) |
 | Text Input (name, two fields) | Data Entry | 6 | Style, State | — | `<input>` | [2758:3449](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) |
@@ -76,8 +76,8 @@
 | Text Input—Date | Data Entry | 6 | State | — | `<input>` | [1623:5660](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660) |
 | Text Input—Multiline | Data Entry | 6 | State | — | `<input>` | [1623:5422](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422) |
 | Text Input—Password | Data Entry | 7 | State | — | `<input>` | [1623:5741](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741) |
-| Text Toggle Selector | Selection & Controls | 1 | Property 1 | — | `<select>` | [1623:5649](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5649) |
-| Text Toggle Selector | Selection & Controls | 1 | Property 1 | — | `<select>` | [1623:5653](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) |
+| Text Toggle Selector | Data Entry | 1 | Property 1 | — | `<select>` | [1623:5649](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5649) |
+| Text Toggle Selector | Data Entry | 1 | Property 1 | — | `<select>` | [1623:5653](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) |
 | Toggle Switch (text) | Selection & Controls | 10 | Selection, Size, State | — | `<input[type=checkbox]>` | [1623:5340](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5340) |
 | Toggle with Text | Selection & Controls | 6 | Property 1 | — | `<input[type=checkbox]>` | [1623:5311](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5311) |
 | Upload Image Area | Data Entry | 4 | Property 1 | — | `<input[type=file]>` | [1623:5327](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5327) |

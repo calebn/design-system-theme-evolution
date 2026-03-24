@@ -9,7 +9,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 | Code Component | Tier | Figma Frames |
 |----------------|------|--------------|
-| `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button, Floating Action Button with Text, Stateful Action Button |
 | `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
@@ -21,7 +21,8 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `Switch` | Primitive | Switch, Toggle with Text |
 | `ToggleGroup` | Primitive | Toggle Switch (text) |
 | `Slider` | Primitive | Slider |
-| `Badge` | Primitive | Badges and Tags, Sale Percentage |
+| `Badge` | Primitive | Badges and Tags |
+| `SaleCallout` | Primitive | Sale Percentage |
 | `StarRating` | Primitive | Star, Reviews |
 | `PriceLabel` | Primitive | Price and Label |
 | `Breadcrumbs` | Primitive | Breadcrumbs |
@@ -39,8 +40,10 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `RadioGroup` | Composition | Multi-Selector, Multi-Select with Text |
 | `CheckboxGroup` | Composition | Multi-Selector, Multi-Select with Text, Single Select Box |
 | `ButtonGroup` | Composition | Button group, CTA Row |
+| `Chip` | Composition | Category Button |
 | `ProductCard` | Composition | Product Grid Card |
-| `ProductDetail` | Composition | Product Content, Product Lineup—Single |
+| `ProductDetail` | Composition | Product Content |
+| `ProductLineup` | Composition | Product Lineup—Single |
 | `FreeTrialCard` | Composition | Free Trial Card |
 | `SectionLayout` | Builder Block | Section Headline, Section Headline with CTA, Text Section, Text Section with Button Group |
 | `ProductCarousel` | Builder Block | Carousel Product |

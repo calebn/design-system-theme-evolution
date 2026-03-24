@@ -284,26 +284,22 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Simple Menu | Button Menu | `Menu` |
 | Star | Reviews | `StarRating` |
 | Text Input (single line) | Text Input—Date | `Input` |
-| Category Button | Stateful Action Button | `Button` |
 | Next-Previous Selector | Slider page selector | `Pagination` |
 | Close Button | Floating Action Button | `IconButton` |
 | Increase-Decrease Buttons | Floating Action Button | `IconButton` |
 | Expand-Collapse Button | Floating Action Button | `IconButton` |
 | Text Input (single line) | Search Field | `Input` |
 | Text Input—Date | Search Field | `Input` |
-| Badges and Tags | Sale Percentage | `Badge` |
 | Multi-Selector | Single Select Box | `CheckboxGroup` |
 | Next-Previous Buttons | Floating Action Button | `IconButton` |
 | Button | Floating Action Button with Text | `Button` |
 | Text Input (single line) | Text Input—Password | `Input` |
-| Floating Action Button with Text | Category Button | `Button` |
 | Dropdown | Form Dropdown | `Select` |
 | Form Dropdown | Form Dropdown Option | `Select` |
 | Text Input—Password | Search Field | `Input` |
 | Modal Button Group | Modal Dialog | `Modal` |
 | Floating Action Button with Text | Stateful Action Button | `Button` |
 | Multi-Select with Text | Single Select Box | `CheckboxGroup` |
-| Button | Category Button | `Button` |
 | Floating Action Button | Play Button | `IconButton` |
 | Multi-Select with Text | Multi-Selector | `CheckboxGroup` |
 | Button | Stateful Action Button | `Button` |
@@ -319,7 +315,6 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 | Text Section with Button Group | Text Section | `SectionLayout` |
 | Text Section | Section Headline with CTA | `SectionLayout` |
 | Text Section | Section Headline | `SectionLayout` |
-| Product Content | Product Lineup—Single | `ProductDetail` |
 | Switch | Toggle with Text | `Switch` |
 | Text Input (name, two fields) | Text Toggle Selector | `FieldGroup` |
 

@@ -558,7 +558,7 @@
     "figmaId": "1935:4111",
     "section": "atoms",
     "functionalCategory": "actions",
-    "proposedCodeName": "CategoryButton",
+    "proposedCodeName": "Chip",
     "variantCount": 4,
     "properties": {
       "State": [
@@ -1483,7 +1483,7 @@
     "figmaId": "5173:41321",
     "section": "other",
     "functionalCategory": "data-display",
-    "proposedCodeName": "SaleBadge",
+    "proposedCodeName": "SaleCallout",
     "variantCount": 8,
     "properties": {
       "Style": [

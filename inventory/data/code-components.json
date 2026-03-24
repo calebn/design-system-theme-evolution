@@ -8,7 +8,6 @@
     "htmlElement": "button",
     "figmaSources": [
       "Button",
-      "Category Button",
       "Floating Action Button with Text",
       "Stateful Action Button"
     ],
@@ -34,7 +33,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All <button> elements with text labels; variant prop handles visual hierarchy"
   },
   {
     "name": "IconButton",
@@ -72,7 +72,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All icon-only <button> elements; unified by absence of text label (MUI/Radix convention)"
   },
   {
     "name": "LinkButton",
@@ -120,7 +121,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Both render as <a> with inline text + icon; icon position is the only layout axis"
   },
   {
     "name": "Input",
@@ -154,7 +156,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All single-line <input> elements; HTML type attribute distinguishes text, date, password, and search variants"
   },
   {
     "name": "Textarea",
@@ -179,7 +182,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single <textarea> element; no grouping needed"
   },
   {
     "name": "FieldGroup",
@@ -201,7 +205,8 @@
         "description": "Number of equal-width columns. Figma shows the 2-column pattern.",
         "proposed": true
       }
-    ]
+    ],
+    "justification": "Both are <fieldset> wrappers grouping related form fields (WCAG 1.3.1 info and relationships)"
   },
   {
     "name": "Select",
@@ -235,7 +240,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All <select> dropdown elements; Form Dropdown adds label + border for form context"
   },
   {
     "name": "Checkbox",
@@ -255,7 +261,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Both are input[type=checkbox] with label; Single Select Box is a long-text usage pattern of the same element"
   },
   {
     "name": "RadioButton",
@@ -274,7 +281,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single input[type=radio] element; error state belongs to parent RadioGroup"
   },
   {
     "name": "Switch",
@@ -300,7 +308,8 @@
         "figmaAxis": "State",
         "default": "off"
       }
-    ]
+    ],
+    "justification": "Both are role=\"switch\" controls; Toggle with Text is the same switch plus an inline text label"
   },
   {
     "name": "ToggleGroup",
@@ -325,7 +334,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Segmented control for mutually exclusive option selection; Radix ToggleGroup provides ARIA and keyboard nav"
   },
   {
     "name": "Slider",
@@ -344,18 +354,18 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single input[type=range] element with a numeric value display"
   },
   {
     "name": "Badge",
     "directoryName": "badge",
     "tier": "primitive",
     "functionalCategory": "data-display",
-    "description": "Small label for tags, status indicators, and sale callouts.",
+    "description": "Small inline label for tags, status indicators, and countdown timers.",
     "htmlElement": "span",
     "figmaSources": [
-      "Badges and Tags",
-      "Sale Percentage"
+      "Badges and Tags"
     ],
     "props": [
       {
@@ -371,7 +381,28 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Inline promotional pills and countdown timers share the same compact <span> display pattern"
+  },
+  {
+    "name": "SaleCallout",
+    "directoryName": "sale-callout",
+    "tier": "primitive",
+    "functionalCategory": "data-display",
+    "description": "Large promotional display text showing a percentage discount headline (e.g. \"Save up to 75%\").",
+    "htmlElement": "div",
+    "figmaSources": [
+      "Sale Percentage"
+    ],
+    "props": [
+      {
+        "name": "scale",
+        "type": "'sm' | 'md' | 'lg' | 'xl'",
+        "figmaAxis": "Size",
+        "default": "md"
+      }
+    ],
+    "justification": "Large display-heading promotional text; visually and structurally distinct from small inline Badge elements"
   },
   {
     "name": "StarRating",
@@ -397,7 +428,8 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Star is the atomic icon unit; Reviews is the full rating row — one component renders both"
   },
   {
     "name": "PriceLabel",
@@ -422,7 +454,8 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Single price display element; sale/value/subscription are all formatting variants of the same data"
   },
   {
     "name": "Breadcrumbs",
@@ -441,7 +474,8 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Single <nav> breadcrumb trail"
   },
   {
     "name": "Menu",
@@ -467,7 +501,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Both are dropdown menu triggers; simple = text links, button = pill-shaped — same interaction, different visual treatment"
   },
   {
     "name": "Tabs",
@@ -500,7 +535,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Container and individual tab item are inseparable parts of one Radix Tabs primitive"
   },
   {
     "name": "SubnavDropdown",
@@ -526,7 +562,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Trigger and options list are parts of one dropdown navigation; both required for the full interaction"
   },
   {
     "name": "QuantityInput",
@@ -551,7 +588,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single +/- quantity picker control; split from AddToCart which is a higher-level composition"
   },
   {
     "name": "AddToCart",
@@ -576,7 +614,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Multi-stage add-to-cart flow (CTA → quantity picker → in-cart confirmation); deferred pending design finalization"
   },
   {
     "name": "Pagination",
@@ -609,15 +648,16 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All three provide content navigation controls; arrow buttons, dot selector, and scroll bar are layout variants of the same <nav>"
   },
   {
     "name": "Toast",
     "directoryName": "toast",
     "tier": "primitive",
     "functionalCategory": "feedback",
-    "description": "Transient status notification.",
-    "htmlElement": "output",
+    "description": "Transient status notification bar. Implement with @radix-ui/react-toast; role=\"status\" for info/success, role=\"alert\" for warning/error.",
+    "htmlElement": "div",
     "figmaSources": [
       "Toast Bar"
     ],
@@ -629,7 +669,8 @@
         "default": "info",
         "description": "Always semantic — never color words"
       }
-    ]
+    ],
+    "justification": "Single notification bar; dynamic ARIA role per severity (Radix Toast)"
   },
   {
     "name": "Modal",
@@ -649,7 +690,8 @@
         "figmaAxis": "Type",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Dialog content and footer button row are inseparable parts of one <dialog> element (Radix Dialog)"
   },
   {
     "name": "Accordion",
@@ -674,7 +716,8 @@
         "figmaAxis": "Type",
         "default": "section"
       }
-    ]
+    ],
+    "justification": "Single expandable <details> section with title trigger and body content (Radix Accordion)"
   },
   {
     "name": "EmailCapture",
@@ -699,7 +742,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single inline email <form> with embedded submit action; too coupled to split"
   },
   {
     "name": "FileUpload",
@@ -718,7 +762,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Single drag-and-drop / click-to-browse file upload zone"
   },
   {
     "name": "RadioGroup",
@@ -745,7 +790,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "Both show grouped radio options with fieldset wrapper; list vs inline are layout variants (Radix RadioGroup)"
   },
   {
     "name": "CheckboxGroup",
@@ -773,7 +819,8 @@
         "figmaAxis": "State",
         "default": "default"
       }
-    ]
+    ],
+    "justification": "All show grouped checkbox options in a fieldset; Single Select Box is a single-item consent group"
   },
   {
     "name": "ButtonGroup",
@@ -797,7 +844,34 @@
         "type": "'start' | 'center' | 'end'",
         "default": "start"
       }
-    ]
+    ],
+    "justification": "Both group related action buttons; CTA Row is the full-width stacked variant"
+  },
+  {
+    "name": "Chip",
+    "directoryName": "chip",
+    "tier": "composition",
+    "functionalCategory": "actions",
+    "description": "Filter chip wrapping Button with constrained API: pill shape, icon + text label, selected/unselected states.",
+    "htmlElement": "button",
+    "figmaSources": [
+      "Category Button"
+    ],
+    "props": [
+      {
+        "name": "selected",
+        "type": "boolean",
+        "figmaAxis": "State",
+        "default": "false"
+      },
+      {
+        "name": "state",
+        "type": "'default' | 'hover' | 'active' | 'disabled'",
+        "figmaAxis": "State",
+        "default": "default"
+      }
+    ],
+    "justification": "Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention)"
   },
   {
     "name": "ProductCard",
@@ -816,27 +890,48 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Single grid product card — badge, image, title, rating, price, CTA"
   },
   {
     "name": "ProductDetail",
     "directoryName": "product-detail",
     "tier": "composition",
     "functionalCategory": "product",
-    "description": "Full product detail display with purchase actions.",
+    "description": "Full product detail display with description, quantity picker, and purchase actions.",
     "htmlElement": "article",
     "figmaSources": [
-      "Product Content",
-      "Product Lineup—Single"
+      "Product Content"
     ],
     "props": [
       {
         "name": "variant",
-        "type": "'full' | 'lineup'",
+        "type": "'full' | 'compact'",
         "figmaAxis": "Type",
         "default": "full"
       }
-    ]
+    ],
+    "justification": "Single full-detail product view; distinct from card (grid listing) and ProductLineup (hero showcase)"
+  },
+  {
+    "name": "ProductLineup",
+    "directoryName": "product-lineup",
+    "tier": "composition",
+    "functionalCategory": "product",
+    "description": "Hero-style product showcase with blue image area, ownership badge, and purchase CTA. Three responsive variants (desktop/tablet/mobile).",
+    "htmlElement": "article",
+    "figmaSources": [
+      "Product Lineup—Single"
+    ],
+    "props": [
+      {
+        "name": "size",
+        "type": "'desktop' | 'tablet' | 'mobile'",
+        "figmaAxis": "Size",
+        "default": "desktop"
+      }
+    ],
+    "justification": "Hero product showcase with distinct layout and responsive variants; not a detail view or grid card"
   },
   {
     "name": "FreeTrialCard",
@@ -848,7 +943,8 @@
     "figmaSources": [
       "Free Trial Card"
     ],
-    "props": []
+    "props": [],
+    "justification": "Single pricing/trial card with plan name, price, CTA button, and feature checklist"
   },
   {
     "name": "SectionLayout",
@@ -870,7 +966,8 @@
         "figmaAxis": "Type",
         "default": "headline-only"
       }
-    ]
+    ],
+    "justification": "All are <section> content blocks with a headline; variants progressively add CTA link, body copy, and button group"
   },
   {
     "name": "ProductCarousel",
@@ -889,7 +986,8 @@
         "figmaAxis": "Size",
         "default": "md"
       }
-    ]
+    ],
+    "justification": "Single horizontally scrolling product card container backed by API data"
   },
   {
     "name": "CtaList",
@@ -901,7 +999,8 @@
     "figmaSources": [
       "Multi-CTA List"
     ],
-    "props": []
+    "props": [],
+    "justification": "Single vertical list of CTA link rows with arrow icons"
   },
   {
     "name": "BasicForm",
@@ -913,6 +1012,7 @@
     "figmaSources": [
       "Basic Form"
     ],
-    "props": []
+    "props": [],
+    "justification": "Generic <form> shell with field layout managed entirely via Builder.io slot content"
   }
 ]

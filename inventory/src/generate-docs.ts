@@ -1227,8 +1227,8 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
     ['Builder Blocks', builderBlocks],
   ] as [string, CodeComponent[]][]) {
     lines.push(`### ${label} (${list.length})`, '');
-    lines.push('| Component | Directory | Category | Figma Sources | HTML |');
-    lines.push('|-----------|-----------|----------|---------------|------|');
+    lines.push('| Component | Directory | Category | Figma Sources | HTML | Justification |');
+    lines.push('|-----------|-----------|----------|---------------|------|---------------|');
     for (const cc of list) {
       const linkedSources = cc.figmaSources
         .map((s) => {
@@ -1237,7 +1237,7 @@ function doc09ComponentArchitecture(components: FigmaComponent[], taxonomy: Taxo
         })
         .join(', ');
       lines.push(
-        mdRow(`\`${cc.name}\``, `\`${cc.directoryName}/\``, CATEGORY_LABELS[cc.functionalCategory], linkedSources, `\`<${cc.htmlElement}>\``)
+        mdRow(`\`${cc.name}\``, `\`${cc.directoryName}/\``, CATEGORY_LABELS[cc.functionalCategory], linkedSources, `\`<${cc.htmlElement}>\``, cc.justification ?? '—')
       );
     }
     lines.push('');
@@ -1573,6 +1573,9 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   toast: ['`role="status"` or `role="alert"` depending on urgency', '`aria-live="polite"` for non-urgent', '`aria-live="assertive"` for urgent'],
   'radio-group': ['`<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)', '`role="radiogroup"` on fieldset (Radix RadioGroup handles this)', '`aria-invalid` + `aria-describedby` on fieldset for error messages'],
   'checkbox-group': ['`<fieldset>` + `<legend>` wrapping the group (rendered as `<fieldset>`)', '`role="group"` on fieldset', '`aria-invalid` + `aria-describedby` on fieldset for error messages'],
+  'sale-callout': ['`role="img"` with `aria-label` describing the promotion (e.g. "Save up to 75%")', '`role="status"` if the text updates dynamically'],
+  chip: ['Same requirements as `button`', '`aria-pressed` for selected/unselected toggle state', '`aria-label` with icon context if icon is the primary indicator'],
+  'product-lineup': ['`role="article"` (implicit on `<article>`)', '`aria-label` naming the product', 'Ensure heading hierarchy is maintained within the card'],
   'quantity-input': ['`aria-label` on increment/decrement buttons (e.g. "Increase quantity", "Decrease quantity")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on value display'],
   'add-to-cart': ['`aria-label` describing current stage (e.g. "Add to cart", "Quantity picker", "In cart")', '`aria-live="polite"` on the container so stage transitions are announced to screen readers'],
 };

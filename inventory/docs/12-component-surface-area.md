@@ -38,7 +38,7 @@ These rules apply to **every** component. They are sourced from
 | Backend data | Components requiring backend data **must** receive it via `CommerceComponentsContext` or an explicit prop callback — never by calling APIs directly. Storybook stories **must** provide stub implementations. | **Code review** |
 | Variant naming | `variant` describes visual hierarchy (`primary`, `secondary`, `tertiary`); `scale` is always a separate prop for size (`sm`, `md`, `lg`). Surface context: `-inverse` (dark surface), `-brand` (brand surface). No color or appearance words in variant names. | **Code review** |
 
-## Primitives (21)
+## Primitives (22)
 
 ---
 
@@ -46,7 +46,7 @@ These rules apply to **every** component. They are sourced from
 
 **HTML element:** `<button>` · **Directory:** `button/` · **Category:** Actions
 
-**Figma sources:** [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480), [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111), [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531), [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104)
+**Figma sources:** [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480), [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531), [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104)
 
 
 > Standard labelled action button covering primary, secondary, tertiary, and stateful variants.
@@ -767,10 +767,10 @@ export function Slider({ variant = 'default', className, children, ...props }: S
 
 **HTML element:** `<span>` · **Directory:** `badge/` · **Category:** Data Display
 
-**Figma sources:** [Badges and Tags](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1773-12115), [Sale Percentage](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5173-41321)
+**Figma sources:** [Badges and Tags](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1773-12115)
 
 
-> Small label for tags, status indicators, and sale callouts.
+> Small inline label for tags, status indicators, and countdown timers.
 
 **Props:**
 
@@ -817,6 +817,59 @@ export function Badge({ variant = 'default', className, children, ...props }: Ba
     <span className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
     </span>
+  );
+}
+```
+
+</details>
+
+---
+
+### `SaleCallout`
+
+**HTML element:** `<div>` · **Directory:** `sale-callout/` · **Category:** Data Display
+
+**Figma sources:** [Sale Percentage](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5173-41321)
+
+
+> Large promotional display text showing a percentage discount headline (e.g. "Save up to 75%").
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `scale` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `role="img"` with `aria-label` describing the promotion (e.g. "Save up to 75%")
+- `role="status"` if the text updates dynamically
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { SaleCallout } from '@faithlife/commerce-components';
+
+<SaleCallout scale="md">{/* content */}</SaleCallout>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// sale-callout/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { Typography } from '../typography/component';
+
+export function SaleCallout({ variant = 'md', className, children, ...props }: SaleCalloutProps) {
+  return (
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+      {children}
+    </div>
   );
 }
 ```
@@ -1271,12 +1324,12 @@ export function Pagination({ variant = 'buttons', className, children, ...props 
 
 ### `Toast`
 
-**HTML element:** `<output>` · **Directory:** `toast/` · **Category:** Feedback & Overlays
+**HTML element:** `<div>` · **Directory:** `toast/` · **Category:** Feedback & Overlays
 
 **Figma sources:** [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729)
 
 
-> Transient status notification.
+> Transient status notification bar. Implement with @radix-ui/react-toast; role="status" for info/success, role="alert" for warning/error.
 
 **Props:**
 
@@ -1322,16 +1375,16 @@ import { Typography } from '../typography/component';
 
 export function Toast({ variant = 'info', className, children, ...props }: ToastProps) {
   return (
-    <output className={cn('tw-preflight', /* variant classes */, className)} {...props}>
+    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
-    </output>
+    </div>
   );
 }
 ```
 
 </details>
 
-## Compositions (12)
+## Compositions (14)
 
 ---
 
@@ -1904,6 +1957,69 @@ export function ButtonGroup({ title, content, ...props }: ButtonGroupProps) {
 
 ---
 
+### `Chip`
+
+**HTML element:** `<button>` · **Directory:** `chip/` · **Category:** Actions
+
+**Figma sources:** [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111)
+
+
+> Filter chip wrapping Button with constrained API: pill shape, icon + text label, selected/unselected states.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `selected` | `boolean` | `false` | State | — |
+| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- Same requirements as `button`
+- `aria-pressed` for selected/unselected toggle state
+- `aria-label` with icon context if icon is the primary indicator
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { Chip } from '@faithlife/commerce-components';
+
+<Chip selected="false">
+  {/* BuilderBlocks renders editable content here */}
+</Chip>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// chip/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function Chip({ title, content, ...props }: ChipProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
 ### `ProductCard`
 
 **HTML element:** `<article>` · **Directory:** `product-card/` · **Category:** Product
@@ -1964,16 +2080,16 @@ export function ProductCard({ title, content, ...props }: ProductCardProps) {
 
 **HTML element:** `<article>` · **Directory:** `product-detail/` · **Category:** Product
 
-**Figma sources:** [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922), [Product Lineup—Single](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-49395)
+**Figma sources:** [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922)
 
 
-> Full product detail display with purchase actions.
+> Full product detail display with description, quantity picker, and purchase actions.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'full' \| 'lineup'` | `full` | Type | — |
+| `variant` | `'full' \| 'compact'` | `full` | Type | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -2003,6 +2119,68 @@ import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
 export function ProductDetail({ title, content, ...props }: ProductDetailProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `ProductLineup`
+
+**HTML element:** `<article>` · **Directory:** `product-lineup/` · **Category:** Product
+
+**Figma sources:** [Product Lineup—Single](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-49395)
+
+
+> Hero-style product showcase with blue image area, ownership badge, and purchase CTA. Three responsive variants (desktop/tablet/mobile).
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `size` | `'desktop' \| 'tablet' \| 'mobile'` | `desktop` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `role="article"` (implicit on `<article>`)
+- `aria-label` naming the product
+- Ensure heading hierarchy is maintained within the card
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { ProductLineup } from '@faithlife/commerce-components';
+
+<ProductLineup size="desktop">
+  {/* BuilderBlocks renders editable content here */}
+</ProductLineup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// product-lineup/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function ProductLineup({ title, content, ...props }: ProductLineupProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}

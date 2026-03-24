@@ -101,6 +101,7 @@ export interface CodeComponent {
   figmaSources: string[];    // Figma frame names that collapse into this component
   props: CodeComponentProp[];
   htmlElement: string;
+  justification?: string;    // Short rationale for grouping these Figma frames
 }
 
 export interface TaxonomyCategory {

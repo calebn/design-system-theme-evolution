@@ -16,7 +16,7 @@
 
 ```mermaid
 graph TD
-  subgraph primitives ["Primitives (21)"]
+  subgraph primitives ["Primitives (22)"]
     Button["Button"]
     IconButton["IconButton"]
     LinkButton["LinkButton"]
@@ -29,6 +29,7 @@ graph TD
     ToggleGroup["ToggleGroup"]
     Slider["Slider"]
     Badge["Badge"]
+    SaleCallout["SaleCallout"]
     StarRating["StarRating"]
     PriceLabel["PriceLabel"]
     Breadcrumbs["Breadcrumbs"]
@@ -49,8 +50,10 @@ graph TD
     RadioGroup["RadioGroup"]
     CheckboxGroup["CheckboxGroup"]
     ButtonGroup["ButtonGroup"]
+    Chip["Chip"]
     ProductCard["ProductCard"]
     ProductDetail["ProductDetail"]
+    ProductLineup["ProductLineup"]
     FreeTrialCard["FreeTrialCard"]
   end
   subgraph builderBlocks ["Builder Blocks (4)"]
@@ -66,14 +69,14 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(5 code / 14 Figma)"]
+  DesignSystem --> actions["Actions\n(6 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
   DesignSystem --> data_entry["Data Entry\n(13 code / 22 Figma)"]
   DesignSystem --> selection["Selection & Controls\n(3 code / 6 Figma)"]
-  DesignSystem --> data_display["Data Display\n(3 code / 8 Figma)"]
+  DesignSystem --> data_display["Data Display\n(4 code / 8 Figma)"]
   DesignSystem --> feedback["Feedback & Overlays\n(2 code / 3 Figma)"]
   DesignSystem --> content_layout["Content Layout\n(2 code / 5 Figma)"]
-  DesignSystem --> product["Product\n(5 code / 6 Figma)"]
+  DesignSystem --> product["Product\n(6 code / 6 Figma)"]
 ```
 
 ## Category Definitions
@@ -86,11 +89,12 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Button` | Primitive | Button, Category Button, Floating Action Button with Text, Stateful Action Button |
+| `Button` | Primitive | Button, Floating Action Button with Text, Stateful Action Button |
 | `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `AddToCart` | Composition | Stepper CTA |
 | `ButtonGroup` | Composition | Button group, CTA Row |
+| `Chip` | Composition | Category Button |
 
 ### Navigation
 
@@ -147,7 +151,8 @@ graph TD
 
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
-| `Badge` | Primitive | Badges and Tags, Sale Percentage |
+| `Badge` | Primitive | Badges and Tags |
+| `SaleCallout` | Primitive | Sale Percentage |
 | `StarRating` | Primitive | Star, Reviews |
 | `PriceLabel` | Primitive | Price and Label |
 
@@ -182,7 +187,8 @@ graph TD
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
 | `ProductCard` | Composition | Product Grid Card |
-| `ProductDetail` | Composition | Product Content, Product Lineup—Single |
+| `ProductDetail` | Composition | Product Content |
+| `ProductLineup` | Composition | Product Lineup—Single |
 | `FreeTrialCard` | Composition | Free Trial Card |
 | `ProductCarousel` | Builder Block | Carousel Product |
 | `CtaList` | Builder Block | Multi-CTA List |
@@ -201,7 +207,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Button group | Molecules | Selection & Controls | `ButtonGroup` | Composition |
 | Button Menu | Atoms | Navigation | `Menu` | Primitive |
 | Carousel Product | Molecules | Product | `ProductCarousel` | Builder Block |
-| Category Button | Atoms | Actions | `Button` | Primitive |
+| Category Button | Atoms | Actions | `Chip` | Composition |
 | Checkbox | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
 | Close Button | Atoms | Actions | `IconButton` | Primitive |
 | CTA Row | Atoms | Actions | `ButtonGroup` | Composition |
@@ -228,10 +234,10 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Product Content | Molecules | Product | `ProductDetail` | Composition |
 | Product Grid Card | Molecules | Product | `ProductCard` | Composition |
 | Product Images | Other | Data Display | — | — |
-| Product Lineup—Single | Molecules | Product | `ProductDetail` | Composition |
+| Product Lineup—Single | Molecules | Product | `ProductLineup` | Composition |
 | Radio Button | Inputs & Forms | Data Entry | `RadioButton` | Primitive |
 | Reviews | Atoms | Data Display | `StarRating` | Primitive |
-| Sale Percentage | Other | Data Display | `Badge` | Primitive |
+| Sale Percentage | Other | Data Display | `SaleCallout` | Primitive |
 | Search Field | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Section Headline | Molecules | Content Layout | `SectionLayout` | Builder Block |
 | Section Headline with CTA | Molecules | Content Layout | `SectionLayout` | Builder Block |
@@ -286,13 +292,14 @@ packages/commerce-components/src/components/
   toggle-group/
   slider/
   badge/
+  sale-callout/
   star-rating/
   price-label/
   breadcrumbs/
   menu/
   tabs/
   subnav-dropdown/
-  stepper/
+  quantity-input/
   pagination/
   toast/
   # Compositions (React-first, Builder.io optional)
@@ -304,8 +311,10 @@ packages/commerce-components/src/components/
   radio-group/
   checkbox-group/
   button-group/
+  chip/
   product-card/
   product-detail/
+  product-lineup/
   free-trial-card/
   # Builder Blocks (require register.tsx with BuilderBlocks)
   section-layout/
@@ -324,7 +333,7 @@ The 6 components in Figma's "Other" section are reclassified as follows:
 | Product Images | Data Display | — | Commerce display atom |
 | Price and Label | Data Display | `PriceLabel` | Commerce display atom |
 | Image Ratios | Data Display | — | Layout constraint — consider removing from component inventory |
-| Sale Percentage | Data Display | `Badge` | Badge variant for promotional pricing |
+| Sale Percentage | Data Display | `SaleCallout` | Badge variant for promotional pricing |
 | List | Data Display | — | Generic atom used inside content sections |
 
 ---

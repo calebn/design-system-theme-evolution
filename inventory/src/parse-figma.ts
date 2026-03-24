@@ -147,7 +147,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Floating Action Button': 'FloatingActionButton',
   'Floating Action Button with Text': 'FloatingActionButtonLabel',
   'Play Button': 'PlayButton',
-  'Category Button': 'CategoryButton',
+  'Category Button': 'Chip',
   'CTA Row': 'CtaRow',
   'Stateful Action Button': 'StatefulButton',
   'Stepper CTA': 'StepperCta',
@@ -172,7 +172,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Star': 'StarIcon',
   'Badges and Tags': 'Badge',
   'Price and Label': 'PriceLabel',
-  'Sale Percentage': 'SaleBadge',
+  'Sale Percentage': 'SaleCallout',
   'Image Ratios': 'ImageContainer',
   'Product Images': 'ProductImage',
   'List': 'List',
@@ -205,6 +205,9 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Multi-Select with Text': 'RadioGroup',
   'Text Toggle Selector': 'FieldGroup',
   'Single Select Box': 'Checkbox',
+  'Category Button': 'Chip',
+  'Product Lineup—Single': 'ProductLineup',
+  'Sale Percentage': 'SaleCallout',
   'Search Field': 'SearchField',
   'Email Capture': 'EmailCaptureField',
   'Upload Image Area': 'FileUpload',
@@ -423,7 +426,6 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     htmlElement: 'button',
     figmaSources: [
       'Button',
-      'Category Button',
       'Floating Action Button with Text',
       'Stateful Action Button',
     ],
@@ -432,6 +434,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md', description: 'Size — always a separate prop, never encoded in variant' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All <button> elements with text labels; variant prop handles visual hierarchy',
   },
 
   {
@@ -454,6 +457,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All icon-only <button> elements; unified by absence of text label (MUI/Radix convention)',
   },
 
   {
@@ -474,6 +478,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Both render as <a> with inline text + icon; icon position is the only layout axis',
   },
 
   {
@@ -494,6 +499,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All single-line <input> elements; HTML type attribute distinguishes text, date, password, and search variants',
   },
 
   {
@@ -508,6 +514,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'filled' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single <textarea> element; no grouping needed',
   },
 
   {
@@ -521,6 +528,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'columns', type: "'2' | '3' | '4'", figmaAxis: '', default: '2', description: 'Number of equal-width columns. Figma shows the 2-column pattern.', proposed: true },
     ],
+    justification: 'Both are <fieldset> wrappers grouping related form fields (WCAG 1.3.1 info and relationships)',
   },
 
   {
@@ -536,6 +544,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'open' | 'disabled' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All <select> dropdown elements; Form Dropdown adds label + border for form context',
   },
 
   {
@@ -549,6 +558,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'state', type: "'default' | 'hover' | 'checked' | 'indeterminate' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Both are input[type=checkbox] with label; Single Select Box is a long-text usage pattern of the same element',
   },
 
   {
@@ -562,6 +572,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'state', type: "'default' | 'hover' | 'checked' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single input[type=radio] element; error state belongs to parent RadioGroup',
   },
 
   {
@@ -576,6 +587,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'default' | 'with-label'", figmaAxis: 'Type', default: 'default' },
       { name: 'state', type: "'on' | 'off' | 'disabled'", figmaAxis: 'State', default: 'off' },
     ],
+    justification: 'Both are role="switch" controls; Toggle with Text is the same switch plus an inline text label',
   },
 
   {
@@ -590,6 +602,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'size', type: "'2' | '3'", figmaAxis: 'Size', default: '2' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Segmented control for mutually exclusive option selection; Radix ToggleGroup provides ARIA and keyboard nav',
   },
 
   {
@@ -603,6 +616,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single input[type=range] element with a numeric value display',
   },
 
   {
@@ -610,13 +624,28 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'badge',
     tier: 'primitive',
     functionalCategory: 'data-display',
-    description: 'Small label for tags, status indicators, and sale callouts.',
+    description: 'Small inline label for tags, status indicators, and countdown timers.',
     htmlElement: 'span',
-    figmaSources: ['Badges and Tags', 'Sale Percentage'],
+    figmaSources: ['Badges and Tags'],
     props: [
       { name: 'variant', type: "'default' | 'sale' | 'tag' | 'info' | 'success' | 'warning' | 'error'", figmaAxis: 'Type', default: 'default', description: 'Use semantic variants (success/warning/error) not color words' },
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Inline promotional pills and countdown timers share the same compact <span> display pattern',
+  },
+
+  {
+    name: 'SaleCallout',
+    directoryName: 'sale-callout',
+    tier: 'primitive',
+    functionalCategory: 'data-display',
+    description: 'Large promotional display text showing a percentage discount headline (e.g. "Save up to 75%").',
+    htmlElement: 'div',
+    figmaSources: ['Sale Percentage'],
+    props: [
+      { name: 'scale', type: "'sm' | 'md' | 'lg' | 'xl'", figmaAxis: 'Size', default: 'md' },
+    ],
+    justification: 'Large display-heading promotional text; visually and structurally distinct from small inline Badge elements',
   },
 
   {
@@ -631,6 +660,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'star' | 'with-count'", figmaAxis: 'Type', default: 'star' },
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Star is the atomic icon unit; Reviews is the full rating row — one component renders both',
   },
 
   {
@@ -645,6 +675,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'default' | 'with-sale'", figmaAxis: 'Type', default: 'default' },
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Single price display element; sale/value/subscription are all formatting variants of the same data',
   },
 
   {
@@ -658,6 +689,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Single <nav> breadcrumb trail',
   },
 
   {
@@ -672,6 +704,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'simple' | 'button'", figmaAxis: 'Type', default: 'simple' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Both are dropdown menu triggers; simple = text links, button = pill-shaped — same interaction, different visual treatment',
   },
 
   {
@@ -687,6 +720,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Container and individual tab item are inseparable parts of one Radix Tabs primitive',
   },
 
   {
@@ -701,6 +735,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'trigger' | 'option'", figmaAxis: 'Type', default: 'trigger' },
       { name: 'state', type: "'default' | 'hover' | 'open' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Trigger and options list are parts of one dropdown navigation; both required for the full interaction',
   },
 
   {
@@ -715,6 +750,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single +/- quantity picker control; split from AddToCart which is a higher-level composition',
   },
 
   {
@@ -729,6 +765,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'stage', type: "'default' | 'quantity' | 'selected'", figmaAxis: 'Stage', default: 'default' },
       { name: 'state', type: "'default' | 'hover' | 'focus' | 'minimum' | 'maximum' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Multi-stage add-to-cart flow (CTA → quantity picker → in-cart confirmation); deferred pending design finalization',
   },
 
   {
@@ -748,6 +785,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'first-page' | 'last-page' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All three provide content navigation controls; arrow buttons, dot selector, and scroll bar are layout variants of the same <nav>',
   },
 
   {
@@ -755,12 +793,13 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'toast',
     tier: 'primitive',
     functionalCategory: 'feedback',
-    description: 'Transient status notification.',
-    htmlElement: 'output',
+    description: 'Transient status notification bar. Implement with @radix-ui/react-toast; role="status" for info/success, role="alert" for warning/error.',
+    htmlElement: 'div',
     figmaSources: ['Toast Bar'],
     props: [
       { name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", figmaAxis: 'Type', default: 'info', description: 'Always semantic — never color words' },
     ],
+    justification: 'Single notification bar; dynamic ARIA role per severity (Radix Toast)',
   },
 
   // ── Compositions ─────────────────────────────────────────────────────────────
@@ -776,6 +815,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'variant', type: "'default' | 'confirmation' | 'fullscreen'", figmaAxis: 'Type', default: 'default' },
     ],
+    justification: 'Dialog content and footer button row are inseparable parts of one <dialog> element (Radix Dialog)',
   },
 
   {
@@ -790,6 +830,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'state', type: "'expanded' | 'collapsed'", figmaAxis: 'State', default: 'collapsed' },
       { name: 'variant', type: "'standalone' | 'section'", figmaAxis: 'Type', default: 'section' },
     ],
+    justification: 'Single expandable <details> section with title trigger and body content (Radix Accordion)',
   },
 
   {
@@ -804,6 +845,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'focus' | 'error' | 'success'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single inline email <form> with embedded submit action; too coupled to split',
   },
 
   {
@@ -817,6 +859,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'state', type: "'default' | 'hover' | 'active' | 'uploaded' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Single drag-and-drop / click-to-browse file upload zone',
   },
 
   {
@@ -831,6 +874,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'list' | 'inline'", figmaAxis: 'Size', default: 'list', description: 'list = vertical with field label (Multi-Selector), inline = compact horizontal pills (Multi-Select with Text)' },
       { name: 'state', type: "'default' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'Both show grouped radio options with fieldset wrapper; list vs inline are layout variants (Radix RadioGroup)',
   },
 
   {
@@ -845,6 +889,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'variant', type: "'list' | 'inline'", figmaAxis: 'Size', default: 'list', description: 'list = vertical with field label, inline = compact horizontal pills' },
       { name: 'state', type: "'default' | 'error'", figmaAxis: 'State', default: 'default' },
     ],
+    justification: 'All show grouped checkbox options in a fieldset; Single Select Box is a single-item consent group',
   },
 
   {
@@ -859,6 +904,22 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'layout', type: "'horizontal' | 'vertical'", figmaAxis: undefined, default: 'horizontal' },
       { name: 'align', type: "'start' | 'center' | 'end'", figmaAxis: undefined, default: 'start' },
     ],
+    justification: 'Both group related action buttons; CTA Row is the full-width stacked variant',
+  },
+
+  {
+    name: 'Chip',
+    directoryName: 'chip',
+    tier: 'composition',
+    functionalCategory: 'actions',
+    description: 'Filter chip wrapping Button with constrained API: pill shape, icon + text label, selected/unselected states.',
+    htmlElement: 'button',
+    figmaSources: ['Category Button'],
+    props: [
+      { name: 'selected', type: 'boolean', figmaAxis: 'State', default: 'false' },
+      { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
+    ],
+    justification: 'Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention)',
   },
 
   {
@@ -872,6 +933,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Single grid product card — badge, image, title, rating, price, CTA',
   },
 
   {
@@ -879,12 +941,27 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     directoryName: 'product-detail',
     tier: 'composition',
     functionalCategory: 'product',
-    description: 'Full product detail display with purchase actions.',
+    description: 'Full product detail display with description, quantity picker, and purchase actions.',
     htmlElement: 'article',
-    figmaSources: ['Product Content', 'Product Lineup—Single'],
+    figmaSources: ['Product Content'],
     props: [
-      { name: 'variant', type: "'full' | 'lineup'", figmaAxis: 'Type', default: 'full' },
+      { name: 'variant', type: "'full' | 'compact'", figmaAxis: 'Type', default: 'full' },
     ],
+    justification: 'Single full-detail product view; distinct from card (grid listing) and ProductLineup (hero showcase)',
+  },
+
+  {
+    name: 'ProductLineup',
+    directoryName: 'product-lineup',
+    tier: 'composition',
+    functionalCategory: 'product',
+    description: 'Hero-style product showcase with blue image area, ownership badge, and purchase CTA. Three responsive variants (desktop/tablet/mobile).',
+    htmlElement: 'article',
+    figmaSources: ['Product Lineup—Single'],
+    props: [
+      { name: 'size', type: "'desktop' | 'tablet' | 'mobile'", figmaAxis: 'Size', default: 'desktop' },
+    ],
+    justification: 'Hero product showcase with distinct layout and responsive variants; not a detail view or grid card',
   },
 
   {
@@ -896,6 +973,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     htmlElement: 'article',
     figmaSources: ['Free Trial Card'],
     props: [],
+    justification: 'Single pricing/trial card with plan name, price, CTA button, and feature checklist',
   },
 
   // ── Builder Blocks ────────────────────────────────────────────────────────────
@@ -916,6 +994,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'variant', type: "'headline-only' | 'headline-cta' | 'text' | 'text-buttons'", figmaAxis: 'Type', default: 'headline-only' },
     ],
+    justification: 'All are <section> content blocks with a headline; variants progressively add CTA link, body copy, and button group',
   },
 
   {
@@ -929,6 +1008,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     props: [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
     ],
+    justification: 'Single horizontally scrolling product card container backed by API data',
   },
 
   {
@@ -940,6 +1020,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     htmlElement: 'ul',
     figmaSources: ['Multi-CTA List'],
     props: [],
+    justification: 'Single vertical list of CTA link rows with arrow icons',
   },
 
   {
@@ -951,6 +1032,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
     htmlElement: 'form',
     figmaSources: ['Basic Form'],
     props: [],
+    justification: 'Generic <form> shell with field layout managed entirely via Builder.io slot content',
   },
 ];
 
@@ -991,13 +1073,14 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  toggle-group/',
   '  slider/',
   '  badge/',
+  '  sale-callout/',
   '  star-rating/',
   '  price-label/',
   '  breadcrumbs/',
   '  menu/',
   '  tabs/',
   '  subnav-dropdown/',
-  '  stepper/',
+  '  quantity-input/',
   '  pagination/',
   '  toast/',
   '  # Compositions (React-first, Builder.io optional)',
@@ -1009,8 +1092,10 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  radio-group/',
   '  checkbox-group/',
   '  button-group/',
+  '  chip/',
   '  product-card/',
   '  product-detail/',
+  '  product-lineup/',
   '  free-trial-card/',
   '  # Builder Blocks (require register.tsx with BuilderBlocks)',
   '  section-layout/',
@@ -1018,6 +1103,94 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  cta-list/',
   '  basic-form/',
 ];
+
+// ---------------------------------------------------------------------------
+// Figma frame visual descriptions (captured from screenshot review)
+// Written to data/figma-frame-descriptions.json to avoid re-screenshotting.
+// ---------------------------------------------------------------------------
+
+const FIGMA_FRAME_DESCRIPTIONS: Record<string, string> = {
+  // Actions — buttons
+  'Button': 'Full-width CTA button in primary (solid blue), secondary (outlined), and tertiary (ghost) styles. Shows "Call to action", "External link", and "+ Add" text patterns. 3 sizes, 6 states (default/hover/focus/active/disabled/loading), light and dark backgrounds.',
+  'Category Button': 'Pill-shaped button with brand icon + text label (e.g. "Commentaries"). 4 states (default/hover/focus/disabled). Used as a filter chip or category selector.',
+  'Floating Action Button with Text': 'Rounded pill button with "Action +" text and plus icon. 2 sizes, 5 states. Light and dark backgrounds.',
+  'Stateful Action Button': 'Full-width button with loading spinner and success checkmark states. Shows "Call to action" → loading → "CTA submitted" transition.',
+  'Close Button': 'Circular icon-only X button for dismissing overlays. 3 sizes (sm/md/lg), 3 background contexts (light/dark/blue), 4 states. Also shown without fill ring.',
+  'Play Button': 'Circular icon-only play triangle button for media. 4 states (default/hover/focus/disabled). Solid fill in dark navy and blue.',
+  'Floating Action Button': 'Circular floating icon-only button showing a heart/wishlist icon. 3 sizes, 3 background contexts (light/dark/transparent), 4 states. No text label.',
+  'Expand-Collapse Button': 'Circular icon-only chevron button for accordion/collapse toggles. 2 sizes, 3 background contexts, 4 states.',
+  'Increase-Decrease Buttons': 'Circular icon-only + and – buttons for quantity adjustment. 2 sizes (sm/md), 4 states. Used inside quantity pickers.',
+  'Next-Previous Buttons': 'Circular icon-only < and > navigation buttons. 2 sizes, 4 states. Used in carousels and media players alongside a page counter.',
+  'Text Button—Icon Left': 'Inline text link with left-pointing arrow icon. Underlined on hover. Multiple states. Renders as <a>.',
+  'Text Button—Icon Right': 'Inline text link with right-pointing arrow icon. Underlined on hover. Multiple states. Renders as <a>.',
+  // Inputs — text
+  'Text Input (single line)': 'Labeled single-line text input field with placeholder, filled, error, and disabled states. Standard border style.',
+  'Text Input—Date': 'Labeled date input field with mm/dd/yyyy placeholder and calendar icon on the right. 6 states.',
+  'Text Input—Password': 'Labeled password input field with show/hide eye icon. 6 states.',
+  'Text Input—Multiline': 'Multi-line textarea with label, placeholder, and resize handle. 6 states.',
+  'Text Input (name, two fields)': 'Two side-by-side text inputs in a horizontal row (First Name + Last Name). 6 states including shared error. Layout pattern for grouped fields.',
+  'Search Field': 'Search input with magnifying glass icon and clear X button. Labeled, with placeholder.',
+  'Text Input—Password': 'Labeled password input with show/hide toggle icon. 6 states.',
+  // Inputs — selection
+  'Dropdown': 'Inline dropdown select with chevron icon. Compact style without external label border.',
+  'Form Dropdown': 'Full-width dropdown in form context — labeled, with border and chevron. 7 states. 10 visible options in open state.',
+  'Form Dropdown Option': 'Individual option row inside an open form dropdown. 5 states (default/hover/focus/selected/disabled).',
+  'Checkbox': 'Single checkbox with label text. 5 states (default/hover/checked/indeterminate/disabled). Square check icon.',
+  'Radio Button': 'Single radio button with label. 2 states (default/active). Circle indicator.',
+  'Switch': 'On/off toggle pill switch. 2 states (on/off). No label in this frame.',
+  'Toggle with Text': 'On/off toggle switch with an inline text label beside it. Same pill control as Switch but with "Option" text label. 6 states.',
+  'Toggle Switch (text)': 'Segmented pill bar with 2 or 3 mutually exclusive text options. Selected option fills dark navy. 5 states.',
+  'Slider': 'Horizontal range slider with draggable thumb, current value display, and dropdown. Shows "How many licenses do you need? 35". 6 states.',
+  'Multi-Select with Text': 'Compact inline radio/checkbox chips — rounded buttons with radio circle or checkbox square plus text label. Both radio and checkbox styles. 6 states.',
+  'Multi-Selector': 'Vertical list of radio buttons or checkboxes under a "Field Name" label, with error state. Both radio and checkbox styles. Standard form layout.',
+  'Text Toggle Selector': 'Vertical list of text items, each with an on/off switch toggle on the right side. Like a settings preferences list.',
+  'Single Select Box': 'Large checkbox with a multi-line paragraph of descriptive text (terms/consent pattern). 2 states (default/error).',
+  'Upload Image Area': 'Dashed-border drag-and-drop upload zone with upload icon and "Upload image" label. 4 states.',
+  'Email Capture': 'Inline email input field with adjacent "Call to action" submit button and consent text below. 6 states.',
+  'Basic Form': 'Full form with first name, last name, email inputs, sign up button, and fine print. Multiple responsive layouts (desktop/tablet/mobile) and a success state.',
+  // Data display
+  'Badges and Tags': 'Small pill/tag labels — "SAVE 30%" sale badges in multiple sizes and colors (navy/red/outlined), plus countdown timers ("ENDS IN 12:23:59:59") in navy/red.',
+  'Sale Percentage': 'Large promotional display headline — "Save up to 75%" in 4 display font sizes. Two rows: bold weight (top) and regular weight (bottom).',
+  'Star': 'Single star icon used for ratings. 2 sizes (sm/lg), 5 states (default/hover/focus/half-filled/filled/disabled).',
+  'Reviews': 'Star rating row with 5 stars (half-star support) and a review count in parentheses. 2 sizes, multiple rating values (0–5 in 0.5 increments).',
+  'Price and Label': 'Price display with formatted dollar amount and cents superscript. Multiple styles: default, sale (strikethrough + discount), value (with "Value:" label), subscription (with billing note). 2 sizes.',
+  'Product Images': 'Product book cover image in multiple aspect ratios (1.2:1, 1.33:1, 1.5:1, etc.). Placeholder checkerboard shown.',
+  'Image Ratios': 'Generic image container in standard ratios (16x9, 1x1, 4x3, etc.). Placeholder checkerboard.',
+  'List': 'Bulleted or numbered list element for body content.',
+  // Navigation
+  'Breadcrumbs': 'Horizontal breadcrumb trail with slash separators (Link 1 / Link 2 / Link 3). 4 states — first item is link, last item is current page.',
+  'Simple Menu': 'Vertical dropdown menu with plain text links (Lorem Ipsum). 7+ items, 5 states per item.',
+  'Button Menu': 'Dropdown trigger button with "Menu ↓" text. Single pill-shaped trigger with open/closed states. 5 states.',
+  'Tabbed Selector': 'Horizontal tab bar with 5 pill-shaped "Tab Option" buttons. One tab is active (filled blue/selected). Multiple states.',
+  'Tabbed Selector Button': 'Single tab item from the tab bar. Same pill shape as Tabbed Selector items. 5 states.',
+  'Subnav Dropdown': 'Sub-navigation with multiple column dropdown layout — shows nested link groups. Large grid of "Lorem Ipsum" items across multiple columns.',
+  'Subnav Dropdown Options': 'Individual option row for the Subnav Dropdown. Plain text link, 5 states.',
+  'Next-Previous Selector': 'Numbered/dot pagination: "1/4" with < and > buttons. Also shows pause ❙❙ button variant. 2 styles (numbered/solid), 2 sizes.',
+  'Slider page selector': 'Progress bar + slide counter ("1/4") + arrow navigation buttons. Indicates current slide position. 2 sizes.',
+  'Slider Scroll Bar': 'Horizontal scroll progress indicator — dark line on light track showing scroll position. 4 variants.',
+  // Selection & Controls
+  'Stepper Control': 'Quantity +/- picker with minus button, number field, and plus button. 2 sizes, 4 states (default/hover/focus/disabled). Rounded pill shape.',
+  'Stepper CTA': 'Multi-stage add-to-cart widget: Stage 1 = "Add to cart" button, Stage 2 = quantity picker (−999+), Stage 3 = "999 ✓ in cart". Minimum stage shows trash icon.',
+  // Feedback
+  'Toast Bar': 'Horizontal notification bar with status icon (info/success/warning/error), message text "Info toast", "Call to action" button, and X dismiss button. Dark and light themes, 4 severity types.',
+  'Modal Dialog': 'Dialog overlay with title, body text, and Cancel/Call-to-Action button row. Sizes for desktop/tablet/mobile. Multi-step variant shows "2 of 3" progress with Back/Next.',
+  'Modal Button Group': 'Button footer row for Modal — Cancel + primary CTA, or Back + Cancel + Next pattern. Multiple states.',
+  // Content Layout
+  'Accordion Section': 'Expandable section with title + chevron trigger and optional image content area. Multiple sizes and states. Collapsed shows only title; expanded shows body + image.',
+  'Section Headline': 'Section label + large headline + author/category text. 3 size variants. No CTA.',
+  'Section Headline with CTA': 'Section label + headline + inline "Call to action →" link. 3 alignment variants.',
+  'Text Section': 'Full-width marketing section with label, headline, description paragraph, and bullet checklist. Multiple responsive sizes.',
+  'Text Section with Button Group': 'Text Section plus a horizontal primary + secondary button row at the bottom.',
+  // Product
+  'Product Grid Card': 'Product listing card: "BEST SELLER" badge, book cover image, truncated title, author, star rating + count, price (with sale), and "Add to cart" button. 3 responsive sizes.',
+  'Product Content': 'Full product detail: sale badge, large headline title, author, star rating, description paragraph, price, quantity picker, "Add to cart" button, and "Call to action →" link. 3 responsive sizes.',
+  'Product Lineup—Single': 'Hero-style product showcase: blue hero image area (full-width), "YOURS FOREVER" badge, title, author, star rating, price (with value), and "Add to cart" button. 3 responsive variants with distinct layout (image above on mobile).',
+  'Free Trial Card': 'Pricing card: plan name + "MOST POPULAR" badge, original price, discounted monthly price, description, "Start 30-day free trial" CTA, feature checklist, and AI feature pills.',
+  'Carousel Product': 'Single-card carousel slide: product image, "SAVE 30%" badge, truncated title, author, star rating, price. Used inside a scrollable carousel container.',
+  'Multi-CTA List': 'Vertical list of 5 CTA link rows — each row has "Call to action" text with a → arrow icon. Dividers between rows.',
+  'CTA Row': 'Single CTA row with "Call to action →" text. Hover shows underline. One of 4 states. Used inside Multi-CTA List.',
+  'Button group': 'Two-button group showing a primary CTA + secondary outline button side by side. With optional description text below. Also a stacked full-width variant.',
+};
 
 function buildTaxonomy(components: FigmaComponent[]): Taxonomy {
   const codeComponents = buildCodeComponents();
@@ -1180,6 +1353,8 @@ export async function parseFigma() {
   writeJson(join(ROOT, 'data', 'tokens.json'), tokens);
   writeJson(join(ROOT, 'data', 'taxonomy.json'), taxonomy);
   writeJson(join(ROOT, 'data', 'code-components.json'), taxonomy.codeComponents);
+  writeJson(join(ROOT, 'data', 'figma-frame-descriptions.json'), FIGMA_FRAME_DESCRIPTIONS);
+  console.log(`  wrote ./data/figma-frame-descriptions.json (${Object.keys(FIGMA_FRAME_DESCRIPTIONS).length} frames)`);
 
   const catSummary = taxonomy.categories.map((c) => `${c.label}=${c.components.length}`).join(', ');
   console.log(`  ${components.length} Figma frames → ${taxonomy.codeComponents.length} code components`);

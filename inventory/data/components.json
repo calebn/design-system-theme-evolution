@@ -1022,7 +1022,7 @@
     "figmaId": "2758:3449",
     "section": "inputs",
     "functionalCategory": "data-entry",
-    "proposedCodeName": "TextInputGroup",
+    "proposedCodeName": "FieldGroup",
     "variantCount": 6,
     "properties": {
       "Style": [

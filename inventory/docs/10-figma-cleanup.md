@@ -14,7 +14,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `TextInputGroup` | Primitive | Text Input (name, two fields) |
+| `FieldGroup` | Composition | Text Input (name, two fields) |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
 | `Checkbox` | Primitive | Checkbox |
 | `RadioButton` | Primitive | Radio Button |

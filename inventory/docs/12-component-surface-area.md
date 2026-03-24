@@ -38,7 +38,7 @@ These rules apply to **every** component. They are sourced from
 | Backend data | Components requiring backend data **must** receive it via `CommerceComponentsContext` or an explicit prop callback — never by calling APIs directly. Storybook stories **must** provide stub implementations. | **Code review** |
 | Variant naming | `variant` describes visual hierarchy (`primary`, `secondary`, `tertiary`); `scale` is always a separate prop for size (`sm`, `md`, `lg`). Surface context: `-inverse` (dark surface), `-brand` (brand surface). No color or appearance words in variant names. | **Code review** |
 
-## Primitives (21)
+## Primitives (20)
 
 ---
 
@@ -395,54 +395,6 @@ export function Textarea({ variant = 'md', className, children, ...props }: Text
     <textarea className={cn('tw-preflight', /* variant classes */, className)} {...props}>
       {children}
     </textarea>
-  );
-}
-```
-
-</details>
-
----
-
-### `TextInputGroup`
-
-**HTML element:** `<div>` · **Directory:** `text-input-group/` · **Category:** Data Entry
-
-**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449)
-
-
-> Two-column name-capture input (first + last).
-
-**Props:**
-
-| Prop | Type | Default | Figma Axis | Description |
-|------|------|---------|------------|-------------|
-| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
-| `className` | `string` | — | — | Additional CSS class |
-| `data-testid` | `string` | — | — | Test selector hook |
-
-<details><summary>Consumer usage</summary>
-
-```tsx
-import { TextInputGroup } from '@faithlife/commerce-components';
-
-<TextInputGroup scale="md">{/* content */}</TextInputGroup>
-```
-
-</details>
-
-<details><summary>Implementation sketch (component.tsx)</summary>
-
-```tsx
-// text-input-group/component.tsx
-// No @builder.io/* imports allowed here — those go in register.tsx
-import { cn } from '../../utils';
-import { Typography } from '../typography/component';
-
-export function TextInputGroup({ variant = 'md', className, children, ...props }: TextInputGroupProps) {
-  return (
-    <div className={cn('tw-preflight', /* variant classes */, className)} {...props}>
-      {children}
-    </div>
   );
 }
 ```
@@ -1324,7 +1276,69 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (10)
+## Compositions (11)
+
+---
+
+### `FieldGroup`
+
+**HTML element:** `<fieldset>` · **Directory:** `field-group/` · **Category:** Data Entry
+
+**Figma sources:** [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449)
+
+
+> Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `columns` | `'2' \| '3' \| '4'` _(proposed)_ | `2` |  | Number of equal-width columns. Figma shows the 2-column pattern. |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `<fieldset>` + `<legend>` required — this is the semantic grouping pattern
+- `<legend>` text should describe the group (e.g. "Full name", "Shipping address")
+- `aria-describedby` on the fieldset for group-level error messages
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { FieldGroup } from '@faithlife/commerce-components';
+
+<FieldGroup columns="2">
+  {/* BuilderBlocks renders editable content here */}
+</FieldGroup>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// field-group/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function FieldGroup({ title, content, ...props }: FieldGroupProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
 
 ---
 

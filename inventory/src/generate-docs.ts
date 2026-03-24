@@ -1551,6 +1551,7 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   'icon-button': ['`aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', '`aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)'],
   'link-button': ['`href` required — always renders as `<a>`', '`aria-label` or visible text required', '`aria-current="page"` when marking active link'],
   input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
+  'field-group': ['`<fieldset>` + `<legend>` required — this is the semantic grouping pattern', '`<legend>` text should describe the group (e.g. "Full name", "Shipping address")', '`aria-describedby` on the fieldset for group-level error messages'],
   textarea: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error'],
   select: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-expanded` when open'],
   checkbox: ['`<label>` associated', '`aria-checked` for indeterminate state', '`aria-required` when required'],

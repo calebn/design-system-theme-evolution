@@ -182,21 +182,23 @@
     ]
   },
   {
-    "name": "TextInputGroup",
-    "directoryName": "text-input-group",
-    "tier": "primitive",
+    "name": "FieldGroup",
+    "directoryName": "field-group",
+    "tier": "composition",
     "functionalCategory": "data-entry",
-    "description": "Two-column name-capture input (first + last).",
-    "htmlElement": "div",
+    "description": "Groups related form fields in a horizontal row. Renders as <fieldset> + <legend> for accessible field grouping.",
+    "htmlElement": "fieldset",
     "figmaSources": [
       "Text Input (name, two fields)"
     ],
     "props": [
       {
-        "name": "scale",
-        "type": "'sm' | 'md' | 'lg'",
-        "figmaAxis": "Size",
-        "default": "md"
+        "name": "columns",
+        "type": "'2' | '3' | '4'",
+        "figmaAxis": "",
+        "default": "2",
+        "description": "Number of equal-width columns. Figma shows the 2-column pattern.",
+        "proposed": true
       }
     ]
   },

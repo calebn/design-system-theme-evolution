@@ -20,8 +20,8 @@
 
 | Tier | Count | Description |
 |------|-------|-------------|
-| Primitives | 21 | Standalone React components |
-| Compositions | 10 | Multi-primitive compositions |
+| Primitives | 20 | Standalone React components |
+| Compositions | 11 | Multi-primitive compositions |
 | Builder Blocks | 4 | Page-level Builder.io blocks |
 
 ## By Functional Category

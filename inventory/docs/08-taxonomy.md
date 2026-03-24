@@ -16,13 +16,12 @@
 
 ```mermaid
 graph TD
-  subgraph primitives ["Primitives (21)"]
+  subgraph primitives ["Primitives (20)"]
     Button["Button"]
     IconButton["IconButton"]
     LinkButton["LinkButton"]
     Input["Input"]
     Textarea["Textarea"]
-    TextInputGroup["TextInputGroup"]
     Select["Select"]
     Checkbox["Checkbox"]
     RadioButton["RadioButton"]
@@ -40,6 +39,7 @@ graph TD
     Toast["Toast"]
   end
   subgraph compositions ["Compositions (9)"]
+    FieldGroup["FieldGroup"]
     AddToCart["AddToCart"]
     Modal["Modal"]
     Accordion["Accordion"]
@@ -113,7 +113,7 @@ graph TD
 |----------------|------|---------------|
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
-| `TextInputGroup` | Primitive | Text Input (name, two fields) |
+| `FieldGroup` | Composition | Text Input (name, two fields) |
 | `Select` | Primitive | Dropdown, Form Dropdown, Form Dropdown Option |
 | `Checkbox` | Primitive | Checkbox |
 | `RadioButton` | Primitive | Radio Button |
@@ -247,7 +247,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Tabbed Selector Button | Atoms | Navigation | `Tabs` | Primitive |
 | Text Button—Icon Left | Atoms | Actions | `LinkButton` | Primitive |
 | Text Button—Icon Right | Atoms | Actions | `LinkButton` | Primitive |
-| Text Input (name, two fields) | Inputs & Forms | Data Entry | `TextInputGroup` | Primitive |
+| Text Input (name, two fields) | Inputs & Forms | Data Entry | `FieldGroup` | Composition |
 | Text Input (single line) | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Date | Inputs & Forms | Data Entry | `Input` | Primitive |
 | Text Input—Multiline | Inputs & Forms | Data Entry | `Textarea` | Primitive |
@@ -275,7 +275,6 @@ packages/commerce-components/src/components/
     index.ts        # barrel re-export
   input/
   textarea/
-  text-input-group/
   select/
   checkbox/
   radio-button/
@@ -292,6 +291,7 @@ packages/commerce-components/src/components/
   pagination/
   toast/
   # Compositions (React-first, Builder.io optional)
+  field-group/
   modal/
   accordion/
   email-capture/

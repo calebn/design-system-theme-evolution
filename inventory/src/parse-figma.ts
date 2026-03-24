@@ -478,7 +478,7 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
       { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
       { name: 'state', type: "'default' | 'hover' | 'active' | 'disabled'", figmaAxis: 'State', default: 'default' },
     ],
-    justification: 'Both render as <a> with inline text + icon; icon position is the only layout axis',
+    justification: 'Both are anchor links with inline text + icon; icon position (leading vs trailing) is the only layout axis',
   },
 
   {

@@ -787,7 +787,7 @@
       "directoryName": "pagination",
       "tier": "primitive",
       "functionalCategory": "selection",
-      "description": "Numbered or dot-style page selector with previous/next buttons.",
+      "description": "Numbered or solid-style page selector with previous/next buttons. Solid variant includes a play/pause toggle for auto-advancing carousels.",
       "htmlElement": "nav",
       "figmaSources": [
         "Next-Previous Selector"
@@ -807,9 +807,10 @@
         },
         {
           "name": "state",
-          "type": "'default' | 'first-page' | 'last-page' | 'disabled'",
+          "type": "'default' | 'hover' | 'focus' | 'disabled' | 'play'",
           "figmaAxis": "State",
-          "default": "default"
+          "default": "default",
+          "description": "play = pause/play toggle active (solid variant only)"
         }
       ],
       "justification": "Single numbered/dot page selector with prev/next controls; distinct from ScrollBar which is a raw scroll position indicator"

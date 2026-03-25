@@ -1264,7 +1264,7 @@ export function QuantityInput({ variant = 'md', className, children, ...props }:
 **Figma sources:** [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088)
 
 
-> Numbered or dot-style page selector with previous/next buttons.
+> Numbered or solid-style page selector with previous/next buttons. Solid variant includes a play/pause toggle for auto-advancing carousels.
 
 **Props:**
 
@@ -1272,7 +1272,7 @@ export function QuantityInput({ variant = 'md', className, children, ...props }:
 |------|------|---------|------------|-------------|
 | `variant` | `'numbered' \| 'solid'` | `numbered` | Style | — |
 | `scale` | `'sm' \| 'md'` | `md` | Size | — |
-| `state` | `'default' \| 'first-page' \| 'last-page' \| 'disabled'` | `default` | State | — |
+| `state` | `'default' \| 'hover' \| 'focus' \| 'disabled' \| 'play'` | `default` | State | play = pause/play toggle active (solid variant only) |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 

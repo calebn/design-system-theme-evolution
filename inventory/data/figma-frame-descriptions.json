@@ -48,7 +48,7 @@
   "Tabbed Selector Button": "Single tab item from the tab bar. Same pill shape as Tabbed Selector items. 5 states.",
   "Subnav Dropdown": "Sub-navigation with multiple column dropdown layout — shows nested link groups. Large grid of \"Lorem Ipsum\" items across multiple columns.",
   "Subnav Dropdown Options": "Individual option row for the Subnav Dropdown. Plain text link, 5 states.",
-  "Next-Previous Selector": "Numbered/dot pagination: \"1/4\" with < and > buttons. Also shows pause ❙❙ button variant. 2 styles (numbered/solid), 2 sizes.",
+  "Next-Previous Selector": "Prev/next arrow controls with optional page counter (\"1/4\"). 2 styles: Solid (circular icon buttons + optional play/pause toggle), Numbered (text-based counter + arrows). 2 sizes. 5 states: Default, Hover, Focus, Disabled, Play. Updated to 18 variants (from 4).",
   "Slider page selector": "Progress bar + slide counter (\"1/4\") + arrow navigation buttons. Indicates current slide position. 2 sizes.",
   "Slider Scroll Bar": "Horizontal scroll progress indicator — dark line on light track showing scroll position. 4 variants.",
   "Stepper Control": "Quantity +/- picker with minus button, number field, and plus button. 2 sizes, 4 states (default/hover/focus/disabled). Rounded pill shape.",

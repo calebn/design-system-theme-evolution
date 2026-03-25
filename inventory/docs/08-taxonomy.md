@@ -58,7 +58,6 @@ graph TD
     PlayButton["PlayButton"]
     ExpandCollapseButton["ExpandCollapseButton"]
     IncrementButton["IncrementButton"]
-    NavigateButton["NavigateButton"]
     FloatingActionButton["FloatingActionButton"]
     StatefulButton["StatefulButton"]
     ProductCard["ProductCard"]
@@ -79,7 +78,7 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(14 code / 14 Figma)"]
+  DesignSystem --> actions["Actions\n(13 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
   DesignSystem --> data_entry["Data Entry\n(14 code / 22 Figma)"]
   DesignSystem --> selection["Selection & Controls\n(4 code / 6 Figma)"]
@@ -110,7 +109,6 @@ graph TD
 | `PlayButton` | Composition | Play Button |
 | `ExpandCollapseButton` | Composition | Expand-Collapse Button |
 | `IncrementButton` | Composition | Increase-Decrease Buttons |
-| `NavigateButton` | Composition | Next-Previous Buttons |
 | `FloatingActionButton` | Composition | Floating Action Button with Text |
 | `StatefulButton` | Composition | Stateful Action Button |
 
@@ -247,7 +245,7 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Multi-CTA List | Molecules | Product | `CtaList` | Builder Block |
 | Multi-Select with Text | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
 | Multi-Selector | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
-| Next-Previous Buttons | Atoms | Actions | `NavigateButton` | Composition |
+| Next-Previous Buttons | Atoms | Actions | — | — |
 | Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
 | Play Button | Atoms | Actions | `PlayButton` | Composition |
 | Price and Label | Other | Data Display | `PriceLabel` | Primitive |
@@ -332,7 +330,6 @@ packages/commerce-components/src/components/
   play-button/
   expand-collapse-button/
   increment-button/
-  navigate-button/
   modal/
   accordion/
   email-capture/

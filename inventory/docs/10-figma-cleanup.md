@@ -48,7 +48,6 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `PlayButton` | Composition | Play Button |
 | `ExpandCollapseButton` | Composition | Expand-Collapse Button |
 | `IncrementButton` | Composition | Increase-Decrease Buttons |
-| `NavigateButton` | Composition | Next-Previous Buttons |
 | `FloatingActionButton` | Composition | Floating Action Button with Text |
 | `StatefulButton` | Composition | Stateful Action Button |
 | `ProductCard` | Composition | Product Grid Card |
@@ -64,6 +63,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 
 These frames are not yet assigned to a code component — review and assign:
 
+- [ ] **Next-Previous Buttons** (Actions)
 - [ ] **Slider page selector** (Selection & Controls)
 - [ ] **Product Images** (Data Display)
 - [ ] **Image Ratios** (Data Display)

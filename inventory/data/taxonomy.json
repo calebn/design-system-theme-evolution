@@ -32,7 +32,6 @@
         "IconButton",
         "IncrementButton",
         "LinkButton",
-        "NavigateButton",
         "PlayButton",
         "StatefulButton"
       ]
@@ -1222,32 +1221,6 @@
       "justification": "Fixed-icon IconButton wrapper; action prop selects IncreaseIcon or DecreaseIcon — used inside QuantityInput composition"
     },
     {
-      "name": "NavigateButton",
-      "directoryName": "navigate-button",
-      "tier": "composition",
-      "functionalCategory": "actions",
-      "description": "Convenience wrapper composing IconButton with LeftIcon or RightIcon pre-wired. Used inside carousels and media players. Deferred — not planned for initial implementation.",
-      "htmlElement": "button",
-      "figmaSources": [
-        "Next-Previous Buttons"
-      ],
-      "props": [
-        {
-          "name": "action",
-          "type": "'next' | 'previous'",
-          "figmaAxis": "Type",
-          "default": "next"
-        },
-        {
-          "name": "scale",
-          "type": "'sm' | 'md' | 'lg'",
-          "figmaAxis": "Size",
-          "default": "md"
-        }
-      ],
-      "justification": "Fixed-icon IconButton wrapper; action prop selects RightIcon or LeftIcon — similar to NextPreviousButton but for inline carousel navigation without surface variants"
-    },
-    {
       "name": "FloatingActionButton",
       "directoryName": "floating-action-button",
       "tier": "composition",
@@ -1473,7 +1446,6 @@
     "  play-button/",
     "  expand-collapse-button/",
     "  increment-button/",
-    "  navigate-button/",
     "  modal/",
     "  accordion/",
     "  email-capture/",

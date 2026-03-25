@@ -5,7 +5,7 @@
 
 ## A · Code Components
 
-50 code components derived from 71 Figma frames.
+49 code components derived from 71 Figma frames.
 
 ### Primitives (23)
 
@@ -35,7 +35,7 @@
 | `ScrollBar` | `scroll-bar/` | Selection & Controls | [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) | `<div>` | Single scroll position indicator; Slider page selector is a layout composition of ScrollBar + Pagination and is unmapped |
 | `Toast` | `toast/` | Feedback & Overlays | [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `<div>` | Single notification bar; dynamic ARIA role per severity (Radix Toast) |
 
-### Compositions (23)
+### Compositions (22)
 
 | Component | Directory | Category | Figma Sources | HTML | Justification |
 |-----------|-----------|----------|---------------|------|---------------|
@@ -55,7 +55,6 @@
 | `PlayButton` | `play-button/` | Actions | [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `<button>` | Fixed-icon IconButton wrapper; always renders PlayIcon — separate from IconButton which accepts any icon as children |
 | `ExpandCollapseButton` | `expand-collapse-button/` | Actions | [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `<button>` | Fixed-icon IconButton wrapper with aria-expanded behavior; icon rotation and ARIA semantics require component-level logic not present in base IconButton |
 | `IncrementButton` | `increment-button/` | Actions | [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `<button>` | Fixed-icon IconButton wrapper; action prop selects IncreaseIcon or DecreaseIcon — used inside QuantityInput composition |
-| `NavigateButton` | `navigate-button/` | Actions | [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `<button>` | Fixed-icon IconButton wrapper; action prop selects RightIcon or LeftIcon — similar to NextPreviousButton but for inline carousel navigation without surface variants |
 | `FloatingActionButton` | `floating-action-button/` | Actions | [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) | `<button>` | Pill-shaped variant of Button with mandatory icon; distinct visual treatment not shared with rectangular Button |
 | `StatefulButton` | `stateful-button/` | Actions | [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) | `<button>` | Loading and success state transitions require internal state management not present in base Button |
 | `ProductCard` | `product-card/` | Product | [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943) | `<article>` | Single grid product card — badge, image, title, rating, price, CTA |
@@ -210,7 +209,7 @@ Every Figma frame and the code component it maps to.
 | [Multi-CTA List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25078) | `CtaList` | Builder Block | `cta-list/` | — |
 | [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) | `RadioGroup` | Composition | `radio-group/` | `variant`, `state` |
 | [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614) | `RadioGroup` | Composition | `radio-group/` | `variant`, `state` |
-| [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `NavigateButton` | Composition | `navigate-button/` | `action`, `scale` |
+| [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | — | — | — | — |
 | [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
 | [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `PlayButton` | Composition | `play-button/` | `scale` |
 | [Price and Label](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=3707-42767) | `PriceLabel` | Primitive | `price-label/` | `variant`, `scale` |

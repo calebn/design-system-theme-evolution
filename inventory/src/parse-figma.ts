@@ -162,7 +162,7 @@ const PROPOSED_CODE_NAMES: Record<string, string> = {
   'Subnav Dropdown': 'SubnavDropdown',
   'Subnav Dropdown Options': 'SubnavDropdownOption',
   'Accordion Section': 'Accordion',
-  'Next-Previous Buttons': 'NavigateButton',
+  'Next-Previous Buttons': 'NextPreviousButton',
   'Next-Previous Selector': 'PreviousNextSelector',
   'Increase-Decrease Buttons': 'IncrementButton',
   'Expand-Collapse Button': 'ExpandCollapseButton',
@@ -1014,21 +1014,6 @@ const CODE_COMPONENT_MAP: CodeComponent[] = [
   },
 
   {
-    name: 'NavigateButton',
-    directoryName: 'navigate-button',
-    tier: 'composition',
-    functionalCategory: 'actions',
-    description: 'Convenience wrapper composing IconButton with LeftIcon or RightIcon pre-wired. Used inside carousels and media players. Deferred — not planned for initial implementation.',
-    htmlElement: 'button',
-    figmaSources: ['Next-Previous Buttons'],
-    props: [
-      { name: 'action', type: "'next' | 'previous'", figmaAxis: 'Type', default: 'next' },
-      { name: 'scale', type: "'sm' | 'md' | 'lg'", figmaAxis: 'Size', default: 'md' },
-    ],
-    justification: 'Fixed-icon IconButton wrapper; action prop selects RightIcon or LeftIcon — similar to NextPreviousButton but for inline carousel navigation without surface variants',
-  },
-
-  {
     name: 'FloatingActionButton',
     directoryName: 'floating-action-button',
     tier: 'composition',
@@ -1228,7 +1213,6 @@ const PROPOSED_FOLDER_STRUCTURE = [
   '  play-button/',
   '  expand-collapse-button/',
   '  increment-button/',
-  '  navigate-button/',
   '  modal/',
   '  accordion/',
   '  email-capture/',

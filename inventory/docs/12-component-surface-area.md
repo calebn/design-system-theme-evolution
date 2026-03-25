@@ -1436,7 +1436,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (23)
+## Compositions (22)
 
 ---
 
@@ -2433,68 +2433,6 @@ import { BuilderBlocks } from '@builder.io/react';
 import { Typography } from '../typography/component';
 
 export function IncrementButton({ title, content, ...props }: IncrementButtonProps) {
-  return (
-    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
-      {title && <Typography variant="h3">{title}</Typography>}
-      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
-    </section>
-  );
-}
-```
-
-</details>
-
----
-
-### `NavigateButton`
-
-**HTML element:** `<button>` · **Directory:** `navigate-button/` · **Category:** Actions
-
-**Figma sources:** [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561)
-
-
-> Convenience wrapper composing IconButton with LeftIcon or RightIcon pre-wired. Used inside carousels and media players. Deferred — not planned for initial implementation.
-
-**Props:**
-
-| Prop | Type | Default | Figma Axis | Description |
-|------|------|---------|------------|-------------|
-| `action` | `'next' \| 'previous'` | `next` | Type | — |
-| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
-| `className` | `string` | — | — | Additional CSS class |
-| `data-testid` | `string` | — | — | Test selector hook |
-
-**Accessibility requirements:**
-
-- `aria-label` required (e.g. "Next slide", "Previous image")
-- `aria-disabled` when at first/last item
-
-**Slots / children:**
-
-- `children` — primary content area
-
-<details><summary>Consumer usage</summary>
-
-```tsx
-import { NavigateButton } from '@faithlife/commerce-components';
-
-<NavigateButton action="next">
-  {/* BuilderBlocks renders editable content here */}
-</NavigateButton>
-```
-
-</details>
-
-<details><summary>Implementation sketch (component.tsx)</summary>
-
-```tsx
-// navigate-button/component.tsx
-// No @builder.io/* imports allowed here — those go in register.tsx
-import { cn } from '../../utils';
-import { BuilderBlocks } from '@builder.io/react';
-import { Typography } from '../typography/component';
-
-export function NavigateButton({ title, content, ...props }: NavigateButtonProps) {
   return (
     <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
       {title && <Typography variant="h3">{title}</Typography>}

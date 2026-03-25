@@ -1559,7 +1559,6 @@ const ARIA_REQUIREMENTS: Record<string, string[]> = {
   'play-button': ['`aria-label` required (e.g. "Play video", "Play audio")', '`aria-pressed` if toggle-style (play/pause)'],
   'expand-collapse-button': ['`aria-expanded` required — reflects current open/closed state', '`aria-controls` pointing to the controlled panel id', '`aria-label` required (e.g. "Expand section")'],
   'increment-button': ['`aria-label` on both increment and decrement buttons (e.g. "Increase quantity", "Decrease quantity")', '`aria-disabled` when at min/max boundary'],
-  'navigate-button': ['`aria-label` required (e.g. "Next slide", "Previous image")', '`aria-disabled` when at first/last item'],
   'stateful-button': ['`aria-busy="true"` while in loading state', '`aria-live="polite"` region to announce success/error transitions'],
   'scroll-bar': ['`aria-label` on the container (e.g. "Scroll position")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the scroll indicator'],
   'cta-row': ['`href` required — renders as an anchor link', '`aria-label` if the visible text is not descriptive enough', '`aria-current="page"` when marking an active link'],

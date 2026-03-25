@@ -46,7 +46,6 @@
 | `Input` | Primitive | Data Entry | 4 | 1 | **7** | ✅ Build first — high dependency weight |
 | `Menu` | Primitive | Navigation | 2 | 0 | **7** | ✅ Build first — high dependency weight |
 | `Modal` | Composition | Feedback & Overlays | 2 | 1 | **7** | ✅ Build first — high dependency weight |
-| `NavigateButton` | Composition | Actions | 1 | 0 | **7** | ✅ Build first — high dependency weight |
 | `Select` | Primitive | Data Entry | 3 | 1 | **7** | ✅ Build first — high dependency weight |
 | `Checkbox` | Primitive | Data Entry | 2 | 1 | **6** | ✅ Ready to build |
 | `CheckboxGroup` | Composition | Data Entry | 2 | 0 | **6** | ✅ Ready to build |
@@ -103,7 +102,7 @@
 | Floating Action Button | `IconButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Floating Action Button with Text | `FloatingActionButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Modal Button Group | `Modal` | Atoms | 3 | 2 | 1 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
-| Next-Previous Buttons | `NavigateButton` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
+| Next-Previous Buttons | `—` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Simple Menu | `Menu` | Atoms | 3 | 2 | 2 | 0 | 0 | **7** | ✅ Build first — high dependency weight |
 | Text Input (single line) | `Input` | Inputs & Forms | 2 | 2 | 2 | 0 | 1 (1) | **7** | ✅ Build first — high dependency weight |
 | Checkbox | `Checkbox` | Inputs & Forms | 2 | 2 | 1 | 0 | 1 (1) | **6** | ✅ Ready to build |

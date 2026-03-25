@@ -41,7 +41,7 @@
     "figmaId": "1623:4561",
     "section": "atoms",
     "functionalCategory": "actions",
-    "proposedCodeName": "NavigateButton",
+    "proposedCodeName": "NextPreviousButton",
     "variantCount": 144,
     "properties": {
       "Size": [

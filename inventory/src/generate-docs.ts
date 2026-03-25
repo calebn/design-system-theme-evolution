@@ -1551,10 +1551,15 @@ function doc10FigmaCleanup(components: FigmaComponent[], gap: GapAnalysis, taxon
 // - Group wrappers (RadioGroup, CheckboxGroup, FieldGroup) own the group-level error state and message display
 const ARIA_REQUIREMENTS: Record<string, string[]> = {
   button: ['`role="button"` (implicit on `<button>`)', '`aria-label` when icon-only', '`aria-disabled` when disabled (do not use HTML `disabled` if you need focusability)', '`aria-pressed` for toggle-style buttons'],
-  'icon-button': ['`aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', '`aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)'],
+  'icon-button': ['`aria-label` required — describe the action, not the icon (e.g. "Add to wishlist", "Close dialog", "Play video")', '`role="button"` (implicit on `<button>`)', '`aria-disabled` when disabled', 'Accepts any icon as `children`; fixed-icon use cases (close, play, expand-collapse) are separate wrapper compositions that add their own ARIA semantics (e.g. `aria-expanded` on ExpandCollapseButton)'],
   'link-button': ['`href` required — always renders as `<a>`', '`aria-label` or visible text required', '`aria-current="page"` when marking active link'],
   input: ['`<label>` associated via `for`/`id` or `aria-label`', '`aria-required` when required', '`aria-invalid` + `aria-describedby` on error', '`autocomplete` attribute for common fields'],
-  'floating-action-button': ['Same requirements as `button`', '`aria-label` if icon conveys the action'],
+  'floating-action-button': ['Same requirements as `button`', '`aria-label` required — describe the action, not the icon'],
+  'close-button': ['`aria-label` required (e.g. "Close dialog", "Dismiss notification")', 'Should set focus to an appropriate element after dismissal'],
+  'play-button': ['`aria-label` required (e.g. "Play video", "Play audio")', '`aria-pressed` if toggle-style (play/pause)'],
+  'expand-collapse-button': ['`aria-expanded` required — reflects current open/closed state', '`aria-controls` pointing to the controlled panel id', '`aria-label` required (e.g. "Expand section")'],
+  'increment-button': ['`aria-label` on both increment and decrement buttons (e.g. "Increase quantity", "Decrease quantity")', '`aria-disabled` when at min/max boundary'],
+  'navigate-button': ['`aria-label` required (e.g. "Next slide", "Previous image")', '`aria-disabled` when at first/last item'],
   'stateful-button': ['`aria-busy="true"` while in loading state', '`aria-live="polite"` region to announce success/error transitions'],
   'scroll-bar': ['`aria-label` on the container (e.g. "Scroll position")', '`aria-valuenow`, `aria-valuemin`, `aria-valuemax` on the scroll indicator'],
   'cta-row': ['`href` required — renders as an anchor link', '`aria-label` if the visible text is not descriptive enough', '`aria-current="page"` when marking an active link'],

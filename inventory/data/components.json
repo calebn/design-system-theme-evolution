@@ -41,7 +41,7 @@
     "figmaId": "1623:4561",
     "section": "atoms",
     "functionalCategory": "actions",
-    "proposedCodeName": "PreviousNextButtons",
+    "proposedCodeName": "NavigateButton",
     "variantCount": 144,
     "properties": {
       "Size": [
@@ -77,7 +77,7 @@
     "figmaId": "1623:4610",
     "section": "atoms",
     "functionalCategory": "actions",
-    "proposedCodeName": "QuantityButtons",
+    "proposedCodeName": "IncrementButton",
     "variantCount": 48,
     "properties": {
       "Size": [

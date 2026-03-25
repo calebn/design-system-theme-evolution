@@ -5,14 +5,14 @@
 
 ## A · Code Components
 
-45 code components derived from 71 Figma frames.
+50 code components derived from 71 Figma frames.
 
 ### Primitives (23)
 
 | Component | Directory | Category | Figma Sources | HTML | Justification |
 |-----------|-----------|----------|---------------|------|---------------|
 | `Button` | `button/` | Actions | [Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-3480) | `<button>` | Core labelled button — primary, secondary, tertiary hierarchy. FloatingActionButton and StatefulButton are separate compositions with distinct APIs. |
-| `IconButton` | `icon-button/` | Actions | [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610), [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `<button>` | All icon-only buttons; unified by absence of text label (MUI/Radix IconButton convention) |
+| `IconButton` | `icon-button/` | Actions | [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) | `<button>` | Visual shape primitive for icon-only buttons; accepts any icon as children. Wrapper compositions (CloseButton, ExpandCollapseButton, etc.) compose this for fixed-icon use cases. |
 | `LinkButton` | `link-button/` | Actions | [Text Button—Icon Left](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-102995), [Text Button—Icon Right](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4782) | `<a>` | Both are anchor links with inline text + icon; icon position (leading vs trailing) is the only layout axis |
 | `Input` | `input/` | Data Entry | [Text Input (single line)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5130), [Text Input—Date](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5660), [Text Input—Password](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5741), [Search Field](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5874) | `<input>` | All single-line text inputs; HTML type attribute distinguishes text, date, password, and search variants |
 | `Textarea` | `textarea/` | Data Entry | [Text Input—Multiline](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5422) | `<textarea>` | Single multi-line text input; no grouping needed |
@@ -35,7 +35,7 @@
 | `ScrollBar` | `scroll-bar/` | Selection & Controls | [Slider Scroll Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2245-93685) | `<div>` | Single scroll position indicator; Slider page selector is a layout composition of ScrollBar + Pagination and is unmapped |
 | `Toast` | `toast/` | Feedback & Overlays | [Toast Bar](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1770-8729) | `<div>` | Single notification bar; dynamic ARIA role per severity (Radix Toast) |
 
-### Compositions (18)
+### Compositions (23)
 
 | Component | Directory | Category | Figma Sources | HTML | Justification |
 |-----------|-----------|----------|---------------|------|---------------|
@@ -51,6 +51,11 @@
 | `FormField` | `form-field/` | Data Entry | [Text Toggle Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5653) | `<div>` | Generic label + error wrapper for any child control (Chakra FormControl / shadcn FormField pattern); Text Toggle Selector frames are usage examples |
 | `FormRow` | `form-row/` | Data Entry | [Text Input (name, two fields)](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2758-3449) | `<div>` | Multi-column form field row; 2-column is the only Figma-evidenced layout — extensible to 3-4 columns when more patterns emerge |
 | `Chip` | `chip/` | Actions | [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111) | `<button>` | Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention) |
+| `CloseButton` | `close-button/` | Actions | [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757) | `<button>` | Fixed-icon IconButton wrapper; always renders ClearIcon — separate from IconButton which accepts any icon as children |
+| `PlayButton` | `play-button/` | Actions | [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `<button>` | Fixed-icon IconButton wrapper; always renders PlayIcon — separate from IconButton which accepts any icon as children |
+| `ExpandCollapseButton` | `expand-collapse-button/` | Actions | [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `<button>` | Fixed-icon IconButton wrapper with aria-expanded behavior; icon rotation and ARIA semantics require component-level logic not present in base IconButton |
+| `IncrementButton` | `increment-button/` | Actions | [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `<button>` | Fixed-icon IconButton wrapper; action prop selects IncreaseIcon or DecreaseIcon — used inside QuantityInput composition |
+| `NavigateButton` | `navigate-button/` | Actions | [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `<button>` | Fixed-icon IconButton wrapper; action prop selects RightIcon or LeftIcon — similar to NextPreviousButton but for inline carousel navigation without surface variants |
 | `FloatingActionButton` | `floating-action-button/` | Actions | [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) | `<button>` | Pill-shaped variant of Button with mandatory icon; distinct visual treatment not shared with rectangular Button |
 | `StatefulButton` | `stateful-button/` | Actions | [Stateful Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=7538-45104) | `<button>` | Loading and success state transitions require internal state management not present in base Button |
 | `ProductCard` | `product-card/` | Product | [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943) | `<article>` | Single grid product card — badge, image, title, rating, price, CTA |
@@ -187,27 +192,27 @@ Every Figma frame and the code component it maps to.
 | [Carousel Product](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2262-261677) | `ProductCarousel` | Builder Block | `product-carousel/` | `scale` |
 | [Category Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1935-4111) | `Chip` | Composition | `chip/` | `selected`, `state` |
 | [Checkbox](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5118) | `Checkbox` | Primitive | `checkbox/` | `state` |
-| [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757) | `CloseButton` | Composition | `close-button/` | `scale` |
 | [CTA Row](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25152) | `CtaRow` | Composition | `cta-row/` | `state` |
 | [Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5473) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
 | [Email Capture](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5925) | `EmailCapture` | Composition | `email-capture/` | `scale`, `state` |
-| [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
-| [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708) | `ExpandCollapseButton` | Composition | `expand-collapse-button/` | `expanded`, `scale` |
+| [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale` |
 | [Floating Action Button with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5650-121531) | `FloatingActionButton` | Composition | `floating-action-button/` | `scale`, `state` |
 | [Form Dropdown](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5532) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
 | [Form Dropdown Option](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2015-39220) | `Select` | Primitive | `select/` | `variant`, `scale`, `state` |
 | [Free Trial Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1880-108955) | `FreeTrialCard` | Composition | `free-trial-card/` | — |
 | [Image Ratios](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=4450-79904) | — | — | — | — |
-| [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610) | `IncrementButton` | Composition | `increment-button/` | `action`, `scale` |
 | [List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1874-101886) | — | — | — | — |
 | [Modal Button Group](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5762-105611) | `Modal` | Composition | `modal/` | `variant` |
 | [Modal Dialog](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=5787-116045) | `Modal` | Composition | `modal/` | `variant` |
 | [Multi-CTA List](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=2769-25078) | `CtaList` | Builder Block | `cta-list/` | — |
 | [Multi-Select with Text](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5250) | `RadioGroup` | Composition | `radio-group/` | `variant`, `state` |
 | [Multi-Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-5614) | `RadioGroup` | Composition | `radio-group/` | `variant`, `state` |
-| [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561) | `NavigateButton` | Composition | `navigate-button/` | `action`, `scale` |
 | [Next-Previous Selector](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1758-5088) | `Pagination` | Primitive | `pagination/` | `variant`, `scale`, `state` |
-| [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `IconButton` | Primitive | `icon-button/` | `variant`, `scale`, `state` |
+| [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164) | `PlayButton` | Composition | `play-button/` | `scale` |
 | [Price and Label](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=3707-42767) | `PriceLabel` | Primitive | `price-label/` | `variant`, `scale` |
 | [Product Content](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1949-59922) | `ProductDetail` | Composition | `product-detail/` | `variant` |
 | [Product Grid Card](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1982-24943) | `ProductCard` | Composition | `product-card/` | `scale` |

@@ -54,6 +54,11 @@ graph TD
     FormField["FormField"]
     FormRow["FormRow"]
     Chip["Chip"]
+    CloseButton["CloseButton"]
+    PlayButton["PlayButton"]
+    ExpandCollapseButton["ExpandCollapseButton"]
+    IncrementButton["IncrementButton"]
+    NavigateButton["NavigateButton"]
     FloatingActionButton["FloatingActionButton"]
     StatefulButton["StatefulButton"]
     ProductCard["ProductCard"]
@@ -74,7 +79,7 @@ graph TD
 ```mermaid
 graph TD
   DesignSystem["Logos Design System"]
-  DesignSystem --> actions["Actions\n(9 code / 14 Figma)"]
+  DesignSystem --> actions["Actions\n(14 code / 14 Figma)"]
   DesignSystem --> navigation["Navigation\n(4 code / 7 Figma)"]
   DesignSystem --> data_entry["Data Entry\n(14 code / 22 Figma)"]
   DesignSystem --> selection["Selection & Controls\n(4 code / 6 Figma)"]
@@ -95,12 +100,17 @@ graph TD
 | Code Component | Tier | Figma Sources |
 |----------------|------|---------------|
 | `Button` | Primitive | Button |
-| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
+| `IconButton` | Primitive | Floating Action Button |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `AddToCart` | Composition | Stepper CTA |
 | `ButtonGroup` | Composition | Button group |
 | `CtaRow` | Composition | CTA Row |
 | `Chip` | Composition | Category Button |
+| `CloseButton` | Composition | Close Button |
+| `PlayButton` | Composition | Play Button |
+| `ExpandCollapseButton` | Composition | Expand-Collapse Button |
+| `IncrementButton` | Composition | Increase-Decrease Buttons |
+| `NavigateButton` | Composition | Next-Previous Buttons |
 | `FloatingActionButton` | Composition | Floating Action Button with Text |
 | `StatefulButton` | Composition | Stateful Action Button |
 
@@ -219,27 +229,27 @@ Every Figma frame mapped to its atomic level, functional category, and code comp
 | Carousel Product | Molecules | Product | `ProductCarousel` | Builder Block |
 | Category Button | Atoms | Actions | `Chip` | Composition |
 | Checkbox | Inputs & Forms | Data Entry | `Checkbox` | Primitive |
-| Close Button | Atoms | Actions | `IconButton` | Primitive |
+| Close Button | Atoms | Actions | `CloseButton` | Composition |
 | CTA Row | Atoms | Actions | `CtaRow` | Composition |
 | Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Email Capture | Inputs & Forms | Data Entry | `EmailCapture` | Composition |
-| Expand-Collapse Button | Atoms | Actions | `IconButton` | Primitive |
+| Expand-Collapse Button | Atoms | Actions | `ExpandCollapseButton` | Composition |
 | Floating Action Button | Atoms | Actions | `IconButton` | Primitive |
 | Floating Action Button with Text | Atoms | Actions | `FloatingActionButton` | Composition |
 | Form Dropdown | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Form Dropdown Option | Inputs & Forms | Data Entry | `Select` | Primitive |
 | Free Trial Card | Molecules | Product | `FreeTrialCard` | Composition |
 | Image Ratios | Other | Data Display | — | — |
-| Increase-Decrease Buttons | Atoms | Actions | `IconButton` | Primitive |
+| Increase-Decrease Buttons | Atoms | Actions | `IncrementButton` | Composition |
 | List | Other | Data Display | — | — |
 | Modal Button Group | Atoms | Feedback & Overlays | `Modal` | Composition |
 | Modal Dialog | Molecules | Feedback & Overlays | `Modal` | Composition |
 | Multi-CTA List | Molecules | Product | `CtaList` | Builder Block |
 | Multi-Select with Text | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
 | Multi-Selector | Inputs & Forms | Data Entry | `RadioGroup` | Composition |
-| Next-Previous Buttons | Atoms | Actions | `IconButton` | Primitive |
+| Next-Previous Buttons | Atoms | Actions | `NavigateButton` | Composition |
 | Next-Previous Selector | Atoms | Selection & Controls | `Pagination` | Primitive |
-| Play Button | Atoms | Actions | `IconButton` | Primitive |
+| Play Button | Atoms | Actions | `PlayButton` | Composition |
 | Price and Label | Other | Data Display | `PriceLabel` | Primitive |
 | Product Content | Molecules | Product | `ProductDetail` | Composition |
 | Product Grid Card | Molecules | Product | `ProductCard` | Composition |
@@ -318,6 +328,11 @@ packages/commerce-components/src/components/
   form-row/
   floating-action-button/
   stateful-button/
+  close-button/
+  play-button/
+  expand-collapse-button/
+  increment-button/
+  navigate-button/
   modal/
   accordion/
   email-capture/

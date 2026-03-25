@@ -25,10 +25,15 @@
         "Button",
         "ButtonGroup",
         "Chip",
+        "CloseButton",
         "CtaRow",
+        "ExpandCollapseButton",
         "FloatingActionButton",
         "IconButton",
+        "IncrementButton",
         "LinkButton",
+        "NavigateButton",
+        "PlayButton",
         "StatefulButton"
       ]
     },
@@ -229,39 +234,27 @@
       "directoryName": "icon-button",
       "tier": "primitive",
       "functionalCategory": "actions",
-      "description": "Icon-only button with no visible label. Requires an aria-label. Covers close, play, floating action, expand-collapse, increment/decrement, and navigation variants.",
+      "description": "Flexible icon-only button base. Accepts any icon as children. Only controls visual shape (default = transparent, floating = circular white with shadow). Fixed-icon use cases (close, play, expand-collapse, increment, navigate) are separate convenience wrapper compositions that compose this primitive.",
       "htmlElement": "button",
       "figmaSources": [
-        "Close Button",
-        "Play Button",
-        "Floating Action Button",
-        "Expand-Collapse Button",
-        "Increase-Decrease Buttons",
-        "Next-Previous Buttons"
+        "Floating Action Button"
       ],
       "props": [
         {
           "name": "variant",
-          "type": "'default' | 'floating' | 'close' | 'play' | 'expand-collapse' | 'increment' | 'navigate'",
+          "type": "'default' | 'floating'",
           "figmaAxis": "Style",
           "default": "default",
-          "description": "Distinguishes the Figma source frame within one component. Values are proposed — derived from Figma frame names, not a Figma axis.",
-          "proposed": true
+          "description": "Controls visual shape only. default = transparent square, floating = circular white with shadow."
         },
         {
           "name": "scale",
           "type": "'sm' | 'md' | 'lg'",
           "figmaAxis": "Size",
           "default": "md"
-        },
-        {
-          "name": "state",
-          "type": "'default' | 'hover' | 'active' | 'disabled'",
-          "figmaAxis": "State",
-          "default": "default"
         }
       ],
-      "justification": "All icon-only buttons; unified by absence of text label (MUI/Radix IconButton convention)"
+      "justification": "Visual shape primitive for icon-only buttons; accepts any icon as children. Wrapper compositions (CloseButton, ExpandCollapseButton, etc.) compose this for fixed-icon use cases."
     },
     {
       "name": "LinkButton",
@@ -1136,6 +1129,125 @@
       "justification": "Filter-chip pattern on top of Button; Category Button uses pill shape and icon+label API not shared by general Button (MUI Chip convention)"
     },
     {
+      "name": "CloseButton",
+      "directoryName": "close-button",
+      "tier": "composition",
+      "functionalCategory": "actions",
+      "description": "Convenience wrapper composing IconButton with ClearIcon pre-wired. Used to dismiss overlays, modals, and toasts. Deferred — not planned for initial implementation.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Close Button"
+      ],
+      "props": [
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        }
+      ],
+      "justification": "Fixed-icon IconButton wrapper; always renders ClearIcon — separate from IconButton which accepts any icon as children"
+    },
+    {
+      "name": "PlayButton",
+      "directoryName": "play-button",
+      "tier": "composition",
+      "functionalCategory": "actions",
+      "description": "Convenience wrapper composing IconButton with PlayIcon pre-wired. Used for media playback controls. Deferred — not planned for initial implementation.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Play Button"
+      ],
+      "props": [
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        }
+      ],
+      "justification": "Fixed-icon IconButton wrapper; always renders PlayIcon — separate from IconButton which accepts any icon as children"
+    },
+    {
+      "name": "ExpandCollapseButton",
+      "directoryName": "expand-collapse-button",
+      "tier": "composition",
+      "functionalCategory": "actions",
+      "description": "Convenience wrapper composing IconButton with a chevron icon. Manages aria-expanded state and icon rotation. Used by Accordion. Deferred — not planned for initial implementation.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Expand-Collapse Button"
+      ],
+      "props": [
+        {
+          "name": "expanded",
+          "type": "boolean",
+          "figmaAxis": "State",
+          "default": "false",
+          "description": "Controls aria-expanded and chevron rotation direction."
+        },
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        }
+      ],
+      "justification": "Fixed-icon IconButton wrapper with aria-expanded behavior; icon rotation and ARIA semantics require component-level logic not present in base IconButton"
+    },
+    {
+      "name": "IncrementButton",
+      "directoryName": "increment-button",
+      "tier": "composition",
+      "functionalCategory": "actions",
+      "description": "Convenience wrapper composing IconButton with IncreaseIcon or DecreaseIcon pre-wired. Used inside QuantityInput. Deferred — not planned for initial implementation.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Increase-Decrease Buttons"
+      ],
+      "props": [
+        {
+          "name": "action",
+          "type": "'increment' | 'decrement'",
+          "figmaAxis": "Type",
+          "default": "increment"
+        },
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        }
+      ],
+      "justification": "Fixed-icon IconButton wrapper; action prop selects IncreaseIcon or DecreaseIcon — used inside QuantityInput composition"
+    },
+    {
+      "name": "NavigateButton",
+      "directoryName": "navigate-button",
+      "tier": "composition",
+      "functionalCategory": "actions",
+      "description": "Convenience wrapper composing IconButton with LeftIcon or RightIcon pre-wired. Used inside carousels and media players. Deferred — not planned for initial implementation.",
+      "htmlElement": "button",
+      "figmaSources": [
+        "Next-Previous Buttons"
+      ],
+      "props": [
+        {
+          "name": "action",
+          "type": "'next' | 'previous'",
+          "figmaAxis": "Type",
+          "default": "next"
+        },
+        {
+          "name": "scale",
+          "type": "'sm' | 'md' | 'lg'",
+          "figmaAxis": "Size",
+          "default": "md"
+        }
+      ],
+      "justification": "Fixed-icon IconButton wrapper; action prop selects RightIcon or LeftIcon — similar to NextPreviousButton but for inline carousel navigation without surface variants"
+    },
+    {
       "name": "FloatingActionButton",
       "directoryName": "floating-action-button",
       "tier": "composition",
@@ -1357,6 +1469,11 @@
     "  form-row/",
     "  floating-action-button/",
     "  stateful-button/",
+    "  close-button/",
+    "  play-button/",
+    "  expand-collapse-button/",
+    "  increment-button/",
+    "  navigate-button/",
     "  modal/",
     "  accordion/",
     "  email-capture/",

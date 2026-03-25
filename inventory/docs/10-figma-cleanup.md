@@ -10,7 +10,7 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | Code Component | Tier | Figma Frames |
 |----------------|------|--------------|
 | `Button` | Primitive | Button |
-| `IconButton` | Primitive | Close Button, Play Button, Floating Action Button, Expand-Collapse Button, Increase-Decrease Buttons, Next-Previous Buttons |
+| `IconButton` | Primitive | Floating Action Button |
 | `LinkButton` | Primitive | Text Button—Icon Left, Text Button—Icon Right |
 | `Input` | Primitive | Text Input (single line), Text Input—Date, Text Input—Password, Search Field |
 | `Textarea` | Primitive | Text Input—Multiline |
@@ -44,6 +44,11 @@ The following table shows which Figma frames will be collapsed into a single Rea
 | `FormField` | Composition | Text Toggle Selector |
 | `FormRow` | Composition | Text Input (name, two fields) |
 | `Chip` | Composition | Category Button |
+| `CloseButton` | Composition | Close Button |
+| `PlayButton` | Composition | Play Button |
+| `ExpandCollapseButton` | Composition | Expand-Collapse Button |
+| `IncrementButton` | Composition | Increase-Decrease Buttons |
+| `NavigateButton` | Composition | Next-Previous Buttons |
 | `FloatingActionButton` | Composition | Floating Action Button with Text |
 | `StatefulButton` | Composition | Stateful Action Button |
 | `ProductCard` | Composition | Product Grid Card |

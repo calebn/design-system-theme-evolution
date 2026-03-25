@@ -8,7 +8,7 @@
 | | Count |
 |--|-------|
 | Figma component frames | 71 |
-| Code components | 45 |
+| Code components | 50 |
 | Total Figma variants | 973 |
 | Responsive Figma frames | 11 |
 | Figma color tokens | 16 |
@@ -21,14 +21,14 @@
 | Tier | Count | Description |
 |------|-------|-------------|
 | Primitives | 23 | Standalone React components |
-| Compositions | 18 | Multi-primitive compositions |
+| Compositions | 23 | Multi-primitive compositions |
 | Builder Blocks | 4 | Page-level Builder.io blocks |
 
 ## By Functional Category
 
 | Category | Figma Frames | Code Components |
 |----------|-------------|-----------------|
-| Actions | 14 | 9 |
+| Actions | 14 | 14 |
 | Navigation | 7 | 4 |
 | Data Entry | 22 | 14 |
 | Data Display | 8 | 4 |
@@ -47,7 +47,7 @@
 | 04 | [Responsive Catalog](./04-responsive-catalog.md) | Figma frames grouped by responsive coverage |
 | 05 | [Variant Analysis](./05-variant-analysis.md) | State axis quality, naming consistency, consolidation opportunities |
 | 06 | [Dependency Graph](./06-dependency-graph.md) | HTML → Atom → Molecule relationships (Mermaid) |
-| 07 | [Priority Dashboard](./07-priority-dashboard.md) | Build order scored by code component (45 rows) with full Figma-frame detail |
+| 07 | [Priority Dashboard](./07-priority-dashboard.md) | Build order scored by code component (50 rows) with full Figma-frame detail |
 | 08 | [Functional Taxonomy](./08-taxonomy.md) | Three-axis classification (atomic · category · tier), Mermaid diagram, folder structure |
 | 09 | [Component Architecture](./09-component-architecture.md) | React-first component list, prop API conventions, Figma axis → prop mapping, directory structure |
 | 10 | [Figma Cleanup Checklist](./10-figma-cleanup.md) | Figma → code consolidation map + actionable cleanup items |
@@ -60,7 +60,7 @@
 |------|-------------|
 | `data/tokens.json` | All Figma variables by category (incl. fontSizes) |
 | `data/components.json` | All 71 Figma frames with functionalCategory and proposedCodeName |
-| `data/code-components.json` | 45 code components with tier, props, and Figma source mapping |
+| `data/code-components.json` | 50 code components with tier, props, and Figma source mapping |
 | `data/variant-axes.json` | Deduplicated property axes across all Figma frames |
 | `data/taxonomy.json` | Category definitions, code components, and proposed folder structure |
 | `data/gap-analysis.json` | Figma vs. commerce-theme token comparison |

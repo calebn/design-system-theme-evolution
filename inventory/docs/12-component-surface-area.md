@@ -128,18 +128,17 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 **HTML element:** `<button>` · **Directory:** `icon-button/` · **Category:** Actions
 
-**Figma sources:** [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757), [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164), [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908), [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708), [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610), [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561)
+**Figma sources:** [Floating Action Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4908)
 
 
-> Icon-only button with no visible label. Requires an aria-label. Covers close, play, floating action, expand-collapse, increment/decrement, and navigation variants.
+> Flexible icon-only button base. Accepts any icon as children. Only controls visual shape (default = transparent, floating = circular white with shadow). Fixed-icon use cases (close, play, expand-collapse, increment, navigate) are separate convenience wrapper compositions that compose this primitive.
 
 **Props:**
 
 | Prop | Type | Default | Figma Axis | Description |
 |------|------|---------|------------|-------------|
-| `variant` | `'default' \| 'floating' \| 'close' \| 'play' \| 'expand-collapse' \| 'increment' \| 'navigate'` _(proposed)_ | `default` | Style | Distinguishes the Figma source frame within one component. Values are proposed — derived from Figma frame names, not a Figma axis. |
+| `variant` | `'default' \| 'floating'` | `default` | Style | Controls visual shape only. default = transparent square, floating = circular white with shadow. |
 | `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
-| `state` | `'default' \| 'hover' \| 'active' \| 'disabled'` | `default` | State | — |
 | `className` | `string` | — | — | Additional CSS class |
 | `data-testid` | `string` | — | — | Test selector hook |
 
@@ -154,10 +153,10 @@ export function Button({ variant = 'primary', scale = 'medium', className, child
 
 **Accessibility requirements:**
 
-- `aria-label` required — use descriptive text (e.g. "Expand section", "Increment quantity", "Next page")
+- `aria-label` required — describe the action, not the icon (e.g. "Add to wishlist", "Close dialog", "Play video")
 - `role="button"` (implicit on `<button>`)
 - `aria-disabled` when disabled
-- `aria-expanded` for toggle-style buttons (e.g. expand-collapse variants)
+- Accepts any icon as `children`; fixed-icon use cases (close, play, expand-collapse) are separate wrapper compositions that add their own ARIA semantics (e.g. `aria-expanded` on ExpandCollapseButton)
 
 <details><summary>Consumer usage</summary>
 
@@ -1437,7 +1436,7 @@ export function Toast({ variant = 'info', className, children, ...props }: Toast
 
 </details>
 
-## Compositions (18)
+## Compositions (23)
 
 ---
 
@@ -2200,6 +2199,315 @@ export function Chip({ title, content, ...props }: ChipProps) {
 
 ---
 
+### `CloseButton`
+
+**HTML element:** `<button>` · **Directory:** `close-button/` · **Category:** Actions
+
+**Figma sources:** [Close Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4757)
+
+
+> Convenience wrapper composing IconButton with ClearIcon pre-wired. Used to dismiss overlays, modals, and toasts. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` required (e.g. "Close dialog", "Dismiss notification")
+- Should set focus to an appropriate element after dismissal
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { CloseButton } from '@faithlife/commerce-components';
+
+<CloseButton scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</CloseButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// close-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function CloseButton({ title, content, ...props }: CloseButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `PlayButton`
+
+**HTML element:** `<button>` · **Directory:** `play-button/` · **Category:** Actions
+
+**Figma sources:** [Play Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1864-94164)
+
+
+> Convenience wrapper composing IconButton with PlayIcon pre-wired. Used for media playback controls. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` required (e.g. "Play video", "Play audio")
+- `aria-pressed` if toggle-style (play/pause)
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { PlayButton } from '@faithlife/commerce-components';
+
+<PlayButton scale="md">
+  {/* BuilderBlocks renders editable content here */}
+</PlayButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// play-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function PlayButton({ title, content, ...props }: PlayButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `ExpandCollapseButton`
+
+**HTML element:** `<button>` · **Directory:** `expand-collapse-button/` · **Category:** Actions
+
+**Figma sources:** [Expand-Collapse Button](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4708)
+
+
+> Convenience wrapper composing IconButton with a chevron icon. Manages aria-expanded state and icon rotation. Used by Accordion. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `expanded` | `boolean` | `false` | State | Controls aria-expanded and chevron rotation direction. |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-expanded` required — reflects current open/closed state
+- `aria-controls` pointing to the controlled panel id
+- `aria-label` required (e.g. "Expand section")
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { ExpandCollapseButton } from '@faithlife/commerce-components';
+
+<ExpandCollapseButton expanded="false">
+  {/* BuilderBlocks renders editable content here */}
+</ExpandCollapseButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// expand-collapse-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function ExpandCollapseButton({ title, content, ...props }: ExpandCollapseButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `IncrementButton`
+
+**HTML element:** `<button>` · **Directory:** `increment-button/` · **Category:** Actions
+
+**Figma sources:** [Increase-Decrease Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4610)
+
+
+> Convenience wrapper composing IconButton with IncreaseIcon or DecreaseIcon pre-wired. Used inside QuantityInput. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `action` | `'increment' \| 'decrement'` | `increment` | Type | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` on both increment and decrement buttons (e.g. "Increase quantity", "Decrease quantity")
+- `aria-disabled` when at min/max boundary
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { IncrementButton } from '@faithlife/commerce-components';
+
+<IncrementButton action="increment">
+  {/* BuilderBlocks renders editable content here */}
+</IncrementButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// increment-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function IncrementButton({ title, content, ...props }: IncrementButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
+### `NavigateButton`
+
+**HTML element:** `<button>` · **Directory:** `navigate-button/` · **Category:** Actions
+
+**Figma sources:** [Next-Previous Buttons](https://www.figma.com/design/8J2B4UtoSMRvkLqBqyoZjB/Logos-Brand-Components?node-id=1623-4561)
+
+
+> Convenience wrapper composing IconButton with LeftIcon or RightIcon pre-wired. Used inside carousels and media players. Deferred — not planned for initial implementation.
+
+**Props:**
+
+| Prop | Type | Default | Figma Axis | Description |
+|------|------|---------|------------|-------------|
+| `action` | `'next' \| 'previous'` | `next` | Type | — |
+| `scale` | `'sm' \| 'md' \| 'lg'` | `md` | Size | — |
+| `className` | `string` | — | — | Additional CSS class |
+| `data-testid` | `string` | — | — | Test selector hook |
+
+**Accessibility requirements:**
+
+- `aria-label` required (e.g. "Next slide", "Previous image")
+- `aria-disabled` when at first/last item
+
+**Slots / children:**
+
+- `children` — primary content area
+
+<details><summary>Consumer usage</summary>
+
+```tsx
+import { NavigateButton } from '@faithlife/commerce-components';
+
+<NavigateButton action="next">
+  {/* BuilderBlocks renders editable content here */}
+</NavigateButton>
+```
+
+</details>
+
+<details><summary>Implementation sketch (component.tsx)</summary>
+
+```tsx
+// navigate-button/component.tsx
+// No @builder.io/* imports allowed here — those go in register.tsx
+import { cn } from '../../utils';
+import { BuilderBlocks } from '@builder.io/react';
+import { Typography } from '../typography/component';
+
+export function NavigateButton({ title, content, ...props }: NavigateButtonProps) {
+  return (
+    <section className={cn('tw-preflight', 'flex flex-col gap-sp16', props.className)}>
+      {title && <Typography variant="h3">{title}</Typography>}
+      <BuilderBlocks parentElementId={props.builderBlock?.id} dataPath="component.options.content" blocks={content} />
+    </section>
+  );
+}
+```
+
+</details>
+
+---
+
 ### `FloatingActionButton`
 
 **HTML element:** `<button>` · **Directory:** `floating-action-button/` · **Category:** Actions
@@ -2221,7 +2529,7 @@ export function Chip({ title, content, ...props }: ChipProps) {
 **Accessibility requirements:**
 
 - Same requirements as `button`
-- `aria-label` if icon conveys the action
+- `aria-label` required — describe the action, not the icon
 
 **Slots / children:**
 

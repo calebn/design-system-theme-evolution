@@ -270,38 +270,23 @@ Components ranked by consolidation strength. **Already consolidated** = frames a
 |---------------|---------------|----------------|
 | Text Section with Button Group | Section Headline | `SectionLayout` |
 | Text Toggle Selector (Figma ID: 1623:5649) | Text Toggle Selector (Figma ID: 1623:5653) | `—` |
-| Increase-Decrease Buttons | Expand-Collapse Button | `IconButton` |
-| Increase-Decrease Buttons | Close Button | `IconButton` |
-| Expand-Collapse Button | Close Button | `IconButton` |
 | Text Button—Icon Right | Text Button—Icon Left | `LinkButton` |
 | Text Section with Button Group | Section Headline with CTA | `SectionLayout` |
 | Section Headline with CTA | Section Headline | `SectionLayout` |
-| Next-Previous Buttons | Close Button | `IconButton` |
 | Text Input—Date | Text Input—Password | `Input` |
-| Next-Previous Buttons | Increase-Decrease Buttons | `IconButton` |
-| Next-Previous Buttons | Expand-Collapse Button | `IconButton` |
 | Dropdown | Form Dropdown Option | `Select` |
 | Simple Menu | Button Menu | `Menu` |
 | Star | Reviews | `StarRating` |
 | Text Input (single line) | Text Input—Date | `Input` |
-| Close Button | Floating Action Button | `IconButton` |
-| Increase-Decrease Buttons | Floating Action Button | `IconButton` |
-| Expand-Collapse Button | Floating Action Button | `IconButton` |
 | Text Input (single line) | Search Field | `Input` |
 | Text Input—Date | Search Field | `Input` |
 | Checkbox | Single Select Box | `Checkbox` |
-| Next-Previous Buttons | Floating Action Button | `IconButton` |
 | Text Input (single line) | Text Input—Password | `Input` |
 | Dropdown | Form Dropdown | `Select` |
 | Form Dropdown | Form Dropdown Option | `Select` |
 | Text Input—Password | Search Field | `Input` |
 | Modal Button Group | Modal Dialog | `Modal` |
-| Floating Action Button | Play Button | `IconButton` |
 | Multi-Select with Text | Multi-Selector | `CheckboxGroup` |
-| Increase-Decrease Buttons | Play Button | `IconButton` |
-| Expand-Collapse Button | Play Button | `IconButton` |
-| Close Button | Play Button | `IconButton` |
-| Next-Previous Buttons | Play Button | `IconButton` |
 | Tabbed Selector Button | Tabbed Selector | `Tabs` |
 | Subnav Dropdown Options | Subnav Dropdown | `SubnavDropdown` |
 | Text Section with Button Group | Text Section | `SectionLayout` |
